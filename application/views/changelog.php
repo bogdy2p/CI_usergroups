@@ -7,16 +7,11 @@
  */
 
 echo 'This is changealog view.';
+echo '<hr>';
 
 $test = new Changelog_model();
-$asd = $test->read();
-echo '<pre>';
-//var_dump($asd);
-
-$aaa = $test->read_changelogs_for_last_x_days('5');
-var_dump($aaa);
-
-//$test->create_changelog_row('vasile', 'red');
-
-//$abc = $test->read_changelogs_for_last_24_hours();
-//var_dump($abc);
+$days = '7';
+$asd = $test->generate_changelog_table_html($days);
+//echo '<pre>';
+//$aaa = $test->read_for_last_x_days('5');
+//var_dump($aaa);
