@@ -33,19 +33,19 @@ class Changelog_model extends CI_Model {
     return $return;
   }
        
-  function read_for_last_24_hours(){
-    $this->db->select('*');
-    $this->db->from('app_changelog');
-    $this->db->where('date >= NOW() - INTERVAL 1 DAY ORDER BY date DESC');
-    $result = $this->db->get();
-    $return = array();
-    foreach ($result->result_array() as $row){
-      $return[] = $row;
-    }
-    return $return;
-	}
+//  function read_for_last_24_hours(){
+//    $this->db->select('*');
+//    $this->db->from('app_changelog');
+//    $this->db->where('date >= NOW() - INTERVAL 1 DAY ORDER BY date DESC');
+//    $result = $this->db->get();
+//    $return = array();
+//    foreach ($result->result_array() as $row){
+//      $return[] = $row;
+//    }
+//    return $return;
+//	}
  
-	function read_for_last_x_days($days = '0'){
+	function read_for_last_x_days($days){
     $this->db->select('*');
     $this->db->from('app_changelog');
     $this->db->where('date >= NOW() - INTERVAL '.$days.' DAY', '', false); 
@@ -68,12 +68,12 @@ class Changelog_model extends CI_Model {
   }
   function generate_changelog_table_header($days){
     echo '<div class="col-xs-12 col-md-12">';
-    if($days == 0){
+    if($days == 1){
       echo "<h3>TODAY'S CHANGE LOGS: </h3>";
-    }elseif($days == 1){
+    }elseif($days == 2){
       echo '<h3>CHANGELOGS SINCE YESTERDAY:</h3>';
-    }elseif($days >1 && $days<=10){
-      echo '<h3>LAST '.$days.' DAYS CHANGE LOGS :</h3>';
+    }elseif($days >2 && $days<=10){
+      echo '<h3>LAST '.($days - 1).' DAYS CHANGE LOGS :</h3>';
     }else{
       echo '<h3> ALL CHANGELOGS AVAILLABLE :</h3>';
     }
@@ -99,7 +99,7 @@ class Changelog_model extends CI_Model {
   }
 
   function generate_changelog_add_new_form(){
-    echo '		<form class="form" id="add_new_changelog_form" action="../models/changelog_model.php" method="post">
+    echo '		<form class="form" id="add_new_changelog_form" action="#" method="post">
               <label>Add Changelog</label><br />
                 <input name="changelog_text"  type="text"  placeholder="Changelog text"> <br />
                 <br />
@@ -111,7 +111,7 @@ class Changelog_model extends CI_Model {
                 <select name="heading_type" id="heading_type" form="add_new_changelog_form">
                   <option selected="null" value="h5">H5</option>
       ';
-                generate_select_heading_options();
+                Self::generate_select_heading_options();
     echo '
                 </select><br /><br />
                 <button type="submit" class="btn btn-success">Add Changelog</button>
@@ -128,10 +128,16 @@ class Changelog_model extends CI_Model {
   function generate_select_day_form(){
   echo '
     <br /><br /><br /><br /><br />
-    <form class="form" id="day_form" action="../views/view_changelogs.php" method="post">
+    <form class="form" id="day_form" action="#" method="post">
           <select name="day" id="day" form="day_form">
-            <option value="0">Today</option>
-            <option value="1">Yesterday</option>
+            <option value="1">Today</option>
+            <option value="2">Yesterday</option>
+            <option value="3">Two Days Ago</option>
+            <option value="4">Three Days Ago</option>
+            <option value="5">Four Days Ago</option>
+            <option value="6">Five Days Ago</option>
+            <option value="7">Six Days Ago</option>
+            <option value="8">Last Week</option>
             <option value="100">All period</option>
           </select> 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -140,11 +146,14 @@ class Changelog_model extends CI_Model {
     ';
   }
 
+   
+  
+  
   function generate_changelog_table_by_post(){
     if ((isset($_POST)) && !empty($_POST)){
-      generate_changelog_table_html($_POST['day']);
+      Self::generate_changelog_table_html($_POST['day']);
     }else{
-      generate_changelog_table_html(0);
+      Self::generate_changelog_table_html('1');
     }
   }
   
