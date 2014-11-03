@@ -1,4 +1,6 @@
-  <div class="container">
+<div class="container">
+ 
+  
 			<div class="row"><?php //Crud::print_sitewide_menu();?></div>
 			
 			<div class="row">
@@ -6,11 +8,41 @@
 		  			 <div class="col-xs-12 col-md-4 "><h1>Users-Groups Administration CMS</h1></div>
 		  			 <div class="col-xs-12 col-md-4 "></div>
 	  		</div>
-	  		<div class="row">
+      
+      
+      
+      <?php 
+        $asd = $this->main_model->read('usergroups');
+        ?>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+<!--	  		<div class="row">
 			  		<hr>
 				  	<div class="col-xs-12 col-md-3">
 				  		<h2>Todo Tasks :</h2>
 				  		<?php
+                //$this->main_model->read('usergroups');
+//                var_dump($test);
+                
 				  			//$test = new User();
 				  			//$test->get_table_of_users_and_number_of_detail_types();
 				  		?>
@@ -27,7 +59,7 @@
 							//	$user->get_database_statistics(); 
 						?>
 					</div>	
-		  	</div>
+		  	</div>-->
 		  	
 		  	<div class="row">
 		  			<?php //Crud::print_color_meanings(); ?>

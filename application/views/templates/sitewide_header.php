@@ -18,3 +18,35 @@ echo '<head>';
 echo '</head>';
 
 echo '<body>';
+  echo '<div class ="container">';
+
+   echo'   
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">';
+   
+   echo '                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>        
+                            <a class="navbar-brand" href="/user">Home</a>
+                    </div>                            
+        ';
+  
+  echo ' 
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                             <li><a href="/user/views/view_list.php             ">   View Tables         </a></li>
+                             <li><a href="/user/views/view_detail_types.php     ">   User Details Types  </a></li>
+                             <li><a href="/user/views/create_user.php           ">   Add User            </a></li>
+                             <li><a href="/user/views/create_group.php          ">   Add Group           </a></li>
+                             <li><a href="/user/views/view_logs.php             ">   View App Logs       </a></li>
+                             <li><a href="/user/views/view_changelogs.php       ">   View Changelogs     </a></li>
+                             <li><a href="/user/views/todo_temporary_view.php       ">Manage Todo\'s (tasks)    </a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </nav>
+';
