@@ -15,7 +15,7 @@ class User extends CI_Controller {
   public function index()
 	{
     $this->load->view('templates/sitewide_header');
-		$this->load->view('user');
+		$this->load->view('users_table');
     $this->load->view('templates/sitewide_footer');
 	}
   
