@@ -7,7 +7,7 @@
  */
 
 
-class Task_model extends CI_Model {
+class Applog_model extends CI_Model {
  
   
   

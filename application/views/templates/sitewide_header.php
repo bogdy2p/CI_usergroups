@@ -35,13 +35,13 @@ echo '<body>';
   echo ' 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                             <li><a href="'.base_url().'">   View Tables         </a></li>
+                             <li><a href="'.base_url().'main/view_list">   View Tables         </a></li>
                              <li><a href="'.base_url().'">   User Details Types  </a></li>
-                             <li><a href="'.base_url().'">   Add User            </a></li>
-                             <li><a href="'.base_url().'">   Add Group           </a></li>
-                             <li><a href="'.base_url().'">   View App Logs       </a></li>
-                             <li><a href="'.base_url().'">   View Changelogs     </a></li>
-                             <li><a href="'.base_url().'">   Manage Todo\'s (tasks)    </a></li>
+                             <li><a href="'.base_url().'user/add">   Add User            </a></li>
+                             <li><a href="'.base_url().'group/add">   Add Group           </a></li>
+                             <li><a href="'.base_url().'applog">   View App Logs       </a></li>
+                             <li><a href="'.base_url().'changelog">   View Changelogs     </a></li>
+                             <li><a href="'.base_url().'task">   Manage Todo\'s (tasks)    </a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>

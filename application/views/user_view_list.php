@@ -6,10 +6,4 @@
  * and open the template in the editor.
  */
 
-
-class Task_model extends CI_Model {
- 
-  
-  
-  
-}
+echo "this is user view list";

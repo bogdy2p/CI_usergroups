@@ -15,7 +15,7 @@ class Changelog extends CI_Controller {
   public function index()
 	{
     $this->load->view('templates/sitewide_header');
-		$this->load->view('index');
+		$this->load->view('changelog');
     $this->load->view('templates/sitewide_footer');
 	}
   

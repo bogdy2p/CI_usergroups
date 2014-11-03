@@ -4,18 +4,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class Task extends CI_Controller {
+class Applog extends CI_Controller {
 
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('task_model');
+    $this->load->model('applog_model');
   }
   
   public function index()
 	{
     $this->load->view('templates/sitewide_header');
-		$this->load->view('task');
+		$this->load->view('applog');
     $this->load->view('templates/sitewide_footer');
 	}
   

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class User_model extends CI_Model {
+class Group_model extends CI_Model {
  
   
   
