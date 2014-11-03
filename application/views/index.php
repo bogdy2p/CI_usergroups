@@ -8,33 +8,12 @@
 		  			 <div class="col-xs-12 col-md-4 "><h1>Users-Groups Administration CMS</h1></div>
 		  			 <div class="col-xs-12 col-md-4 "></div>
 	  		</div>
-      
-      
+
       
       <?php 
         $asd = $this->main_model->read('usergroups');
-        ?>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+        ?>  
+
 <!--	  		<div class="row">
 			  		<hr>
 				  	<div class="col-xs-12 col-md-3">

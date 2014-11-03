@@ -4,12 +4,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class User extends CI_Controller {
+class Group extends CI_Controller {
 
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('user_model');
+    $this->load->model('group_model');
   }
   
   public function index()
