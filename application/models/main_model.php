@@ -9,7 +9,7 @@ class Main_model extends CI_Model {
 		return $query->result();
 	 }
  
-   
+   //IN MODEL SUNT TREBURILE CU BAZA DE DATE.
  
    
    

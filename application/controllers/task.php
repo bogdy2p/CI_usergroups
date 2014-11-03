@@ -9,7 +9,7 @@ class Task extends CI_Controller {
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('tasks_model');
+    $this->load->model('task_model');
   }
   
   public function index()

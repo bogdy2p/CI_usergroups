@@ -40,7 +40,7 @@
 
 $route['default_controller'] = "main";
 $route['404_override'] = '';
-
+$route['journals'] = "main";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
