@@ -33,23 +33,11 @@ class Changelog_model extends CI_Model {
     return $return;
   }
        
-//  function read_for_last_24_hours(){
-//    $this->db->select('*');
-//    $this->db->from('app_changelog');
-//    $this->db->where('date >= NOW() - INTERVAL 1 DAY ORDER BY date DESC');
-//    $result = $this->db->get();
-//    $return = array();
-//    foreach ($result->result_array() as $row){
-//      $return[] = $row;
-//    }
-//    return $return;
-//	}
- 
 	function read_for_last_x_days($days){
     $this->db->select('*');
     $this->db->from('app_changelog');
     $this->db->where('date >= NOW() - INTERVAL '.$days.' DAY', '', false); 
-    $this->db->order_by('date DESC');
+    $this->db->order_by('date');
     $result = $this->db->get();
     $return = array();
     foreach ($result->result_array() as $row){
@@ -144,20 +132,35 @@ class Changelog_model extends CI_Model {
         <button type="submit" class="btn btn-success">Change Chosen Period</button>
     </form>
     ';
-  }
-
-   
-  
+  }  
   
   function generate_changelog_table_by_post(){
-    if ((isset($_POST)) && !empty($_POST)){
+    if ((isset($_POST['day'])) && !empty($_POST['day'])){
       Self::generate_changelog_table_html($_POST['day']);
     }else{
       Self::generate_changelog_table_html('1');
     }
   }
   
-  
+  function validation_and_insertion_of_a_new_changelog(){
+	
+    if(isset($_POST) && !empty($_POST)){
+
+      if(isset($_POST['colour'])){
+        print_r($_POST);
+        if (!empty($_POST['changelog_text'])){
+      $name_with_heading = '<'.$_POST['heading_type'].'>'.$_POST['changelog_text'].'</'.$_POST['heading_type'].'>';
+      $colour = $_POST['colour'];
+      $changelog = new Changelog_model();
+      $changelog->create($name_with_heading,$colour);
+      }
+      header("Location: #");
+      die();
+      }elseif(isset($_POST['day'])){/*print_r($_POST);*/}	
+      }else{
+        
+      }
+}
   
   
   
