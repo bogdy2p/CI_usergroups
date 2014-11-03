@@ -1,0 +1,106 @@
+.default_css_table{
+margin: 0px auto;
+background: black;
+text-align: center;
+
+}
+.default_css_table th {
+	background: yellow;
+	min-width: 100px;
+}
+
+.default_css_table td {
+	background: white;
+}
+
+.content{
+	margin:0px auto;
+	text-align: center;
+}
+
+.content_index{
+	background-color: #FFFF99;
+	margin:0px auto;
+	width:700px;
+	text-align: left;
+}
+.content_index a{
+	font-weight: bold;
+	text-decoration: none;
+	color:red;
+}
+
+spanblue{
+	color:blue;
+}
+
+spanred{
+	color:red;
+}
+
+spanyel{
+	/*color:yellow;*/
+	color:#f39c12;
+
+}
+spanora{
+	color:#e74c3c;
+}
+spangre{
+	color:#2ecc71;
+}
+
+.spanblue{
+	color:blue;
+}
+
+.spanred{
+	color:red;
+}
+
+.spanyel{
+	/*color:yellow;*/
+	color:#f39c12;
+
+}
+.spanora{
+	color:#e74c3c;
+}
+.spangre{
+	color:#2ecc71;
+}
+
+#pbc_top_menu_links{
+	margin-top:5px;
+}
+#pbc_top_menu_links2{
+	margin-top:5px;
+}
+
+.pbc_mt5 {
+	margin-top: 5px;
+}
+
+#users_table th {
+	max-width: 50px;
+	word-wrap: break-word;
+}
+#users_table td {
+	max-width: 40px;
+	word-wrap: break-word;
+}
+
+#wordwrap {
+	/*max-width: 80px;*/
+	word-wrap: break-word;
+}
+
+.wordrwapped {
+	word-wrap: break-word;
+	max-width: 80px;
+}
+
+
+.pointer {
+	cursor: pointer;
+}
