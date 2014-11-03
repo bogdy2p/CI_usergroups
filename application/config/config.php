@@ -1,7 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-$config['site_name'] = 'My sitename';
-
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -16,7 +14,7 @@ $config['site_name'] = 'My sitename';
 | path to your installation.
 |
 */
-$config['base_url']	= '/localhost/user_ci';
+$config['base_url']	= '/user_ci';
 
 /*
 |--------------------------------------------------------------------------

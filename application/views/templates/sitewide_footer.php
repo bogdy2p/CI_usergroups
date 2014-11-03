@@ -1,7 +1,4 @@
 <?php
 
-
-echo '
-</body>
-</html>
-';
+echo '</body>';
+echo '</html>';

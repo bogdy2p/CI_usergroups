@@ -1,13 +1,20 @@
 <?php
+echo '<!DOCTYPE html>';
+echo '<html lang="en">';
+echo '<head>';
+  
+    echo '<title>UserGroups on Codeigniter</title>';
+    echo '<meta charset="utf-8">';
+    echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
+    echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 
-echo '
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome TITLE</title>
+      echo '<link href="'.base_url().'assets/css/bootstrap.css"       rel="stylesheet"  >';
+      echo '<link href="'.base_url().'assets/css/bootstrap-theme.css" rel="stylesheet"  >';
+      echo '<link href="'.base_url().'assets/css/style.css"           rel="stylesheet"  type="text/css">';
+      
+      echo '<script src="'.base_url().'assets/js/testuser.js"></script>';
+      echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>';
 
-	<style type="text/css">	</style>
-</head>
-<body>
-';
+echo '</head>';
+
+echo '<body>';
