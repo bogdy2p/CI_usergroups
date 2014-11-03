@@ -127,6 +127,7 @@ class Changelog_model extends CI_Model {
             <option value="7">Six Days Ago</option>
             <option value="8">Last Week</option>
             <option value="100">All period</option>
+            <!--BREAK THIS INTO OPTIONS -->
           </select> 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button type="submit" class="btn btn-success">Change Chosen Period</button>

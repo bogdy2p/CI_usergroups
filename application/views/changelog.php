@@ -24,3 +24,10 @@ $changelog->validation_and_insertion_of_a_new_changelog();
 </div>
           
 <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+
+
+<!-- 
+      EXPORT CSV of CHANGELOGS IN FUNCTIE DE FILTRE.
+      SORTARE LA TOATE TABELELE DUPA DATA / NUME ( HEADER ) 
+      
+-->
