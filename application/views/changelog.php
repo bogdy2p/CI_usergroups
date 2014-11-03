@@ -6,4 +6,12 @@
  * and open the template in the editor.
  */
 
-echo 'This is changelog view.';
+echo 'This is changealog view.';
+
+$test = new Changelog_model();
+$asd = $test->read();
+echo '<pre>';
+var_dump($asd);
+
+
+//$test->create_changelog_row('vasile', 'red');
