@@ -11,7 +11,6 @@ echo '<head>';
       echo '<link href="'.base_url().'assets/css/bootstrap.css"       rel="stylesheet"  >';
       echo '<link href="'.base_url().'assets/css/bootstrap-theme.css" rel="stylesheet"  >';
       echo '<link href="'.base_url().'assets/css/style.css"           rel="stylesheet"  type="text/css">';
-      
       echo '<script src="'.base_url().'assets/js/testuser.js"></script>';
       echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>';
 
@@ -19,7 +18,6 @@ echo '</head>';
 
 echo '<body>';
   echo '<div class ="container">';
-
    echo'   
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
@@ -31,20 +29,19 @@ echo '<body>';
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>        
-                            <a class="navbar-brand" href="/user">Home</a>
+                            <a class="navbar-brand" href="'.base_url().'">Home</a>
                     </div>                            
         ';
-  
   echo ' 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                             <li><a href="/user/views/view_list.php             ">   View Tables         </a></li>
-                             <li><a href="/user/views/view_detail_types.php     ">   User Details Types  </a></li>
-                             <li><a href="/user/views/create_user.php           ">   Add User            </a></li>
-                             <li><a href="/user/views/create_group.php          ">   Add Group           </a></li>
-                             <li><a href="/user/views/view_logs.php             ">   View App Logs       </a></li>
-                             <li><a href="/user/views/view_changelogs.php       ">   View Changelogs     </a></li>
-                             <li><a href="/user/views/todo_temporary_view.php       ">Manage Todo\'s (tasks)    </a></li>
+                             <li><a href="'.base_url().'">   View Tables         </a></li>
+                             <li><a href="'.base_url().'">   User Details Types  </a></li>
+                             <li><a href="'.base_url().'">   Add User            </a></li>
+                             <li><a href="'.base_url().'">   Add Group           </a></li>
+                             <li><a href="'.base_url().'">   View App Logs       </a></li>
+                             <li><a href="'.base_url().'">   View Changelogs     </a></li>
+                             <li><a href="'.base_url().'">   Manage Todo\'s (tasks)    </a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>
