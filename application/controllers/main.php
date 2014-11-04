@@ -23,9 +23,9 @@ class Main extends CI_Controller {
   {
     $this->load->view('templates/sitewide_header');
     $this->load->model('user_model');
-    $this->load->view('user/index');
+    $this->load->view('user/table');
     $this->load->model('group_model');
-    $this->load->view('group/index');
+    $this->load->view('group/table');
 		$this->load->view('main/list');
     $this->load->view('templates/sitewide_footer');
   }
