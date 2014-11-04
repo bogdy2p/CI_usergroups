@@ -49,22 +49,16 @@ class User_model extends CI_Model {
               //Grab the user id just entered into a variable to be able to update then after.
               foreach ($detail_types as $detail_type) {
 								if(isset($_POST[$detail_type])){
-                      
-                      //NU POATE SA AIBA DEJA SETAT UN DETAIL TYPE CA DOARA E USER NOU.
-////									$users->add_user_detail_with_type($user['id'],$detail_type,$_POST[$detail_type]);
-                  print_r($_POST[$detail_type]);
-                  echo "<br />";
+                  
+									Self::add_user_detail_with_type($user_id,$detail_type,$_POST[$detail_type]);
+                  //print_r($_POST[$detail_type]);
+                  //echo "<br />";
 								}
             	}
-              
-              // ++++ DACA SUNT DETALII SETATE , UPDATEAZA USER-UL CU RESPECTIVELE DETALII !
           }else
           {
               die("this username already exists !");
-          }
-      	
-        
-						
+          }						
 				//$asd2 = $users->update($user['id'],'users',$update_params_array);
         //header('Location: '.base_url().'user');
 				//die(print_r($detail_types));
@@ -77,13 +71,19 @@ class User_model extends CI_Model {
 	}
   
   function add_user_detail_with_type($user_id,$detail_type,$detail){
-		//$detail_exists = Crud::check_detail_exists_of_type($user_id,$detail_type,$detail);
-		//$detail_type_exists = Crud::check_detail_type_exists($detail_type);
+		$detail_exists = Self::check_detail_exists_of_type($user_id,$detail_type,$detail);
+		$detail_type_exists = Self::check_detail_type_exists($detail_type);
 		if((!$detail_exists) && (!(is_null($detail))) && ($detail != ' ') && ($detail != '')){
 			if($detail_type_exists){
-				$statement = $this->db->prepare("INSERT INTO user_details (user_id,detail_type,detail) VALUES ('$user_id','$detail_type','$detail')");
-				$statement->execute();
-				return $statement;
+          $data = array(
+              'user_id'=>$user_id,
+              'detail_type'=>$detail_type,
+              'detail'=>$detail,
+           );
+          $this->db->insert('user_details',$data);
+				//$statement = $this->db->prepare("INSERT INTO user_details (user_id,detail_type,detail) VALUES ('$user_id','$detail_type','$detail')");
+				//$statement->execute();
+				//return $statement;
 			}else{
 				echo "You cannot enter a detail which hasn't been predefined in the db";
 			}
@@ -93,7 +93,55 @@ class User_model extends CI_Model {
 	}
   
   
-  
+  function check_detail_exists($user_id,$detail){
+    $this->db->select('id');
+    $this->db->from('user_details');
+    $this->db->where('detail',$detail);
+    $this->db->where('user_id',$user_id);
+    $result = $this->db->count_all_results();
+    if ($result == 0){
+       return false;
+     }else{
+       return true;
+     }
+	}
+  function get_detail_types_set_for_user($user_id){
+    $this->db->select('detail_type');
+    $this->db->from('user_details');
+    $this->db->where('user_id',$user_id);
+    $result = $this->db->get();
+    $return = array();
+    foreach ($result->result_array() as $row){
+      $return[] = $row['detail_type'];
+    }
+    return $return;
+	}
+
+  function check_detail_exists_of_type($user_id,$detail_type,$detail){
+		$exists = Self::check_detail_exists($user_id,$detail);
+		if($exists){
+			$already_set_details = Self::get_detail_types_set_for_user($user_id);
+			if(in_array($detail_type, $already_set_details)){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+  //OLD VERSION YET
+  function check_detail_type_exists($user_detail_type) {
+    $this->db->select('id');
+    $this->db->from('user_detail_types');
+    $this->db->where('name',$user_detail_type);
+    $result = $this->db->count_all_results();
+    if ($result == 0){
+       return false;
+     }else{
+       return true;
+     }
+  }
   
   function user_already_exists($name){
      $this->db->select('*');
@@ -134,7 +182,10 @@ class User_model extends CI_Model {
     $this->db->from('users');
     $this->db->where('name',$name);
     $result = $this->db->get();
-    return $result;
+    foreach ($result->result_array() as $row){
+      $return = $row['id'];
+    }
+    return $return;
   }
   
   function get_all_user_detail_types() {
