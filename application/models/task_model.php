@@ -14,6 +14,15 @@ class Task_model extends CI_Model {
         parent::__construct();
     }
   
+  function create($name,$colour){
+	  $data = array(
+   'name' => $name,
+   'colour' => $colour ,
+    );
+    $this->db->set('date', 'NOW()', FALSE);
+    $this->db->insert('todo_list', $data); 
+	}
+  
   function read($table_name = 'todo_list'){
     $this->db->select('*');
     $this->db->from('todo_list');
@@ -25,15 +34,6 @@ class Task_model extends CI_Model {
     }
     return $return;
 	 }
-
-	function create($name,$colour){
-	  $data = array(
-   'name' => $name,
-   'colour' => $colour ,
-    );
-    $this->db->set('date', 'NOW()', FALSE);
-    $this->db->insert('todo_list', $data); 
-	}
   
   function delete($id){
     $this->db->where('id', $id);

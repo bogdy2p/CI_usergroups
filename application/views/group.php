@@ -1,9 +1,11 @@
-<?php
+<?php 
+$test = new Group_model();
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+$array = array('name'=>'asdddsa','special_key'=>'4324234234');
 
-echo 'this is group!';
+$test->create($array);
+
+?>
+
+
+<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>

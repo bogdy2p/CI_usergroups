@@ -5,9 +5,8 @@ $task->validate_insert_new_task();
 
 
 <div class="container">
-			
-		<div class="row">
 		
+    <div class="row">
 				<div class="col-xs-12 col-md-4"></div>
 				<div class="col-xs-12 col-md-4">
 					<?php $test = new Task_model();
@@ -15,17 +14,17 @@ $task->validate_insert_new_task();
           ?>
 				</div>
 				<div class="col-xs-12 col-md-4"></div>
-				
-		</div>
+    </div>
 	
-
-		<div class="row">
+  	<div class="row">
 				<div class="col-xs-12 col-md-1"></div>
 				<div class="col-xs-12 col-md-10">
 					<?php 
             $test->generate_todo_list_html_admin(); ?>
 				</div>
 				<div class="col-xs-12 col-md-1"></div>
-				
-		</div>
+    </div>
+      
+</div>
+<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 	

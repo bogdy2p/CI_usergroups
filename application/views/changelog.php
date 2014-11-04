@@ -18,7 +18,6 @@ $changelog->validation_and_insertion_of_a_new_changelog();
       <div class ="row">
                     <?php $changelog->generate_changelog_table_by_post();  ?>
       </div>
-      <div class="row"></div>
 </div>
           
 <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>

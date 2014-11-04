@@ -20,5 +20,8 @@
 					</form>
 				</div>
 				<div class="col-xs-4 col-md-4"></div>
-		</div>
- 	</div>
+    </div>
+      
+</div>
+
+<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
