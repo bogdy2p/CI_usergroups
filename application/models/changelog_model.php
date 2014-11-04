@@ -87,7 +87,7 @@ class Changelog_model extends CI_Model {
   }
 
   function generate_changelog_add_new_form(){
-    echo '		<form class="form" id="add_new_changelog_form" action="#" method="post">
+    echo '		<form class="form" id="add_new_changelog_form" action="add" method="post">
               <label>Add Changelog</label><br />
                 <input name="changelog_text"  type="text"  placeholder="Changelog text"> <br />
                 <br />
@@ -144,18 +144,16 @@ class Changelog_model extends CI_Model {
   }
   
   function validation_and_insertion_of_a_new_changelog(){
-	
-    if(isset($_POST) && !empty($_POST)){
-
-      if(isset($_POST['colour'])){
-        print_r($_POST);
+	    if(isset($_POST) && !empty($_POST)){
+        if(isset($_POST['colour'])){
+  
         if (!empty($_POST['changelog_text'])){
       $name_with_heading = '<'.$_POST['heading_type'].'>'.$_POST['changelog_text'].'</'.$_POST['heading_type'].'>';
       $colour = $_POST['colour'];
       $changelog = new Changelog_model();
       $changelog->create($name_with_heading,$colour);
       }
-      header("Location: #");
+      header("Location: index");
       die();
       }elseif(isset($_POST['day'])){/*print_r($_POST);*/}	
       }else{

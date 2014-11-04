@@ -1,12 +1,12 @@
 <?php
 $changelog = new Changelog_model();
-$changelog->validation_and_insertion_of_a_new_changelog();
+
 ?>
 
 <div class ="container">
       <div class="row">
             <div class="col-xs-12 col-md-4">
-                        <?php	$changelog->generate_changelog_add_new_form(); ?>
+                        ADD NEW CHANGELOG BUTTOn
             </div>
             <div class="col-xs-12 col-md-4 "> 	
                       <h2>Latest Applied Changes:</h2>
