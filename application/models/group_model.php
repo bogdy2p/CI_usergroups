@@ -21,14 +21,21 @@ class Group_model extends CI_Model {
     $this->db->insert($table,$data);
 	}
 
-   
-    
-    
+  function read(){
+    $this->db->select('*');
+    $this->db->from('groups');
+    $result = $this->db->get();
+    $return = array();
+    foreach ($result->result_array() as $row){
+      $return[] = $row;
+    }
+    return $return;
+	 } 
     
   function generate_groups_table_html(){
-	generate_groups_table_header();
-	generate_groups_table_content();
-	generate_groups_table_footer();
+    Self::generate_groups_table_header();
+    Self::generate_groups_table_content();
+    Self::generate_groups_table_footer();
 }
 
   function generate_groups_table_header(){
@@ -42,8 +49,7 @@ class Group_model extends CI_Model {
     echo '<th class="success">Delete</th>';
   }
   function generate_groups_table_content(){
-    $group = new Group();
-    $groups = $group->list_groups();
+    $groups = Self::read();
     foreach ($groups as $individual_group) {
         $type = 'groups';
           echo '<tr>';
@@ -60,9 +66,9 @@ class Group_model extends CI_Model {
   }
 
   function generate_groups_users_table_html(){
-    generate_groups_users_table_header();
-    generate_groups_users_table_content();
-    generate_groups_users_table_footer();
+    Self::generate_groups_users_table_header();
+    Self::generate_groups_users_table_content();
+    Self::generate_groups_users_table_footer();
   }
 
   function generate_groups_users_table_header(){
@@ -76,7 +82,8 @@ class Group_model extends CI_Model {
   function generate_groups_users_table_content(){
     $user = new User();
     $group = new Group();
-    $groups = $group->list_groups();
+    $groups = Self::read();
+    $groups = $group->list_groups();    
     foreach ($groups as $group) 
       {
         $userids_array = $user->get_userids_for_a_group($group['id']);	
@@ -98,9 +105,9 @@ class Group_model extends CI_Model {
 
 
   function generate_groups_table_list_html(){
-    generate_groups_table_list_header();
-    generate_groups_table_list_content();
-    generate_groups_table_list_footer();
+    Self::generate_groups_table_list_header();
+    Self::generate_groups_table_list_content();
+    Self::generate_groups_table_list_footer();
   }
 
   function generate_groups_table_list_header(){

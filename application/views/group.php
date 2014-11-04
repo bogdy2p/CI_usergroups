@@ -3,8 +3,8 @@ $test = new Group_model();
 
 $array = array('name'=>'asdddsa','special_key'=>'4324234234');
 
-$test->create($array);
-
+//$test->create($array);
+$test->generate_groups_table_html();
 ?>
 
 
