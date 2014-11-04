@@ -48,6 +48,11 @@ class Group_model extends CI_Model {
           else 
             { die('Object id '.$id.'doesnt exist in db , table is incorrect , or params array is empty'); }    
     }
+    
+    function delete($id){
+      $this->db->where('id', $id);
+      $this->db->delete('groups'); 
+    }
   
    function validation_and_create(){
 		$group = array();
@@ -85,9 +90,7 @@ function validate_and_update_group() {
 			header("Location: group");
 			die();						
 			}
-	}else{
-    echo "GET DE ID IS NOT SET";
-  }
+	}else{ die("validation error");}
 }
 
   function get_group_object_by_id($id, $table_name = 'groups'){
@@ -116,7 +119,6 @@ function validate_and_update_group() {
        return true;
      }
    }  
-   
    
   function generate_groups_table_html(){
     Self::generate_groups_table_header();

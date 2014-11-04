@@ -33,4 +33,9 @@ class Group extends CI_Controller {
     $this->load->view('group/edit');
     $this->load->view('templates/sitewide_footer');
   }
+  
+  public function delete()
+  {
+   $this->load->view('group/delete');
+  }
 }

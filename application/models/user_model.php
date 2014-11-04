@@ -30,7 +30,14 @@ class User_model extends CI_Model {
     }
     return $return;
  }
-   
+  
+  function delete($id){
+      $this->db->where('id', $id);
+      $this->db->delete('users'); 
+    }
+ 
+ 
+ 
   function validate_and_create(){
 		$user = array();
 		if(isset($_POST['name'])){ $user['name'] = $_POST['name']; }else{ $user['name'] = NULL; }  
