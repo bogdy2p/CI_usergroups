@@ -59,7 +59,7 @@ class Task_model extends CI_Model {
 
   function generate_todo_add_new_form(){
     echo '		<form class="form" id="add_new_todo_form" action="#" method="post">
-              <label>Add New Todo</label><br />
+              <label>Add New Task</label><br />
                 <input name="todo_text"  type="text"  placeholder="Todo text"> <br />
                 <br />
                 <select name="colour" id="colour" form="add_new_todo_form">
@@ -73,7 +73,7 @@ class Task_model extends CI_Model {
                 Self::generate_todo_select_heading_options();
     echo '
                 </select><br /><br />
-                <button type="submit" class="btn btn-success">Add New Todo</button>
+                <button type="submit" class="btn btn-success">Add New Task</button>
           </form> 
       ';
   }

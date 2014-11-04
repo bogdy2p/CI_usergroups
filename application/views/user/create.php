@@ -20,8 +20,6 @@
 						<br />
 						<button type="submit" id="submit" class="btn btn-success" id="submit">Create User</button>
 
-					
-
 					</form>
 				</div>
 				<div class="col-xs-4 col-md-4"></div>

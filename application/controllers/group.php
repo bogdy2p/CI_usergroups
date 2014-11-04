@@ -19,11 +19,17 @@ class Group extends CI_Controller {
     $this->load->view('templates/sitewide_footer');
 	}
   
-  
-  public function add(){
+  public function add()
+  {
     $this->load->view('templates/sitewide_header');
     $this->load->view('group/create');
     $this->load->view('templates/sitewide_footer');
   }
   
+  public function edit()
+  {
+    $this->load->view('templates/sitewide_header');
+    $this->load->view('group/edit');
+    $this->load->view('templates/sitewide_footer');
+  }
 }

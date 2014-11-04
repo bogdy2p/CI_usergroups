@@ -33,11 +33,9 @@ class Group_model extends CI_Model {
 	 } 
      
    function validation_and_create(){
-     // ADD CHECK FOR ALREADY EXISTS IN DB.
 		$group = array();
 		if(isset($_POST['name'])){ $group['name'] = $_POST['name']; }else{ $group['name'] = NULL; }
 		if(isset($_POST['special_key'])){ $group['special_key'] = $_POST['special_key']; }else{ $group['special_key'] = NULL; }
-
 		if(isset($group['name']) && isset($group['special_key'])) {
             $exists = Self::group_already_exists($group['name']);
             if($group['name'] != '' && ($exists == false)){

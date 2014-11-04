@@ -20,7 +20,7 @@ $changelog = new Changelog_model();
       </div>
 </div>
           
-<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+
 
 <!-- 
       EXPORT CSV of CHANGELOGS IN FUNCTIE DE FILTRE.
