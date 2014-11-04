@@ -1,5 +1,4 @@
 function confirm_delete_user(id) {
-    var x;
     if (confirm("Confirm deletion of user  " + id + " ? ") == true) {
         window.location.replace("/user_ci/user/delete?id="+id);return true;
     } else {
@@ -7,7 +6,6 @@ function confirm_delete_user(id) {
     }
 }
 function confirm_delete_group(id){
-	var x;
 	if (confirm("Are you sure you want to delete group " + id + "? ") == true){
 		window.location.replace("/user_ci/group/delete?id="+id);return true;
 	}else{
@@ -29,9 +27,9 @@ function confirm_detail_type_delete(id){
 	}
 }
 function confirm_delete_todo(id){
-	if (confirm("Remove this entry ?") == true){
-		window.location.replace("../models/delete.php?id="+id+"&type=todo");return true;
+	if (confirm("Remove task with id = "+ id +" ?") == true){
+		window.location.replace("/user_ci/task/delete?id="+id); return true;
 	}else{
-		window.location.replace("/user_ci/views/todo_temporary_view.php");return false;
+		window.location.replace("/user_ci/task"); return false;
 	}
 }
