@@ -6,7 +6,7 @@ $changelog = new Changelog_model();
 <div class ="container">
       <div class="row">
             <div class="col-xs-12 col-md-4">
-                        ADD NEW CHANGELOG BUTTOn
+              <a href="changelog/add">GOTO ADD NEW CHANGELOG</a>
             </div>
             <div class="col-xs-12 col-md-4 "> 	
                       <h2>Latest Applied Changes:</h2>
@@ -21,7 +21,6 @@ $changelog = new Changelog_model();
 </div>
           
 <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
-
 
 <!-- 
       EXPORT CSV of CHANGELOGS IN FUNCTIE DE FILTRE.

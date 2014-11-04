@@ -46,6 +46,42 @@ class User_model extends CI_Model {
     }
 	}
   
+  function get_all_user_detail_types() {
+    $this->db->select('*');
+    $this->db->from('user_detail_types');
+    $return = array();
+    $result = $this->db->get();
+    foreach ($result->result_array() as $row){
+      $return[] = $row['name'];
+    }
+    return $return;
+    //OLD VERSION
+//		$statement = $this->db->prepare("SELECT * FROM user_detail_types");
+//		$statement->execute();
+//		$detail_types_array = array();
+//		foreach ($statement as $row) {
+//			$detail_types_array[] = $row['name'];
+//		}
+//		return $detail_types_array;
+	}
+  
+  
+  
+  function add_dynamic_user_detail_form_inputs(){
+		$detail_types = Self::get_all_user_detail_types();
+		foreach ($detail_types as $detail_type) {
+			echo '<label>'.$detail_type.'</label><br />';
+			echo '<input name="'.$detail_type.'" type="text" placeholder="enter '.$detail_type.'"';
+				if(isset($_POST[$detail_type])){ echo 'value="'. $_POST[$detail_type] .'"> <br />'; }
+				else{ echo 'value=""> <br />'; }
+		}
+	}
+  /**********************************************************************************/
+  /**********************************************************************************/
+  /**********************************************************************************/
+  /**********************************************************************************/
+  /**********************************************************************************/
+  
   function generate_users_table_html(){
     Self::generate_users_table_header();
     Self::generate_users_table_content();
