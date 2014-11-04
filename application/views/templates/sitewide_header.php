@@ -35,7 +35,7 @@ echo '<body>';
   echo ' 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                             <li><a href="'.base_url().'main/view_list">   View Tables         </a></li>
+                             <li><a href="'.base_url().'user">   View Tables         </a></li>
                              <li><a href="'.base_url().'">   User Details Types  </a></li>
                              <li><a href="'.base_url().'user">   Add User            </a></li>
                              <li><a href="'.base_url().'group">   Add Group           </a></li>

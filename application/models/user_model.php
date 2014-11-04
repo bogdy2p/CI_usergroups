@@ -12,8 +12,15 @@ class User_model extends CI_Model {
     {
         parent::__construct();
     }
-     
-  function grab_all_users(){
+  function create($array,$table = 'users'){
+    $data = array(
+      'name'=>$array['name'],
+      'password'=>$array['password'],
+        );
+    $this->db->insert($table,$data);
+	}
+    
+  function read(){
     $this->db->select('*');
     $this->db->from('users');
     $result = $this->db->get();
@@ -24,6 +31,82 @@ class User_model extends CI_Model {
     return $return;
  }
    
+  function validate_and_create(){
+		$user = array();
+		if(isset($_POST['name'])){ $user['name'] = $_POST['name']; }else{ $user['name'] = NULL; }  
+		if(isset($_POST['password'])){ $user['password'] = $_POST['password']; }else{ $user['password'] = NULL; }
+		if(isset($_POST['pass_conf'])){ $user['pass_conf'] = $_POST['pass_conf']; }else{ $user['pass_conf'] = NULL; }
+    
+		if(isset($user['name']) && isset($user['password'])) {
+			if($_POST['password'] === $_POST['pass_conf']){
+        $exists = Self::user_already_exists($user['name']);
+          if ($exists == false){
+              $detail_types = Self::get_all_user_detail_types();//Aici preluam toate detaliile disponibile (empty fields)
+              $enc_pass = md5($_POST['password']);
+              $user['password'] = $enc_pass;
+              $asd = Self::create($user);
+              $user_id = Self::grab_userid_by_username($user['name']);
+              //Grab the user id just entered into a variable to be able to update then after.
+              foreach ($detail_types as $detail_type) {
+								if(isset($_POST[$detail_type])){
+                      
+                      //NU POATE SA AIBA DEJA SETAT UN DETAIL TYPE CA DOARA E USER NOU.
+////									$users->add_user_detail_with_type($user['id'],$detail_type,$_POST[$detail_type]);
+                  print_r($_POST[$detail_type]);
+                  echo "<br />";
+								}
+            	}
+              
+              // ++++ DACA SUNT DETALII SETATE , UPDATEAZA USER-UL CU RESPECTIVELE DETALII !
+          }else
+          {
+              die("this username already exists !");
+          }
+      	
+        
+						
+				//$asd2 = $users->update($user['id'],'users',$update_params_array);
+        //header('Location: '.base_url().'user');
+				//die(print_r($detail_types));
+			}
+			else{
+				echo "ERROR : Passwords do not match ! Please re-enter !";
+			}
+		}
+		 else{}
+	}
+  
+  function add_user_detail_with_type($user_id,$detail_type,$detail){
+		//$detail_exists = Crud::check_detail_exists_of_type($user_id,$detail_type,$detail);
+		//$detail_type_exists = Crud::check_detail_type_exists($detail_type);
+		if((!$detail_exists) && (!(is_null($detail))) && ($detail != ' ') && ($detail != '')){
+			if($detail_type_exists){
+				$statement = $this->db->prepare("INSERT INTO user_details (user_id,detail_type,detail) VALUES ('$user_id','$detail_type','$detail')");
+				$statement->execute();
+				return $statement;
+			}else{
+				echo "You cannot enter a detail which hasn't been predefined in the db";
+			}
+		}else{
+			//echo "Unable to add {$detail} : This detail already exists for this user / Is null !";
+		}
+	}
+  
+  
+  
+  
+  function user_already_exists($name){
+     $this->db->select('*');
+     $this->db->from('users');
+     $this->db->where('name',$name);
+     $result = $this->db->count_all_results();
+     if ($result == 0){
+       return false;
+     }else{
+       return true;
+     }
+   }  
+ 
   function get_number_of_groups_for_a_user($id){
     $this->db->select('group_id');
     $this->db->from('usergroups');
@@ -46,6 +129,14 @@ class User_model extends CI_Model {
     }
 	}
   
+  function grab_userid_by_username($name){
+    $this->db->select('id');
+    $this->db->from('users');
+    $this->db->where('name',$name);
+    $result = $this->db->get();
+    return $result;
+  }
+  
   function get_all_user_detail_types() {
     $this->db->select('*');
     $this->db->from('user_detail_types');
@@ -55,14 +146,6 @@ class User_model extends CI_Model {
       $return[] = $row['name'];
     }
     return $return;
-    //OLD VERSION
-//		$statement = $this->db->prepare("SELECT * FROM user_detail_types");
-//		$statement->execute();
-//		$detail_types_array = array();
-//		foreach ($statement as $row) {
-//			$detail_types_array[] = $row['name'];
-//		}
-//		return $detail_types_array;
 	}
   
   
@@ -102,7 +185,7 @@ class User_model extends CI_Model {
   
   function generate_users_table_content(){
     $user = new User_model();
-    $users = $user->grab_all_users();
+    $users = $user->read();
    
     foreach ($users as $individual_user) {
             $type = 'users';

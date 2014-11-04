@@ -2,9 +2,20 @@
 <div class="col-xs-12 col-md-4">
   <a href="user/add">GOTO ADD NEW USER</a>
 </div>
-<div class="col-xs-12 col-md-4"></div>
+<div class="col-xs-12 col-md-4">
+  
+  
+  
+  
+</div>
 <?php
 $user = new User_model();
 $user->generate_users_table_html();
 ?>
 
+<?php 
+
+print_r($user->grab_userid_by_username('11')->result_array());
+
+
+?>

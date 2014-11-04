@@ -1,13 +1,13 @@
 <?php
   $user = new User_model();
-  //$user->validate();
+  $user->validate_and_create();
 ?>
 			<div class="row">
 				<div class="col-xs-4 col-md-4"></div>
 				<div class="col-xs-4 col-md-4">
 					<br /><br />
 
-					<form class="form" id="asd" action="add" method="post">
+					<form class="form" id="asd" action="#" method="post">
 						<div id="name_error"></div>
 						<label>name</label><br />
 						<input name="name" id="name" type="text"  placeholder="enter desired name" value="<?php if(isset($_POST['name'])) echo $_POST['name'];?>"> <br />
