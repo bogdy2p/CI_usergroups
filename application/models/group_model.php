@@ -33,42 +33,34 @@ class Group_model extends CI_Model {
 	 } 
      
    function validation_and_create(){
+     // ADD CHECK FOR ALREADY EXISTS IN DB.
 		$group = array();
 		if(isset($_POST['name'])){ $group['name'] = $_POST['name']; }else{ $group['name'] = NULL; }
 		if(isset($_POST['special_key'])){ $group['special_key'] = $_POST['special_key']; }else{ $group['special_key'] = NULL; }
 
 		if(isset($group['name']) && isset($group['special_key'])) {
-            if($group['name'] != ''){
+            $exists = Self::group_already_exists($group['name']);
+            if($group['name'] != '' && ($exists == false)){
                   Self::create($group);
             }else{
-              die('GroupName Is NULL. Cannot Enter');
+              die('GroupName Is NULL / Already exists. Cannot Add');
             }
 			header("Location: #");
 			die();
 		}
 	}
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+   function group_already_exists($name){
+     $this->db->select('*');
+     $this->db->from('groups');
+     $this->db->where('name',$name);
+     $result = $this->db->count_all_results();
+     if ($result == 0){
+       return false;
+     }else{
+       return true;
+     }
+   }  
    
    
   function generate_groups_table_html(){

@@ -11,7 +11,6 @@ $group->validation_and_create();
 				<div class="col-xs-4 col-md-4">
 					<br />
 					
-					
 					<form class="form" id="asd" action="#" method="post">
 						<div id="group_error"></div>
 						<label>group name</label><br />
