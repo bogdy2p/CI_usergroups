@@ -24,7 +24,7 @@ class Changelog_model extends CI_Model {
 	function read($table_name = 'app_changelog'){
     $this->db->select('*');
     $this->db->from($table_name);
-    $this->db->order_by('date');
+    $this->db->order_by('date','desc');
     $return = array();
     $result = $this->db->get();
     foreach ($result->result_array() as $row){
@@ -37,7 +37,7 @@ class Changelog_model extends CI_Model {
     $this->db->select('*');
     $this->db->from('app_changelog');
     $this->db->where('date >= NOW() - INTERVAL '.$days.' DAY', '', false); 
-    $this->db->order_by('date');
+    $this->db->order_by('date','desc');
     $result = $this->db->get();
     $return = array();
     foreach ($result->result_array() as $row){
