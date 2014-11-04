@@ -31,7 +31,46 @@ class Group_model extends CI_Model {
     }
     return $return;
 	 } 
-    
+     
+   function validation_and_create(){
+		$group = array();
+		if(isset($_POST['name'])){ $group['name'] = $_POST['name']; }else{ $group['name'] = NULL; }
+		if(isset($_POST['special_key'])){ $group['special_key'] = $_POST['special_key']; }else{ $group['special_key'] = NULL; }
+
+		if(isset($group['name']) && isset($group['special_key'])) {
+            if($group['name'] != ''){
+                  Self::create($group);
+            }else{
+              die('GroupName Is NULL. Cannot Enter');
+            }
+			header("Location: #");
+			die();
+		}
+	}
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
   function generate_groups_table_html(){
     Self::generate_groups_table_header();
     Self::generate_groups_table_content();
@@ -117,14 +156,13 @@ class Group_model extends CI_Model {
 
   }
   function generate_groups_table_list_content(){
-    $group = new Group();
-    $groups = $group->list_groups();
+    $groups = Self::read();
     $count = 0;
-    foreach ($groups as $individual_group) {
+    foreach ($groups as $group) {
         $count += 1;
         $type = 'groups';
           echo '<tr>';
-                  echo ''.$count.'-'. $individual_group['name'] . ' | &nbsp;';             
+                  echo ''.$count.'-'. $group['name'] . ' | &nbsp;';             
                   echo '</tr>';
       }
   }
