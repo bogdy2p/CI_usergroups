@@ -37,4 +37,11 @@ class User extends CI_Controller {
   {
    $this->load->view('user/delete');
   }
+  
+  public function view_user()
+  {
+    $this->load->view('templates/sitewide_header');
+		$this->load->view('user/view_user');
+    $this->load->view('templates/sitewide_footer');
+  }
 }

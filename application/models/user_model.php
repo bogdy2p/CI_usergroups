@@ -239,8 +239,8 @@ class User_model extends CI_Model {
                        echo '<td class="success">'. $individual_user['id'] . '</td>';
                        echo '<td>'. $individual_user['name'] . '</td>';
                        echo '<td>'.  implode(" / ",$groups_array) . '</td>';
-                       echo '<td><a href="../views/view_user.php?id='.$individual_user["id"].'"><span class="glyphicon glyphicon-eye-open"></span></td>';
-                       echo '<td><a href="../views/edit_user.php?id='.$individual_user["id"].'&type='.$type.'"><span class="glyphicon glyphicon-edit spangre"></span></td>';
+                       echo '<td><a href="'.base_url().'user/view_user?id='.$individual_user["id"].'"><span class="glyphicon glyphicon-eye-open"></span></td>';
+                       echo '<td><a href="'.base_url().'user/edit?id='.$individual_user["id"].'&type='.$type.'"><span class="glyphicon glyphicon-edit spangre"></span></td>';
                        echo '<td><a><span class="glyphicon glyphicon-remove spanred pointer" onclick=confirm_delete_user('.$individual_user["id"].');></span></td>';
                        echo '</tr>';
             }
