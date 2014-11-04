@@ -15,7 +15,7 @@ class Task extends CI_Controller {
   public function index()
 	{
     $this->load->view('templates/sitewide_header');
-		$this->load->view('task');
+		$this->load->view('task/task');
     $this->load->view('templates/sitewide_footer');
 	}
   

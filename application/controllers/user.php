@@ -15,8 +15,14 @@ class User extends CI_Controller {
   public function index()
 	{
     $this->load->view('templates/sitewide_header');
-		$this->load->view('users_table');
+		$this->load->view('user/users_table');
     $this->load->view('templates/sitewide_footer');
 	}
+  
+  public function add(){
+    $this->load->view('templates/sitewide_header');
+		$this->load->view('user/add');
+    $this->load->view('templates/sitewide_footer');
+  }
   
 }

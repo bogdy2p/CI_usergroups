@@ -15,8 +15,15 @@ class Group extends CI_Controller {
   public function index()
 	{
     $this->load->view('templates/sitewide_header');
-		$this->load->view('group');
+		$this->load->view('group/group');
     $this->load->view('templates/sitewide_footer');
 	}
+  
+  
+  public function add(){
+    $this->load->view('templates/sitewide_header');
+    $this->load->view('group/add');
+    $this->load->view('templates/sitewide_footer');
+  }
   
 }

@@ -15,7 +15,7 @@ class Applog extends CI_Controller {
   public function index()
 	{
     $this->load->view('templates/sitewide_header');
-		$this->load->view('applog');
+		$this->load->view('applog/index');
     $this->load->view('templates/sitewide_footer');
 	}
   
