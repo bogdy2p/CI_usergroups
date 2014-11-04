@@ -22,7 +22,7 @@ class Group extends CI_Controller {
   
   public function add(){
     $this->load->view('templates/sitewide_header');
-    $this->load->view('group/add');
+    $this->load->view('group/create');
     $this->load->view('templates/sitewide_footer');
   }
   
