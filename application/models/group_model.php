@@ -33,39 +33,22 @@ class Group_model extends CI_Model {
 	 } 
     
    
-   function update($id, $table, $update_params_array){
-		$exists = Crud::verify_object_exists($id,$table);
-		if(($exists) && (!empty($update_params_array))) {
-
-				if ($table == 'users'){
-							$statement = $this->db->prepare("UPDATE users SET name=?, password=? WHERE id=?");
-							$statement->bindParam(1, $update_params_array['name']);
-							$statement->bindParam(2, $update_params_array['password']);
-							$statement->bindParam(3, $id);
-						
-									  }
-				elseif ($table == 'groups'){
-
-				$statement = $this->db->prepare("UPDATE groups SET id=?, name=?, special_key=? WHERE id=? ");
-				$statement->bindParam(1, $update_params_array['id']);
-				$statement->bindParam(2, $update_params_array['name']);
-				$statement->bindParam(3, $update_params_array['special_key']);
-				$statement->bindParam(4, $id);
-				
+   function update($id, $data){
+    $groupname = Self::get_group_object_by_id($id)->name;
+		$exists = Self::group_already_exists($groupname,'groups');
+		if(($exists) && (!empty($data))) {
+          $data = array(
+               'name' => $data['name'],
+               'special_key' => $data['special_key'],
+            );
+          $this->db->where('id', $id);
+          $this->db->update('groups', $data);
+          
 					}
-			$statement->execute();
-		}else{
-			echo("Object id {$id} doesnt exist in db , table is incorrect , or params array is empty <br />");
-		}
-	 }
-   
-   
-   
-   
-   
-   
-   
-   
+          else 
+            { die('Object id '.$id.'doesnt exist in db , table is incorrect , or params array is empty'); }    
+    }
+  
    function validation_and_create(){
 		$group = array();
 		if(isset($_POST['name'])){ $group['name'] = $_POST['name']; }else{ $group['name'] = NULL; }
@@ -77,7 +60,7 @@ class Group_model extends CI_Model {
             }else{
               die('GroupName Is NULL / Already exists. Cannot Add');
             }
-			header("Location: #");
+			header('Location: '.base_url().'group');
 			die();
 		}
 	}
@@ -93,14 +76,13 @@ function validate_and_update_group() {
 
 		if(isset($_POST['name']) && isset($_POST['special_key'])){
 		
-			$group_update_details = array(
+			$update_details = array(
 					'id' => $_POST['id'],
 					'name' => $_POST['name'],
 					'special_key' => $_POST['special_key'],
-					);
-			
-			$update = $group->update($group_update_details['id'],'groups',$group_update_details);
-			//header("Location: /user/views/view_list.php");
+					);			
+       Self::update($_GET['id'],$update_details);
+			header("Location: group");
 			die();						
 			}
 	}else{
@@ -160,7 +142,7 @@ function validate_and_update_group() {
                   echo '<td class="warning">'. $individual_group['id'] . '</td>';
                   echo '<td>'. $individual_group['name'] . '</td>';
                   echo '<td>'. $individual_group['special_key'] . '</td>';
-                  echo '<td><a href="group/edit?id='.$individual_group["id"].'&type='.$type.'"><span class="glyphicon glyphicon-edit spangre"></td>';
+                  echo '<td><a href="'.base_url().'group/edit?id='.$individual_group["id"].'&type='.$type.'"><span class="glyphicon glyphicon-edit spangre"></td>';
                   echo '<td><a><span onclick="confirm_delete_group('.$individual_group["id"].')" class="glyphicon glyphicon-remove spanred pointer"></span></a></td>';
                   echo '</tr>';
       }
