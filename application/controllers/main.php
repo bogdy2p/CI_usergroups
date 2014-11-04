@@ -15,11 +15,22 @@ class Main extends CI_Controller {
   public function index()
 	{
     $this->load->view('templates/sitewide_header');
-		$this->load->view('main');
+		$this->load->view('main/index');
     $this->load->view('templates/sitewide_footer');
 	}
  
-  	public function view_list() { // VIEW-UL cu tabele
+  public function tables()  // VIEW-UL cu tabele
+  {
+    $this->load->view('templates/sitewide_header');
+    $this->load->model('user_model');
+    $this->load->view('user/index');
+    $this->load->model('group_model');
+    $this->load->view('group/index');
+		$this->load->view('main/list');
+    $this->load->view('templates/sitewide_footer');
+  }
+ 
+ 	public function view_list() { 
 		$this->load->view('templates/sitewide_header');
 		$this->load->view('user/index');
 		$this->load->view('templates/sitewide_footer');

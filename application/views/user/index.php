@@ -15,6 +15,6 @@ $user->generate_users_table_html();
 
 <?php 
 
-print_r($user->grab_userid_by_username('11'));
+//print_r($user->grab_userid_by_username('11'));
 
 ?>

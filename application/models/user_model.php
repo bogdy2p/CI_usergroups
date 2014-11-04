@@ -41,27 +41,23 @@ class User_model extends CI_Model {
 			if($_POST['password'] === $_POST['pass_conf']){
         $exists = Self::user_already_exists($user['name']);
           if ($exists == false){
-              $detail_types = Self::get_all_user_detail_types();//Aici preluam toate detaliile disponibile (empty fields)
+              $detail_types = Self::get_all_user_detail_types();
               $enc_pass = md5($_POST['password']);
               $user['password'] = $enc_pass;
               $asd = Self::create($user);
               $user_id = Self::grab_userid_by_username($user['name']);
-              //Grab the user id just entered into a variable to be able to update then after.
+              
               foreach ($detail_types as $detail_type) {
-								if(isset($_POST[$detail_type])){
-                  
-									Self::add_user_detail_with_type($user_id,$detail_type,$_POST[$detail_type]);
-                  //print_r($_POST[$detail_type]);
-                  //echo "<br />";
+								if(isset($_POST[$detail_type])){   
+                      Self::add_user_detail_with_type($user_id,$detail_type,$_POST[$detail_type]);
 								}
             	}
           }else
           {
               die("this username already exists !");
           }						
-				//$asd2 = $users->update($user['id'],'users',$update_params_array);
-        //header('Location: '.base_url().'user');
-				//die(print_r($detail_types));
+        header('Location: '.base_url().'user');
+				die();
 			}
 			else{
 				echo "ERROR : Passwords do not match ! Please re-enter !";
@@ -75,21 +71,12 @@ class User_model extends CI_Model {
 		$detail_type_exists = Self::check_detail_type_exists($detail_type);
 		if((!$detail_exists) && (!(is_null($detail))) && ($detail != ' ') && ($detail != '')){
 			if($detail_type_exists){
-          $data = array(
-              'user_id'=>$user_id,
-              'detail_type'=>$detail_type,
-              'detail'=>$detail,
-           );
+          $data = array('user_id'=>$user_id, 'detail_type'=>$detail_type, 'detail'=>$detail,);
           $this->db->insert('user_details',$data);
-				//$statement = $this->db->prepare("INSERT INTO user_details (user_id,detail_type,detail) VALUES ('$user_id','$detail_type','$detail')");
-				//$statement->execute();
-				//return $statement;
 			}else{
 				echo "You cannot enter a detail which hasn't been predefined in the db";
 			}
-		}else{
-			//echo "Unable to add {$detail} : This detail already exists for this user / Is null !";
-		}
+		}else{/*echo "Unable to add {$detail} : This detail already exists for this user / Is null !";*/}
 	}
   
   
@@ -183,9 +170,8 @@ class User_model extends CI_Model {
     $this->db->where('name',$name);
     $result = $this->db->get();
     foreach ($result->result_array() as $row){
-      $return = $row['id'];
+      return $row['id'];
     }
-    return $return;
   }
   
   function get_all_user_detail_types() {
