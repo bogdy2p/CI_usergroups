@@ -56,9 +56,8 @@ class Task_model extends CI_Model {
 		}else{}
   }
 
-
   function generate_todo_add_new_form(){
-    echo '		<form class="form" id="add_new_todo_form" action="#" method="post">
+    echo '		<form class="form" id="add_new_todo_form" action="index" method="post">
               <label>Add New Task</label><br />
                 <input name="todo_text"  type="text"  placeholder="Todo text"> <br />
                 <br />

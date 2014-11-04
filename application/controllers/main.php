@@ -21,10 +21,12 @@ class Main extends CI_Controller {
  
   public function tables()  // VIEW-UL cu tabele
   {
+     $this->load->model('user_model');
+     $this->load->model('group_model');
     $this->load->view('templates/sitewide_header');
-    $this->load->model('user_model');
+   
     $this->load->view('user/table');
-    $this->load->model('group_model');
+    
     $this->load->view('group/table');
 		$this->load->view('main/list');
     $this->load->view('templates/sitewide_footer');

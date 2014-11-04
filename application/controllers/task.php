@@ -16,7 +16,14 @@ class Task extends CI_Controller {
 	{
     $this->load->view('templates/sitewide_header');
 		$this->load->view('task/index');
+    $this->load->view('task/table');
     $this->load->view('templates/sitewide_footer');
 	}
+  
+  public function add(){
+    $this->load->view('templates/sitewide_header');
+    $this->load->view('task/create');
+    $this->load->view('templates/sitewide_footer');
+  }
   
 }

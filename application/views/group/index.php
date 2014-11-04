@@ -1,7 +1,14 @@
 
-<div class="row">Foreach file in the folder , print a link with the file's name / FUNCTIONS OF THIS KIND?</div>
+
 <div class="row">
-        <a href="group/add">ADD NEW GROUP</a>
+  <div class="col-xs-12 col-md-4"></div>
+  <div class="col-xs-12 col-md-4">
+    
+      <a href="group/add">ADD NEW GROUP</a>
+    
+  </div>
+  <div class="col-xs-12 col-md-4"></div>
+        
 </div>  
 
 <div class="row"></div>

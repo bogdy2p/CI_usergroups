@@ -37,8 +37,8 @@ echo '<body>';
                         <ul class="nav navbar-nav">
                              <li><a href="'.base_url().'main/tables">   View Tables         </a></li>
                              <li><a href="'.base_url().'">   User Details Types  </a></li>
-                             <li><a href="'.base_url().'user">   Add User            </a></li>
-                             <li><a href="'.base_url().'group">   Add Group           </a></li>
+                             <li><a href="'.base_url().'user">   USER            </a></li>
+                             <li><a href="'.base_url().'group">   GROUP           </a></li>
                              <li><a href="'.base_url().'applog">   View App Logs       </a></li>
                              <li><a href="'.base_url().'changelog">   View Changelogs     </a></li>
                              <li><a href="'.base_url().'task">   Manage Todo\'s (tasks)    </a></li>

@@ -16,6 +16,7 @@ class Group extends CI_Controller {
 	{
     $this->load->view('templates/sitewide_header');
 		$this->load->view('group/index');
+    $this->load->view('group/table');
     $this->load->view('templates/sitewide_footer');
 	}
   
