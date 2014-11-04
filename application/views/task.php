@@ -1,9 +1,31 @@
-<?php
+<div class="container">
+			
+		<div class="row">
+		
+				<div class="col-xs-12 col-md-4"></div>
+				<div class="col-xs-12 col-md-4">a
+					<?php //generate_todo_add_new_form(); 
+          
+          $test = new Task_model();
+          $asd = $test->read();
+          var_dump($asd);
+          
+          $test->create('1','2');
+          
+          
+          ?>
+				</div>
+				<div class="col-xs-12 col-md-4"></div>
+				
+		</div>
+	
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-echo 'Task view';
+		<div class="row">
+				<div class="col-xs-12 col-md-1"></div>
+				<div class="col-xs-12 col-md-10">b
+					<?php //generate_todo_list_html_admin(); ?>
+				</div>
+				<div class="col-xs-12 col-md-1"></div>
+				
+		</div>
+	

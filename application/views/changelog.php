@@ -4,7 +4,6 @@ $changelog->validation_and_insertion_of_a_new_changelog();
 ?>
 
 <div class ="container">
-  
       <div class="row">
             <div class="col-xs-12 col-md-4">
                         <?php	$changelog->generate_changelog_add_new_form(); ?>
@@ -20,7 +19,6 @@ $changelog->validation_and_insertion_of_a_new_changelog();
                     <?php $changelog->generate_changelog_table_by_post();  ?>
       </div>
       <div class="row"></div>
-    
 </div>
           
 <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
@@ -28,6 +26,5 @@ $changelog->validation_and_insertion_of_a_new_changelog();
 
 <!-- 
       EXPORT CSV of CHANGELOGS IN FUNCTIE DE FILTRE.
-      SORTARE LA TOATE TABELELE DUPA DATA / NUME ( HEADER ) 
-      
+      SORTARE LA TOATE TABELELE DUPA DATA / NUME ( HEADER )    
 -->
