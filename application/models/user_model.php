@@ -535,8 +535,6 @@ function create_user_update_details_array($post_array){
      }
 	}  
     
-    
-    
   function check_detail_pair_exists($user_id,$detail_type){
     $this->db->select('id');
     $this->db->from('user_details');
@@ -549,9 +547,6 @@ function create_user_update_details_array($post_array){
        return false;
      }
 	}
-
-
-  
   
   /**********************************************************************************/
   /*******************************USER DETAILS TABLE**********************************/
@@ -575,7 +570,7 @@ function create_user_update_details_array($post_array){
     foreach ($user_details_array as $key => $value) {
       echo '<tr>';
       echo '<td>'.$value.'</td>';
-      echo '<td> <a href="#?name='.$value.'"><span class="glyphicon glyphicon-edit"></span></a>  </td>';
+      echo '<td> <a href="'.base_url().'user/edit_detail_type?name='.$value.'"><span class="glyphicon glyphicon-edit"></span></a>  </td>';
       echo '<td><a><span onclick="confirm_detail_type_delete(\''.$value.'\')" class="glyphicon glyphicon-remove spanred pointer"></span></a></td>';
       echo '</tr>';
     }
@@ -584,11 +579,6 @@ function create_user_update_details_array($post_array){
     echo '</table>';
   }
 
-  
-  
-  
-  
-  
   
   /**********************************************************************************/
   /**********************************************************************************/

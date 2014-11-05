@@ -46,8 +46,14 @@ class User extends CI_Controller {
   }
   
   public function detail_types(){
-     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/sitewide_header');
 		$this->load->view('user/detail_types');
+    $this->load->view('templates/sitewide_footer');
+  }
+  
+  public function edit_detail_type(){
+    $this->load->view('templates/sitewide_header');
+		$this->load->view('user/edit_detail_type');
     $this->load->view('templates/sitewide_footer');
   }
 }
