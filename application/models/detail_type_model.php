@@ -32,9 +32,11 @@ class Detail_type_model extends CI_Model {
     return $return;
 	 }
    
-	 function update($data){
-      var_dump($data);
-      $this->db->where('name',$data['name']);
+	 function update($old_value,$new_value){
+     $data = array(
+       'name'=>$new_value,
+     );
+      $this->db->where('name',$old_value);
       $this->db->update('user_detail_types',$data);
     }
     
@@ -58,14 +60,15 @@ class Detail_type_model extends CI_Model {
   } 
   
   function validate_and_edit(){
-	if(isset($_POST['new_detail_name'])){
-		if(!empty($_POST['new_detail_name'])){
-      $data = array('name'=> $_POST['new_detail_name'] ,);
-      Self::update($data);
+	if(isset($_POST['name'])){
+		if(!empty($_POST['name'])){
+      $data = array('name'=> $_POST['name'],);
+      print_r($data);
+      Self::update($_GET['name'],$_POST['name']);
 			//MUST UPDATE IN THE OTHER TABLE EVERYWHERE WHERE DETAIL TYPE OF THIS KIND IS SET !
 			//$user->update_detail_types_names_in_user_groups($_POST['old_detail_name'],$_POST['new_detail_name']);
 			header('Location: '.base_url().'detail_type');
-			die();
+			die('errz');
 		}else{
 			echo '$_post is set but EMPTY';
 			header('Location: '.base_url().'detail_type');
@@ -108,7 +111,7 @@ class Detail_type_model extends CI_Model {
 
   function print_edit_existing_detail_form($name){
 	echo '
-			<form class="form" id="edit_existing_detail_form" action="edit" method="post">
+			<form class="form" id="edit_existing_detail_form" action="edit?name='.$_GET['name'].'" method="post">
 				<label>Change detail name for "'.$name.'" </label><br />
 					<div id="edit_detail_type_error"></div>
 					<input name="name" id="name" type="text"  placeholder="change detail name"> <br />

@@ -1,12 +1,9 @@
 <?php $detail = new Detail_type_model();
-      print_r($_GET);
-      echo '<br />';
-      print_r($_POST);
-//      if (isset($_GET['new_detail_name'])){
-//        $_POST['name'] = $_GET['new_detail_name'];
-//        $detail->validate_and_edit($_POST['name']);
-//      }
-     
+
+      if(isset($_POST['name']) && !empty($_POST['name'])) {
+        $detail->validate_and_edit($_POST['name']);   
+      }
+      
 ?>
 <div class="row"> <!--SECOND ROW -->
 			<div class="col-xs-2 col-md-4"></div>
@@ -18,8 +15,9 @@
 			<hr>
 			<div class="col-xs-12 col-md-4"> <!--FIRST COLUMN -->
 				<?php 
-					$test = $detail->get_detail_type_by_name($_GET['name']);	
-					$detail->print_edit_detail_table_html($test['name']);
+					$detaliu = $detail->get_detail_type_by_name($_GET['name']);
+          //print_r($detaliu);
+					$detail->print_edit_detail_table_html($detaliu['name']);
 				?>
 			</div> <!-- END FIRST COLUMN -->
 			<div class="col-xs-12 col-md-4"> <!--SECOND COLUMN -->

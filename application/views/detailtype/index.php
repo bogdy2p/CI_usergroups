@@ -17,7 +17,7 @@
 <div class="row"> <!--FOURTH ROW -->
 			<hr>
 			<div class="col-xs-12 col-md-3"> <!--FIRST COLUMN -->
-				 <?php 
+              <?php 
 								$detail_types_array = $detail->get_all_user_detail_types();
 								$detail->print_user_details_table_html($detail_types_array); 
 							?>
