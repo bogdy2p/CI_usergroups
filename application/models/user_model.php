@@ -118,9 +118,6 @@ class User_model extends CI_Model {
 												//Apply new mapping using the new values from the form !!!! (Foreach in one line)
 												$test = Self::verify_update_details_for_user($get['id']);
 												foreach ($group_ids_checked_array as $group_id_checked) {Self::assign_user_to_group($get['id'],$group_id_checked);}
-												
-
-												
 												header('Location: '.base_url().'user');		
 												die();						
 											}else{
@@ -133,7 +130,6 @@ class User_model extends CI_Model {
 									}
 							}	
 							 else  {//If field OLD PASSWORD IS EMPTY
-                  die('went into else / old password empty');
 							 		$delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
 							 		$group_ids_checked_array = Self::get_group_ids_checked_in_form();
 							 		$test = Self::verify_update_details_for_user($get['id']);

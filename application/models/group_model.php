@@ -73,20 +73,28 @@ class Group_model extends CI_Model {
   
 function validate_and_update_group() {
 	if(isset($_GET['id'])){
+        
 		$group = Self::get_group_object_by_id($_GET['id']);
 		$group_id = $group->id; 
 		$old_name = $group->name;
 		$old_special_key = $group->special_key;
 		$_POST['id'] = $_GET['id'];
+    //die();
 
 		if(isset($_POST['name']) && isset($_POST['special_key'])){
-		
 			$update_details = array(
 					'id' => $_POST['id'],
 					'name' => $_POST['name'],
 					'special_key' => $_POST['special_key'],
 					);			
-       Self::update($_GET['id'],$update_details);
+      //VERIFICARE DACA NU EXISTA ALT GRUP CU ACELASI NUME DEJA , DACA EXISTA THROW AN ERROR
+       $exists = Self::group_already_exists($_POST['name']);
+       if ($exists == false){
+          Self::update($_GET['id'],$update_details);
+       }else{ die('You cannot override anothe group !');
+            //UNSET GROUPNAME FROM POST ARRAY
+            //UPDATE GROUP WITHOUT NAME UPDATE
+            }
 			header("Location: group");
 			die();						
 			}
@@ -106,8 +114,7 @@ function validate_and_update_group() {
     }
    return $this;
 	}
-  
-  
+    
    function group_already_exists($name){
      $this->db->select('*');
      $this->db->from('groups');

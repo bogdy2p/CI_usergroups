@@ -1,6 +1,8 @@
 <?php 
   $user = new User_model();
   $user->validate_and_save_user($_GET);
+  
+  //print_r($_GET);
 ?>
 <form class="form" id="edituser" action="<?php echo base_url() ?>user/edit?id=<?php echo $_GET['id'];?>&type=users" method="post">
 				<div class="row">

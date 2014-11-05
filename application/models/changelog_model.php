@@ -118,6 +118,7 @@ class Changelog_model extends CI_Model {
     <br /><br /><br /><br /><br />
     <form class="form" id="day_form" action="#" method="post">
           <select name="day" id="day" form="day_form">
+            <option value="100">All period</option>
             <option value="1">Today</option>
             <option value="2">Yesterday</option>
             <option value="3">Two Days Ago</option>
@@ -126,7 +127,7 @@ class Changelog_model extends CI_Model {
             <option value="6">Five Days Ago</option>
             <option value="7">Six Days Ago</option>
             <option value="8">Last Week</option>
-            <option value="100">All period</option>
+            
             <!--BREAK THIS INTO OPTIONS -->
           </select> 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -139,7 +140,7 @@ class Changelog_model extends CI_Model {
     if ((isset($_POST['day'])) && !empty($_POST['day'])){
       Self::generate_changelog_table_html($_POST['day']);
     }else{
-      Self::generate_changelog_table_html('1');
+      Self::generate_changelog_table_html('100');
     }
   }
   
