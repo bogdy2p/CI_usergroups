@@ -203,6 +203,85 @@ class User_model extends CI_Model {
 				else{ echo 'value=""> <br />'; }
 		}
 	}
+  
+  function get_user_object($id){
+    $this->db->select('*');
+    $this->db->from('users');
+    $this->db->where('id',$id);
+    $result = $this->db->get();
+    foreach ($result->result() as $user_object){
+      return $user_object;
+    }
+  }
+  
+  
+  function print_userdata_inputs(){
+		if(isset($_GET['id'])){
+			$user = Self::get_user_object($_GET['id']); //Fetch the user object from the database
+	echo '
+		<p id="hideable_on_click">To change the password OR the username , <br /> you must know the old password !</p>
+		<label>Name</label><br />
+		<div id="edit_username_error"></div>
+		<input name="name" id="edit_username" type="text"  placeholder="User Name" value="'.$user->name.'"> <br />
+		<label>Enter current Password</label><br />
+		<input name="old_password"  type="password"  placeholder="Old Password" value=""><br />
+		<label>New Password</label><br />
+		<input name="password"  type="password"  placeholder="New Password" value=""><br />
+		<label>Confirm New Password</label><br />
+		<input name="pass_conf" type="password"  placeholder="Confirm New Password" value=""><br />
+    ';
+	}
+}
+  
+  function print_group_checkboxes_inputs(){
+				$array_of_current_groups = Self::get_number_of_groups_for_a_user($_GET['id']);
+				$groups_array = Self::get_all_groups_in_db();				
+				$group_names = $groups_array['name'];
+				$group_ids = $groups_array['id'];
+				echo '<h3>This user is a member of: </h3><br />';
+				foreach ($group_names as $group_name) {
+					if (in_array($group_name, $array_of_current_groups)){
+						echo '<input name="'.$group_name.'" type="checkbox" value="'.$group_name.'" checked>&nbsp;';
+						echo '<label>'.$group_name.'\'s</label><br />';
+					}else{
+						echo '<input name="'.$group_name.'" type="checkbox" value="'.$group_name.'">&nbsp;';
+						echo '<label>'.$group_name.'</label><br />';
+					}
+				} //end foreach
+	}
+  
+  function get_all_groups_in_db() {
+    $this->db->select('*');
+    $this->db->from('groups');
+    $result = $this->db->get();
+    $groups_array = array();
+    foreach ($result->result_array() as $row){
+      $groups_array['id'][] = $row['id'];
+      $groups_array['name'][] = $row['name'];
+      }
+    return $groups_array;
+    }  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   /**********************************************************************************/
   /**********************************************************************************/
   /**********************************************************************************/
