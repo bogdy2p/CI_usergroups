@@ -55,10 +55,6 @@ class User_model extends CI_Model {
       $this->db->where('id', $id);
       $this->db->delete('users'); 
   }
-  function delete_detail_type($name){
-      $this->db->where('name', $name);
-      $this->db->delete('user_detail_types'); 
-  }
  
   function validate_and_create(){
 		$user = array();
