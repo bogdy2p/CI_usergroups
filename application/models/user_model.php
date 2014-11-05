@@ -332,6 +332,15 @@ class User_model extends CI_Model {
     }
 	}
   
+  function add_dynamic_user_detail_form_inputs(){
+		$detail_types = Self::get_all_user_detail_types();
+		foreach ($detail_types as $detail_type) {
+			echo '<label>'.$detail_type.'</label><br />';
+			echo '<input name="'.$detail_type.'" type="text" placeholder="enter '.$detail_type.'"';
+				if(isset($_POST[$detail_type])){ echo 'value="'. $_POST[$detail_type] .'"> <br />'; }
+				else{ echo 'value=""> <br />'; }
+		}
+	}
   
   function get_group_ids_checked_in_form(){
     $name_of_groups_array = Self::get_groups_checked_in_form();

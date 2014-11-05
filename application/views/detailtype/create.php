@@ -1,4 +1,7 @@
-<?php $detail = new Detail_type_model();?>
+<?php $detail = new Detail_type_model();
+  $detail->validate_and_add();
+
+?>
 
 <div class="row"> 
 						<div class="col-xs-3 col-md-4"></div>

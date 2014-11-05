@@ -9,7 +9,7 @@
 <div class='row'><!--THIRD ROW -->
       <div class="col-xs-12 col-md-4"></div>
       <div class="col-xs-12 col-md-4">
-        <a href="add" >ADD NEW DETAIL TYPE</a>
+        <a href="detail_type/add" >ADD NEW DETAIL TYPE</a>
       </div>
       <div class="col-xs-12 col-md-4"></div>
 </div><!--END THIRD ROW -->
