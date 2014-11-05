@@ -275,13 +275,12 @@ class User_model extends CI_Model {
 	}  
   
   function get_detail_data_by_detail_id($detail_id) {
-    $this->db->select('detail','detail_type');
+    $this->db->select('*');
     $this->db->from('user_details');
-    $this->db->where('user_id',$detail_id);
+    $this->db->where('id',$detail_id);
     $result = $this->db->get();
     $data = array();
     foreach ($result->result_array() as $row){
-      //print_r($row);
       $data['type'] = $row['detail_type'];
       $data['value'] = $row['detail'];
     }
@@ -289,27 +288,47 @@ class User_model extends CI_Model {
 	}	
     
   function get_userdata_details_availlable($user_id){
- 		
  		$already_set_details = array(); 
 		$all_existing_detail_types = Self::get_all_user_detail_types();
 		$user_details_ids = Self::get_user_details_array($user_id);
  		foreach ($user_details_ids as $key => $value) {		
-     // print_r($key);echo "<br />";print_r($value);
+//     print_r($key);
+//     echo "<br />";
+//     print_r($value);
+//     echo "<br />";
       
-      
- 			$already_set_details[$value] = Self::get_detail_data_by_detail_id($value);
-      die();
+ 			$already_set_details[$value] = Self::get_detail_data_by_detail_id($value)['type'];
+      // AICI RETURNEAZA DOAR PHONE-ul , ar trebuii sa returneze toate setate...
+        echo '<pre>';
+         print_r($already_set_details);
+        die();
+      print_r($already_set_details);
   		}
   		foreach ($all_existing_detail_types as $individual_detail) {
+          echo '<pre>';
+          print_r($individual_detail);
+          die();
   				if(in_array($individual_detail, $already_set_details)){
-  					$detail_value = $user->grab_detail_value_by_type_and_id($user_id,$individual_detail);
+  					$detail_value = Self::grab_detail_value_by_type_and_id($user_id,$individual_detail);
   					Self::print_detail_inputs_with_value($individual_detail,$detail_value);
   					$_POST[$individual_detail] = $detail_value;
   				}else{
-  					Self::print_detail_inputs_without_value($individual_detail);
+  					//Self::print_detail_inputs_without_value($individual_detail);
   				}
   		}
 }
+
+function grab_detail_value_by_type_and_id($id,$type){
+  $this->db->select('detail');
+  $this->db->from('user_details');
+  $this->db->where('user_id',$id);
+  $this->db->where('detail_type',$type);
+  $result = $this->db->get();
+  foreach($result->result_array() as $row){
+    return $row['detail'];
+  }
+}
+
 function print_detail_inputs_with_value($type,$detail){
 		echo '
 			<label>'.$type.'</label></br>
