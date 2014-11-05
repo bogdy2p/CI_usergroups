@@ -36,29 +36,18 @@ class User_model extends CI_Model {
   }
  
   function update_user_details_for_user($user_id,$detail_type,$new_detail){
-    
   $data = array(
-      ''=>'',
-      ''=>'',
-      ''=>'',
-  );
-    
-    
-    
-		$statement = $this->db->prepare("UPDATE user_groups.user_details SET detail = ? WHERE user_details.user_id = ? AND user_details.detail_type = ?");
-		$statement->bindParam(1,$new_detail);
-		$statement->bindParam(2,$user_id);
-		$statement->bindParam(3,$detail_type);
-		$statement->execute();
-		print_r($statement);
-		return $statement;
+               'detail' => $new_detail,
+            );
+  $this->db->where('user_id', $user_id);
+  $this->db->where('detail_type', $detail_type);
+  $this->db->update('user_details', $data); 
 	}
-  
-  
+    
   function delete($id){
       $this->db->where('id', $id);
       $this->db->delete('users'); 
-    }
+  }
  
  
  
@@ -125,7 +114,7 @@ class User_model extends CI_Model {
 												
 
 												
-												header("Location: /user/views/view_list.php");		
+												header('Location: '.base_url().'user');		
 												die();						
 											}else{
 												print_r("The passwords you entered do not match.");
@@ -140,7 +129,7 @@ class User_model extends CI_Model {
 							 		$group_ids_checked_array = Self::get_group_ids_checked_in_form();
 							 		$test = Self::verify_update_details_for_user($get['id']);
 							 		foreach ($group_ids_checked_array as $group_id_checked) {Self::assign_user_to_group($get['id'],$group_id_checked);}
-							 		header("Location: /user/views/view_list.php");
+							 		header('Location: '.base_url().'user');
 								 	die();
 									}
 
@@ -478,6 +467,41 @@ function create_user_update_details_array($post_array){
       $this->db->delete('usergroups');
 		}
   
+  function assign_user_to_group($user_id,$group_id){
+		$mapping_exists = Self::verify_existing_mapping($user_id,$group_id);
+		if(!$mapping_exists){
+			Self::map_user_group($user_id,$group_id);
+		}else{
+			$username = Self::get_name_by_id($user_id,'users');
+			$groupname = Self::get_name_by_id($user_id,'groups');
+			die("'".$username."' is already into the '" .$groupname. "' Group!");
+		}
+	}
+
+	function map_user_group($uid,$gid){
+    $data = array(
+      'user_id'=>$uid,
+      'group_id'=>$gid,
+      );
+    
+    $this->db->insert('usergroups', $data); 
+	}
+
+	function verify_existing_mapping($uid,$gid){
+    $this->db->select('*');
+    $this->db->from('usergroups');
+    $this->db->where('user_id',$uid);
+    $this->db->where('group_id',$gid);
+    $result = $this->db->count_all_results();
+     if ($result >= 1){
+       return true;
+     }else{
+       return false;
+     }
+	}  
+    
+    
+    
   function check_detail_pair_exists($user_id,$detail_type){
     $this->db->select('id');
     $this->db->from('user_details');
