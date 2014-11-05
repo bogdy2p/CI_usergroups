@@ -39,6 +39,15 @@ class Detail_type_model extends CI_Model {
       $this->db->where('name',$old_value);
       $this->db->update('user_detail_types',$data);
     }
+    // AICI TREBUIE SA FACA ASA :
+    // UPDATE USER DETAILS , SET DETAIL_TYPE = NEW NAME WHERE DETAIL TYPE = OLD NAME.
+  function update_detail_types_names_in_user_groups($old_name,$new_name){
+      $data = array(
+        'detail_type' => $new_name,
+      );
+      $this->db->where('detail_type',$old_name);
+      $this->db->update('user_details',$data);
+	}
     
     function delete($name){
       $this->db->where('name', $name);
@@ -66,7 +75,7 @@ class Detail_type_model extends CI_Model {
       print_r($data);
       Self::update($_GET['name'],$_POST['name']);
 			//MUST UPDATE IN THE OTHER TABLE EVERYWHERE WHERE DETAIL TYPE OF THIS KIND IS SET !
-			//$user->update_detail_types_names_in_user_groups($_POST['old_detail_name'],$_POST['new_detail_name']);
+			Self::update_detail_types_names_in_user_groups($_GET['name'],$_POST['name']);
 			header('Location: '.base_url().'detail_type');
 			die('errz');
 		}else{
