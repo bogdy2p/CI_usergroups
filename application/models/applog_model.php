@@ -6,7 +6,6 @@
  * and open the template in the editor.
  */
 
-
 class Applog_model extends CI_Model {
  
   
