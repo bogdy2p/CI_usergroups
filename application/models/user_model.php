@@ -106,9 +106,7 @@ class User_model extends CI_Model {
 											if($_POST['password'] == $_POST['pass_conf']) {
                         
 												//Create the update details array using the post data.																		
-												$user_update_details = Self::create_user_update_details_array($_POST);
-                        print_r($user_update_details);
-                        
+												$user_update_details = Self::create_user_update_details_array($_POST);                        
 												//Update the user details correspondingly
 												$update = Self::update($user_update_details);
 												//Delete all the mapping for this user			
@@ -245,14 +243,24 @@ class User_model extends CI_Model {
     $result = $this->db->get();
     $groups_array = array();
     foreach ($result->result_array() as $row){
-      $groups_array[] = $this->get_name_by_id($row['group_id'],'groups');
+      $groups_array[] = $this->get_group_name_by_id($row['group_id']);
     }
     return $groups_array;
   }
  
-  function get_name_by_id($id,$table_name){
+  function get_group_name_by_id($id){
     $this->db->select('name');
-    $this->db->from($table_name);
+    $this->db->from('groups');
+    $this->db->where('id',$id);
+    $result = $this->db->get();
+    foreach ($result->result_array() as $row){
+      return $row['name'];
+    }
+	}
+  
+  function get_user_name_by_user_id($id){
+    $this->db->select('name');
+    $this->db->from('users');
     $this->db->where('id',$id);
     $result = $this->db->get();
     foreach ($result->result_array() as $row){
@@ -269,7 +277,16 @@ class User_model extends CI_Model {
       return $row['id'];
     }
   }
-  
+  function grab_all_user_ids() {
+    $this->db->select('id');
+    $this->db->from('users');
+    $result = $this->db->get();
+    $return = array();
+    foreach ($result->result_array() as $row){
+      $return[] = $row['id'];
+    }
+    return $return;
+	}
  
   function get_all_user_detail_types() {
     $this->db->select('*');
