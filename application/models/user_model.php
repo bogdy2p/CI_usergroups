@@ -33,15 +33,8 @@ class User_model extends CI_Model {
    
   function update($data_array){
     $exists = Self::user_already_exists_by_id($data_array['id']);
-    echo"<br />";
-    //var_dump($exists);
 		if(($exists) && (!empty($data_array))) {
-      $data = array(
-          'name'=>$data_array['name'],
-          'password'=>$data_array['password'],
-        );
-      echo"<br />";
-      print_r($data);
+      $data = array('name'=>$data_array['name'],'password'=>$data_array['password'],);
       $this->db->where('id',$data_array['id']);
       $this->db->update('users',$data);
 		}else{
@@ -49,9 +42,6 @@ class User_model extends CI_Model {
 		}
 	 }
 
-  
-
- 
   function update_user_details_for_user($user_id,$detail_type,$new_detail){
     $data = array(
                  'detail' => $new_detail,
@@ -122,7 +112,6 @@ class User_model extends CI_Model {
 												//Update the user details correspondingly
 												$update = Self::update($user_update_details);
 												//Delete all the mapping for this user			
-                        die("Died After UPDATE CALLED");
 												$delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
 												//Get an array of checked groups in the form
 												$group_ids_checked_array = Self::get_group_ids_checked_in_form();
@@ -490,6 +479,7 @@ function create_user_update_details_array($post_array){
 		'id' => $post_array['id'],
 		'name' => $post_array['name'],
 		'password' => md5($post_array['password']),
+    
 		);
 		return $data;
 }  
