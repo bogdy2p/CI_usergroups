@@ -21,9 +21,9 @@ function confirm_delete_mapping(id){
 }
 function confirm_detail_type_delete(id){
 	if (confirm("Are you sure you want to delete AA "+id+" ? ") == true){
-		window.location.replace("/user_ci/user/delete_detail_type?id="+id+"&type=detail");return true;
+		window.location.replace("/user_ci/detail_type/delete?id="+id+"&type=detail");return true;
 	}else{
-		window.location.replace("/user_ci/detail_types");return false;
+		window.location.replace("/user_ci/detail_type");return false;
 	}
 }
 function confirm_delete_todo(id){

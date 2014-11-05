@@ -21,21 +21,6 @@ class Detail_type_model extends CI_Model {
       );  
     $this->db->insert('user_detail_types', $data); 
     }
-   
-   
-  function validate_and_add(){
-      if(isset($_POST['detail_name'])){
-        if(!empty($_POST['detail_name'])){
-            $detail = $_POST['detail_name'];
-            Self::create($detail);
-            header('Location: '.base_url().'detail_type');
-        }else{
-          echo "<h3>You cannot create a empty detail!<br /></h3>";
-          echo '<h3><a href="'.base_url().'detail_type">Go Back</a></h3>';
-          die();
-        }
-      }else{}
-} 
     
    function read(){
     $this->db->select('*');
@@ -48,7 +33,30 @@ class Detail_type_model extends CI_Model {
     return $return;
 	 }
    
-   function get_all_user_detail_types() {
+    function update(){
+      
+    }
+    
+    function delete($name){
+      $this->db->where('name', $name);
+      $this->db->delete('user_detail_types'); 
+  }
+  
+  function validate_and_add(){
+      if(isset($_POST['detail_name'])){
+        if(!empty($_POST['detail_name'])){
+            $detail = $_POST['detail_name'];
+            Self::create($detail);
+            header('Location: '.base_url().'detail_type');
+        }else{
+          echo "<h3>You cannot create a empty detail!<br /></h3>";
+          echo '<h3><a href="'.base_url().'detail_type">Go Back</a></h3>';
+          die();
+        }
+      }else{}
+  } 
+  
+  function get_all_user_detail_types() {
     $this->db->select('*');
     $this->db->from('user_detail_types');
     $return = array();
@@ -58,17 +66,7 @@ class Detail_type_model extends CI_Model {
     }
     return $return;
 	}
-  
-    function update(){
-      
-    }
-    
-    function delete_detail_type($name){
-      $this->db->where('name', $name);
-      $this->db->delete('user_detail_types'); 
-  }
-    
-  
+
   function add_dynamic_user_detail_form_inputs(){
 		$detail_types = Self::get_all_user_detail_types();
 		foreach ($detail_types as $detail_type) {
