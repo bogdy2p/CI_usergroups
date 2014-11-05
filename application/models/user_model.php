@@ -31,6 +31,30 @@ class User_model extends CI_Model {
     return $return;
  }
   
+  function update(){
+    
+  }
+ 
+  function update_user_details_for_user($user_id,$detail_type,$new_detail){
+    
+  $data = array(
+      ''=>'',
+      ''=>'',
+      ''=>'',
+  );
+    
+    
+    
+		$statement = $this->db->prepare("UPDATE user_groups.user_details SET detail = ? WHERE user_details.user_id = ? AND user_details.detail_type = ?");
+		$statement->bindParam(1,$new_detail);
+		$statement->bindParam(2,$user_id);
+		$statement->bindParam(3,$detail_type);
+		$statement->execute();
+		print_r($statement);
+		return $statement;
+	}
+  
+  
   function delete($id){
       $this->db->where('id', $id);
       $this->db->delete('users'); 
@@ -73,6 +97,65 @@ class User_model extends CI_Model {
 		 else{}
 	}
   
+  function validate_and_save_user($get) {
+	
+	if(isset($get) && ($get != NULL))
+		{ 
+			//$user = new User(); //Call User Class
+			$user = Self::get_user_object($get['id']); //Fetch the user object from the database by the ID !!
+			$old_pass = $user->password; // Grab the old password from the object
+			$old_name = $user->name;			
+			$_POST['id'] = $get['id'];
+					if(isset($_POST['old_password'])) { 
+							if(!empty($_POST['old_password'])) {
+									if(md5($_POST['old_password']) == $old_pass){
+											if($_POST['password'] == $_POST['pass_conf']) {
+
+												//Create the update details array using the post data.																		
+												$user_update_details = Self::create_user_update_details_array($_POST);
+												//Update the user details correspondingly
+												$update = Self::update($user_update_details['id'],'users',$user_update_details);
+												//Delete all the mapping for this user			
+												$delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
+												//Get an array of checked groups in the form
+												$group_ids_checked_array = Self::get_group_ids_checked_in_form();
+												//Apply new mapping using the new values from the form !!!! (Foreach in one line)
+												$test = Self::verify_update_details_for_user($get['id']);
+												foreach ($group_ids_checked_array as $group_id_checked) {Self::assign_user_to_group($get['id'],$group_id_checked);}
+												
+
+												
+												header("Location: /user/views/view_list.php");		
+												die();						
+											}else{
+												print_r("The passwords you entered do not match.");
+											}
+									}else{
+										echo "That is not the current password for this user !";
+										die();
+									}
+							}	
+							 else  {//If field OLD PASSWORD IS EMPTY
+							 		$delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
+							 		$group_ids_checked_array = Self::get_group_ids_checked_in_form();
+							 		$test = Self::verify_update_details_for_user($get['id']);
+							 		foreach ($group_ids_checked_array as $group_id_checked) {Self::assign_user_to_group($get['id'],$group_id_checked);}
+							 		header("Location: /user/views/view_list.php");
+								 	die();
+									}
+
+					}else 	{
+							echo "";
+							//If $_POST does not exists (@ the first page load , before submit)
+							}
+		}
+	else{
+		die("There is no get. Or it's NULL // 404 Redirect Here !");
+		}
+} //end Verification
+  
+  
+  
   function add_user_detail_with_type($user_id,$detail_type,$detail){
 		$detail_exists = Self::check_detail_exists_of_type($user_id,$detail_type,$detail);
 		$detail_type_exists = Self::check_detail_type_exists($detail_type);
@@ -85,7 +168,7 @@ class User_model extends CI_Model {
 			}
 		}else{/*echo "Unable to add {$detail} : This detail already exists for this user / Is null !";*/}
 	}
-  
+ 
   
   function check_detail_exists($user_id,$detail){
     $this->db->select('id');
@@ -181,6 +264,7 @@ class User_model extends CI_Model {
     }
   }
   
+ 
   function get_all_user_detail_types() {
     $this->db->select('*');
     $this->db->from('user_detail_types');
@@ -214,6 +298,38 @@ class User_model extends CI_Model {
     }
   }
   
+  function get_groups_checked_in_form(){
+    //Grab an the array of all groups ind the db.
+    $groups_from_db = Self::get_all_groups_in_db($_GET['id']);
+    $names_of_groups_from_db = $groups_from_db['name'];
+    $groups_selected = array();
+    foreach ($names_of_groups_from_db as $group_name) {
+      if (isset($_POST[$group_name])){
+        $groups_selected[] = $group_name;
+      }
+    }
+    return $groups_selected;
+  }
+  
+  function get_groupid_by_groupname($groupname){
+    $this->db->select('id');
+    $this->db->from('groups');
+    $this->db->where('name',$groupname);
+    $result = $this->db->get();
+    foreach ($result->result_array() as $row){
+      return $row['id'];
+    }
+	}
+  
+  
+  function get_group_ids_checked_in_form(){
+    $name_of_groups_array = Self::get_groups_checked_in_form();
+    $array_of_group_ids_checked = array();
+      foreach ($name_of_groups_array as $key => $value) {
+        $array_of_group_ids_checked[] = Self::get_groupid_by_groupname($value);	
+      }
+    return $array_of_group_ids_checked;
+  }
   
   function print_userdata_inputs(){
 		if(isset($_GET['id'])){
@@ -292,22 +408,9 @@ class User_model extends CI_Model {
 		$all_existing_detail_types = Self::get_all_user_detail_types();
 		$user_details_ids = Self::get_user_details_array($user_id);
  		foreach ($user_details_ids as $key => $value) {		
-//       print_r($key);
-//     echo "<br />";
-//     print_r($value);
-//     echo "<br />";
-      
  			$already_set_details[$value] = Self::get_detail_data_by_detail_id($value)['type'];
-      // AICI RETURNEAZA DOAR PHONE-ul , ar trebuii sa returneze toate setate...
-      //  echo '<pre>';
-        // print_r($already_set_details);
-       // die();
-   //   print_r($already_set_details);
   		}
   		foreach ($all_existing_detail_types as $individual_detail) {
-       //   echo '<pre>';
-     //     print_r($individual_detail);
-      //    die();
   				if(in_array($individual_detail, $already_set_details)){
   					$detail_value = Self::grab_detail_value_by_type_and_id($user_id,$individual_detail);
   					Self::print_detail_inputs_with_value($individual_detail,$detail_value);
@@ -342,12 +445,53 @@ function print_detail_inputs_without_value($detail){
 			';
 }
   
+  function verify_update_details_for_user($user_id){
+    // 1 . Grab all detail types array.
+    // 2 . For each detail type , check POST [ that detail ] is set and is not null
+    // 3 . Call the update function that UPDATES the values in the database with the values from the POST (input)
+    $all_existing_detail_types = Self::get_all_user_detail_types();
+    foreach ($all_existing_detail_types as $detail) {
+
+      if(isset($_POST[$detail]) && (!empty($_POST[$detail]))){
+        $detail_pair_exists = Self::check_detail_pair_exists($user_id,$detail);
+        if (!$detail_pair_exists){
+          $create_a_new = Self::add_user_detail_with_type($user_id,$detail,$_POST[$detail]);
+        }else{}
+        Self::update_user_details_for_user($user_id,$detail,$_POST[$detail]);
+      }
+    }
+  }
+
+
   
+function create_user_update_details_array($post_array){
+	$data = array(
+		'id' => $post_array['id'],
+		'name' => $post_array['name'],
+		'password' => md5($post_array['password']),
+		);
+		return $data;
+}  
   
+ function delete_all_mapping_for_user($user_id){
+      $this->db->where('user_id',$user_id);
+      $this->db->delete('usergroups');
+		}
   
-  
-  
-  
+  function check_detail_pair_exists($user_id,$detail_type){
+    $this->db->select('id');
+    $this->db->from('user_details');
+    $this->db->where('user_id',$user_id);
+    $this->db->where('detail_type',$detail_type);
+     $result = $this->db->count_all_results();
+     if ($result >= 1){
+       return true;
+     }else{
+       return false;
+     }
+	}
+
+
   
   
   
