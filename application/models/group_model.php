@@ -37,10 +37,17 @@ class Group_model extends CI_Model {
     $groupname = Self::get_group_object_by_id($id)->name;
 		$exists = Self::group_already_exists($groupname,'groups');
 		if(($exists) && (!empty($data))) {
-          $data = array(
+          //AICI FACI VERIFICARE IN FUNCTIE DE NAME
+          if (isset($data['name'])){
+            $data = array(
                'name' => $data['name'],
                'special_key' => $data['special_key'],
             );
+          }else{
+            $data = array(
+               'special_key' => $data['special_key'],
+            );
+          }
           $this->db->where('id', $id);
           $this->db->update('groups', $data);
           
@@ -91,11 +98,13 @@ function validate_and_update_group() {
        $exists = Self::group_already_exists($_POST['name']);
        if ($exists == false){
           Self::update($_GET['id'],$update_details);
-       }else{ die('You cannot override anothe group !');
-            //UNSET GROUPNAME FROM POST ARRAY
-            //UPDATE GROUP WITHOUT NAME UPDATE
+          header("Location: group");
+       }else{ 
+            unset($update_details['name']);
+            Self::update($_GET['id'],$update_details);
+            header("Location: group");
             }
-			header("Location: group");
+			//header("Location: group");
 			die();						
 			}
 	}else{ die("validation error");}

@@ -8,7 +8,7 @@ $group->validate_and_update_group();
       <form class="form" id="editgroup" action="#" method="post">
 				<div id="edit_group_error"></div>
 				<label>Name</label><br />
-				<input name="name" id="edit_groupname" type="text"  placeholder="<?php if(isset($group)) echo $group->name;?>" value=""> <br />
+				<input name="name" id="edit_groupname" type="text"  placeholder="<?php if(isset($group)) echo $group->name;?>" value="<?php if(isset($group)) echo $group->name;?>"> <br />
 				<label>Special Key</label><br />
 				<input name="special_key"   type="text"  placeholder="<?php if(isset($group)) echo $group->special_key;?>" value="<?php if(isset($group)) echo $group->special_key;?>"> <br/>
 				<br />
