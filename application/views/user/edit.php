@@ -24,7 +24,7 @@
 							<!-- <h4>phone , etc ,, for each detail type availlable (must be DYNAMIC)</h4> -->
 							<?php
 								  
-								//get_userdata_details_availlable($_GET['id']); 
+								$user->get_userdata_details_availlable($_GET['id']); 
 								/// VERIFY IF INPUTS EXIST , AND IF EXIST , UPDATE WITH THE INFORMATION IN THE POST.
 
 

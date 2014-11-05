@@ -247,7 +247,7 @@ class User_model extends CI_Model {
 						echo '<input name="'.$group_name.'" type="checkbox" value="'.$group_name.'">&nbsp;';
 						echo '<label>'.$group_name.'</label><br />';
 					}
-				} //end foreach
+				}
 	}
   
   function get_all_groups_in_db() {
@@ -262,7 +262,66 @@ class User_model extends CI_Model {
     return $groups_array;
     }  
   
+  function get_user_details_array($user_id) {
+    $this->db->select('id');
+    $this->db->from('user_details');
+    $this->db->where('user_id',$user_id);
+    $result = $this->db->get();
+    $details_array = array();
+    foreach ($result->result_array() as $row){
+      $details_array[] = $row['id'];
+    }
+    return $details_array;
+	}  
   
+  function get_detail_data_by_detail_id($detail_id) {
+    $this->db->select('detail','detail_type');
+    $this->db->from('user_details');
+    $this->db->where('user_id',$detail_id);
+    $result = $this->db->get();
+    $data = array();
+    foreach ($result->result_array() as $row){
+      //print_r($row);
+      $data['type'] = $row['detail_type'];
+      $data['value'] = $row['detail'];
+    }
+    return $data;
+	}	
+    
+  function get_userdata_details_availlable($user_id){
+ 		
+ 		$already_set_details = array(); 
+		$all_existing_detail_types = Self::get_all_user_detail_types();
+		$user_details_ids = Self::get_user_details_array($user_id);
+ 		foreach ($user_details_ids as $key => $value) {		
+     // print_r($key);echo "<br />";print_r($value);
+      
+      
+ 			$already_set_details[$value] = Self::get_detail_data_by_detail_id($value);
+      die();
+  		}
+  		foreach ($all_existing_detail_types as $individual_detail) {
+  				if(in_array($individual_detail, $already_set_details)){
+  					$detail_value = $user->grab_detail_value_by_type_and_id($user_id,$individual_detail);
+  					Self::print_detail_inputs_with_value($individual_detail,$detail_value);
+  					$_POST[$individual_detail] = $detail_value;
+  				}else{
+  					Self::print_detail_inputs_without_value($individual_detail);
+  				}
+  		}
+}
+function print_detail_inputs_with_value($type,$detail){
+		echo '
+			<label>'.$type.'</label></br>
+			<input name="'.$type.'" type="text" placeholder="" value="'.$detail.'"></br>
+			';
+}
+function print_detail_inputs_without_value($detail){
+		echo '
+			<label>'.$detail.'</label></br>
+			<input name="'.$detail.'" type="text" placeholder="" value=""></br>
+			';
+}
   
   
   
