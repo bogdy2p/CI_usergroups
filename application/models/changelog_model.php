@@ -20,7 +20,7 @@ class Changelog_model extends CI_Model {
     $this->db->set('date', 'NOW()', FALSE);
     $this->db->insert('app_changelog', $data);
    }
-  
+   
 	function read($table_name = 'app_changelog'){
     $this->db->select('*');
     $this->db->from($table_name);
@@ -45,6 +45,43 @@ class Changelog_model extends CI_Model {
     }
     return $return;
 	}
+  
+  function validation(){
+	
+	if(isset($_POST) && !empty($_POST)){
+		if(isset($_POST['colour'])){
+			print_r($_POST);
+			if (!empty($_POST['changelog_text'])){
+		$name_with_heading = '<'.$_POST['heading_type'].'>'.$_POST['changelog_text'].'</'.$_POST['heading_type'].'>';
+		$colour = $_POST['colour'];
+		Self::create($name_with_heading,$colour);
+		}
+    header('Location: '.base_url().'changelog');
+		die();
+		}elseif(isset($_POST['day'])){/*print_r($_POST);*/}	
+		}else{}
+}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   /************************************************************************/
   
