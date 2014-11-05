@@ -1,8 +1,11 @@
-<?php
+<?php $detail = new Detail_type_model();?>
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+<div class="row"> 
+						<div class="col-xs-3 col-md-4"></div>
+						<div class="col-xs-6 col-md-4">
+              
+              <?php $detail->print_add_new_user_detail_form(); ?>
+            
+            </div>
+						<div class="col-xs-3 col-md-4"></div>
+</div>

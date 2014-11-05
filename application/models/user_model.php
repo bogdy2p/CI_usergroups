@@ -299,18 +299,6 @@ class User_model extends CI_Model {
     return $return;
 	}
   
-  
-  
-  function add_dynamic_user_detail_form_inputs(){
-		$detail_types = Self::get_all_user_detail_types();
-		foreach ($detail_types as $detail_type) {
-			echo '<label>'.$detail_type.'</label><br />';
-			echo '<input name="'.$detail_type.'" type="text" placeholder="enter '.$detail_type.'"';
-				if(isset($_POST[$detail_type])){ echo 'value="'. $_POST[$detail_type] .'"> <br />'; }
-				else{ echo 'value=""> <br />'; }
-		}
-	}
-  
   function get_user_object($id){
     $this->db->select('*');
     $this->db->from('users');
@@ -548,36 +536,7 @@ function create_user_update_details_array($post_array){
      }
 	}
   
-  /**********************************************************************************/
-  /*******************************USER DETAILS TABLE**********************************/
-  /**********************************************************************************/
-  /**********************************************************************************/
-  /**********************************************************************************/ 
-    
-  function print_user_details_table_html($user_details_array){
-    Self::print_user_details_table_header();
-    Self::print_user_details_table_content($user_details_array);
-    Self::print_user_details_table_footer();
-  }
-
-  function print_user_details_table_header(){
-    echo '<table class="table table-bordered">';
-    echo '<th> Current User Details Set</th>';
-    echo '<th> Edit</th>';
-    echo '<th> Delete</th>';
-  }
-  function print_user_details_table_content($user_details_array){
-    foreach ($user_details_array as $key => $value) {
-      echo '<tr>';
-      echo '<td>'.$value.'</td>';
-      echo '<td> <a href="'.base_url().'user/edit_detail_type?name='.$value.'"><span class="glyphicon glyphicon-edit"></span></a>  </td>';
-      echo '<td><a><span onclick="confirm_detail_type_delete(\''.$value.'\')" class="glyphicon glyphicon-remove spanred pointer"></span></a></td>';
-      echo '</tr>';
-    }
-  }
-  function print_user_details_table_footer(){
-    echo '</table>';
-  }
+  
 
   
   /**********************************************************************************/

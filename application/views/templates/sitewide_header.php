@@ -36,7 +36,7 @@ echo '<body>';
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                              <li><a href="'.base_url().'main/tables">   View Tables         </a></li>
-                             <li><a href="'.base_url().'user/detail_types">   User Details Types  </a></li>
+                             <li><a href="'.base_url().'detail_type">   Details Types  </a></li>
                              <li><a href="'.base_url().'user">   USER            </a></li>
                              <li><a href="'.base_url().'group">   GROUP           </a></li>
                            <!--  <li><a href="'.base_url().'applog">   View App Logs       </a></li> -->

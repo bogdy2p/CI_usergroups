@@ -15,26 +15,26 @@ class Detail_type extends CI_Controller {
   public function index()
 	{
     $this->load->view('templates/sitewide_header');
-		$this->load->view('detail/index');
+		$this->load->view('detailtype/index');
     $this->load->view('templates/sitewide_footer');
 	}
   
   public function add()
   {
     $this->load->view('templates/sitewide_header');
-		$this->load->view('detail/create');
+		$this->load->view('detailtype/create');
     $this->load->view('templates/sitewide_footer');
   }
   
   public function edit()
   {
     $this->load->view('templates/sitewide_header');
-		$this->load->view('detail/edit');
+		$this->load->view('detailtype/edit');
     $this->load->view('templates/sitewide_footer');
   }
   public function delete()
   {
-   $this->load->view('detail/delete');
+   $this->load->view('detailtype/delete');
   }
   
 }
