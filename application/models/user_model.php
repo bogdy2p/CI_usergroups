@@ -30,26 +30,41 @@ class User_model extends CI_Model {
     }
     return $return;
  }
+   
+  function update($data_array){
+    $exists = Self::user_already_exists_by_id($data_array['id']);
+    echo"<br />";
+    //var_dump($exists);
+		if(($exists) && (!empty($data_array))) {
+      $data = array(
+          'name'=>$data_array['name'],
+          'password'=>$data_array['password'],
+        );
+      echo"<br />";
+      print_r($data);
+      $this->db->where('id',$data_array['id']);
+      $this->db->update('users',$data);
+		}else{
+			echo("User with id : {$id} doesnt exist  !");
+		}
+	 }
+
   
-  function update(){
-    
-  }
+
  
   function update_user_details_for_user($user_id,$detail_type,$new_detail){
-  $data = array(
-               'detail' => $new_detail,
-            );
-  $this->db->where('user_id', $user_id);
-  $this->db->where('detail_type', $detail_type);
-  $this->db->update('user_details', $data); 
+    $data = array(
+                 'detail' => $new_detail,
+              );
+    $this->db->where('user_id', $user_id);
+    $this->db->where('detail_type', $detail_type);
+    $this->db->update('user_details', $data); 
 	}
     
   function delete($id){
       $this->db->where('id', $id);
       $this->db->delete('users'); 
   }
- 
- 
  
   function validate_and_create(){
 		$user = array();
@@ -99,12 +114,15 @@ class User_model extends CI_Model {
 							if(!empty($_POST['old_password'])) {
 									if(md5($_POST['old_password']) == $old_pass){
 											if($_POST['password'] == $_POST['pass_conf']) {
-
+                        
 												//Create the update details array using the post data.																		
 												$user_update_details = Self::create_user_update_details_array($_POST);
+                        print_r($user_update_details);
+                        
 												//Update the user details correspondingly
-												$update = Self::update($user_update_details['id'],'users',$user_update_details);
+												$update = Self::update($user_update_details);
 												//Delete all the mapping for this user			
+                        die("Died After UPDATE CALLED");
 												$delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
 												//Get an array of checked groups in the form
 												$group_ids_checked_array = Self::get_group_ids_checked_in_form();
@@ -118,6 +136,7 @@ class User_model extends CI_Model {
 												die();						
 											}else{
 												print_r("The passwords you entered do not match.");
+                        die();
 											}
 									}else{
 										echo "That is not the current password for this user !";
@@ -125,6 +144,7 @@ class User_model extends CI_Model {
 									}
 							}	
 							 else  {//If field OLD PASSWORD IS EMPTY
+                  die('went into else / old password empty');
 							 		$delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
 							 		$group_ids_checked_array = Self::get_group_ids_checked_in_form();
 							 		$test = Self::verify_update_details_for_user($get['id']);
@@ -213,6 +233,18 @@ class User_model extends CI_Model {
      $this->db->select('*');
      $this->db->from('users');
      $this->db->where('name',$name);
+     $result = $this->db->count_all_results();
+     if ($result == 0){
+       return false;
+     }else{
+       return true;
+     }
+   } 
+   
+   function user_already_exists_by_id($id){
+     $this->db->select('*');
+     $this->db->from('users');
+     $this->db->where('id',$id);
      $result = $this->db->count_all_results();
      if ($result == 0){
        return false;
