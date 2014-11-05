@@ -39,8 +39,7 @@ class Detail_type_model extends CI_Model {
       $this->db->where('name',$old_value);
       $this->db->update('user_detail_types',$data);
     }
-    // AICI TREBUIE SA FACA ASA :
-    // UPDATE USER DETAILS , SET DETAIL_TYPE = NEW NAME WHERE DETAIL TYPE = OLD NAME.
+ 
   function update_detail_types_names_in_user_groups($old_name,$new_name){
       $data = array(
         'detail_type' => $new_name,
@@ -51,7 +50,10 @@ class Detail_type_model extends CI_Model {
     
     function delete($name){
       $this->db->where('name', $name);
-      $this->db->delete('user_detail_types'); 
+      $this->db->delete('user_detail_types');
+      $this->db->where('detail_type',$name);
+      $this->db->delete('user_details');
+     // HERE WE SHOULD DELETE ALSO FROM USER_DETAILS , THE ROWS THAT HAVE AS A DETAIL TYPE , the same NAME      
   }
   
   function validate_and_add(){
@@ -68,13 +70,12 @@ class Detail_type_model extends CI_Model {
       }else{}
   } 
   
-  function validate_and_edit(){
+function validate_and_edit(){
 	if(isset($_POST['name'])){
 		if(!empty($_POST['name'])){
       $data = array('name'=> $_POST['name'],);
       print_r($data);
       Self::update($_GET['name'],$_POST['name']);
-			//MUST UPDATE IN THE OTHER TABLE EVERYWHERE WHERE DETAIL TYPE OF THIS KIND IS SET !
 			Self::update_detail_types_names_in_user_groups($_GET['name'],$_POST['name']);
 			header('Location: '.base_url().'detail_type');
 			die('errz');
@@ -83,7 +84,7 @@ class Detail_type_model extends CI_Model {
 			header('Location: '.base_url().'detail_type');
 		}
 	}else{/*echo "NO POST";*/}
-}/*end verify edit*/
+}
   
   function get_all_user_detail_types() {
     $this->db->select('*');
