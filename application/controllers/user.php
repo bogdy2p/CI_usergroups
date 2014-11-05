@@ -56,4 +56,9 @@ class User extends CI_Controller {
 		$this->load->view('user/edit_detail_type');
     $this->load->view('templates/sitewide_footer');
   }
+  
+   public function delete_detail_type(){
+		$this->load->view('user/delete_detail_type');
+  }
+  
 }
