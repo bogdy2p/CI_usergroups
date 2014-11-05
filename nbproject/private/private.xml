@@ -3,15 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Hyphen Lab">
-            <file>file:/var/www/html/user_ci/application/views/main.php</file>
-            <file>file:/var/www/html/user_ci/application/views/user_view_list.php</file>
-            <file>file:/var/www/html/user_ci/application/controllers/changelog.php</file>
-            <file>file:/var/www/html/user_ci/application/views/users_table.php</file>
-            <file>file:/var/www/html/user_ci/application/models/changelog_model.php</file>
+            <file>file:/var/www/html/user_ci/application/views/changelog/index.php</file>
+            <file>file:/var/www/html/user_ci/application/views/changelog/table.php</file>
+            <file>file:/var/www/html/user_ci/application/models/user_model.php</file>
+            <file>file:/var/www/html/user_ci/application/views/task/table.php</file>
+            <file>file:/var/www/html/user_ci/application/views/user/view_user.php</file>
+            <file>file:/var/www/html/user_ci/application/views/group/index.php</file>
+            <file>file:/var/www/html/user_ci/application/views/group/edit.php</file>
+            <file>file:/var/www/html/user_ci/application/views/user/table.php</file>
+            <file>file:/var/www/html/user_ci/application/views/task/index.php</file>
+            <file>file:/var/www/html/user_ci/application/views/changelog/latest_changes.php</file>
+            <file>file:/var/www/html/user_ci/application/views/user/index.php</file>
+            <file>file:/var/www/html/user_ci/application/models/group_model.php</file>
+            <file>file:/var/www/html/user_ci/application/views/user/edit.php</file>
             <file>file:/var/www/html/user_ci/application/controllers/user.php</file>
-            <file>file:/var/www/html/user_ci/application/controllers/main.php</file>
-            <file>file:/var/www/html/user_ci/application/views/task.php</file>
-            <file>file:/var/www/html/user_ci/application/views/changelog.php</file>
+            <file>file:/var/www/html/user_ci/application/views/user/create.php</file>
+            <file>file:/var/www/html/user_ci/application/views/user/delete.php</file>
         </group>
     </open-files>
 </project-private>
