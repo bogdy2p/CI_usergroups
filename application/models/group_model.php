@@ -160,7 +160,7 @@ function validate_and_update_group() {
                   echo '<td class="warning">'. $individual_group['id'] . '</td>';
                   echo '<td>'. $individual_group['name'] . '</td>';
                   echo '<td>'. $individual_group['special_key'] . '</td>';
-                  echo '<td><a href="'.base_url().'group/edit?id='.$individual_group["id"].'&type='.$type.'"><span class="glyphicon glyphicon-edit spangre"></td>';
+                  echo '<td><a href="'.base_url().'group/edit?id='.$individual_group["id"].'"><span class="glyphicon glyphicon-edit spangre"></td>';
                   echo '<td><a><span onclick="confirm_delete_group('.$individual_group["id"].')" class="glyphicon glyphicon-remove spanred pointer"></span></a></td>';
                   echo '</tr>';
       }
@@ -181,13 +181,9 @@ function validate_and_update_group() {
     echo '<table class="table table-bordered" name="groups_users">';
   }
 
-
-
   function generate_groups_users_table_content(){
-    $user = new User();
-    $group = new Group();
+    
     $groups = Self::read();
-    $groups = $group->list_groups();    
     foreach ($groups as $group) 
       {
         $userids_array = $user->get_userids_for_a_group($group['id']);	

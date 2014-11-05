@@ -599,12 +599,11 @@ function create_user_update_details_array($post_array){
 /**********************************************************************************/
 /**********************************************************************************/
 	function print_user_information_table_html($user_id){
-		print_user_information_table_header($user_id);
-		$user = new User();
-		$user->get_user_object_by_id($user_id);
-		$groups_array = $user->get_number_of_groups_for_a_user($user_id);
-		print_user_information_table_content($user,$groups_array);
-		print_user_information_table_footer();
+		Self::print_user_information_table_header($user_id);
+		$user = Self::get_user_object($user_id);
+		$groups_array = Self::get_number_of_groups_for_a_user($user_id);
+		Self::print_user_information_table_content($user,$groups_array);
+		Self::print_user_information_table_footer();
 	}
 
 	function print_user_information_table_header($user_id){
@@ -642,11 +641,11 @@ function create_user_update_details_array($post_array){
 	function print_user_details_information_table_html($user_id){
 			
 			$user = new User();
-			$user_details_ids = $user->get_user_details_array($user_id);
+			$user_details_ids = Self::get_user_details_array($user_id);
 			if(!empty($user_details_ids)){
-				print_user_details_information_table_header();
-				print_user_details_information_table_content($user_details_ids);
-				print_user_details_information_table_footer();
+				Self::print_user_details_information_table_header();
+				Self::print_user_details_information_table_content($user_details_ids);
+				Self::print_user_details_information_table_footer();
 			}else{
 				echo "<h3>This user has no details set.</h3>";
 			}
@@ -660,9 +659,8 @@ function create_user_update_details_array($post_array){
 	}
 
 	function print_user_details_information_table_content($user_details_ids){
-			$user = new User();
 		foreach ($user_details_ids as $user_detail_id) {
-			$detail = $user->get_detail_data_by_detail_id($user_detail_id);
+			$detail = Self::get_detail_data_by_detail_id($user_detail_id);
 			echo '<th class="col-xs-2 col-md-2">User '.$_POST['id'] . '\'s ' . $detail['type'] .'</th>';							
 			echo '<tr><td class="col-xs-2 col-md-2">'. $detail['value'] .'</td></tr>';
 		}  
