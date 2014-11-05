@@ -292,28 +292,28 @@ class User_model extends CI_Model {
 		$all_existing_detail_types = Self::get_all_user_detail_types();
 		$user_details_ids = Self::get_user_details_array($user_id);
  		foreach ($user_details_ids as $key => $value) {		
-//     print_r($key);
+//       print_r($key);
 //     echo "<br />";
 //     print_r($value);
 //     echo "<br />";
       
  			$already_set_details[$value] = Self::get_detail_data_by_detail_id($value)['type'];
       // AICI RETURNEAZA DOAR PHONE-ul , ar trebuii sa returneze toate setate...
-        echo '<pre>';
-         print_r($already_set_details);
-        die();
-      print_r($already_set_details);
+      //  echo '<pre>';
+        // print_r($already_set_details);
+       // die();
+   //   print_r($already_set_details);
   		}
   		foreach ($all_existing_detail_types as $individual_detail) {
-          echo '<pre>';
-          print_r($individual_detail);
-          die();
+       //   echo '<pre>';
+     //     print_r($individual_detail);
+      //    die();
   				if(in_array($individual_detail, $already_set_details)){
   					$detail_value = Self::grab_detail_value_by_type_and_id($user_id,$individual_detail);
   					Self::print_detail_inputs_with_value($individual_detail,$detail_value);
   					$_POST[$individual_detail] = $detail_value;
   				}else{
-  					//Self::print_detail_inputs_without_value($individual_detail);
+  					Self::print_detail_inputs_without_value($individual_detail);
   				}
   		}
 }
