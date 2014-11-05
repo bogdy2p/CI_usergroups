@@ -14,7 +14,6 @@ class Detail_type_model extends CI_Model {
         parent::__construct();
     }
     
-    
     function create($name){
     $data = array(
       'name' => $name,
@@ -33,8 +32,10 @@ class Detail_type_model extends CI_Model {
     return $return;
 	 }
    
-    function update(){
-      
+	 function update($data){
+      var_dump($data);
+      $this->db->where('name',$data['name']);
+      $this->db->update('user_detail_types',$data);
     }
     
     function delete($name){
@@ -55,6 +56,22 @@ class Detail_type_model extends CI_Model {
         }
       }else{}
   } 
+  
+  function validate_and_edit(){
+	if(isset($_POST['new_detail_name'])){
+		if(!empty($_POST['new_detail_name'])){
+      $data = array('name'=> $_POST['new_detail_name'] ,);
+      Self::update($data);
+			//MUST UPDATE IN THE OTHER TABLE EVERYWHERE WHERE DETAIL TYPE OF THIS KIND IS SET !
+			//$user->update_detail_types_names_in_user_groups($_POST['old_detail_name'],$_POST['new_detail_name']);
+			header('Location: '.base_url().'detail_type');
+			die();
+		}else{
+			echo '$_post is set but EMPTY';
+			header('Location: '.base_url().'detail_type');
+		}
+	}else{/*echo "NO POST";*/}
+}/*end verify edit*/
   
   function get_all_user_detail_types() {
     $this->db->select('*');
@@ -88,7 +105,31 @@ class Detail_type_model extends CI_Model {
 			</form>
 	';
 }
-  
+
+  function print_edit_existing_detail_form($name){
+	echo '
+			<form class="form" id="edit_existing_detail_form" action="edit" method="post">
+				<label>Change detail name for "'.$name.'" </label><br />
+					<div id="edit_detail_type_error"></div>
+					<input name="name" id="name" type="text"  placeholder="change detail name"> <br />
+					<br />
+					<button type="submit" id="submit" class="btn btn-success">Save </button>
+			</form>
+	';
+}
+
+  function get_detail_type_by_name($name){
+    $this->db->select('*');
+    $this->db->from('user_detail_types');
+    $this->db->where('name',$name);
+    $result = $this->db->get();
+    $return = array();
+    foreach ($result->result_array() as $row){
+      $return['id'] = $row['id'];
+      $return['name'] = $row['name'];
+    }
+    return $return;
+	}
   
   /**********************************************************************************/
   /*******************************USER DETAILS TABLE**********************************/
@@ -120,4 +161,30 @@ class Detail_type_model extends CI_Model {
   function print_user_details_table_footer(){
     echo '</table>';
   }
+  
+  /**************************************************************************************/
+  function print_edit_detail_table_html($name){
+    Self::print_edit_detail_table_header($name);
+		Self::print_edit_detail_table_content($name);
+		Self::print_edit_detail_table_footer();	
+  }
+  function print_edit_detail_table_header($name){
+    echo '<div class="col-xs-12 col-md-12">
+        <h4>Current data for "'.$name.'" detail </h4>';
+    echo '<table class="table table-bordered" name="view_detail">';
+  }
+  function print_edit_detail_table_content($name){
+     $details = Self::get_detail_type_by_name($name);
+     foreach ($details as $key => $value) {
+      echo '<tr>';
+      echo '<th class="info"> Detail '.$key.'</th>';
+      echo '<td>'.$value.'</td>';	 	
+      echo '</tr>';
+     }
+  }
+  function print_edit_detail_table_footer(){
+    echo "</table>
+        </div>";
+  }
+
 }
