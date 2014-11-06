@@ -124,7 +124,7 @@ function validate_and_edit(){
 			<form class="form" id="edit_existing_detail_form" action="edit?name='.$_GET['name'].'" method="post">
 				<label>Change detail name for "'.$name.'" </label><br />
 					<div id="edit_detail_type_error"></div>
-					<input name="name" id="name" type="text"  placeholder="change detail name"> <br />
+					<input name="name" id="new_name" type="text"  placeholder="change detail name"> <br />
 					<br />
 					<button type="submit" id="submit" class="btn btn-success">Save </button>
 			</form>
