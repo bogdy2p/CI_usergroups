@@ -590,7 +590,7 @@ function create_user_update_details_array($post_array){
   }
 
   function generate_users_table_header(){
-		echo '<div class="col-xs-12 col-md-8">';
+		//echo '<div class="col-xs-12 col-md-8">';
 		echo "<h3>ALL USERS : </h3>";
 		echo '<table class="table table-bordered" id="users_table">';
 		echo '<th class="danger">ID</th>';
@@ -620,7 +620,8 @@ function create_user_update_details_array($post_array){
             }
 }
   function generate_users_table_footer(){
-    echo '</table></div>';
+    echo '</table>';
+    //echo '</div>';
   }
 
 
@@ -638,7 +639,7 @@ function create_user_update_details_array($post_array){
 	}
 
 	function print_user_information_table_header($user_id){
-		echo '<div class="col-xs-12 col-md-12">';
+		//echo '<div class="col-xs-12 col-md-12">';
 		echo '<h3> Userdata for user : '.$user_id.'</h3>';
 		echo '<table class="table table-bordered">';
 			echo '<th class="col-xs-1 col-md-1" id="wordwrap">ID</th>';
@@ -657,7 +658,8 @@ function create_user_update_details_array($post_array){
 	}
 
 	function print_user_information_table_footer(){
-		echo '</table></div>';
+		echo '</table>';
+    //echo '</div>';
 	}
 /**********************************************************************************/
 /**********************************************************************************/
@@ -685,7 +687,7 @@ function create_user_update_details_array($post_array){
 	function print_user_details_information_table_header(){
 		echo "<h3>The details set for this user are :</h3>";
         echo "<br />";
-		echo '<div class="col-xs-2 col-md-2">';
+		//echo '<div class="col-xs-2 col-md-2">';
         echo '<table class="table table-bordered">';
 	}
 
@@ -699,6 +701,6 @@ function create_user_update_details_array($post_array){
 
 	function print_user_details_information_table_footer(){
 		echo '</table>';
-		echo '</div>'; 
+		//echo '</div>'; 
 	}
 }

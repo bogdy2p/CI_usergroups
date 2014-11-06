@@ -10,14 +10,3 @@ $changelog = new Changelog_model();
     <div class="col-xs-12 col-md-4"></div>
     
 </div>
-
-     
-      
-
-          
-
-
-<!-- 
-      EXPORT CSV of CHANGELOGS IN FUNCTIE DE FILTRE.
-      SORTARE LA TOATE TABELELE DUPA DATA / NUME ( HEADER )    
--->

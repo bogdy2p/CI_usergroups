@@ -202,8 +202,8 @@ function validate_and_edit(){
 		Self::print_edit_detail_table_footer();	
   }
   function print_edit_detail_table_header($name){
-    echo '<div class="col-xs-12 col-md-12">
-        <h4>Current data for "'.$name.'" detail </h4>';
+    //echo '<div class="col-xs-12 col-md-12">';
+    echo '<h4>Current data for "'.$name.'" detail </h4>';
     echo '<table class="table table-bordered" name="view_detail">';
   }
   function print_edit_detail_table_content($name){
@@ -216,7 +216,7 @@ function validate_and_edit(){
      }
   }
   function print_edit_detail_table_footer(){
-    echo "</table>
-        </div>";
+    echo "</table>";
+    //echo "</div>";
   }  
 }

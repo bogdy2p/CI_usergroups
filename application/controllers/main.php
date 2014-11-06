@@ -38,7 +38,7 @@ class Main extends CI_Controller {
     
     $this->load->view('group/table');
     $this->load->view('main/mappingtable');
-		$this->load->view('main/list');
+		//$this->load->view('main/list');
     $this->load->view('templates/sitewide_footer');
   }
  

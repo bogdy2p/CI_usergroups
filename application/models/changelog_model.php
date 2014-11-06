@@ -97,7 +97,7 @@ class Changelog_model extends CI_Model {
     Self::generate_changelog_table_footer();
   }
   function generate_changelog_table_header($days){
-    echo '<div class="col-xs-12 col-md-12">';
+    //echo '<div class="col-xs-12 col-md-12">';
     if($days == 1){
       echo "<h3>TODAY'S CHANGE LOGS: </h3>";
     }elseif($days == 2){
@@ -125,7 +125,8 @@ class Changelog_model extends CI_Model {
       }
   }
   function generate_changelog_table_footer(){
-  	echo '</table></div>';
+  	echo '</table>';
+    echo '</div>';
   }
 
   function generate_changelog_add_new_form(){

@@ -163,7 +163,7 @@ function validate_and_update_group() {
 }
 
   function generate_groups_table_header(){
-    echo '<div class="col-xs-12 col-md-4">';
+    //echo '<div class="col-xs-12 col-md-4">';
     echo "<h3>ALL GROUPS :</h3>";
     echo '<table class="table table-bordered">';
     echo '<th class="success">Id</th>';
@@ -186,7 +186,8 @@ function validate_and_update_group() {
       }
   }
   function generate_groups_table_footer(){
-    echo '</table></div>';
+    echo '</table>';
+    //echo '</div>';
   }
 
   function generate_groups_users_table_html(){

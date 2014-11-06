@@ -23,16 +23,6 @@ class Main_model extends CI_Model {
    $this->db->where('id',$id);
    $this->db->delete('usergroups');
  }
-//  function read($table_name){
-//    $this->db->select('*');
-//		$this->db->from($table_name);	
-//		$query = $this->db->get();
-//		return $query->result();
-//	 }
- 
-   //IN MODEL SUNT TREBURILE CU BAZA DE DATE.
- 
-   
    
    
    function print_colour_meanings(){
@@ -65,8 +55,6 @@ class Main_model extends CI_Model {
 				  			echo 'Total User Detail Types: <b>'.$user_details_set.'</b><br />';
 				  			$mappings_availlable = Self::return_mappingcount();
 				  			echo 'Total Mappings Set: <b>'.$mappings_availlable.'</b><br />';
-//				  			$app_logs_availlable = Self::get_number_of_rows('function_call_log');
-//				  			echo 'Total App Logs: <b>'.$app_logs_availlable.'</b><br />';
 				  			$change_logs_availlable = $changelog->return_changelogcount();
 				  			echo 'Total ChangeLogs: <b>'.$change_logs_availlable.'</b><br />';
                 $tasks_pending = $task->return_taskcount();
@@ -93,7 +81,7 @@ class Main_model extends CI_Model {
     Self::generate_mapping_table_footer();
   }
   function generate_mapping_table_header(){
-    echo '<div class="col-xs-12 col-md-4">';
+    //echo '<div class="col-xs-12 col-md-4">';
     echo "<h3>MAPPING TABLE :</h3>";
     echo '<table class="table table-bordered">';
     echo '<th class="warning">Id</th>';
@@ -119,7 +107,7 @@ class Main_model extends CI_Model {
   }
   function generate_mapping_table_footer(){
     echo "</table>";
-    echo "</div>";
+    //echo "</div>";
   }
    
 }
