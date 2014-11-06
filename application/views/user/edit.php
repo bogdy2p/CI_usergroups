@@ -23,14 +23,9 @@
 						<div class="col-xs-1 col-md-1"></div>
 						<div class="col-xs-10 col-md-10">
 
-							<!-- <h3>ADD FUNCTIONALITY TO EDIT USER CORRESPONDING DETAILS</h3> -->
-							<!-- <h4>phone , etc ,, for each detail type availlable (must be DYNAMIC)</h4> -->
+							
 							<?php
-								  
 								$user->get_userdata_details_availlable($_GET['id']); 
-								/// VERIFY IF INPUTS EXIST , AND IF EXIST , UPDATE WITH THE INFORMATION IN THE POST.
-
-
 							?>
 
 						</div>

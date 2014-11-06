@@ -7,12 +7,24 @@ class Main_model extends CI_Model {
         parent::__construct();
     }
   
-  function read($table_name){
+  function read(){
     $this->db->select('*');
-		$this->db->from($table_name);	
-		$query = $this->db->get();
-		return $query->result();
-	 }
+    $this->db->from('usergroups');
+    $result = $this->db->get();
+    $return = array();
+    foreach($result->result_array() as $row){
+      $return[] = $row;
+    }
+    return $return;
+ }  
+    
+    
+//  function read($table_name){
+//    $this->db->select('*');
+//		$this->db->from($table_name);	
+//		$query = $this->db->get();
+//		return $query->result();
+//	 }
  
    //IN MODEL SUNT TREBURILE CU BAZA DE DATE.
  
@@ -67,6 +79,43 @@ class Main_model extends CI_Model {
       $this->db->from('usergroups');
       $result = $this->db->count_all_results();
       return $result;
+  }
+  
+  
+  
+    function generate_mapping_table_html(){
+    Self::generate_mapping_table_header();
+    Self::generate_mapping_table_content();
+    Self::generate_mapping_table_footer();
+  }
+  function generate_mapping_table_header(){
+    echo '<div class="col-xs-12 col-md-4">';
+    echo "<h3>MAPPING TABLE :</h3>";
+    echo '<table class="table table-bordered">';
+    echo '<th class="warning">Id</th>';
+    echo '<th class="warning">User ID</th>';
+    echo '<th class="warning">Group ID</th>';
+    echo '<th class="warning">Remove</th>';
+  }
+  function generate_mapping_table_content(){
+    
+    $user = new User_model();
+    $group = new Group_model();
+    $mapping_table = Self::read();
+    foreach ($mapping_table as $table) {
+    $map_id = $table['id'];
+    $type='usergroups';
+    echo '<tr>';
+    echo '<td class="info">'.$table['id'].'</td>';
+    echo '<td>' . $table['user_id'] . ' - ' . $user->get_user_name_by_user_id($table['user_id']) .'</td>';
+    echo '<td>' . $table['group_id'] . ' - ' . $group->get_group_name_by_group_id($table['group_id']) .'</td>';
+    echo '<td><a><span onclick="confirm_delete_mapping('.$map_id.')" class="glyphicon glyphicon-remove spanred pointer"></span></a></td>';
+    echo '</tr>';
+    }
+  }
+  function generate_mapping_table_footer(){
+    echo "</table>";
+    echo "</div>";
   }
    
 }

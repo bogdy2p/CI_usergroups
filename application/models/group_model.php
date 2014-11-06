@@ -124,6 +124,17 @@ function validate_and_update_group() {
    return $this;
 	}
     
+  function get_group_name_by_group_id($id){
+    $this->db->select('name');
+    $this->db->from('groups');
+    $this->db->where('id',$id);
+    $result = $this->db->get();
+    foreach ($result->result_array() as $row){
+      return $row['name'];
+    }
+	}
+  
+  
    function group_already_exists($name){
      $this->db->select('*');
      $this->db->from('groups');

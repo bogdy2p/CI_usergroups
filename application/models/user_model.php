@@ -496,10 +496,7 @@ function print_detail_inputs_without_value($detail){
       }
         elseif (isset($_POST[$detail]) && (empty($_POST[$detail]))){
           print_r($detail);
-          self::delete_user_detail_row($user_id,$detail);
-          //delete_user_detail_row($userid,$detailtype);
-          // DELETE DETAIL TYPE WITH THE NAME $detail. for this user.
-          //echo ('POST[DETAIL] EXISTS BUT IT IS NULL. HERE SHOULD DELETE. and for the ones that are set , update.');
+          Self::delete_user_detail_row($user_id,$detail);
       }
     }
   }
