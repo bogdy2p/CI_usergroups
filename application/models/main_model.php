@@ -110,4 +110,44 @@ class Main_model extends CI_Model {
     //echo "</div>";
   }
    
+  function generate_groups_users_table_html(){
+    Self::generate_groups_users_table_header();
+    Self::generate_groups_users_table_content();
+  	Self::generate_groups_users_table_footer();
+  }
+
+  function generate_groups_users_table_header(){
+    //echo '<div class="col-xs-12 col-md-3">';
+    echo '<h3>Users by group</h3>';
+    echo '<table class="table table-bordered" name="groups_users">';
+  }
+
+
+
+  function generate_groups_users_table_content(){
+    $user = new User_model();
+    $group = new Group_model();
+    $groups = $group->read();
+    foreach ($groups as $group) 
+      {
+        $userids_array = $user->get_userids_for_a_group($group['id']);	
+        echo '<th class="info">'.$group["name"].'\'s</th>';
+        echo '<th class="info">User ID</th>';
+                  foreach ($userids_array as $key => $value) {
+                    echo "<tr>";
+                        print_r("<td>".$user->get_user_name_by_user_id($value)."</td>");
+                        print_r("<td>".$value."</td>");
+                    echo "</tr>";
+                  }
+      }
+  }
+
+  function generate_groups_users_table_footer(){
+    echo "</table>";
+    //echo "</div>";
+  }
+
+  
+  
+  
 }

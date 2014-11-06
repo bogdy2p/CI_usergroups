@@ -303,6 +303,19 @@ class User_model extends CI_Model {
     return $return;
 	}
  
+  function get_userids_for_a_group($id){
+    $this->db->select('user_id');
+    $this->db->from('usergroups');
+    $this->db->where('group_id',$id);
+    $return = array();
+    $result = $this->db->get();
+    foreach ($result->result_array() as $row){
+      $return[] = $row['user_id'];
+    }
+    return $return;
+  }
+  
+  
   function get_all_user_detail_types() {
     $this->db->select('*');
     $this->db->from('user_detail_types');
