@@ -61,16 +61,18 @@ function check_username_availlability_on_edit(){
 	$(document).ready(function(){
 		$('#edit_username').blur(function(){
 			$.ajax({
-				url: '#',
+				url: 'ajax',
 				data: {'edit_username': $('#edit_username').val()},
 				success: success,
 				dataType: 'json'
 				})
 			.done(function(data){
 				if(data==0){
+                                        alert(data);
 					$('#edit_username_error').html("");
 					$('#submit').show();
 				}else{
+                                        alert(data);
 					$('#submit').hide();
 					$('#edit_username_error').html("THAT NAME IS ALREADY TAKEN. Please choose another one");
 				}
@@ -95,10 +97,12 @@ function check_username_availlability(){
 				.done(function(data){
 	   						 // alert( "Returning " + data );
 	   				 	if (data==0){
+                                                  alert(data);
 	   				 		$('#name_error').html("");//Aici setezi textul in div-ul de langa name
 	   				 		$('#submit').show();
 	   				 	}
 	   					else{
+                                                  alert(data);
 	   						$('#submit').hide();
 	   						$('#name_error').html("<h4><spanred><spangre>"+$('#name').val()+ "</spangre> is already taken ! Please choose another one</spanred></h4>");
 	   					}
@@ -114,16 +118,19 @@ function check_group_availlability(){
 	$(document).ready(function(){
 		$('#groupname').blur(function(){
 			$.ajax({
-				url: '#',
+				url: 'ajax',
 				data: {'groupname' : $('#groupname').val()},
 				success: success,
 				dataType: 'json'
 				})
 			.done(function(data){
 				if (data==0){
+                                  alert(data);
 					$('#group_error').html("");//Aici setezi textul in div-ul de langa name
 					$('#submit').show();
+                                        
 				}else{
+                                  alert(data);
 					$('#submit').hide();
 					$('#group_error').html("<h4><spanred><spangre>"+$('#groupname').val()+"</spangre> group already exists!</spanred></h4>");
 				}

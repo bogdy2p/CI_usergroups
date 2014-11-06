@@ -38,4 +38,9 @@ class Group extends CI_Controller {
   {
    $this->load->view('group/delete');
   }
+  
+  public function ajax()
+  {
+   $this->load->view('group/ajax');  
+  }
 }

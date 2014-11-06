@@ -1,6 +1,6 @@
-<?php 
-$group = new Group_model();
+<?php $group = new Group_model();
 $group->validation_and_create();
+//$group->check_ajax_at_group_adding();
 // VALIDATE AND ADD 
 ?>
 <div class ="container">
