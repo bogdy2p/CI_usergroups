@@ -110,4 +110,12 @@ class Task_model extends CI_Model {
     echo "</ol>";
   }
   
+  
+  function return_taskcount(){
+     $this->db->select('*');
+     $this->db->from('todo_list');
+     $result = $this->db->count_all_results();
+     return $result;
+  }
+  
 }

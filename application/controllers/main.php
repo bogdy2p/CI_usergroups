@@ -15,6 +15,11 @@ class Main extends CI_Controller {
   public function index()
 	{
     $this->load->model('task_model');
+    $this->load->model('user_model');
+    $this->load->model('group_model');
+    $this->load->model('detail_type_model');
+    $this->load->model('changelog_model');
+    
     
     
     

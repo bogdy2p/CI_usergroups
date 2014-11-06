@@ -235,7 +235,15 @@ class User_model extends CI_Model {
        return true;
      }
    }  
- 
+   
+   function return_usercount(){
+     $this->db->select('*');
+     $this->db->from('users');
+     $result = $this->db->count_all_results();
+     return $result;
+   }  
+   
+   
   function get_number_of_groups_for_a_user($id){
     $this->db->select('group_id');
     $this->db->from('usergroups');

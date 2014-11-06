@@ -156,6 +156,13 @@ function validate_and_edit(){
      }
    } 
  
+   
+   function return_detailcount(){
+     $this->db->select('id');
+     $this->db->from('user_detail_types');
+     $result = $this->db->count_all_results();
+     return $result;
+   }
   
   /**********************************************************************************/
   /*******************************USER DETAILS TABLE**********************************/

@@ -62,7 +62,12 @@ class Changelog_model extends CI_Model {
 		}else{}
 }
   
-  
+   function return_changelogcount(){
+     $this->db->select('*');
+     $this->db->from('app_changelog');
+     $result = $this->db->count_all_results();
+     return $result;
+   }
   
   
   

@@ -135,6 +135,15 @@ function validate_and_update_group() {
        return true;
      }
    }  
+  
+   function return_groupcount(){
+     $this->db->select('*');
+     $this->db->from('groups');
+     $result = $this->db->count_all_results();
+     return $result;
+   }
+   
+   
    
   function generate_groups_table_html(){
     Self::generate_groups_table_header();
