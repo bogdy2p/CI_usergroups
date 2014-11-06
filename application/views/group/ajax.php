@@ -1,6 +1,5 @@
-<?php 
-    check_ajax_at_group_adding();
-    check_ajax_at_group_editing();
+<?php  //GROUP AJAX
+    check_ajax();
 
 function return_ajax_for_group($input){		
     $group = new Group_model();
@@ -12,13 +11,11 @@ function return_ajax_for_group($input){
 		}
 	}
   
-  function check_ajax_at_group_adding(){
-    if (isset($_GET['groupname'])){
+  function check_ajax(){
+     if (isset($_GET['groupname'])){
       return_ajax_for_group($_GET['groupname']);
-    }
-  }
-  function check_ajax_at_group_editing(){
-    if (isset($_GET['edit_groupname'])){
+     }
+     if (isset($_GET['edit_groupname'])){
       return_ajax_for_group($_GET['edit_groupname']);
     }
   }

@@ -36,5 +36,8 @@ class Detail_type extends CI_Controller {
   {
    $this->load->view('detailtype/delete');
   }
-  
+   public function ajax()
+  {
+   $this->load->view('detailtype/ajax');  
+  }
 }

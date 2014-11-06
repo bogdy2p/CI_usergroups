@@ -1,6 +1,5 @@
 <?php $group = new Group_model();
 $group->validate_and_update_group();
-//$group->check_ajax_at_group_editing();
 ?>
 
 <div class="row">

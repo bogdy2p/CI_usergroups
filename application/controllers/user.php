@@ -60,5 +60,8 @@ class User extends CI_Controller {
    public function delete_detail_type(){
 		$this->load->view('user/delete_detail_type');
   }
-  
+   public function ajax()
+  {
+   $this->load->view('user/ajax');  
+  }
 }

@@ -144,6 +144,19 @@ function validate_and_edit(){
     return $return;
 	}
   
+  function check_detail_type_exists($user_detail_type) {
+    $this->db->select('id');
+    $this->db->from('user_detail_types');
+    $this->db->where('name',$user_detail_type);
+    $result = $this->db->count_all_results();
+     if ($result == 0){
+       return false;
+     }else{
+       return true;
+     }
+   } 
+ 
+  
   /**********************************************************************************/
   /*******************************USER DETAILS TABLE**********************************/
   /**********************************************************************************/
@@ -198,22 +211,5 @@ function validate_and_edit(){
   function print_edit_detail_table_footer(){
     echo "</table>
         </div>";
-  }
-
-  /************************************************************************/
-  /************************************************************************/
-  /***********AJAX FUNCTIONALITY WHEN ADDING/EDITING DETAIL TYPE***********/
-  /************************************************************************/
-  /************************************************************************/
-  
-  function return_ajax_for_detail_type($input){
-		$user = new User();
-		$exists = $user->check_detail_type_exists($input);
-		if ($exists){
-			echo '1';
-		}else{
-			echo '0';
-		}
-	}
-  
+  }  
 }

@@ -10,7 +10,7 @@ function check_group_availlability_on_edit(){
 $(document).ready(function(){
 		$('#edit_groupname').blur(function(){
 			$.ajax({
-				url: 'user_ci/group/add',
+				url: 'ajax',
 				data: {'edit_groupname' : $('#edit_groupname').val()},
 				success: success,
 				dataType: 'json'
@@ -35,7 +35,7 @@ function check_detail_type_availlability_on_edit(){
 	$(document).ready(function(){
 		$('#edit_detail').blur(function(){
 			$.ajax({
-				url: '#',
+				url: 'ajax',
 				data: {'edit_detail' : $('#edit_detail').val()},
 				success: success,
 				dataType: 'json'
@@ -68,11 +68,9 @@ function check_username_availlability_on_edit(){
 				})
 			.done(function(data){
 				if(data==0){
-                                        alert(data);
 					$('#edit_username_error').html("");
 					$('#submit').show();
 				}else{
-                                        alert(data);
 					$('#submit').hide();
 					$('#edit_username_error').html("THAT NAME IS ALREADY TAKEN. Please choose another one");
 				}
@@ -89,7 +87,7 @@ function check_username_availlability(){
 	$(document).ready(function(){
 			$('#name').blur(function(){
 				$.ajax({
-						url: '#', 
+						url: 'ajax', 
 						data: {'name' : $('#name').val()},
 						success: success,
 						dataType: 'json'
@@ -97,12 +95,10 @@ function check_username_availlability(){
 				.done(function(data){
 	   						 // alert( "Returning " + data );
 	   				 	if (data==0){
-                                                  alert(data);
 	   				 		$('#name_error').html("");//Aici setezi textul in div-ul de langa name
 	   				 		$('#submit').show();
 	   				 	}
 	   					else{
-                                                  alert(data);
 	   						$('#submit').hide();
 	   						$('#name_error').html("<h4><spanred><spangre>"+$('#name').val()+ "</spangre> is already taken ! Please choose another one</spanred></h4>");
 	   					}
@@ -125,12 +121,10 @@ function check_group_availlability(){
 				})
 			.done(function(data){
 				if (data==0){
-                                  alert(data);
 					$('#group_error').html("");//Aici setezi textul in div-ul de langa name
 					$('#submit').show();
                                         
 				}else{
-                                  alert(data);
 					$('#submit').hide();
 					$('#group_error').html("<h4><spanred><spangre>"+$('#groupname').val()+"</spangre> group already exists!</spanred></h4>");
 				}
@@ -147,7 +141,7 @@ function check_detail_type_availlability(){
 	$(document).ready(function(){
 		$('#detail_name').blur(function(){
 			$.ajax({
-				url: '../models/ajax.php',
+				url: 'ajax',
 				data: {'detail_name' : $('#detail_name').val()},
 				success: success,
 				dataType: 'json'
