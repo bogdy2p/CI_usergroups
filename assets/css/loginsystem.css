@@ -1,0 +1,20 @@
+/* 
+    Created on : Nov 6, 2014, 4:56:30 PM
+    Author     : Popa Bogdan Constantin <bogdy2p@gmail.com / bogdy2p@yahoo.com>
+*/
+
+#login_box{
+  background-color: #ABEBC6;
+  width: 300px;
+  height: 250px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 2px #E68F8F;
+}
+
+#register_box{
+  background-color: #E68F8F;
+  width: 300px;
+  height: 250px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 2px #ABEBC6;
+}

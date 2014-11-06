@@ -12,6 +12,7 @@ echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 echo '<link href="' . base_url() . 'assets/css/bootstrap.css"       rel="stylesheet"  >';
 echo '<link href="' . base_url() . 'assets/css/bootstrap-theme.css" rel="stylesheet"  >';
 echo '<link href="' . base_url() . 'assets/css/style.css"           rel="stylesheet"  type="text/css">';
+echo '<link href="' . base_url() . 'assets/css/loginsystem.css"           rel="stylesheet"  type="text/css">';
 echo '<script src="' . base_url() . 'assets/js/testuser.js"></script>';
 
 echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>';
@@ -32,7 +33,7 @@ echo '                   <button type="button" class="navbar-toggle collapsed" d
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>        
-                            <a class="navbar-brand" href="' . base_url() . '">Home</a>
+                            <a class="navbar-brand" href="' . base_url() . '"><span class="spanyel">Home</span></a>
                     </div>                            
         ';
 echo ' 
@@ -44,7 +45,8 @@ echo '
                              <li><a href="' . base_url() . 'group">   GROUP           </a></li>
                              <li><a href="' . base_url() . 'changelog">   View Changelogs     </a></li>
                              <li><a href="' . base_url() . 'task">   Manage Todo\'s (tasks)    </a></li>
-                             <li><a href="' . base_url() . 'login">   LOGIN SYSTEM </a></li>
+                             <li><a href="' . base_url() . 'user/login"><span class="spangre">Login</span></a></li>
+                             <li><a href="' . base_url() . 'user/register"><span class="spanred">Register</span></a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>
