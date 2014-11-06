@@ -48,7 +48,9 @@ class Main extends CI_Controller {
 		$this->load->view('templates/sitewide_footer');
 	}
   
-  
+  public function delete(){
+    $this->load->view('main/delete');
+  }
   
   
   

@@ -13,10 +13,10 @@ function confirm_delete_group(id){
 	}
 }
 function confirm_delete_mapping(id){
-	if (confirm("Are you sure?") == true){
-		window.location.replace("/user_ci/mapping/delete?id="+id+"&type=usergroups");return true;
+	if (confirm("Delete mapping "+id+" ?") == true){
+		window.location.replace("/user_ci/main/delete?id="+id+"&type=usergroups");return true;
 	}else{
-		window.location.replace("/user_ci/mapping");return false;
+		window.location.replace("/user_ci/main/tables");return false;
 	}
 }
 function confirm_detail_type_delete(id){

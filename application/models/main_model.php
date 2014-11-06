@@ -19,6 +19,10 @@ class Main_model extends CI_Model {
  }  
     
     
+ function delete_mapping($id){
+   $this->db->where('id',$id);
+   $this->db->delete('usergroups');
+ }
 //  function read($table_name){
 //    $this->db->select('*');
 //		$this->db->from($table_name);	
