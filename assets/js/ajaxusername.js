@@ -45,7 +45,7 @@ function check_detail_type_availlability_on_edit(){
 					$('#edit_detail_type_error').html("");
 					$('#submit').show();
 				}else{
-                                        $('#edit_detail_type_error').html("<h5><spanred>Can't rename to : <spangre><b>"+$('#new_name').val()+"</b></spangre> <br /> Another group named like that already exists!</spanred></h5>");
+                                        $('#edit_detail_type_error').html("<h5><spanred>Can't rename to : <spangre><b>"+$('#new_name').val()+"</b></spangre> <br /> Another DETAIL named like that already exists!</spanred></h5>");
 					$('#submit').hide();
 					
 				}

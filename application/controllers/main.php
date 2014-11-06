@@ -14,6 +14,10 @@ class Main extends CI_Controller {
   
   public function index()
 	{
+    $this->load->model('task_model');
+    
+    
+    
     $this->load->view('templates/sitewide_header');
 		$this->load->view('main/index');
     $this->load->view('templates/sitewide_footer');
@@ -34,7 +38,7 @@ class Main extends CI_Controller {
  
  	public function view_list() { 
 		$this->load->view('templates/sitewide_header');
-		$this->load->view('user/index');
+		$this->load->view('main/list');
 		$this->load->view('templates/sitewide_footer');
 	}
   

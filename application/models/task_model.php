@@ -101,5 +101,13 @@ class Task_model extends CI_Model {
       }
     }
   
+  function generate_todo_list_for_main(){
+    $tasks = Self::read();
+    echo "<ol>";
+    foreach ($tasks as $individual_todo) {
+      echo '<li><'.$individual_todo['colour'].'>'. $individual_todo['name'] .'</'.$individual_todo['colour'].'></li>';
+    }
+    echo "</ol>";
+  }
   
 }
