@@ -47,20 +47,26 @@ class Main_model extends CI_Model {
 				  			echo 'Total Groups : <b>'.$groups_availlable.'</b><br />';
                 $user_details_set = $detail->return_detailcount();
 				  			echo 'Total User Detail Types: <b>'.$user_details_set.'</b><br />';
-//				  			$mappings_availlable = Self::get_number_of_rows('usergroups');
-//				  			echo 'Total Mappings Set: <b>'.$mappings_availlable.'</b><br />';
+				  			$mappings_availlable = Self::return_mappingcount();
+				  			echo 'Total Mappings Set: <b>'.$mappings_availlable.'</b><br />';
 //				  			$app_logs_availlable = Self::get_number_of_rows('function_call_log');
 //				  			echo 'Total App Logs: <b>'.$app_logs_availlable.'</b><br />';
 				  			$change_logs_availlable = $changelog->return_changelogcount();
 				  			echo 'Total ChangeLogs: <b>'.$change_logs_availlable.'</b><br />';
                 $tasks_pending = $task->return_taskcount();
 				  			echo 'Total Tasks Pending: <b>'.$tasks_pending.'</b><br />';
-//				  			$user_id_with_most_details_entered = Self::get_table_of_users_and_number_of_detail_types();
-//				  			$username_most_detailed = Self::get_name_by_id($user_id_with_most_details_entered,'users');
-//				  			echo 'Most details user :<b> '.$username_most_detailed.'</b> (userid <b>'.$user_id_with_most_details_entered.')</b>';
+				  			$most_details_user = $user->get_table_of_users_and_number_of_detail_types();
+                echo 'Most detailed user_id :<b> '.$most_details_user.'</b><br />';
+                $username_most_detailed = $user->get_user_name_by_user_id($most_details_user);
+				  			echo 'Most details user :<b> '.$username_most_detailed.'</b> (userid <b>'.$most_details_user.')</b>';
 
 }
    
-   
+  function return_mappingcount(){
+      $this->db->select('*');
+      $this->db->from('usergroups');
+      $result = $this->db->count_all_results();
+      return $result;
+  }
    
 }

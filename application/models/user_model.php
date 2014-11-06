@@ -553,7 +553,17 @@ function create_user_update_details_array($post_array){
      }
 	}
   
-  
+  function get_table_of_users_and_number_of_detail_types(){
+    $this->db->select('user_id','Count(user_id)');
+    //$this->db->as('det_number');
+    $this->db->from('user_details');
+    $this->db->group_by('user_id');
+    $this->db->order_by('Count(user_id)','DESC');
+    $result = $this->db->get();
+    foreach ($result->result_array() as $row){
+      return $row['user_id'];
+    }
+	}
 
   
   /**********************************************************************************/
