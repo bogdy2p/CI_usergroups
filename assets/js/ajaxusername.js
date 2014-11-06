@@ -10,7 +10,7 @@ function check_group_availlability_on_edit(){
 $(document).ready(function(){
 		$('#edit_groupname').blur(function(){
 			$.ajax({
-				url: '../models/ajax.php',
+				url: 'user_ci/group/add',
 				data: {'edit_groupname' : $('#edit_groupname').val()},
 				success: success,
 				dataType: 'json'
@@ -35,7 +35,7 @@ function check_detail_type_availlability_on_edit(){
 	$(document).ready(function(){
 		$('#edit_detail').blur(function(){
 			$.ajax({
-				url: '../models/ajax.php',
+				url: '#',
 				data: {'edit_detail' : $('#edit_detail').val()},
 				success: success,
 				dataType: 'json'
@@ -61,7 +61,7 @@ function check_username_availlability_on_edit(){
 	$(document).ready(function(){
 		$('#edit_username').blur(function(){
 			$.ajax({
-				url: '../models/ajax.php',
+				url: '#',
 				data: {'edit_username': $('#edit_username').val()},
 				success: success,
 				dataType: 'json'
@@ -87,7 +87,7 @@ function check_username_availlability(){
 	$(document).ready(function(){
 			$('#name').blur(function(){
 				$.ajax({
-						url: '../models/ajax.php', 
+						url: '#', 
 						data: {'name' : $('#name').val()},
 						success: success,
 						dataType: 'json'
@@ -114,7 +114,7 @@ function check_group_availlability(){
 	$(document).ready(function(){
 		$('#groupname').blur(function(){
 			$.ajax({
-				url: '../models/ajax.php',
+				url: '#',
 				data: {'groupname' : $('#groupname').val()},
 				success: success,
 				dataType: 'json'

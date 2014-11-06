@@ -231,4 +231,22 @@ function validate_and_update_group() {
     echo '</table></div>';
   }  
   
+  
+  /************************************************************************/
+  /************************************************************************/
+  /***************AJAX FUNCTIONALITY WHEN ADDING/EDITING GROUP*************/
+  /************************************************************************/
+  /************************************************************************/
+  
+  function return_ajax_for_group($input){
+		$group = new Group();
+		$exists = $group->verify_name_exists_in_table($input,'groups');
+		if ($exists){
+			echo '1';
+		}else{
+			echo '0';
+		}
+	}
+  
+  
 }
