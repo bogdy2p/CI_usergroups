@@ -122,8 +122,6 @@ class Main_model extends CI_Model {
     echo '<table class="table table-bordered" name="groups_users">';
   }
 
-
-
   function generate_groups_users_table_content(){
     $user = new User_model();
     $group = new Group_model();

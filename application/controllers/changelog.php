@@ -27,4 +27,15 @@ class Changelog extends CI_Controller {
 		$this->load->view('changelog/create');
     $this->load->view('templates/sitewide_footer');
   }
+  
+  public function download()
+  {
+    
+    
+    $this->load->dbutil();
+    $this->load->helper('file');
+    $this->load->view('templates/sitewide_header');
+    $this->load->view('changelog/download');
+    $this->load->view('templates/sitewide_footer');
+  }
 }

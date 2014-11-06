@@ -69,26 +69,27 @@ class Changelog_model extends CI_Model {
      return $result;
    }
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  /************************************************************************/
+ /************************************************************************/
+ /************************************************************************/
+ /************************************************************************/
+   function export_changelog_data($array){
+     $path = $array['path'];
+     $file_name = $array['file_name'];
+     $data = $array['data'];
+     
+    $query = $this->db->query('SELECT * FROM app_changelog WHERE date >= NOW() - INTERVAL '.$days.' DAY ORDER BY date DESC');
+    $data = $this->dbutil->csv_from_result($query);
+    if ( ! write_file($path.$file_name, $data))
+    {echo 'Unable to write the file';}
+       else
+    {echo 'Last '.$days.' days data written to : '.$path.$file_name;}
+}
+    //this->db->where('date >= NOW() - INTERVAL '.$days.' DAY', '', false); 
+    //$this->db->order_by('date','desc');
+/************************************************************************/
+/************************************************************************/
+/************************************************************************/
+/************************************************************************/
   
   
   function generate_changelog_table_html($days){
