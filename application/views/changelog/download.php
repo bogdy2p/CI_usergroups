@@ -1,31 +1,41 @@
 <?php
-    var_dump($_POST);
-    var_dump($_GET);
+  header('Content-Type: csv; charset=utf-8');
+  header('Content-Disposition: attachment; filename=.csv');
 
-    if (isset($_POST['data'])){
-    $changelog = new Changelog_model();
-    $changelog->export_changelog_data($_POST['data']); // EXPORT SHOULD GET AN ARRAY
-      echo ' File exported';
-    }else{
-      echo 'Nothing to export;';
-    }
+  
+  $filename = date('D-M-Y_:H:m:s') .'_CSV';
+  $path_with_file = '/var/www/html/user_ci/temporary/'.$filename;
+     
+     $_POST['data'] = array(
+                    'path'=> '/var/www/html/user_ci/temporary/',
+                    'file_name'=> $filename.'.csv',
+                    'data'=>array('ion','vasile'),
+                  );
+     $_POST['days'] = '3';        
+
+
+    //var_dump($_POST);
+    //var_dump($_GET);
+
+    if ((isset($_POST['data'])) && isset($_POST['days'])){
+      if (!empty($_POST['days'])){
+          $changelog = new Changelog_model();
+          //$changelog->export_changelog_data($_POST['data']); // EXPORT SHOULD GET AN ARRAY
+          $query = $changelog->export_query($_POST['data']);
+          var_dump($query->result());
+          
+            //echo ' File exported';
+          }
+    }else
+      {
+      //echo 'Nothing to export;';
+      }
     
 ?>
 
 
 <?php 
-//$filename = date('D/M/Y :H:m:s') .'_CSV'; //The name of the csv file.
-//header('Content-Type: text/csv; charset=utf-8');
-//header('Content-Disposition: attachment; filename='.$filename.'.csv');
-
-
-
-$path = '/var/www/html/';
-$days = '3';
+//$path = '/var/www/html/';
+//$days = '3';
 //$changelog->export_changelog_data($path,$filename,$days);
 ?>
-
-
- <br /><br /><br /> <br /><br /><br />
-SELECT CSV PERIOD TO DOWNLOAD <br />
-THIS IS DOWNLOAD SHOULD HAVE A BUTTON , <br />AND FUNCTIONALITY TO DOWNLOAD CSV FROM DB USING FILTERS
