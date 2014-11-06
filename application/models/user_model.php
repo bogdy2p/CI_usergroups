@@ -56,6 +56,13 @@ class User_model extends CI_Model {
       $this->db->delete('users'); 
   }
  
+  function delete_user_detail_row($userid,$detailtype){
+    $this->db->where('user_id',$userid);
+    $this->db->where('detail_type',$detailtype);
+    $this->db->delete('user_details');
+  }
+  
+  
   function validate_and_create(){
 		$user = array();
 		if(isset($_POST['name'])){ $user['name'] = $_POST['name']; }else{ $user['name'] = NULL; }  
@@ -486,6 +493,13 @@ function print_detail_inputs_without_value($detail){
           $create_a_new = Self::add_user_detail_with_type($user_id,$detail,$_POST[$detail]);
         }else{}
         Self::update_user_details_for_user($user_id,$detail,$_POST[$detail]);
+      }
+        elseif (isset($_POST[$detail]) && (empty($_POST[$detail]))){
+          print_r($detail);
+          self::delete_user_detail_row($user_id,$detail);
+          //delete_user_detail_row($userid,$detailtype);
+          // DELETE DETAIL TYPE WITH THE NAME $detail. for this user.
+          //echo ('POST[DETAIL] EXISTS BUT IT IS NULL. HERE SHOULD DELETE. and for the ones that are set , update.');
       }
     }
   }
