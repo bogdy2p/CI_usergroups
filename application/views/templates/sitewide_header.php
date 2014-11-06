@@ -42,9 +42,9 @@ echo '
                              <li><a href="' . base_url() . 'detail_type">   Details Types  </a></li>
                              <li><a href="' . base_url() . 'user">   USER            </a></li>
                              <li><a href="' . base_url() . 'group">   GROUP           </a></li>
-                           <!--  <li><a href="' . base_url() . 'applog">   View App Logs       </a></li> -->
                              <li><a href="' . base_url() . 'changelog">   View Changelogs     </a></li>
                              <li><a href="' . base_url() . 'task">   Manage Todo\'s (tasks)    </a></li>
+                             <li><a href="' . base_url() . 'login">   LOGIN SYSTEM </a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>

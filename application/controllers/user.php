@@ -21,6 +21,18 @@ class User extends CI_Controller {
     $this->load->view('user/table');
     $this->load->view('templates/sitewide_footer');
   }
+  
+  public function login(){
+    $this->load->view('templates/sitewide_header');
+    $this->load->view('login/index');
+    $this->load->view('templates/sitewide_footer');
+  }
+  
+  public function register(){
+    $this->load->view('templates/sitewide_header');
+    $this->load->view('login/register');
+    $this->load->view('templates/sitewide_footer');
+  }
 
   public function add() {
     $this->load->view('templates/sitewide_header');
