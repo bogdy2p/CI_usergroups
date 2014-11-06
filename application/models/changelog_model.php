@@ -72,24 +72,22 @@ class Changelog_model extends CI_Model {
  /************************************************************************/
  /************************************************************************/
  /************************************************************************/
-   function export_changelog_data($array){
-     $path = $array['path'];
-     $file_name = $array['file_name'];
-     $data = $array['data'];
-     $days = $_POST['days'];
-     
-    $query = $this->db->query('SELECT * FROM app_changelog WHERE date >= NOW() - INTERVAL '.$days.' DAY ORDER BY date DESC');
-    $data = $this->dbutil->csv_from_result($query);
-    if ( ! write_file($path.$file_name, $data))
-    {echo 'Unable to write the file. No access to : '.$path.$file_name;}
-       else
-    {echo 'Last '.$days.' days data written to : '.$path.$file_name;}
-}
+   //THIS IS OLD AND NOT CORRECT !
+//   function export_changelog_data($array){
+//     $path = $array['path'];
+//     $file_name = $array['file_name'];
+//     $data = $array['data'];
+//     $days = $_POST['days'];
+//     
+//    $query = $this->db->query('SELECT * FROM app_changelog WHERE date >= NOW() - INTERVAL '.$days.' DAY ORDER BY date DESC');
+//    $data = $this->dbutil->csv_from_result($query);
+//    if ( ! write_file($path.$file_name, $data))
+//    {echo 'Unable to write the file. No access to : '.$path.$file_name;}
+//       else
+//    {echo 'Last '.$days.' days data written to : '.$path.$file_name;}
+//}
     
-    function export_query($array){
-     $path = $array['path'];
-     $file_name = $array['file_name'];
-     $data = $array['data'];
+    function export_query(){     
      $days = $_POST['days'];
      $query = $this->db->query('SELECT * FROM app_changelog WHERE date >= NOW() - INTERVAL '.$days.' DAY ORDER BY date DESC');
      return $query;
@@ -171,7 +169,7 @@ class Changelog_model extends CI_Model {
 
   function generate_select_day_form(){
   echo '
-    <br /><br /><br /><br /><br />
+    <br /><br /><br />
     <form class="form" id="day_form" action="#" method="post">
           <select name="day" id="day" form="day_form">
             <option value="100">All period</option>
@@ -189,8 +187,35 @@ class Changelog_model extends CI_Model {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button type="submit" class="btn btn-success">Change Chosen Period</button>
     </form>
+    <br /><br />
+    ';
+  } 
+  
+  function generate_select_export_form(){
+  echo '
+    <br /><br /><br />
+    <form class="form" id="export_form" action="changelog/download" method="post">
+
+          <input name="filename"  type="hidden" value="'.date("D-M-Y_:H:m:s").'_Changelogs"> 
+          <select name="days" id="days" form="export_form">
+            <option value="100">All period</option>
+            <option value="1">Today</option>
+            <option value="2">Yesterday</option>
+            <option value="3">Two Days Ago</option>
+            <option value="4">Three Days Ago</option>
+            <option value="5">Four Days Ago</option>
+            <option value="6">Five Days Ago</option>
+            <option value="7">Six Days Ago</option>
+            <option value="8">Last Week</option>
+          </select> 
+          &nbsp;&nbsp;&nbsp;
+        <button type="submit" class="btn btn-success">Export as CSV</button>
+    </form>
+    <br /><br />
     ';
   }  
+  
+  
   
   function generate_changelog_table_by_post(){
     if ((isset($_POST['day'])) && !empty($_POST['day'])){
