@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-md-4"></div>
   <div class="col-xs-12 col-md-4">
-    <?php // if (isset($validation_errors)) echo $validation_errors;?>
     <?php echo validation_errors('<p class="error">'); ?>
     <?php
     $size_options = array(
@@ -25,7 +24,6 @@
     echo form_dropdown('colour', $color_options, $selected = array('spanyel'));
     echo '<br /><br />';
     echo form_dropdown('size', $size_options, $selected = array('h5'));
-
     echo '<br /><br />';
     echo form_submit('submit', 'Add New Task_FH', 'class="btn btn-success"');
     echo '<br /><br />';
@@ -34,5 +32,4 @@
 
   </div>
   <div class="col-xs-12 col-md-4"></div>
-
 </div>

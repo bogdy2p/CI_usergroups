@@ -51,27 +51,6 @@ class Changelog_model extends CI_Model {
     return $return;
   }
 
-  function validation() {
-
-    if (isset($_POST) && !empty($_POST)) {
-      if (isset($_POST['colour'])) {
-        print_r($_POST);
-        if (!empty($_POST['changelog_text'])) {
-          $name_with_heading = '<' . $_POST['heading_type'] . '>' . $_POST['changelog_text'] . '</' . $_POST['heading_type'] . '>';
-          $colour = $_POST['colour'];
-          Self::create($name_with_heading, $colour);
-        }
-        header('Location: ' . base_url() . 'changelog');
-        die();
-      }
-      elseif (isset($_POST['day'])) {/* print_r($_POST); */
-      }
-    }
-    else {
-      
-    }
-  }
-
   function return_changelogcount() {
     $this->db->select('*');
     $this->db->from('app_changelog');
@@ -138,33 +117,6 @@ class Changelog_model extends CI_Model {
     echo '</div>';
   }
 
-  function generate_changelog_add_new_form() {
-    echo '		<form class="form" id="add_new_changelog_form" action="add" method="post">
-              <label>Add Changelog</label><br />
-                <input name="changelog_text"  type="text"  placeholder="Changelog text"> <br />
-                <br />
-                <select name="colour" id="colour" form="add_new_changelog_form">
-                  <option selected="null" value="spanred">Red (hard)</option>
-                  <option value="spanyel">Yellow (normal)</option>
-                  <option value="spangre">Green (easy)</option>
-                </select><br /><br />
-                <select name="heading_type" id="heading_type" form="add_new_changelog_form">
-                  <option selected="null" value="h5">H5</option>
-      ';
-    Self::generate_select_heading_options();
-    echo '
-                </select><br /><br />
-                <button type="submit" class="btn btn-success">Add Changelog</button>
-          </form> 
-      ';
-  }
-
-  function generate_select_heading_options() {
-    for ($i = 1; $i <= 6; $i++) {
-      echo '<option value="h' . $i . '">H' . $i . '</option>';
-    }
-  }
-
   function generate_select_day_form() {
     echo '
     <br /><br /><br />
@@ -222,25 +174,24 @@ class Changelog_model extends CI_Model {
     }
   }
 
-  function validation_and_insertion_of_a_new_changelog() {
-    if (isset($_POST) && !empty($_POST)) {
-      if (isset($_POST['colour'])) {
-
-        if (!empty($_POST['changelog_text'])) {
-          $name_with_heading = '<' . $_POST['heading_type'] . '>' . $_POST['changelog_text'] . '</' . $_POST['heading_type'] . '>';
-          $colour = $_POST['colour'];
-          $changelog = new Changelog_model();
-          $changelog->create($name_with_heading, $colour);
-        }
-        header("Location: index");
-        die();
-      }
-      elseif (isset($_POST['day'])) {/* print_r($_POST); */
-      }
-    }
-    else {
-      
-    }
-  }
-
+//  function validation_and_insertion_of_a_new_changelog() {
+//    if (isset($_POST) && !empty($_POST)) {
+//      if (isset($_POST['colour'])) {
+//
+//        if (!empty($_POST['changelog_text'])) {
+//          $name_with_heading = '<' . $_POST['heading_type'] . '>' . $_POST['changelog_text'] . '</' . $_POST['heading_type'] . '>';
+//          $colour = $_POST['colour'];
+//          $changelog = new Changelog_model();
+//          $changelog->create($name_with_heading, $colour);
+//        }
+//        header("Location: index");
+//        die();
+//      }
+//      elseif (isset($_POST['day'])) {/* print_r($_POST); */
+//      }
+//    }
+//    else {
+//      
+//    }
+//  }
 }

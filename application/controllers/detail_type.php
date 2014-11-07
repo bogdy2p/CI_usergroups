@@ -41,4 +41,17 @@ class Detail_type extends CI_Controller {
     $this->load->view('detailtype/ajax');
   }
 
+  public function validate_form_create_detail() {
+    $this->form_validation->set_rules('detail_name', 'Detail Name', 'required|min_length[2]');
+    if ($this->form_validation->run() == FALSE) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('detail_type/create');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      $this->detail_type_model->create();
+      redirect('detail_type');
+    }
+  }
+
 }

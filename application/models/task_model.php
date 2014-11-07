@@ -43,33 +43,6 @@ class Task_model extends CI_Model {
     $this->db->delete('todo_list');
   }
 
-  function generate_todo_add_new_form() {
-    echo '		<form class="form" id="add_new_todo_form" action="index" method="post">
-              <label>Add New Task</label><br />
-                <input name="todo_text"  type="text"  placeholder="Todo text"> <br />
-                <br />
-                <select name="colour" id="colour" form="add_new_todo_form">
-                  <option selected="null" value="spanred">Red (hard)</option>
-                  <option value="spanyel">Yellow (normal)</option>
-                  <option value="spangre">Green (easy)</option>
-                </select><br /><br />
-                <select name="heading_type" id="heading_type" form="add_new_todo_form">
-                  <option selected="null" value="h5">H5</option>
-      ';
-    Self::generate_todo_select_heading_options();
-    echo '
-                </select><br /><br />
-                <button type="submit" class="btn btn-success">Add New Task</button>
-          </form> 
-      ';
-  }
-
-  function generate_todo_select_heading_options() {
-    for ($i = 1; $i <= 6; $i++) {
-      echo '<option value="h' . $i . '">H' . $i . '</option>';
-    }
-  }
-
   function generate_todo_list_html_admin() {
     $tasks = Self::read();
     $lines = $this->db->count_all('todo_list');

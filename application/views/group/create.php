@@ -4,7 +4,8 @@
     <?php
     $group = new Group_model();
     $group->generate_groups_table_list_html();
-    ?></div>
+    ?>
+  </div>
   <div class="row">
     <div class="col-xs-4 col-md-4"></div>
     <div class="col-xs-4 col-md-4">
@@ -13,7 +14,7 @@
       <div id="group_error"></div>
       <?php echo validation_errors('<p class="error">'); ?>
       <?php
-      echo form_open('group/validate_form_create_group','id="asd"');
+      echo form_open('group/validate_form_create_group', 'id="asd"');
       echo form_label('Add new Group');
       echo '<br />';
       echo form_input('name', '', 'id="groupname" placeholder ="Group Name"');

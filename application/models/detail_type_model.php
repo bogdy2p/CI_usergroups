@@ -13,9 +13,9 @@ class Detail_type_model extends CI_Model {
     parent::__construct();
   }
 
-  function create($name) {
+  function create() {
     $data = array(
-      'name' => $name,
+      'name' => $this->input->post('detail_name'),
     );
     $this->db->insert('user_detail_types', $data);
   }
@@ -53,24 +53,6 @@ class Detail_type_model extends CI_Model {
     $this->db->where('detail_type', $name);
     $this->db->delete('user_details');
     // HERE WE SHOULD DELETE ALSO FROM USER_DETAILS , THE ROWS THAT HAVE AS A DETAIL TYPE , the same NAME      
-  }
-
-  function validate_and_add() {
-    if (isset($_POST['detail_name'])) {
-      if (!empty($_POST['detail_name'])) {
-        $detail = $_POST['detail_name'];
-        Self::create($detail);
-        header('Location: ' . base_url() . 'detail_type');
-      }
-      else {
-        echo "<h3>You cannot create a empty detail!<br /></h3>";
-        echo '<h3><a href="' . base_url() . 'detail_type">Go Back</a></h3>';
-        die();
-      }
-    }
-    else {
-      
-    }
   }
 
   function validate_and_edit() {
@@ -115,18 +97,6 @@ class Detail_type_model extends CI_Model {
         echo 'value=""> <br />';
       }
     }
-  }
-
-  function print_add_new_user_detail_form() {
-    echo '
-			<form class="form" id="add_new_detail_form" action="add" method="post">
-				<label>Add Detail Type</label><br />
-					<div id="detail_type_error"></div>
-					<input name="detail_name" id="detail_name" type="text"  placeholder="new detail type"> <br />
-					<br />
-					<button type="submit" id="submit" class="btn btn-success">Add new Detail</button>
-			</form>
-	';
   }
 
   function print_edit_existing_detail_form($name) {
