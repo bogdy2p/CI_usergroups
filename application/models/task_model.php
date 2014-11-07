@@ -25,8 +25,7 @@ class Task_model extends CI_Model {
     $this->db->set('date', 'NOW()', FALSE);
     $this->db->insert('todo_list', $data);
   }
-  
-  
+
   function read($table_name = 'todo_list') {
     $this->db->select('*');
     $this->db->from('todo_list');

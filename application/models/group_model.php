@@ -12,12 +12,12 @@ class Group_model extends CI_Model {
     parent::__construct();
   }
 
-  function create($array, $table = 'groups') {
+  function create() {
     $data = array(
-      'name' => $array['name'],
-      'special_key' => $array['special_key'],
-    );
-    $this->db->insert($table, $data);
+      'name' => $this->input->post('name'),
+      'special_key' => $this->input->post('special_key'),
+    );    
+    $this->db->insert('groups', $data);
   }
 
   function read() {
@@ -58,33 +58,6 @@ class Group_model extends CI_Model {
   function delete($id) {
     $this->db->where('id', $id);
     $this->db->delete('groups');
-  }
-
-  function validation_and_create() {
-    $group = array();
-    if (isset($_POST['name'])) {
-      $group['name'] = $_POST['name'];
-    }
-    else {
-      $group['name'] = NULL;
-    }
-    if (isset($_POST['special_key'])) {
-      $group['special_key'] = $_POST['special_key'];
-    }
-    else {
-      $group['special_key'] = NULL;
-    }
-    if (isset($group['name']) && isset($group['special_key'])) {
-      $exists = Self::group_already_exists($group['name']);
-      if ($group['name'] != '' && ($exists == false)) {
-        Self::create($group);
-      }
-      else {
-        die('GroupName Is NULL / Already exists. Cannot Add');
-      }
-      header('Location: ' . base_url() . 'group');
-      die();
-    }
   }
 
   function validate_and_update_group() {

@@ -32,17 +32,18 @@ class Task extends CI_Controller {
     $this->load->view('task/delete');
   }
 
-  public function validate_form_create_task(){
-    
+  public function validate_form_create_task() {
+
     $this->form_validation->set_rules('todo_text', 'Task Text', 'required|min_length[2]');
     if ($this->form_validation->run() == FALSE) {
-        $this->load->view('templates/sitewide_header');
-        $this->load->view('task/create');
-        $this->load->view('templates/sitewide_footer');
-    }else{
-        $this->task_model->create();
-        redirect('task');
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('task/create');
+      $this->load->view('templates/sitewide_footer');
     }
-    
+    else {
+      $this->task_model->create();
+      redirect('task');
+    }
   }
+
 }

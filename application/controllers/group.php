@@ -28,6 +28,20 @@ class Group extends CI_Controller {
     $this->load->view('templates/sitewide_footer');
   }
 
+  public function validate_form_create_group() {
+    $this->form_validation->set_rules('name', 'Group Name', 'required|min_length[2]|is_unique[groups.name]');
+    if ($this->form_validation->run() == FALSE) {
+      
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('group/create');
+        $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      $this->group_model->create();
+      redirect('group');
+    }
+  }
+
   public function edit() {
     $this->load->view('templates/sitewide_header');
     $this->load->view('group/edit');
