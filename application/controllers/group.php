@@ -41,6 +41,20 @@ class Group extends CI_Controller {
       redirect('group');
     }
   }
+  
+  public function validate_form_update_group(){ //|is_unique[groups.name]
+    $this->form_validation->set_rules('name', 'Group Name', 'min_length[2]');
+    if ($this->form_validation->run() == FALSE) {
+      
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('group/edit');
+        $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      $this->group_model->update();
+      redirect('group');
+    }
+  }
 
   public function edit() {
     $this->load->view('templates/sitewide_header');

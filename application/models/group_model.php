@@ -16,7 +16,7 @@ class Group_model extends CI_Model {
     $data = array(
       'name' => $this->input->post('name'),
       'special_key' => $this->input->post('special_key'),
-    );    
+    );
     $this->db->insert('groups', $data);
   }
 
@@ -31,69 +31,28 @@ class Group_model extends CI_Model {
     return $return;
   }
 
-  function update($id, $data) {
-    $groupname = Self::get_group_object_by_id($id)->name;
-    $exists = Self::group_already_exists($groupname, 'groups');
-    if (($exists) && (!empty($data))) {
-      //AICI FACI VERIFICARE IN FUNCTIE DE NAME
-      if (isset($data['name'])) {
-        $data = array(
-          'name' => $data['name'],
-          'special_key' => $data['special_key'],
-        );
-      }
-      else {
-        $data = array(
-          'special_key' => $data['special_key'],
-        );
-      }
-      $this->db->where('id', $id);
-      $this->db->update('groups', $data);
+  function update() {
+    $old_name = $this->input->post('old_grp_name');
+    $old_key = $this->input->post('old_grp_key');
+    $a = $this->input->post('name');
+    if (!empty($a)) {
+      $data = array(
+        'name' => $this->input->post('name'),
+        'special_key' => $this->input->post('special_key'),
+      );
     }
     else {
-      die('Object id ' . $id . 'doesnt exist in db , table is incorrect , or params array is empty');
+      $data = array(
+        'special_key' => $this->input->post('special_key'),
+      );
     }
+    $this->db->where('name', $old_name);
+    $this->db->update('groups', $data);
   }
 
   function delete($id) {
     $this->db->where('id', $id);
     $this->db->delete('groups');
-  }
-
-  function validate_and_update_group() {
-    if (isset($_GET['id'])) {
-
-      $group = Self::get_group_object_by_id($_GET['id']);
-      $group_id = $group->id;
-      $old_name = $group->name;
-      $old_special_key = $group->special_key;
-      $_POST['id'] = $_GET['id'];
-      //die();
-
-      if (isset($_POST['name']) && isset($_POST['special_key'])) {
-        $update_details = array(
-          'id' => $_POST['id'],
-          'name' => $_POST['name'],
-          'special_key' => $_POST['special_key'],
-        );
-        //VERIFICARE DACA NU EXISTA ALT GRUP CU ACELASI NUME DEJA , DACA EXISTA THROW AN ERROR
-        $exists = Self::group_already_exists($_POST['name']);
-        if ($exists == false) {
-          Self::update($_GET['id'], $update_details);
-          header("Location: group");
-        }
-        else {
-          unset($update_details['name']);
-          Self::update($_GET['id'], $update_details);
-          header("Location: group");
-        }
-        //header("Location: group");
-        die();
-      }
-    }
-    else {
-      die("validation error");
-    }
   }
 
   function get_group_object_by_id($id, $table_name = 'groups') {
