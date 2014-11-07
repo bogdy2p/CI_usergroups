@@ -7,13 +7,13 @@
   <?php } ?>
  
   <?php
-  echo form_open('register/create_user');
-  echo form_input('first_name', set_value('first_name','First Name'));
-  echo form_input('last_name', set_value('last_name','Last Name'));
-  echo form_input('email', set_value('email','Email Adress'));
-  echo form_input('username', set_value('username','Username'));
-  echo form_input('password','', 'placeholder="Passowrd" class="password"');
-  echo form_input('password_confirm','', 'placeholder="Confirm Passowrd" class="password"');
+  echo form_open('user/validate_form_create_user');
+  echo form_input('first_name','','placeholder = "First Name"');
+  echo form_input('last_name','','placeholder = "Last Name"');
+  echo form_input('email','','placeholder = "example@provider.com"');
+  echo form_input('username','','placeholder = "Username"');
+  echo form_input('password','', 'placeholder="Password" class="password"');
+  echo form_input('password_confirm','', 'placeholder="Confirm Password" class="password"');
   echo '<br />';
   echo form_submit('submit','Create Account');
 
