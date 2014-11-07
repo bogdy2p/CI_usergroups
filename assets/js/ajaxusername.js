@@ -33,10 +33,10 @@ function check_group_availlability_on_edit() {
 
 function check_detail_type_availlability_on_edit() {
   $(document).ready(function() {
-    $('#new_name').blur(function() {
+    $('#detail_name').blur(function() {
       $.ajax({
         url: 'ajax',
-        data: {'edit_detail': $('#new_name').val()},
+        data: {'edit_detail': $('#detail_name').val()},
         success: success,
         dataType: 'json'
       })
@@ -45,7 +45,7 @@ function check_detail_type_availlability_on_edit() {
             $('#edit_detail_type_error').html("");
             $('#submit').show();
           } else {
-            $('#edit_detail_type_error').html("<h5><spanred>Can't rename to : <spangre><b>" + $('#new_name').val() + "</b></spangre> <br /> Another DETAIL named like that already exists!</spanred></h5>");
+            $('#edit_detail_type_error').html("<h5><spanred>Can't rename to : <spangre><b>" + $('#detail_name').val() + "</b></spangre> <br /> Another DETAIL named like that already exists!</spanred></h5>");
             $('#submit').hide();
 
           }
