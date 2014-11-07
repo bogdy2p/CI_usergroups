@@ -20,7 +20,15 @@ if (isset($_POST['name']) && !empty($_POST['name'])) {
   <div class="col-xs-12 col-md-4"> <!--SECOND COLUMN -->
     <div class="row">
       <?php
-      $detail->print_edit_existing_detail_form($_GET['name']);
+      echo form_open('detail_type/validate_form_update_detail', 'id="add_new_detail_form"');
+      echo form_label('Update Detail : ' . $this->input->get('name'));
+      echo '<br />';
+      echo form_hidden('old_detail_name', $this->input->get('name'));
+      echo form_input('detail_name', '', 'id="detail_name" placeholder ="New Detail Name"');
+      echo '<br /><br />';
+      echo form_submit('submit', 'Update detail', 'id="submit" class="btn btn-success"');
+      echo '<br /><br />';
+      echo form_close();
       ?>
     </div>
   </div> <!--END SECOND COLUMN -->

@@ -31,15 +31,19 @@ class Detail_type_model extends CI_Model {
     return $return;
   }
 
-  function update($old_value, $new_value) {
+  function update(){
+    $old_value = $this->input->post('old_detail_name');
     $data = array(
-      'name' => $new_value,
+      'name' => $this->input->post('detail_name'),
     );
     $this->db->where('name', $old_value);
-    $this->db->update('user_detail_types', $data);
+    $this->db->update('user_detail_types',$data);
   }
-
-  function update_detail_types_names_in_user_groups($old_name, $new_name) {
+  
+  function update_detail_types_names_in_user_groups() {
+    $old_name = $this->input->post('old_detail_name');
+    $new_name = $this->input->post('detail_name');
+    
     $data = array(
       'detail_type' => $new_name,
     );
@@ -53,25 +57,6 @@ class Detail_type_model extends CI_Model {
     $this->db->where('detail_type', $name);
     $this->db->delete('user_details');
     // HERE WE SHOULD DELETE ALSO FROM USER_DETAILS , THE ROWS THAT HAVE AS A DETAIL TYPE , the same NAME      
-  }
-
-  function validate_and_edit() {
-    if (isset($_POST['name'])) {
-      if (!empty($_POST['name'])) {
-        $data = array('name' => $_POST['name'],);
-        print_r($data);
-        Self::update($_GET['name'], $_POST['name']);
-        Self::update_detail_types_names_in_user_groups($_GET['name'], $_POST['name']);
-        header('Location: ' . base_url() . 'detail_type');
-        die('errz');
-      }
-      else {
-        echo '$_post is set but EMPTY';
-        header('Location: ' . base_url() . 'detail_type');
-      }
-    }
-    else {/* echo "NO POST"; */
-    }
   }
 
   function get_all_user_detail_types() {
