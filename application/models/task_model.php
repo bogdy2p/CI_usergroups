@@ -43,27 +43,6 @@ class Task_model extends CI_Model {
     $this->db->delete('todo_list');
   }
 
-//  function validate_insert_new_task() {
-//    if (isset($_POST) && !empty($_POST)) {
-//
-//      if (isset($_POST['colour'])) {
-//        print_r($_POST);
-//        if (!empty($_POST['todo_text'])) {
-//          $name_with_heading = '<' . $_POST['size'] . '>' . $_POST['todo_text'] . '</' . $_POST['size'] . '>';
-//          $colour = $_POST['colour'];
-//          Self::create($name_with_heading, $colour);
-//        }
-//        header("Location: #");
-//        die();
-//      }
-//      elseif (isset($_POST['day'])) {/* print_r($_POST); */
-//      }
-//    }
-//    else {
-//      
-//    }
-//  }
-
   function generate_todo_add_new_form() {
     echo '		<form class="form" id="add_new_todo_form" action="index" method="post">
               <label>Add New Task</label><br />

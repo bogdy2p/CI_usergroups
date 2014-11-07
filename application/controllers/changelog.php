@@ -34,5 +34,18 @@ class Changelog extends CI_Controller {
     $this->load->helper('file');
     $this->load->view('changelog/download');
   }
-
+  
+  public function validate_form_create_changelog(){
+      $this->form_validation->set_rules('changelog_text', 'Changelog Text', 'required|min_length[2]');
+       if ($this->form_validation->run() == FALSE) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('changelog/create');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      $this->changelog_model->create();
+      redirect('changelog');
+    }
+  }
+  
 }

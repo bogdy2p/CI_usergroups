@@ -13,9 +13,15 @@ class Changelog_model extends CI_Model {
     parent::__construct();
   }
 
-  function create($name, $colour) {
-
-    $data = array('name' => $name, 'colour' => $colour,);
+  function create() {
+    $size = $this->input->post('size');
+    $text = $this->input->post('changelog_text');
+    $colour = $this->input->post('colour');
+    $name = '<' . $size . '>' . $text . '</' . $size . '>';
+    $data = array(
+      'name' => $name,
+      'colour' => $colour,
+    );
     $this->db->set('date', 'NOW()', FALSE);
     $this->db->insert('app_changelog', $data);
   }
