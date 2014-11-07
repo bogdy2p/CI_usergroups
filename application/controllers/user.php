@@ -28,10 +28,22 @@ class User extends CI_Controller {
     $this->load->view('templates/sitewide_footer');
   }
 
-  public function validate_login_credentials() {
-    $this->load->view('templates/sitewide_header');
-    //$this->load->view('login/login_form');
-    $this->load->view('templates/sitewide_footer');
+  public function validate_credentials_and_login() {
+    
+    $this->load->model('user_model');
+    $query = $this->user_model->validate_login();
+      
+      if ($query){ // DACA S-A VALIDAT CU SUCCESS
+        $data = array(
+          'username'=>$this->input->post('username'),
+          'is_logged_in'=> true,
+          );
+        $this->session->set_userdata($data);
+        redirect('user/index');
+
+      }else{ // Credentials INCORRECT
+        $this->login_failed();
+      }
   }
 
   public function register() {
@@ -41,7 +53,6 @@ class User extends CI_Controller {
   }
 
   public function validate_form_create_user() {
-
 
     $this->load->helper('form');
     //FORM VALIDATION
@@ -118,4 +129,10 @@ class User extends CI_Controller {
     $this->load->view('user/ajax');
   }
 
+  public function login_failed(){
+    $data['account_created'] = 'Your login failed. Please Try Again';
+    $this->load->view('templates/sitewide_header');
+    $this->load->view('login/login_form',$data);
+    $this->load->view('templates/sitewide_footer');
+  }
 }

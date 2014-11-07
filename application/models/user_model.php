@@ -78,6 +78,18 @@ class User_model extends CI_Model {
     $this->db->delete('user_details');
   }
 
+  function validate_login(){
+    $this->db->where('name',$this->input->post('username'));
+    $this->db->where('password',md5($this->input->post('password')));
+    $query = $this->db->get('users');
+    
+    if($query->num_rows == 1){
+      return true;
+    }
+  }
+  
+  
+  
   function validate_and_create() {
     $user = array();
     if (isset($_POST['name'])) {

@@ -7,7 +7,7 @@
   <?php } ?>
  
   <?php
-  echo form_open('user/validate_login_credentials');
+  echo form_open('user/validate_credentials_and_login');
   echo form_input('username', 'Username');
   echo form_password('password', '', 'placeholder="Password" class="Password"');
   echo '<br />';echo '<br />';
