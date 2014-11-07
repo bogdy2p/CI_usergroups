@@ -24,9 +24,9 @@ class User_model extends CI_Model {
     
     $username = $this->input->post('username');
     $data = array(
+      'username'=>$this->input->post('username'),
       'first_name'=>$this->input->post('first_name'),
-      'last_name'=>$this->input->post('last_name'),
-      'name'=>$this->input->post('username'),
+      'last_name'=>$this->input->post('last_name'),     
       'email'=>$this->input->post('email'),
       'password'=>md5($this->input->post('password')),
       );
@@ -45,8 +45,23 @@ class User_model extends CI_Model {
     }
     return $return;
   }
-
-  function update($data_array) {
+    //UPDATE USER. ALL ROWS EXCEPT EMAIL.
+  function update(){
+    $id = $this->input->post('id');
+    $data = arraY(
+      'username'=>$this->input->post('username'),
+      'password'=>$this->input->post('password'),
+      'first_name'=>$this->input->post('first_name'),
+      'last_name'=>$this->input->post('last_name'),
+      );
+    
+    $this->db->where('id',$id);
+    $this->db->update('users',$data);
+  }
+  
+  
+  
+  function update_old($data_array) {
     $exists = Self::user_already_exists_by_id($data_array['id']);
     if (($exists) && (!empty($data_array))) {
       $data = array('name' => $data_array['name'], 'password' => $data_array['password'],);
@@ -79,7 +94,7 @@ class User_model extends CI_Model {
   }
 
   function validate_login(){
-    $this->db->where('name',$this->input->post('username'));
+    $this->db->where('username',$this->input->post('username'));
     $this->db->where('password',md5($this->input->post('password')));
     $query = $this->db->get('users');
     
@@ -92,11 +107,11 @@ class User_model extends CI_Model {
   
   function validate_and_create() {
     $user = array();
-    if (isset($_POST['name'])) {
-      $user['name'] = $_POST['name'];
+    if (isset($_POST['username'])) {
+      $user['username'] = $_POST['username'];
     }
     else {
-      $user['name'] = NULL;
+      $user['username'] = NULL;
     }
     if (isset($_POST['password'])) {
       $user['password'] = $_POST['password'];
@@ -111,15 +126,15 @@ class User_model extends CI_Model {
       $user['pass_conf'] = NULL;
     }
 
-    if (isset($user['name']) && isset($user['password'])) {
+    if (isset($user['username']) && isset($user['password'])) {
       if ($_POST['password'] === $_POST['pass_conf']) {
-        $exists = Self::user_already_exists($user['name']);
+        $exists = Self::user_already_exists($user['username']);
         if ($exists == false) {
           $detail_types = Self::get_all_user_detail_types();
           $enc_pass = md5($_POST['password']);
           $user['password'] = $enc_pass;
           $asd = Self::create($user);
-          $user_id = Self::grab_userid_by_username($user['name']);
+          $user_id = Self::grab_userid_by_username($user['username']);
 
           foreach ($detail_types as $detail_type) {
             if (isset($_POST[$detail_type])) {
@@ -142,65 +157,65 @@ class User_model extends CI_Model {
     }
   }
 
-  function validate_and_save_user($get) {
-
-    if (isset($get) && ($get != NULL)) {
-      //$user = new User(); //Call User Class
-      $user = Self::get_user_object($get['id']); //Fetch the user object from the database by the ID !!
-      $old_pass = $user->password; // Grab the old password from the object
-      $old_name = $user->name;
-      $_POST['id'] = $get['id'];
-      if (isset($_POST['old_password'])) {
-        if (!empty($_POST['old_password'])) {
-          if (md5($_POST['old_password']) == $old_pass) {
-            if ($_POST['password'] == $_POST['pass_conf']) {
-
-              //Create the update details array using the post data.																		
-              $user_update_details = Self::create_user_update_details_array($_POST);
-              //Update the user details correspondingly
-              $update = Self::update($user_update_details);
-              //Delete all the mapping for this user			
-              $delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
-              //Get an array of checked groups in the form
-              $group_ids_checked_array = Self::get_group_ids_checked_in_form();
-              //Apply new mapping using the new values from the form !!!! (Foreach in one line)
-              $test = Self::verify_update_details_for_user($get['id']);
-              foreach ($group_ids_checked_array as $group_id_checked) {
-                Self::assign_user_to_group($get['id'], $group_id_checked);
-              }
-              header('Location: ' . base_url() . 'user');
-              die();
-            }
-            else {
-              print_r("The passwords you entered do not match.");
-              die();
-            }
-          }
-          else {
-            echo "That is not the current password for this user !";
-            die();
-          }
-        }
-        else {//If field OLD PASSWORD IS EMPTY
-          $delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
-          $group_ids_checked_array = Self::get_group_ids_checked_in_form();
-          $test = Self::verify_update_details_for_user($get['id']);
-          foreach ($group_ids_checked_array as $group_id_checked) {
-            Self::assign_user_to_group($get['id'], $group_id_checked);
-          }
-          header('Location: ' . base_url() . 'user');
-          die();
-        }
-      }
-      else {
-        echo "";
-        //If $_POST does not exists (@ the first page load , before submit)
-      }
-    }
-    else {
-      die("There is no get. Or it's NULL // 404 Redirect Here !");
-    }
-  }
+//  function validate_and_save_user($get) {
+//
+//    if (isset($get) && ($get != NULL)) {
+//      //$user = new User(); //Call User Class
+//      $user = Self::get_user_object($get['id']); //Fetch the user object from the database by the ID !!
+//      $old_pass = $user->password; // Grab the old password from the object
+//      $old_name = $user->name;
+//      $_POST['id'] = $get['id'];
+//      if (isset($_POST['old_password'])) {
+//        if (!empty($_POST['old_password'])) {
+//          if (md5($_POST['old_password']) == $old_pass) {
+//            if ($_POST['password'] == $_POST['pass_conf']) {
+//
+//              //Create the update details array using the post data.																		
+//              $user_update_details = Self::create_user_update_details_array($_POST);
+//              //Update the user details correspondingly
+//              $update = Self::update($user_update_details);
+//              //Delete all the mapping for this user			
+//              $delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
+//              //Get an array of checked groups in the form
+//              $group_ids_checked_array = Self::get_group_ids_checked_in_form();
+//              //Apply new mapping using the new values from the form !!!! (Foreach in one line)
+//              $test = Self::verify_update_details_for_user($get['id']);
+//              foreach ($group_ids_checked_array as $group_id_checked) {
+//                Self::assign_user_to_group($get['id'], $group_id_checked);
+//              }
+//              header('Location: ' . base_url() . 'user');
+//              die();
+//            }
+//            else {
+//              print_r("The passwords you entered do not match.");
+//              die();
+//            }
+//          }
+//          else {
+//            echo "That is not the current password for this user !";
+//            die();
+//          }
+//        }
+//        else {//If field OLD PASSWORD IS EMPTY
+//          $delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
+//          $group_ids_checked_array = Self::get_group_ids_checked_in_form();
+//          $test = Self::verify_update_details_for_user($get['id']);
+//          foreach ($group_ids_checked_array as $group_id_checked) {
+//            Self::assign_user_to_group($get['id'], $group_id_checked);
+//          }
+//          header('Location: ' . base_url() . 'user');
+//          die();
+//        }
+//      }
+//      else {
+//        echo "";
+//        //If $_POST does not exists (@ the first page load , before submit)
+//      }
+//    }
+//    else {
+//      die("There is no get. Or it's NULL // 404 Redirect Here !");
+//    }
+//  }
 
 //end Verification
 
@@ -279,7 +294,7 @@ class User_model extends CI_Model {
   function user_already_exists($name) {
     $this->db->select('*');
     $this->db->from('users');
-    $this->db->where('name', $name);
+    $this->db->where('username', $name);
     $result = $this->db->count_all_results();
     if ($result == 0) {
       return false;
@@ -332,19 +347,19 @@ class User_model extends CI_Model {
   }
 
   function get_user_name_by_user_id($id) {
-    $this->db->select('name');
+    $this->db->select('username');
     $this->db->from('users');
     $this->db->where('id', $id);
     $result = $this->db->get();
     foreach ($result->result_array() as $row) {
-      return $row['name'];
+      return $row['username'];
     }
   }
 
   function grab_userid_by_username($name) {
     $this->db->select('id');
     $this->db->from('users');
-    $this->db->where('name', $name);
+    $this->db->where('username', $name);
     $result = $this->db->get();
     foreach ($result->result_array() as $row) {
       return $row['id'];
@@ -448,7 +463,7 @@ class User_model extends CI_Model {
 		<p id="hideable_on_click">To change the password OR the username , <br /> you must know the old password !</p>
 		<label>Name</label><br />
 		<div id="edit_username_error"></div>
-		<input name="name" id="edit_username" type="text"  placeholder="User Name" value="' . $user->name . '"> <br />
+		<input name="name" id="edit_username" type="text"  placeholder="User Name" value="' . $user->username . '"> <br />
 		<label>Enter current Password</label><br />
 		<input name="old_password"  type="password"  placeholder="Old Password" value=""><br />
 		<label>New Password</label><br />
@@ -585,7 +600,7 @@ class User_model extends CI_Model {
   function create_user_update_details_array($post_array) {
     $data = array(
       'id' => $post_array['id'],
-      'name' => $post_array['name'],
+      'username' => $post_array['username'],
       'password' => md5($post_array['password']),
     );
     return $data;
@@ -691,7 +706,7 @@ class User_model extends CI_Model {
       $groups_array = $user->get_number_of_groups_for_a_user($userid);
       echo '<tr>';
       echo '<td class="success">' . $individual_user['id'] . '</td>';
-      echo '<td>' . $individual_user['name'] . '</td>';
+      echo '<td>' . $individual_user['username'] . '</td>';
       echo '<td>' . implode(" / ", $groups_array) . '</td>';
       echo '<td><a href="' . base_url() . 'user/view_user?id=' . $individual_user["id"] . '"><span class="glyphicon glyphicon-eye-open"></span></td>';
       echo '<td><a href="' . base_url() . 'user/edit?id=' . $individual_user["id"] . '&type=' . $type . '"><span class="glyphicon glyphicon-edit spangre"></span></td>';
@@ -732,7 +747,7 @@ class User_model extends CI_Model {
   function print_user_information_table_content($user, $groups_array) {
     echo '<tr>';
     echo '<td>' . $user->id . '</td>';
-    echo '<td  id="wordwrap">' . $user->name . '</td>';
+    echo '<td  id="wordwrap">' . $user->username . '</td>';
     echo '<td  id="wordwrap">' . $user->password . '</td>';
     echo' <td  id="wordwrap">' . implode(" / ", $groups_array) . '</td>';
     echo '</tr>';

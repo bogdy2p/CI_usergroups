@@ -54,7 +54,7 @@ class User extends CI_Controller {
 
   public function validate_form_create_user() {
 
-    $this->load->helper('form');
+    //$this->load->helper('form');
     //FORM VALIDATION
     $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[3]|max_length[18]');
     $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[3]|max_length[30]');
@@ -86,6 +86,13 @@ class User extends CI_Controller {
       }
     }
   }
+  
+  function validate_form_update_user(){
+    echo 'asd';
+    print_r($_POST);
+    
+  }
+  
 
   public function add() {
     $this->load->view('templates/sitewide_header');
