@@ -32,4 +32,9 @@ class Task extends CI_Controller {
     $this->load->view('task/delete');
   }
 
+  public function create_task(){
+    $this->load->view('templates/sitewide_header');
+    $this->load->view('task/create');
+    $this->load->view('templates/sitewide_footer');
+  }
 }
