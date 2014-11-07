@@ -16,11 +16,11 @@
     'spanyel'=>'Yellow (normal task)',
     'spangre'=>'Green (easy task)',);   
    
-  echo form_open('task');
+  echo form_open('task/create_task');
   echo form_label('Add New Task');echo '<br />';
   echo form_input('todo_text','','placeholder ="Task Text"');echo '<br /><br />';
-  echo form_dropdown('colour', $color_options, $selected=('spanyel'));echo '<br /><br />';
-  echo form_dropdown('size', $size_options , $selected=('h5'));
+  echo form_dropdown('colour', $color_options, $selected = array('spanyel'));echo '<br /><br />';
+  echo form_dropdown('size', $size_options , $selected = array('h5'));
   
   echo '<br /><br />';
   echo form_submit('submit', 'Add New Task_FH','class="btn btn-success"');

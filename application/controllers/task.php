@@ -33,8 +33,7 @@ class Task extends CI_Controller {
   }
 
   public function create_task(){
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('task/create');
-    $this->load->view('templates/sitewide_footer');
+    $this->task_model->create();
+    redirect('task');
   }
 }
