@@ -13,7 +13,7 @@
   echo '<br />';echo '<br />';
   echo form_submit('submit', 'Login');
   echo '<br /><br />';
-  echo anchor('login/signup', 'Create Account');
+  echo anchor('user/register', 'Create Account');
   echo form_close();
   ?>
 

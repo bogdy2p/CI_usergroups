@@ -30,7 +30,7 @@ class User extends CI_Controller {
   
   public function register(){
     $this->load->view('templates/sitewide_header');
-    $this->load->view('login/register');
+    $this->load->view('login/register_form');
     $this->load->view('templates/sitewide_footer');
   }
 

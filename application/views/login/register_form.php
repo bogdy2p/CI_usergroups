@@ -3,18 +3,22 @@
     <h3> <?php echo $account_created; ?> </h3>
   <?php }
   else { ?>
-    <h1> Register New ACC </h1>
+    <h1> Create Account </h1>
   <?php } ?>
  
   <?php
-  echo form_open('register/validate_credentials');
-  echo form_input('username', 'Username');
-  echo form_password('password', '', 'placeholder="Password" class="Password"');
-  echo '<br />';echo '<br />';
-  echo form_submit('submit', 'Login');
-  echo '<br /><br />';
-  echo anchor('login/signup', 'Create Account');
-  echo form_close();
-  ?>
+  echo form_open('register/create_user');
+  echo form_input('first_name', set_value('first_name','First Name'));
+  echo form_input('last_name', set_value('last_name','Last Name'));
+  echo form_input('email', set_value('email','Email Adress'));
+  echo form_input('username', set_value('username','Username'));
+  echo form_input('password','', 'placeholder="Passowrd" class="password"');
+  echo form_input('password_confirm','', 'placeholder="Confirm Passowrd" class="password"');
+  echo '<br />';
+  echo form_submit('submit','Create Account');
 
-</div><!-- end login form -->
+
+  //echo form_close();
+  ?>
+  <?php echo validation_errors('<p class="error">'); ?>
+</div><!-- end register form -->

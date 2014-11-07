@@ -19,7 +19,7 @@
   box-shadow: 0px 0px 5px 2px #ABEBC6;
 }
 
-#login_form{
+#login_form,#register_form{
   width: 300px;
   background-color: #9acfea; 
   border: 1px solid white;
