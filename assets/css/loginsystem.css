@@ -18,3 +18,14 @@
   border-radius: 10px;
   box-shadow: 0px 0px 5px 2px #ABEBC6;
 }
+
+#login_form{
+  width: 300px;
+  background-color: #9acfea; 
+  border: 1px solid white;
+  margin: 100px auto 0;
+  padding: 1em;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
