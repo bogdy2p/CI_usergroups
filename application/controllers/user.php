@@ -42,14 +42,15 @@ class User extends CI_Controller {
   
   public function validate_form_create_user(){
     
+    
+    $this->load->helper('form');
     //FORM VALIDATION
-    $this->load->library('form_validation');
-    $this->form_validation->set_rules('first_name','First Name','trim|required');
-    $this->form_validation->set_rules('last_name','Last Name','trim|required');
-    $this->form_validation->set_rules('email','Email Adress','trim|required|valid_email|casadas');
-    $this->form_validation->set_rules('username','Username','trim|required|min_length[4]');
+    $this->form_validation->set_rules('first_name','First Name','trim|required|min_length[3]|max_length[18]');
+    $this->form_validation->set_rules('last_name','Last Name','trim|required|min_length[3]|max_length[30]');
+    $this->form_validation->set_rules('email','Email Adress','trim|required|valid_email||min_length[6]|is_unique[users.email]');
+    $this->form_validation->set_rules('username','Username','trim|required|min_length[4]|is_unique[users.name]');
     $this->form_validation->set_rules('password','Password','trim|required|min_length[4]');
-    $this->form_validation->set_rules('password_confirm','Password Confirmation','trim|required|min_length[4]');
+    $this->form_validation->set_rules('password_confirm','Password Confirmation','trim|required|matches[password]');
     
     
     if ($this->form_validation->run() == FALSE) // validation failed
