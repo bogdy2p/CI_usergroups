@@ -21,49 +21,59 @@ class User extends CI_Controller {
     $this->load->view('user/table');
     $this->load->view('templates/sitewide_footer');
   }
-  
-  public function login(){    
+
+  public function login() {
     $this->load->view('templates/sitewide_header');
     $this->load->view('login/login_form');
     $this->load->view('templates/sitewide_footer');
   }
-  
-  public function validate_login_credentials(){
+
+  public function validate_login_credentials() {
     $this->load->view('templates/sitewide_header');
     //$this->load->view('login/login_form');
     $this->load->view('templates/sitewide_footer');
   }
-  
-  public function register(){
-     $this->load->view('templates/sitewide_header');
-     $this->load->view('login/register_form');
-     $this->load->view('templates/sitewide_footer');
-  }  
-  
-  public function validate_form_create_user(){
-    
-    
+
+  public function register() {
+    $this->load->view('templates/sitewide_header');
+    $this->load->view('login/register_form');
+    $this->load->view('templates/sitewide_footer');
+  }
+
+  public function validate_form_create_user() {
+
+
     $this->load->helper('form');
     //FORM VALIDATION
-    $this->form_validation->set_rules('first_name','First Name','trim|required|min_length[3]|max_length[18]');
-    $this->form_validation->set_rules('last_name','Last Name','trim|required|min_length[3]|max_length[30]');
-    $this->form_validation->set_rules('email','Email Adress','trim|required|valid_email||min_length[6]|is_unique[users.email]');
-    $this->form_validation->set_rules('username','Username','trim|required|min_length[4]|is_unique[users.name]');
-    $this->form_validation->set_rules('password','Password','trim|required|min_length[4]');
-    $this->form_validation->set_rules('password_confirm','Password Confirmation','trim|required|matches[password]');
-    
-    
-    if ($this->form_validation->run() == FALSE) // validation failed
-      {
-          $this->load->view('templates/sitewide_header');
-          $this->load->view('login/register_form');
-          $this->load->view('templates/sitewide_footer');
-      } 
-      else
-      {
+    $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[3]|max_length[18]');
+    $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[3]|max_length[30]');
+    $this->form_validation->set_rules('email', 'Email Adress', 'trim|required|valid_email||min_length[6]|is_unique[users.email]');
+    $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]|is_unique[users.name]');
+    $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]');
+    $this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|required|matches[password]');
+
+
+    if ($this->form_validation->run() == FALSE) { // validation failed
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('login/register_form');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      $this->load->model('user_model');
+
+      if ($query = $this->user_model->create_user()) {
+
+        $data['account_created'] = 'Your account has been created.';
         $this->load->view('templates/sitewide_header');
+        $this->load->view('login/login_form', $data);
         $this->load->view('templates/sitewide_footer');
       }
+      else {
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('login/register_form');
+        $this->load->view('templates/sitewide_footer');
+      }
+    }
   }
 
   public function add() {

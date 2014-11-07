@@ -19,6 +19,21 @@ class User_model extends CI_Model {
     );
     $this->db->insert($table, $data);
   }
+  
+  function create_user(){
+    
+    $username = $this->input->post('username');
+    $data = array(
+      'first_name'=>$this->input->post('first_name'),
+      'last_name'=>$this->input->post('last_name'),
+      'name'=>$this->input->post('username'),
+      'email'=>$this->input->post('email'),
+      'password'=>md5($this->input->post('password')),
+      );
+    $this->db->set('creation_date', 'NOW()', FALSE);
+    $insert = $this->db->inserT('users',$data);
+    return $insert;
+  }
 
   function read() {
     $this->db->select('*');
