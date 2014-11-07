@@ -55,7 +55,7 @@ class Task_model extends CI_Model {
       if (isset($_POST['colour'])) {
         print_r($_POST);
         if (!empty($_POST['todo_text'])) {
-          $name_with_heading = '<' . $_POST['heading_type'] . '>' . $_POST['todo_text'] . '</' . $_POST['heading_type'] . '>';
+          $name_with_heading = '<' . $_POST['size'] . '>' . $_POST['todo_text'] . '</' . $_POST['size'] . '>';
           $colour = $_POST['colour'];
           Self::create($name_with_heading, $colour);
         }
