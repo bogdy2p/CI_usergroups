@@ -24,6 +24,7 @@
     echo form_label('Password:');
     echo '<br />';
     echo form_input('password', '', 'placeholder="Password" class="password"');
+    echo '<br />';
     echo form_label('Confirm Password:');
     echo '<br />';
     echo form_input('password_confirm', '', 'placeholder="Confirm Password" class="password"');
