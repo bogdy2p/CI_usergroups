@@ -12,17 +12,15 @@ class User_model extends CI_Model {
     parent::__construct();
   }
 
-  function create($array, $table = 'users') {
-    $data = array(
-      'name' => $array['name'],
-      'password' => $array['password'],
-    );
-    $this->db->insert($table, $data);
-  }
+//  function create($array, $table = 'users') {
+//    $data = array(
+//      'name' => $array['name'],
+//      'password' => $array['password'],
+//    );
+//    $this->db->insert($table, $data);
+//  }
   
-  function create_user(){
-    
-    $username = $this->input->post('username');
+  function create(){
     $data = array(
       'username'=>$this->input->post('username'),
       'first_name'=>$this->input->post('first_name'),
@@ -30,11 +28,26 @@ class User_model extends CI_Model {
       'email'=>$this->input->post('email'),
       'password'=>md5($this->input->post('password')),
       );
+    //Add the data from the dynamic fields
+    
     $this->db->set('creation_date', 'NOW()', FALSE);
     $insert = $this->db->inserT('users',$data);
     return $insert;
   }
 
+  function create_user_data_field($fieldname){
+    $username = $this->input->post('username');
+    $the_user_id = $this->user_model->grab_userid_by_username($username);
+    $data = array(
+      'user_id'=>$the_user_id,
+      'detail_type'=>$fieldname,
+      'detail'=>$this->input->post($fieldname),
+      );
+    $insert = $this->db->insert('user_details',$data);
+    return $insert;
+  }
+  
+  
   function read() {
     $this->db->select('*');
     $this->db->from('users');

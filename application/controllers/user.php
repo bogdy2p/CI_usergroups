@@ -74,12 +74,14 @@ class User extends CI_Controller {
     else {
       $this->load->model('user_model');
 
-      if ($query = $this->user_model->create_user()) {
-
-        $data['account_created'] = 'Your account has been created.';
-        $this->load->view('templates/sitewide_header');
-        $this->load->view('login/login_form', $data);
-        $this->load->view('templates/sitewide_footer');
+      if ($query = $this->user_model->create()) {
+          foreach ($detail_types as $fieldname){
+            $this->user_model->create_user_data_field($fieldname);
+          }
+            $data['account_created'] = 'Your account has been created.';
+            $this->load->view('templates/sitewide_header');
+            $this->load->view('login/login_form', $data);
+            $this->load->view('templates/sitewide_footer');
       }
       else {
         $this->load->view('templates/sitewide_header');
