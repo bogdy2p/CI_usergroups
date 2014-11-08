@@ -1,7 +1,3 @@
-<?php
-$user = new User_model();
-//$user->validate_and_create();
-?>
 <div class="row">
   <div class="col-xs-12 col-md-4"></div>
   <div class="col-xs-12 col-md-3">
@@ -9,7 +5,6 @@ $user = new User_model();
     <?php echo validation_errors('<p class="error">'); ?>
     <?php
     echo form_open('user/validate_form_create_user');
-
     echo form_label('Email:');
     echo '<br />';
     echo form_input('email', set_value('email'), 'placeholder = "example@provider.com"');
@@ -33,10 +28,16 @@ $user = new User_model();
     echo '<br />';
     echo form_input('password_confirm', '', 'placeholder="Confirm Password" class="password"');
     echo '<br />';
+
+    $detail_types = $this->user_model->get_all_user_detail_types();
     
-    $user->add_dynamic_user_detail_form_inputs();
-    /// FOREACH HERE TO DISPLAY THE FIELDS THAT MUST BE ADDED BY MAPPING !
-    /// HERE YOU MUST DISPLAY THE FIELDS WITH NO VALUE. ON THE EDIT , THERE WILL BE VALUE ONTO THE FIELDS.
+    foreach ($detail_types as $detail_type) {
+      echo form_label(ucfirst($detail_type));
+      echo '<br />';
+      echo form_input($detail_type, set_value($detail_type), 'placeholder="' . ucfirst($detail_type) . '"');
+      echo '<br />';
+    }
+
     echo '<br />';
 
     echo form_submit('submit', 'Create Account', 'class="btn btn-success"');

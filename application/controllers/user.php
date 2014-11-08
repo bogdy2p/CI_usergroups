@@ -54,7 +54,6 @@ class User extends CI_Controller {
 
   public function validate_form_create_user() {
 
-    //$this->load->helper('form');
     //FORM VALIDATION
     $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[3]|max_length[18]');
     $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[3]|max_length[30]');
@@ -62,7 +61,10 @@ class User extends CI_Controller {
     $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]|is_unique[users.username]');
     $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]');
     $this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|required|matches[password]');
-
+    $detail_types = $this->user_model->get_all_user_detail_types();
+    foreach ($detail_types as $detail_type){
+      $this->form_validation->set_rules($detail_type, ucfirst($detail_type), 'trim|min_length[2]');
+    }
 
     if ($this->form_validation->run() == FALSE) { // validation failed
       $this->load->view('templates/sitewide_header');
