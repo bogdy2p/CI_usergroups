@@ -52,31 +52,17 @@ class User_model extends CI_Model {
     //UPDATE USER. ALL ROWS EXCEPT EMAIL.
   function update(){
     $id = $this->input->post('id');
+    print_r($id);
     $data = arraY(
-      'username'=>$this->input->post('username'),
-      'password'=>$this->input->post('password'),
       'first_name'=>$this->input->post('first_name'),
       'last_name'=>$this->input->post('last_name'),
       );
     
     $this->db->where('id',$id);
-    $this->db->update('users',$data);
+    $update = $this->db->update('users',$data);
+    return $update;
   }
   
-  
-  
-//  function update_old($data_array) {
-//    $exists = Self::user_already_exists_by_id($data_array['id']);
-//    if (($exists) && (!empty($data_array))) {
-//      $data = array('name' => $data_array['name'], 'password' => $data_array['password'],);
-//      $this->db->where('id', $data_array['id']);
-//      $this->db->update('users', $data);
-//    }
-//    else {
-//      echo("User with id : {$id} doesnt exist  !");
-//    }
-//  }
-
   function update_user_details_for_user($user_id, $detail_type, $new_detail) {
     $data = array(
       'detail' => $new_detail,
@@ -418,43 +404,6 @@ class User_model extends CI_Model {
     
   }
   
-  
-//  function print_userdata_inputs() {
-//    if (isset($_GET['id'])) {
-//      $user = Self::get_user_object($_GET['id']); //Fetch the user object from the database
-//      echo '
-//		<p id="hideable_on_click">To change the password OR the username , <br /> you must know the old password !</p>
-//		<label>Name</label><br />
-//		<div id="edit_username_error"></div>
-//		<input name="name" id="edit_username" type="text"  placeholder="User Name" value="' . $user->username . '"> <br />
-//		<label>Enter current Password</label><br />
-//		<input name="old_password"  type="password"  placeholder="Old Password" value=""><br />
-//		<label>New Password</label><br />
-//		<input name="password"  type="password"  placeholder="New Password" value=""><br />
-//		<label>Confirm New Password</label><br />
-//		<input name="pass_conf" type="password"  placeholder="Confirm New Password" value=""><br />
-//    ';
-//    }
-//  }
-
-//  function print_group_checkboxes_inputs() {
-//    $array_of_current_groups = Self::get_number_of_groups_for_a_user($_GET['id']);
-//    $groups_array = Self::get_all_groups_in_db();
-//    $group_names = $groups_array['name'];
-//    $group_ids = $groups_array['id'];
-//    echo '<h3>This user is a member of: </h3><br />';
-//    foreach ($group_names as $group_name) {
-//      if (in_array($group_name, $array_of_current_groups)) {
-//        echo '<input name="' . $group_name . '" type="checkbox" value="' . $group_name . '" checked>&nbsp;';
-//        echo '<label>' . $group_name . '\'s</label><br />';
-//      }
-//      else {
-//        echo '<input name="' . $group_name . '" type="checkbox" value="' . $group_name . '">&nbsp;';
-//        echo '<label>' . $group_name . '</label><br />';
-//      }
-//    }
-//  }
-
   function get_all_groups_in_db() {
     $this->db->select('*');
     $this->db->from('groups');

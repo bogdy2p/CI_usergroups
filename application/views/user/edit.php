@@ -9,9 +9,13 @@
   <div class="col-xs-12 col-md-3">
     <?php
     $user = $this->user_model->get_user_object($_GET['id']);
-    echo form_label('Email:');
-    echo '<br />';
-    echo form_input('email', set_value('email', $user->email), 'placeholder = "example@provider.com"');
+    
+    echo form_hidden('id',$_GET['id']);
+    
+    echo form_label('User : '.$user->username.' Is associated with<br /> Email : '.$user->email);
+//    echo form_label('Email:');
+//    echo '<br />';
+//    echo form_input('email', set_value('email', $user->email), 'placeholder = "example@provider.com"');
     echo '<br />';
     echo form_label('First Name:');
     echo '<br />';
@@ -20,10 +24,10 @@
     echo form_label('Last Name:');
     echo '<br />';
     echo form_input('last_name', set_value('last_name', $user->last_name), 'placeholder = "Last Name"');
-    echo '<br />';
-    echo form_label('Username:');
-    echo '<br />';
-    echo form_input('username', set_value('username', $user->username), 'placeholder = "Username"');
+//    echo '<br />';
+//    echo form_label('Username:');
+//    echo '<br />';
+//    echo form_input('username', set_value('username', $user->username), 'placeholder = "Username"');
     echo '<br /><br /><br />';
     echo form_label('Old Password:');
     echo '<br />';
