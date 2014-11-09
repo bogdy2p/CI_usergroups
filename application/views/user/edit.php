@@ -47,7 +47,28 @@
     <br />
   </div>
   <div class="col-xs-12 col-md-3">coloana3</div>
-  <div class="col-xs-12 col-md-3">coloana4</div>
+  <div class="col-xs-12 col-md-3">
+
+    <?php
+    $array_of_groups_already_member = $this->user_model->get_number_of_groups_for_a_user($_GET['id']);
+    $array_all_groups_availlable = $this->user_model->get_all_groups_in_db()['name'];
+    echo '<h3>Change group\'s membersip: </h3><br />';
+    foreach ($array_all_groups_availlable as $group) {
+      if (in_array($group, $array_of_groups_already_member)) {
+        echo form_checkbox($group, $group, TRUE);
+        echo form_label($group . '\'s');
+        echo '<br />';
+      }
+      else {
+        echo form_checkbox($group, $group, FALSE);
+        echo form_label($group . '\'s');
+        echo '<br />';
+      }
+    }
+    ?>
+
+
+  </div>
 
 </div>
 <div class="row">
@@ -62,31 +83,7 @@
 
 </div>
 
-<?php
-$user = new User_model;
-$user->print_userdata_inputs();
-?>		
-
-<?php $user->print_group_checkboxes_inputs(); ?>
-
-<?php
-$user->get_userdata_details_availlable($_GET['id']);
-?>
-<!--    
- function print_group_checkboxes_inputs() {
-    $array_of_current_groups = Self::get_number_of_groups_for_a_user($_GET['id']);
-    $groups_array = Self::get_all_groups_in_db();
-    $group_names = $groups_array['name'];
-    $group_ids = $groups_array['id'];
-    echo '<h3>This user is a member of: </h3><br />';
-    foreach ($group_names as $group_name) {
-      if (in_array($group_name, $array_of_current_groups)) {
-        echo '<input name="' . $group_name . '" type="checkbox" value="' . $group_name . '" checked>&nbsp;';
-        echo '<label>' . $group_name . '\'s</label><br />';
-      }
-      else {
-        echo '<input name="' . $group_name . '" type="checkbox" value="' . $group_name . '">&nbsp;';
-        echo '<label>' . $group_name . '</label><br />';
-      }
-    }
-  }-->
+//<?php
+//$user = new User_model;
+//$user->print_userdata_inputs();
+//?>

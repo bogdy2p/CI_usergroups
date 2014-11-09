@@ -11,14 +11,6 @@ class User_model extends CI_Model {
   function __construct() {
     parent::__construct();
   }
-
-//  function create($array, $table = 'users') {
-//    $data = array(
-//      'name' => $array['name'],
-//      'password' => $array['password'],
-//    );
-//    $this->db->insert($table, $data);
-//  }
   
   function create(){
     $data = array(
@@ -28,14 +20,13 @@ class User_model extends CI_Model {
       'email'=>$this->input->post('email'),
       'password'=>md5($this->input->post('password')),
       );
-    //Add the data from the dynamic fields
     
     $this->db->set('creation_date', 'NOW()', FALSE);
     $insert = $this->db->inserT('users',$data);
     return $insert;
   }
 
-  function create_user_data_field($fieldname){
+  function create_user_dynamic_fields($fieldname){
     $username = $this->input->post('username');
     $the_user_id = $this->user_model->grab_userid_by_username($username);
     $data = array(
@@ -74,17 +65,17 @@ class User_model extends CI_Model {
   
   
   
-  function update_old($data_array) {
-    $exists = Self::user_already_exists_by_id($data_array['id']);
-    if (($exists) && (!empty($data_array))) {
-      $data = array('name' => $data_array['name'], 'password' => $data_array['password'],);
-      $this->db->where('id', $data_array['id']);
-      $this->db->update('users', $data);
-    }
-    else {
-      echo("User with id : {$id} doesnt exist  !");
-    }
-  }
+//  function update_old($data_array) {
+//    $exists = Self::user_already_exists_by_id($data_array['id']);
+//    if (($exists) && (!empty($data_array))) {
+//      $data = array('name' => $data_array['name'], 'password' => $data_array['password'],);
+//      $this->db->where('id', $data_array['id']);
+//      $this->db->update('users', $data);
+//    }
+//    else {
+//      echo("User with id : {$id} doesnt exist  !");
+//    }
+//  }
 
   function update_user_details_for_user($user_id, $detail_type, $new_detail) {
     $data = array(
@@ -116,60 +107,6 @@ class User_model extends CI_Model {
     }
   }
   
-  
-  
-  function validate_and_create() {
-    $user = array();
-    if (isset($_POST['username'])) {
-      $user['username'] = $_POST['username'];
-    }
-    else {
-      $user['username'] = NULL;
-    }
-    if (isset($_POST['password'])) {
-      $user['password'] = $_POST['password'];
-    }
-    else {
-      $user['password'] = NULL;
-    }
-    if (isset($_POST['pass_conf'])) {
-      $user['pass_conf'] = $_POST['pass_conf'];
-    }
-    else {
-      $user['pass_conf'] = NULL;
-    }
-
-    if (isset($user['username']) && isset($user['password'])) {
-      if ($_POST['password'] === $_POST['pass_conf']) {
-        $exists = Self::user_already_exists($user['username']);
-        if ($exists == false) {
-          $detail_types = Self::get_all_user_detail_types();
-          $enc_pass = md5($_POST['password']);
-          $user['password'] = $enc_pass;
-          $asd = Self::create($user);
-          $user_id = Self::grab_userid_by_username($user['username']);
-
-          foreach ($detail_types as $detail_type) {
-            if (isset($_POST[$detail_type])) {
-              Self::add_user_detail_with_type($user_id, $detail_type, $_POST[$detail_type]);
-            }
-          }
-        }
-        else {
-          die("this username already exists !");
-        }
-        header('Location: ' . base_url() . 'user');
-        die();
-      }
-      else {
-        echo "ERROR : Passwords do not match ! Please re-enter !";
-      }
-    }
-    else {
-      
-    }
-  }
-
 //  function validate_and_save_user($get) {
 //
 //    if (isset($get) && ($get != NULL)) {

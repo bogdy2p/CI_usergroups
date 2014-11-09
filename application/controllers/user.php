@@ -76,7 +76,7 @@ class User extends CI_Controller {
 
       if ($query = $this->user_model->create()) {
           foreach ($detail_types as $fieldname){
-            $this->user_model->create_user_data_field($fieldname);
+            $this->user_model->create_user_dynamic_fields($fieldname);
           }
             $data['account_created'] = 'Your account has been created.';
             $this->load->view('templates/sitewide_header');
