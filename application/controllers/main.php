@@ -21,10 +21,6 @@ class Main extends CI_Controller {
     $this->load->model('group_model');
     $this->load->model('detail_type_model');
     $this->load->model('changelog_model');
-
-
-
-
     $this->load->view('templates/sitewide_header');
     $this->load->view('main/index');
     $this->load->view('templates/sitewide_footer');

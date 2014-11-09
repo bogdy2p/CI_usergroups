@@ -52,7 +52,6 @@ class User_model extends CI_Model {
     //UPDATE USER. ALL ROWS EXCEPT EMAIL.
   function update(){
     $id = $this->input->post('id');
-    print_r($id);
     $data = arraY(
       'first_name'=>$this->input->post('first_name'),
       'last_name'=>$this->input->post('last_name'),
@@ -432,6 +431,20 @@ class User_model extends CI_Model {
     
   }
   
+  function get_all_groupnames_from_db(){
+    $this->db->select('*');
+    $this->db->from('groups');
+    $result = $this->db->get();
+    $group_names = array();
+    foreach ($result->result_array() as $row) {
+      $group_names[] = $row['name'];
+    }
+    return $group_names;
+  }
+  
+  
+  
+  
   function get_all_groups_in_db() {
     $this->db->select('*');
     $this->db->from('groups');
@@ -551,6 +564,11 @@ class User_model extends CI_Model {
     $this->db->delete('usergroups');
   }
 
+  function assign_user_to_group_by_name(){
+    
+  }
+  
+  
   function assign_user_to_group($user_id, $group_id) {
     $mapping_exists = Self::verify_existing_mapping($user_id, $group_id);
     if (!$mapping_exists) {
