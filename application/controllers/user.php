@@ -96,8 +96,8 @@ class User extends CI_Controller {
     //print_r($_POST);
     echo '</pre>';
     //FORM VALIDATION
-    $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[3]|max_length[18]');
-    $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[3]|max_length[30]');
+    $this->form_validation->set_rules('first_name', 'First Name', 'trim|min_length[3]|max_length[18]');
+    $this->form_validation->set_rules('last_name', 'Last Name', 'trim|min_length[3]|max_length[30]');
     $this->form_validation->set_rules('password', 'Password', 'trim|min_length[4]');
     $this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|matches[password]');
     $detail_types = $this->user_model->get_all_user_detail_types();
@@ -119,21 +119,21 @@ class User extends CI_Controller {
       
       $this->load->model('user_model');
       if ($query = $this->user_model->update()) {
-       // print_r($query);
-      //  print_r("UPDATED");
-        $data['account_created'] = 'Your account has been UPDATED.';
+        $detail_types = $this->user_model->get_all_user_detail_types();
+        foreach ($detail_types as $fieldname){
+            $this->user_model->update_user_dynamic_field($fieldname);
+        }
+        
+          
         $this->load->view('templates/sitewide_header');
-        $this->load->view('user/table', $data);
+        $this->load->view('user/table');
         $this->load->view('templates/sitewide_footer');
-      }
+          }
       else {
-          print_r("FAILED");
-//        $this->load->view('templates/sitewide_header');
-//        $this->load->view('user/create');
-//        $this->load->view('templates/sitewide_footer');
-      }
+        print_r("FAILED UPDATE FIRSTNAME & LASTNAME ");
+        print_r("please contact site administrator about this.");
+      }     
     }
-    
   }
   
 

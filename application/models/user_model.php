@@ -63,6 +63,34 @@ class User_model extends CI_Model {
     return $update;
   }
   
+  function update_user_dynamic_field($fieldname){
+    $user_id = $this->input->post('id');
+    // Check if the user_details table already has an input for this user-id;detail_type pair
+    //If already exists , run this :
+     $exists = $this->user_model->check_detail_pair_exists($user_id,$fieldname);
+     if ($exists){
+            $data = array(
+              'detail'=>$this->input->post($fieldname),
+              );
+
+            $this->db->where('detail_type',$fieldname);
+            $this->db->where('user_id',$user_id);
+            $update = $this->db->update('user_details',$data);
+            return $update;
+     }else{     
+     /// If it doesnt exist , run CREATE SCRIPT
+       if (!empty($this->input->post($fieldname))){
+            $data = array(
+              'user_id'=> $user_id,
+              'detail_type' => $fieldname,
+              'detail' => $this->input->post($fieldname),
+            );
+            $insert = $this->db->insert('user_details',$data);
+            return $insert;
+       }
+     } 
+  }
+  
   function update_user_details_for_user($user_id, $detail_type, $new_detail) {
     $data = array(
       'detail' => $new_detail,
