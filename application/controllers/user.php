@@ -24,7 +24,7 @@ class User extends CI_Controller {
 
   public function login() {
     $this->load->view('templates/sitewide_header');
-    $this->load->view('login/login_form');
+    $this->load->view('user/login_form');
     $this->load->view('templates/sitewide_footer');
   }
 
@@ -48,10 +48,17 @@ class User extends CI_Controller {
 
   public function register() {
     $this->load->view('templates/sitewide_header');
-    $this->load->view('login/register_form');
+    $this->load->view('user/register_form');
     $this->load->view('templates/sitewide_footer');
   }
 
+  public function forgot_password(){
+    $this->load->view('templates/sitewide_header');
+    $this->load->view('user/forgot_password');
+    $this->load->view('templates/sitewide_footer');
+  }
+  
+  
   public function validate_form_create_user() {
     //FORM VALIDATION
     $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[3]|max_length[18]');

@@ -29,17 +29,17 @@
 //    echo '<br />';
 //    echo form_input('username', set_value('username', $user->username), 'placeholder = "Username"');
     echo '<br /><br /><br />';
-    echo form_label('Old Password:');
-    echo '<br />';
-    echo form_input('old_password', '', 'placeholder="Password" class="password"');
-    echo '<br />';
-    echo form_label('Password:');
-    echo '<br />';
-    echo form_input('password', '', 'placeholder="Password" class="password"');
-    echo '<br />';
-    echo form_label('Confirm Password:');
-    echo '<br />';
-    echo form_input('password_confirm', '', 'placeholder="Confirm Password" class="password"');
+//    echo form_label('Old Password:');
+//    echo '<br />';
+//    echo form_input('old_password', '', 'placeholder="Password" class="password"');
+//    echo '<br />';
+//    echo form_label('Password:');
+//    echo '<br />';
+//    echo form_input('password', '', 'placeholder="Password" class="password"');
+//    echo '<br />';
+//    echo form_label('Confirm Password:');
+//    echo '<br />';
+//    echo form_input('password_confirm', '', 'placeholder="Confirm Password" class="password"');
     ?>
     <br />
   </div>

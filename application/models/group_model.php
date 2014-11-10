@@ -55,20 +55,29 @@ class Group_model extends CI_Model {
     $this->db->delete('groups');
   }
 
-  function get_group_object_by_id($id, $table_name = 'groups') {
+  function get_group_object_by_id($id) {
     $this->db->select('*');
     $this->db->from('groups');
     $this->db->where('id', $id);
     $return = array();
     $result = $this->db->get();
     foreach ($result->result() as $row) {
-      $this->id = $row->id;
-      $this->name = $row->name;
-      $this->special_key = $row->special_key;
+      return $row;
     }
-    return $this;
   }
 
+  function grab_all_group_ids() {
+    $this->db->select('id');
+    $this->db->from('groups');
+    $result = $this->db->get();
+    $return = array();
+    foreach ($result->result_array() as $row) {
+      $return[] = $row['id'];
+    }
+    return $return;
+  }
+  
+  
   function get_group_name_by_group_id($id) {
     $this->db->select('name');
     $this->db->from('groups');
@@ -98,7 +107,7 @@ class Group_model extends CI_Model {
     $result = $this->db->count_all_results();
     return $result;
   }
-
+///////////////////////////////////////???THIS IS CHANGED WITH CI HELPER
   function generate_groups_table_html() {
     Self::generate_groups_table_header();
     Self::generate_groups_table_content();
