@@ -108,65 +108,19 @@ class Group_model extends CI_Model {
     return $result;
   }
 
-  function generate_groups_users_table_html() {
-    Self::generate_groups_users_table_header();
-    Self::generate_groups_users_table_content();
-    Self::generate_groups_users_table_footer();
-  }
 
-  function generate_groups_users_table_header() {
-    echo '<div class="col-xs-12 col-md-3">
-        <h3>Users by group</h3>';
-    echo '<table class="table table-bordered" name="groups_users">';
-  }
-
-  function generate_groups_users_table_content() {
-
-    $groups = Self::read();
-    foreach ($groups as $group) {
-      $userids_array = $user->get_userids_for_a_group($group['id']);
-      echo '<th class="info">' . $group["name"] . '\'s</th>';
-      echo '<th class="info">User ID</th>';
-      foreach ($userids_array as $key => $value) {
-        echo "<tr>";
-        print_r("<td>" . $user->get_name_by_id($value) . "</td>");
-        print_r("<td>" . $value . "</td>");
-        echo "</tr>";
-      }
-    }
-  }
-
-  function generate_groups_users_table_footer() {
-    echo "</table>
-        </div>";
-  }
-
-  function generate_groups_table_list_html() {
-    Self::generate_groups_table_list_header();
-    Self::generate_groups_table_list_content();
-    Self::generate_groups_table_list_footer();
-  }
-
-  function generate_groups_table_list_header() {
-    echo '<div class="col-xs-12 col-md-12">';
+  function generate_groups_list_html() {
     echo "<h4>Already Existent Groups :</h4>";
-    echo '<table class="table table-bordered">';
-  }
-
-  function generate_groups_table_list_content() {
     $groups = Self::read();
     $count = 0;
+    echo '<ul class="list-inline">';
     foreach ($groups as $group) {
       $count += 1;
       $type = 'groups';
-      echo '<tr>';
-      echo '' . $count . '-' . $group['name'] . ' | &nbsp;';
-      echo '</tr>';
+      echo '<li>';
+      echo '' . $count . '-' . $group['name'] . '';
+      echo '</li>';
     }
+    echo '</ul>';
   }
-
-  function generate_groups_table_list_footer() {
-    echo '</table></div>';
-  }
-
 }

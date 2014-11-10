@@ -1,10 +1,7 @@
 <div class ="container">
 
   <div class="row">
-    <?php
-    $group = new Group_model();
-    $group->generate_groups_table_list_html();
-    ?>
+    <?php $this->group_model->generate_groups_list_html(); ?>
   </div>
   <div class="row">
     <div class="col-xs-4 col-md-4"></div>

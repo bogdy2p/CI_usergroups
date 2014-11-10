@@ -116,32 +116,4 @@ class Detail_type_model extends CI_Model {
     $result = $this->db->count_all_results();
     return $result;
   }
-
-//  function print_edit_detail_table_html($name) {
-//    Self::print_edit_detail_table_header($name);
-//    Self::print_edit_detail_table_content($name);
-//    Self::print_edit_detail_table_footer();
-//  }
-//
-//  function print_edit_detail_table_header($name) {
-//    //echo '<div class="col-xs-12 col-md-12">';
-//    echo '<h4>Current data for "' . $name . '" detail </h4>';
-//    echo '<table class="table table-bordered" name="view_detail">';
-//  }
-//
-//  function print_edit_detail_table_content($name) {
-//    $details = Self::get_detail_type_by_name($name);
-//    foreach ($details as $key => $value) {
-//      echo '<tr>';
-//      echo '<th class="info"> Detaail ' . $key . '</th>';
-//      echo '<td>' . $value . '</td>';
-//      echo '</tr>';
-//    }
-//  }
-//
-//  function print_edit_detail_table_footer() {
-//    echo "</table>";
-//    //echo "</div>";
-//  }
-
 }

@@ -21,7 +21,7 @@
     $table_data = array(
       array('User ID',
         'Username',
-        'Groups Of Belonging',
+        //'Groups Of Belonging',
         'View',
         'Edit',
         'Delete',
@@ -34,7 +34,7 @@
       $table_data[] = array(
         $temp->id,
         $temp->username,
-        implode(" / ", $groups_array),
+       // implode(" / ", $groups_array),
         '<a href="' . base_url() . 'user/view_user?id=' . $user_id . '"><span class="glyphicon glyphicon-eye-open"></span>',
         '<a href="' . base_url() . 'user/edit?id=' . $user_id . '"><span class="glyphicon glyphicon-edit spangre"></span>',
         '<a><span class="glyphicon glyphicon-remove spanred pointer" onclick=confirm_delete_user(' . $user_id . ');></span>',
