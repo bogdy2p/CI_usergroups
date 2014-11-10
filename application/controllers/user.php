@@ -163,13 +163,17 @@ class User extends CI_Controller {
   }
 
   public function edit() {
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
     // HERE WE SHOULD CHECK IF POST OR GET ['ID'] IS SET , OR ELSE , DIE TO 404.
     
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('user/edit');
     $this->load->view('templates/sitewide_footer');
+  }else{
+    show_404();
   }
+}
 
   public function delete() {
     if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
