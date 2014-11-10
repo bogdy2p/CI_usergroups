@@ -17,6 +17,7 @@ class User extends CI_Controller {
 
   public function index() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('user/index');
     $this->load->view('user/table');
     $this->load->view('templates/sitewide_footer');
@@ -24,6 +25,7 @@ class User extends CI_Controller {
 
   public function login() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('user/login_form');
     $this->load->view('templates/sitewide_footer');
   }
@@ -48,12 +50,14 @@ class User extends CI_Controller {
 
   public function register() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('user/register_form');
     $this->load->view('templates/sitewide_footer');
   }
 
   public function forgot_password(){
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('user/forgot_password');
     $this->load->view('templates/sitewide_footer');
   }
@@ -74,6 +78,7 @@ class User extends CI_Controller {
 
     if ($this->form_validation->run() == FALSE) { // validation failed
       $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
       $this->load->view('user/create');
       $this->load->view('templates/sitewide_footer');
     }
@@ -89,11 +94,13 @@ class User extends CI_Controller {
         }
         $data['account_created'] = 'Your account has been created.';
         $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
         $this->load->view('login/login_form', $data);
         $this->load->view('templates/sitewide_footer');
       }
       else {
         $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
         $this->load->view('user/create');
         $this->load->view('templates/sitewide_footer');
       }
@@ -113,6 +120,7 @@ class User extends CI_Controller {
 
     if ($this->form_validation->run() == FALSE) { // validation failed
       $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
       $this->load->view('user/edit');
       $this->load->view('templates/sitewide_footer');
     }
@@ -131,6 +139,7 @@ class User extends CI_Controller {
           $this->user_model->update_user_dynamic_field($fieldname);
         }
         $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
         $this->load->view('user/table');
         $this->load->view('templates/sitewide_footer');
       }
@@ -143,12 +152,14 @@ class User extends CI_Controller {
 
   public function add() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('user/create');
     $this->load->view('templates/sitewide_footer');
   }
 
   public function edit() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('user/edit');
     $this->load->view('templates/sitewide_footer');
   }
@@ -159,18 +170,21 @@ class User extends CI_Controller {
 
   public function view_user() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('user/view_user');
     $this->load->view('templates/sitewide_footer');
   }
 
   public function detail_types() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('user/detail_types');
     $this->load->view('templates/sitewide_footer');
   }
 
   public function edit_detail_type() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('user/edit_detail_type');
     $this->load->view('templates/sitewide_footer');
   }
@@ -186,6 +200,7 @@ class User extends CI_Controller {
   public function login_failed() {
     $data['account_created'] = 'Your login failed. Please Try Again';
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('login/login_form', $data);
     $this->load->view('templates/sitewide_footer');
   }

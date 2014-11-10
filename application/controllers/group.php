@@ -17,6 +17,7 @@ class Group extends CI_Controller {
 
   public function index() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('group/index');
     $this->load->view('group/table');
     $this->load->view('templates/sitewide_footer');
@@ -24,6 +25,7 @@ class Group extends CI_Controller {
 
   public function add() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('group/create');
     $this->load->view('templates/sitewide_footer');
   }
@@ -33,6 +35,7 @@ class Group extends CI_Controller {
     if ($this->form_validation->run() == FALSE) {
       
         $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
         $this->load->view('group/create');
         $this->load->view('templates/sitewide_footer');
     }
@@ -47,6 +50,7 @@ class Group extends CI_Controller {
     if ($this->form_validation->run() == FALSE) {
       
         $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
         $this->load->view('group/edit');
         $this->load->view('templates/sitewide_footer');
     }
@@ -58,6 +62,7 @@ class Group extends CI_Controller {
 
   public function edit() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('group/edit');
     $this->load->view('templates/sitewide_footer');
   }

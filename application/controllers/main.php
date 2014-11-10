@@ -22,6 +22,7 @@ class Main extends CI_Controller {
     $this->load->model('detail_type_model');
     $this->load->model('changelog_model');
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('main/index');
     $this->load->view('templates/sitewide_footer');
   }
@@ -30,6 +31,7 @@ class Main extends CI_Controller {
     $this->load->model('user_model');
     $this->load->model('group_model');
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
 
     $this->load->view('user/table');
 
@@ -41,6 +43,7 @@ class Main extends CI_Controller {
 
   public function view_list() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('main/list');
     $this->load->view('templates/sitewide_footer');
   }

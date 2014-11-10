@@ -17,18 +17,21 @@ class Detail_type extends CI_Controller {
 
   public function index() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('detailtype/index');
     $this->load->view('templates/sitewide_footer');
   }
 
   public function add() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('detailtype/create');
     $this->load->view('templates/sitewide_footer');
   }
 
   public function edit() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('detailtype/edit');
     $this->load->view('templates/sitewide_footer');
   }
@@ -45,6 +48,7 @@ class Detail_type extends CI_Controller {
     $this->form_validation->set_rules('detail_name', 'Detail Name', 'required|min_length[2]|is_unique[user_detail_types.name]');
     if ($this->form_validation->run() == FALSE) {
       $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
       $this->load->view('detail_type/create');
       $this->load->view('templates/sitewide_footer');
     }
@@ -59,6 +63,7 @@ class Detail_type extends CI_Controller {
    $this->form_validation->set_rules('detail_name', 'Detail Name', 'required|min_length[2]|is_unique[user_detail_types.name]');
     if ($this->form_validation->run() == FALSE) {
       $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
       $this->load->view('detail_type/edit');
       $this->load->view('templates/sitewide_footer');
     }

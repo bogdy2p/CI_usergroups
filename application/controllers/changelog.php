@@ -17,6 +17,7 @@ class Changelog extends CI_Controller {
 
   public function index() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('changelog/index');
     $this->load->view('changelog/latest_changes');
     $this->load->view('changelog/table');
@@ -25,6 +26,7 @@ class Changelog extends CI_Controller {
 
   public function add() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('changelog/create');
     $this->load->view('templates/sitewide_footer');
   }
@@ -39,6 +41,7 @@ class Changelog extends CI_Controller {
     $this->form_validation->set_rules('changelog_text', 'Changelog Text', 'required|min_length[2]');
     if ($this->form_validation->run() == FALSE) {
       $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
       $this->load->view('changelog/create');
       $this->load->view('templates/sitewide_footer');
     }

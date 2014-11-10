@@ -17,6 +17,7 @@ class Task extends CI_Controller {
 
   public function index() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('task/index');
     $this->load->view('task/table');
     $this->load->view('templates/sitewide_footer');
@@ -24,6 +25,7 @@ class Task extends CI_Controller {
 
   public function add() {
     $this->load->view('templates/sitewide_header');
+    $this->load->view('templates/site_menu');
     $this->load->view('task/create');
     $this->load->view('templates/sitewide_footer');
   }
@@ -37,6 +39,7 @@ class Task extends CI_Controller {
     $this->form_validation->set_rules('todo_text', 'Task Text', 'required|min_length[2]');
     if ($this->form_validation->run() == FALSE) {
       $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
       $this->load->view('task/create');
       $this->load->view('templates/sitewide_footer');
     }
