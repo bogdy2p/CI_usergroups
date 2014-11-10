@@ -30,11 +30,11 @@ class User extends CI_Controller {
     $this->load->view('templates/sitewide_footer');
   }
 
-  public function logout(){
+  public function logout() {
     $this->session->sess_destroy();
-    redirect('site','refresh');
+    redirect('site', 'refresh');
   }
-  
+
   public function validate_credentials_and_login() {
 
     $this->load->model('user_model');
@@ -61,14 +61,13 @@ class User extends CI_Controller {
     $this->load->view('templates/sitewide_footer');
   }
 
-  public function forgot_password(){
+  public function forgot_password() {
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('user/forgot_password');
     $this->load->view('templates/sitewide_footer');
   }
-  
-  
+
   public function validate_form_create_user() {
     //FORM VALIDATION
     $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[3]|max_length[18]');
@@ -92,7 +91,7 @@ class User extends CI_Controller {
       $this->load->model('user_model');
 
       if ($query = $this->user_model->create()) {
-        
+
         $username = $_POST['username'];
         $this->user_model->map_user_at_creation($username);
         foreach ($detail_types as $fieldname) {

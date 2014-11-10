@@ -32,10 +32,11 @@ class Detail_type extends CI_Controller {
     $this->load->view('templates/site_menu');
     $this->load->view('detailtype/create');
     $this->load->view('templates/sitewide_footer');
-  }else{
-    $this->load->view('templates/unauthorized');
+  }
+      else {
+      $this->load->view('templates/unauthorized');
     }
-}
+  }
 
   public function edit() {
     if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){

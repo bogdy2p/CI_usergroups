@@ -27,8 +27,8 @@ class Group extends CI_Controller {
   }
 }
   public function add() {
-    if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
-    $this->load->view('templates/sitewide_header');
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
+      $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('group/create');
     $this->load->view('templates/sitewide_footer');

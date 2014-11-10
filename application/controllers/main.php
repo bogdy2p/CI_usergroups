@@ -16,6 +16,7 @@ class Main extends CI_Controller {
   }
 
   public function index() {
+    if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
     $this->load->model('task_model');
     $this->load->model('user_model');
     $this->load->model('group_model');
@@ -26,8 +27,13 @@ class Main extends CI_Controller {
     $this->load->view('main/index');
     $this->load->view('templates/sitewide_footer');
   }
+      else {
+      $this->load->view('templates/unauthorized');
+    }
+  }
 
   public function tables() {  // VIEW-UL cu tabele
+    if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
     $this->load->model('user_model');
     $this->load->model('group_model');
     $this->load->view('templates/sitewide_header');
@@ -39,17 +45,28 @@ class Main extends CI_Controller {
     $this->load->view('main/mappingtable');
     $this->load->view('main/usersbygroups');
     $this->load->view('templates/sitewide_footer');
-  }
+  }else{
+    $this->load->view('templates/unauthorized');
+    }
+}
 
   public function view_list() {
+    if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('main/list');
     $this->load->view('templates/sitewide_footer');
-  }
+  }else{
+    $this->load->view('templates/unauthorized');
+    }
+}
 
   public function delete() {
+    if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
     $this->load->view('main/delete');
-  }
-
+  }else{
+    $this->load->view('templates/unauthorized');
+    }
 }
+
+} // END OF CLASS

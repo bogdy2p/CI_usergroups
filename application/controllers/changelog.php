@@ -24,7 +24,7 @@ class Changelog extends CI_Controller {
         $this->load->view('changelog/table');
         $this->load->view('templates/sitewide_footer');
     }else{
-        $this->load->view('templates/unauthorized');
+  $this->load->view('templates/unauthorized');
     }
     
   }

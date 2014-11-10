@@ -9,9 +9,8 @@ class Site extends CI_Controller {
     parent::__construct();
     $this->load->model('site_model');
   }
-   
-  
-  public function index(){
+
+  public function index() {
     $this->load->model('task_model');
     $this->load->model('user_model');
     $this->load->model('group_model');
@@ -22,7 +21,5 @@ class Site extends CI_Controller {
     $this->load->view('site/index');
     $this->load->view('templates/sitewide_footer');
   }
-  
-  
-  
+
 }
