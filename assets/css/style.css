@@ -102,9 +102,13 @@ spangre{
 
 .wordwrap1 {
 	word-wrap: break-word;
-        max-width: 55px;
+        max-width: 80px;
 }
 
 .pointer {
 	cursor: pointer;
+}
+
+.clearer {
+  clear: both;
 }
