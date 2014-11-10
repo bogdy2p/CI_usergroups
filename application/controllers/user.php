@@ -38,6 +38,7 @@ class User extends CI_Controller {
     if ($query) { // DACA S-A VALIDAT CU SUCCESS
       $data = array(
         'username' => $this->input->post('username'),
+        'is_administrator' => $this->user_model->check_user_is_administrator($this->input->post('username')),
         'is_logged_in' => true,
       );
       $this->session->set_userdata($data);

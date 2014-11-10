@@ -23,4 +23,6 @@ echo '<script src="' . base_url() . 'assets/js/ajaxusername.js"></script>';
 
 
 echo '<div class ="container">';
-
+echo '<pre>';
+print_r($this->session->userdata);
+echo '</pre>';
