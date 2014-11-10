@@ -97,9 +97,13 @@ spangre{
 
 .wordrwapped {
 	word-wrap: break-word;
-	max-width: 80px;
+	max-width: 100%;
 }
 
+.wordwrap1 {
+	word-wrap: break-word;
+        max-width: 55px;
+}
 
 .pointer {
 	cursor: pointer;
