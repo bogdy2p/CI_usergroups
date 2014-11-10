@@ -520,6 +520,14 @@ class User_model extends CI_Model {
     
   }
   
+  function map_user_at_creation($user_name){
+    $this->load->model('group_model');
+    $data = array(
+      'user_id' => Self::grab_userid_by_username($user_name),
+      'group_id' => $this->group_model->get_group_id_of_group_user(),
+    );
+   $this->db->insert('usergroups', $data);
+  }
   
   function assign_user_to_group($user_id, $group_id) {
     $mapping_exists = Self::verify_existing_mapping($user_id, $group_id);

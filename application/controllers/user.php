@@ -81,6 +81,9 @@ class User extends CI_Controller {
       $this->load->model('user_model');
 
       if ($query = $this->user_model->create()) {
+        
+        $username = $_POST['username'];
+        $this->user_model->map_user_at_creation($username);
         foreach ($detail_types as $fieldname) {
           $this->user_model->create_user_dynamic_fields($fieldname);
         }
