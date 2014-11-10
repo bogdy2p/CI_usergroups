@@ -77,8 +77,6 @@ class Group_model extends CI_Model {
     return $return;
   }
   
- 
-  
   function get_group_id_of_group_user(){
     $this->db->select('*');
     $this->db->from('groups');
