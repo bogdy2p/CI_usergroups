@@ -86,22 +86,22 @@ function check_username_availlability_on_edit() {
 
 function check_username_availlability() {
   $(document).ready(function() {
-    $('#name').blur(function() {
+    $('#username').blur(function() {
       $.ajax({
         url: 'ajax',
-        data: {'name': $('#name').val()},
+        data: {'username': $('#username').val()},
         success: success,
         dataType: 'json'
       })
         .done(function(data) {
           // alert( "Returning " + data );
           if (data == 0) {
-            $('#name_error').html("");//Aici setezi textul in div-ul de langa name
+            $('#username_error').html("");//Aici setezi textul in div-ul de langa name
             $('#submit').show();
           }
           else {
             $('#submit').hide();
-            $('#name_error').html("<h4><spanred><spangre>" + $('#name').val() + "</spangre> is already taken ! Please choose another one</spanred></h4>");
+            $('#username_error').html("<h5><spanred><spangre>" + $('#username').val() + "</spangre> already taken ! Get another one</spanred></h5>");
           }
         });
     });

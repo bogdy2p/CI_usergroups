@@ -17,6 +17,7 @@
     echo '<br />';
     echo form_input('last_name', set_value('last_name'), 'placeholder = "Last Name"');
     echo '<br />';
+    echo '<p id="username_error"></p>';
     echo form_label('Username:');
     echo '<br />';
     echo form_input('username', set_value('username'), 'id="username" placeholder = "Username"');
@@ -41,7 +42,7 @@
 
     echo '<br />';
 
-    echo form_submit('submit', 'Create Account', 'class="btn btn-success"');
+    echo form_submit('submit', 'Create Account', 'id="submit" class="btn btn-success"');
     ?>
 
 
