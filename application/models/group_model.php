@@ -107,42 +107,6 @@ class Group_model extends CI_Model {
     $result = $this->db->count_all_results();
     return $result;
   }
-///////////////////////////////////////???THIS IS CHANGED WITH CI HELPER
-  function generate_groups_table_html() {
-    Self::generate_groups_table_header();
-    Self::generate_groups_table_content();
-    Self::generate_groups_table_footer();
-  }
-
-  function generate_groups_table_header() {
-    //echo '<div class="col-xs-12 col-md-4">';
-    echo "<h3>ALL GROUPS :</h3>";
-    echo '<table class="table table-bordered">';
-    echo '<th class="success">Id</th>';
-    echo '<th class="success">Group Name</th>';
-    echo '<th class="success">Special Key</th>';
-    echo '<th class="success">Edit</th>';
-    echo '<th class="success">Delete</th>';
-  }
-
-  function generate_groups_table_content() {
-    $groups = Self::read();
-    foreach ($groups as $individual_group) {
-      $type = 'groups';
-      echo '<tr>';
-      echo '<td class="warning">' . $individual_group['id'] . '</td>';
-      echo '<td>' . $individual_group['name'] . '</td>';
-      echo '<td>' . $individual_group['special_key'] . '</td>';
-      echo '<td><a href="' . base_url() . 'group/edit?id=' . $individual_group["id"] . '"><span class="glyphicon glyphicon-edit spangre"></td>';
-      echo '<td><a><span onclick="confirm_delete_group(' . $individual_group["id"] . ')" class="glyphicon glyphicon-remove spanred pointer"></span></a></td>';
-      echo '</tr>';
-    }
-  }
-
-  function generate_groups_table_footer() {
-    echo '</table>';
-    //echo '</div>';
-  }
 
   function generate_groups_users_table_html() {
     Self::generate_groups_users_table_header();

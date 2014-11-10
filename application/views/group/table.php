@@ -1,10 +1,4 @@
-<?php
-
-$group = new Group_model();
-$group->generate_groups_table_html();
-?>
-
- <h4>Groups Table</h4>
+<h4>Groups Table</h4>
 <?php 
  $table_template = array(
       'table_open' => '<table class="table table-bordered col-xs-12 col-md-3">',

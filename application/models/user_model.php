@@ -629,53 +629,6 @@ class User_model extends CI_Model {
       return $row['user_id'];
     }
   }
-  /*   * ******************************************************************************* */
-  /*   * ******************************************************************************* */
-  /*   * ******************************************************************************* */
-  /*   * ******************************************************************************* */
-  /*   * ******************************************************************************* */
-
-  function generate_users_table_html() {
-    Self::generate_users_table_header();
-    Self::generate_users_table_content();
-    Self::generate_users_table_footer();
-  }
-
-  function generate_users_table_header() {
-    //echo '<div class="col-xs-12 col-md-8">';
-    echo "<h3>ALL USERS : </h3>";
-    echo '<table class="table table-bordered" id="users_table">';
-    echo '<th class="danger">ID</th>';
-    echo '<th class="danger">User Name</th>';
-    echo '<th class="danger">Groups of Belonging</th>';
-    echo '<th class="danger">View</th>';
-    echo '<th class="danger">Edit</th>';
-    echo '<th class="danger">JAVASCRIPT Del</th>';
-  }
-
-  function generate_users_table_content() {
-    $user = new User_model();
-    $users = $user->read();
-
-    foreach ($users as $individual_user) {
-      $type = 'users';
-      $userid = $individual_user['id'];
-      $groups_array = $user->get_number_of_groups_for_a_user($userid);
-      echo '<tr>';
-      echo '<td class="success">' . $individual_user['id'] . '</td>';
-      echo '<td>' . $individual_user['username'] . '</td>';
-      echo '<td>' . implode(" / ", $groups_array) . '</td>';
-      echo '<td><a href="' . base_url() . 'user/view_user?id=' . $individual_user["id"] . '"><span class="glyphicon glyphicon-eye-open"></span></td>';
-      echo '<td><a href="' . base_url() . 'user/edit?id=' . $individual_user["id"] . '&type=' . $type . '"><span class="glyphicon glyphicon-edit spangre"></span></td>';
-      echo '<td><a><span class="glyphicon glyphicon-remove spanred pointer" onclick=confirm_delete_user(' . $individual_user["id"] . ');></span></td>';
-      echo '</tr>';
-    }
-  }
-
-  function generate_users_table_footer() {
-    echo '</table>';
-    //echo '</div>';
-  }
 
   /*   * ******************************************************************************* */
   /*   * *******************PRINT THE USER BASIC INFORMATION TABLE********************** */
