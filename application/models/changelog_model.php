@@ -174,24 +174,4 @@ class Changelog_model extends CI_Model {
     }
   }
 
-//  function validation_and_insertion_of_a_new_changelog() {
-//    if (isset($_POST) && !empty($_POST)) {
-//      if (isset($_POST['colour'])) {
-//
-//        if (!empty($_POST['changelog_text'])) {
-//          $name_with_heading = '<' . $_POST['heading_type'] . '>' . $_POST['changelog_text'] . '</' . $_POST['heading_type'] . '>';
-//          $colour = $_POST['colour'];
-//          $changelog = new Changelog_model();
-//          $changelog->create($name_with_heading, $colour);
-//        }
-//        header("Location: index");
-//        die();
-//      }
-//      elseif (isset($_POST['day'])) {/* print_r($_POST); */
-//      }
-//    }
-//    else {
-//      
-//    }
-//  }
 }
