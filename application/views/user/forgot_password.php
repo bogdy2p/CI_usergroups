@@ -9,6 +9,6 @@ ACCESS THAT ONE-TIME LINK AND CHANGE YOUR PASSWORD.
 YOU MUST ANSWER A SECRET QUESTION / ENTER SOMETHING like birthdate and a CAPTCHA TOO to reset the password.
 <br /><br />
 
-  <?php
+<?php
 
 ?>
