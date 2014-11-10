@@ -117,66 +117,31 @@ class Detail_type_model extends CI_Model {
     return $result;
   }
 
-  /*   * ******************************************************************************* */
-  /*   * *****************************USER DETAILS TABLE********************************* */
-  /*   * ******************************************************************************* */
-  /*   * ******************************************************************************* */
-  /*   * ******************************************************************************* */
-
-  function print_user_details_table_html($user_details_array) {
-    Self::print_user_details_table_header();
-    Self::print_user_details_table_content($user_details_array);
-    Self::print_user_details_table_footer();
-  }
-
-  function print_user_details_table_header() {
-    echo '<table class="table table-bordered">';
-    echo '<th> Current User Details Set</th>';
-    echo '<th> Edit</th>';
-    echo '<th> Delete</th>';
-  }
-
-  function print_user_details_table_content($user_details_array) {
-    foreach ($user_details_array as $key => $value) {
-      echo '<tr>';
-      echo '<td>' . $value . '</td>';
-      echo '<td> <a href="' . base_url() . 'detail_type/edit?name=' . $value . '"><span class="glyphicon glyphicon-edit"></span></a>  </td>';
-      echo '<td><a><span onclick="confirm_detail_type_delete(\'' . $value . '\')" class="glyphicon glyphicon-remove spanred pointer"></span></a></td>';
-      echo '</tr>';
-    }
-  }
-
-  function print_user_details_table_footer() {
-    echo '</table>';
-  }
-
-  /*   * *********************************************************************************** */
-
-  function print_edit_detail_table_html($name) {
-    Self::print_edit_detail_table_header($name);
-    Self::print_edit_detail_table_content($name);
-    Self::print_edit_detail_table_footer();
-  }
-
-  function print_edit_detail_table_header($name) {
-    //echo '<div class="col-xs-12 col-md-12">';
-    echo '<h4>Current data for "' . $name . '" detail </h4>';
-    echo '<table class="table table-bordered" name="view_detail">';
-  }
-
-  function print_edit_detail_table_content($name) {
-    $details = Self::get_detail_type_by_name($name);
-    foreach ($details as $key => $value) {
-      echo '<tr>';
-      echo '<th class="info"> Detail ' . $key . '</th>';
-      echo '<td>' . $value . '</td>';
-      echo '</tr>';
-    }
-  }
-
-  function print_edit_detail_table_footer() {
-    echo "</table>";
-    //echo "</div>";
-  }
+//  function print_edit_detail_table_html($name) {
+//    Self::print_edit_detail_table_header($name);
+//    Self::print_edit_detail_table_content($name);
+//    Self::print_edit_detail_table_footer();
+//  }
+//
+//  function print_edit_detail_table_header($name) {
+//    //echo '<div class="col-xs-12 col-md-12">';
+//    echo '<h4>Current data for "' . $name . '" detail </h4>';
+//    echo '<table class="table table-bordered" name="view_detail">';
+//  }
+//
+//  function print_edit_detail_table_content($name) {
+//    $details = Self::get_detail_type_by_name($name);
+//    foreach ($details as $key => $value) {
+//      echo '<tr>';
+//      echo '<th class="info"> Detaail ' . $key . '</th>';
+//      echo '<td>' . $value . '</td>';
+//      echo '</tr>';
+//    }
+//  }
+//
+//  function print_edit_detail_table_footer() {
+//    echo "</table>";
+//    //echo "</div>";
+//  }
 
 }

@@ -4,17 +4,17 @@
     <?php
     $table_template = array(
       'table_open' => '<table class="table table-bordered col-xs-12 col-md-3">',
-      'heading_row_start' => '<tr>',
+      'heading_row_start' => '<tr class="wordwrap1">',
       'heading_row_end' => '</tr>',
-      'heading_cell_start' => '<th class="success">',
+      'heading_cell_start' => '<th class="success wordwrap1">',
       'heading_cell_end' => '</th>',
       'row_start' => '<tr class="">',
       'row_end' => '</tr>',
       'cell_start' => '<td class="wordwrap1">',
       'cell_end' => '</td>',
-      'row_alt_start' => '<tr class="">',
+      'row_alt_start' => '<tr class="wordwrap1">',
       'row_alt_end' => '</tr>',
-      'cell_alt_start' => '<td class="">',
+      'cell_alt_start' => '<td class="wordwrap1">',
       'cell_alt_end' => '</td>',
       'table_close' => '</table>',
     );
