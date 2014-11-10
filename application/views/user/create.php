@@ -7,7 +7,8 @@
     echo form_open('user/validate_form_create_user');
     echo form_label('Email:');
     echo '<br />';
-    echo form_input('email', set_value('email'), 'placeholder = "example@provider.com"');
+    echo '<p id="email_field_error"></p>'; 
+    echo form_input('email', set_value('email'), 'id="email_field" placeholder = "example@provider.com"');
     echo '<br />';
     echo form_label('First Name:');
     echo '<br />';

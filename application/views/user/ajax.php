@@ -14,7 +14,21 @@ function return_ajax_for_username($input) {
   }
 }
 
+function return_ajax_for_email($input) {
+  $user = new User_model();
+  $exists = $user->email_already_exists($input);
+  if ($exists) {
+    echo '1';
+  }
+  else {
+    echo '0';
+  }
+}
+
 function check_ajax() {
+  if (isset($_GET['email_field'])) {
+    return_ajax_for_email($_GET['email_field']);
+  }
   if (isset($_GET['username'])) {
     return_ajax_for_username($_GET['username']);
   }

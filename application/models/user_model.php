@@ -192,6 +192,20 @@ class User_model extends CI_Model {
     }
   }
 
+  function email_already_exists($email){
+    $this->db->select('*');
+    $this->db->from('users');
+    $this->db->where('email', $email);
+    $result = $this->db->count_all_results();
+    if ($result == 0) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+  
+  
   function user_already_exists($name) {
     $this->db->select('*');
     $this->db->from('users');

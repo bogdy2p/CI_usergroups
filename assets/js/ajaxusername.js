@@ -1,3 +1,4 @@
+check_email_availlability_on_user_creation();
 check_detail_type_availlability_on_edit();
 check_group_availlability();
 check_username_availlability();
@@ -5,6 +6,34 @@ check_detail_type_availlability();
 check_password_matching();
 check_username_availlability_on_edit();
 check_group_availlability_on_edit();
+
+
+function check_email_availlability_on_user_creation(){
+  $(document).ready(function() {
+    $('#email_field').blur(function(){
+      $.ajax({
+        url : 'ajax',
+        data: {'email_field':$('#email_field').val()},
+        success: success,
+        dataType: 'json'
+      })
+        .done(function(data) {
+          if (data == 0){
+            $('#email_field_error').html("");
+            $('#submit').show();
+          }else {
+            $('#submit').hide();
+            $('#email_field_error').html("<h4><spanred>There already is an account on this adress.</spanred><spangre> Please use forgot password to recover your password!</spangre></h4>");
+          }
+      })
+    });
+    function success(){
+      console.log("CHECK EMAIL AVAILLABILITY called.");
+    }
+  });
+}
+
+
 
 function check_group_availlability_on_edit() {
   $(document).ready(function() {
