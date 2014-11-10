@@ -6,7 +6,7 @@
             <file>file:/var/www/html/user_ci/application/models/user_model.php</file>
             <file>file:/var/www/html/user_ci/application/views/user/index.php</file>
             <file>file:/var/www/html/user_ci/application/controllers/user.php</file>
-            <file>file:/var/www/html/user_ci/application/views/user/create.php</file>
+            <file>file:/var/www/html/user_ci/application/views/user/table.php</file>
         </group>
     </open-files>
 </project-private>
