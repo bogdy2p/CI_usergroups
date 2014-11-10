@@ -11,22 +11,34 @@
     <div class="col-xs-4 col-md-4"></div>
     <div class="col-xs-4 col-md-4">
 
-      <form class="form" id="viewuser" action="view_user" method="post"><br /><br />
-        <select name="id" id="id" form="viewuser">
-          <?php
-          $id_array = $user->grab_all_user_ids();
-          foreach ($id_array as $id => $value) {
-            echo '<option value="' . $value . '">' . $value . ' - ' . $user->get_user_name_by_user_id($value) . '</option>';
-          }
-          ?>
-        </select>
-        <br /><br />
-        <button type="submit" class="button">View User's Data</button>
-      </form>
+      <?php
+      // GENERATE FORM OF SWITCHING USERS WITH CODEIGNITER FORM HELPER
+      echo form_open('user/view_user');
+      $id_array = $user->grab_all_user_ids();
+      $data = array();
+      foreach ($id_array as $id => $value) {
+        $data[$value] = 'User ' . $value . ' - ' . $user->get_user_name_by_user_id($value);
+      }
+      echo form_dropdown('id', $data, 'ASD');
+      echo '<br /><br />';
+      echo form_submit('submit', 'Change User Account', 'class="btn btn-success"');
+
+      echo form_close();
+      ?>
     </div>
     <div class="col-xs-4 col-md-4"></div>
   </div>
   <div clas="row">
+
+
+
+    <?php
+    // GENERATE TABLES USING CODEIGNITER TABLE HELPER 
+    ?>
+
+
+
+
     <?php
     if (isset($_GET['id']) && ($_GET['id'] > 0)) {
       $_POST['id'] = $_GET['id'];
