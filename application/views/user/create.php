@@ -19,7 +19,7 @@
     echo '<br />';
     echo form_label('Username:');
     echo '<br />';
-    echo form_input('username', set_value('username'), 'placeholder = "Username"');
+    echo form_input('username', set_value('username'), 'id="username" placeholder = "Username"');
     echo '<br />';
     echo form_label('Password:');
     echo '<br />';

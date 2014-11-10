@@ -73,50 +73,6 @@ class Changelog_model extends CI_Model {
   /*   * ********************************************************************* */
   /*   * ********************************************************************* */
 
-  function generate_changelog_table_html($days) {
-    Self::generate_changelog_table_header($days);
-    Self::generate_changelog_table_content($days);
-    Self::generate_changelog_table_footer();
-  }
-
-  function generate_changelog_table_header($days) {
-    //echo '<div class="col-xs-12 col-md-12">';
-    if ($days == 1) {
-      echo "<h3>TODAY'S CHANGE LOGS: </h3>";
-    }
-    elseif ($days == 2) {
-      echo '<h3>CHANGELOGS SINCE YESTERDAY:</h3>';
-    }
-    elseif ($days > 2 && $days <= 10) {
-      echo '<h3>LAST ' . ($days - 1) . ' DAYS CHANGE LOGS :</h3>';
-    }
-    else {
-      echo '<h3> ALL CHANGELOGS AVAILLABLE :</h3>';
-    }
-
-
-    echo '<table class="table table-bordered">';
-    echo '<th class="success">Name</th>';
-    echo '<th class="success">Created</th>';
-  }
-
-  function generate_changelog_table_content($days) {
-    $changelog = new Changelog();
-    $changelogs = Self::read_for_last_x_days($days);
-    foreach ($changelogs as $individual_changelog) {
-      $type = 'changelogs';
-      echo '<tr>';
-      echo '<td><' . $individual_changelog['colour'] . '>' . $individual_changelog['name'] . '</' . $individual_changelog['colour'] . '></td>';
-      echo '<td>' . $individual_changelog['date'] . '</td>';
-      echo '</tr>';
-    }
-  }
-
-  function generate_changelog_table_footer() {
-    echo '</table>';
-    echo '</div>';
-  }
-
   function generate_select_day_form() {
     echo '
     <br /><br /><br />
@@ -163,15 +119,6 @@ class Changelog_model extends CI_Model {
     </form>
     <br /><br />
     ';
-  }
-
-  function generate_changelog_table_by_post() {
-    if ((isset($_POST['day'])) && !empty($_POST['day'])) {
-      Self::generate_changelog_table_html($_POST['day']);
-    }
-    else {
-      Self::generate_changelog_table_html('100');
-    }
   }
 
 }

@@ -15,8 +15,8 @@ function return_ajax_for_username($input) {
 }
 
 function check_ajax() {
-  if (isset($_GET['name'])) {
-    return_ajax_for_username($_GET['name']);
+  if (isset($_GET['username'])) {
+    return_ajax_for_username($_GET['username']);
   }
   if (isset($_GET['edit_username'])) {
     return_ajax_for_username($_GET['edit_username']);
