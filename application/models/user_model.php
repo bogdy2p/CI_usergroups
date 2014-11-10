@@ -119,69 +119,7 @@ class User_model extends CI_Model {
       return true;
     }
   }
-  
-//  function validate_and_save_user($get) {
-//
-//    if (isset($get) && ($get != NULL)) {
-//      //$user = new User(); //Call User Class
-//      $user = Self::get_user_object($get['id']); //Fetch the user object from the database by the ID !!
-//      $old_pass = $user->password; // Grab the old password from the object
-//      $old_name = $user->name;
-//      $_POST['id'] = $get['id'];
-//      if (isset($_POST['old_password'])) {
-//        if (!empty($_POST['old_password'])) {
-//          if (md5($_POST['old_password']) == $old_pass) {
-//            if ($_POST['password'] == $_POST['pass_conf']) {
-//
-//              //Create the update details array using the post data.																		
-//              $user_update_details = Self::create_user_update_details_array($_POST);
-//              //Update the user details correspondingly
-//              $update = Self::update($user_update_details);
-//              //Delete all the mapping for this user			
-//              $delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
-//              //Get an array of checked groups in the form
-//              $group_ids_checked_array = Self::get_group_ids_checked_in_form();
-//              //Apply new mapping using the new values from the form !!!! (Foreach in one line)
-//              $test = Self::verify_update_details_for_user($get['id']);
-//              foreach ($group_ids_checked_array as $group_id_checked) {
-//                Self::assign_user_to_group($get['id'], $group_id_checked);
-//              }
-//              header('Location: ' . base_url() . 'user');
-//              die();
-//            }
-//            else {
-//              print_r("The passwords you entered do not match.");
-//              die();
-//            }
-//          }
-//          else {
-//            echo "That is not the current password for this user !";
-//            die();
-//          }
-//        }
-//        else {//If field OLD PASSWORD IS EMPTY
-//          $delete_current_mapping = Self::delete_all_mapping_for_user($get['id']);
-//          $group_ids_checked_array = Self::get_group_ids_checked_in_form();
-//          $test = Self::verify_update_details_for_user($get['id']);
-//          foreach ($group_ids_checked_array as $group_id_checked) {
-//            Self::assign_user_to_group($get['id'], $group_id_checked);
-//          }
-//          header('Location: ' . base_url() . 'user');
-//          die();
-//        }
-//      }
-//      else {
-//        echo "";
-//        //If $_POST does not exists (@ the first page load , before submit)
-//      }
-//    }
-//    else {
-//      die("There is no get. Or it's NULL // 404 Redirect Here !");
-//    }
-//  }
-
-//end Verification
-
+ 
   function add_user_detail_with_type($user_id, $detail_type, $detail) {
     $detail_exists = Self::check_detail_exists_of_type($user_id, $detail_type, $detail);
     $detail_type_exists = Self::check_detail_type_exists($detail_type);
