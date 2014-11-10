@@ -1,13 +1,16 @@
 <?php
-if ((isset($this->session->userdata['is_logged_in'])) && (!empty($this->session->userdata))){
-  if ((isset($this->session->userdata['admin_status'])) && ($this->session->userdata['admin_status'])){
-       display_administrator_menu();
-    }else{
-      display_normal_menu();  
-    }
-  }else{
-    display_no_session_menu();  
+
+if ((isset($this->session->userdata['is_logged_in'])) && (!empty($this->session->userdata))) {
+  if ((isset($this->session->userdata['admin_status'])) && ($this->session->userdata['admin_status'])) {
+    display_administrator_menu();
   }
+  else {
+    display_normal_menu();
+  }
+}
+else {
+  display_no_session_menu();
+}
 
 function display_normal_menu() {
   echo '<nav class="navbar navbar-default" role="navigation">
@@ -92,5 +95,3 @@ function display_no_session_menu() {
             </nav>
 ';
 }
-
-

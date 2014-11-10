@@ -33,7 +33,7 @@ class Detail_type extends CI_Controller {
     $this->load->view('detailtype/create');
     $this->load->view('templates/sitewide_footer');
   }
-      else {
+  else {
       $this->load->view('templates/unauthorized');
     }
   }

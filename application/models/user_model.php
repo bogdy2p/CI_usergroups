@@ -11,34 +11,33 @@ class User_model extends CI_Model {
   function __construct() {
     parent::__construct();
   }
-  
-  function create(){
+
+  function create() {
     $data = array(
-      'username'=>$this->input->post('username'),
-      'first_name'=>$this->input->post('first_name'),
-      'last_name'=>$this->input->post('last_name'),     
-      'email'=>$this->input->post('email'),
-      'password'=>md5($this->input->post('password')),
-      );
-    
+      'username' => $this->input->post('username'),
+      'first_name' => $this->input->post('first_name'),
+      'last_name' => $this->input->post('last_name'),
+      'email' => $this->input->post('email'),
+      'password' => md5($this->input->post('password')),
+    );
+
     $this->db->set('creation_date', 'NOW()', FALSE);
-    $insert = $this->db->inserT('users',$data);
+    $insert = $this->db->inserT('users', $data);
     return $insert;
   }
 
-  function create_user_dynamic_fields($fieldname){
+  function create_user_dynamic_fields($fieldname) {
     $username = $this->input->post('username');
     $the_user_id = $this->user_model->grab_userid_by_username($username);
     $data = array(
-      'user_id'=>$the_user_id,
-      'detail_type'=>$fieldname,
-      'detail'=>$this->input->post($fieldname),
-      );
-    $insert = $this->db->insert('user_details',$data);
+      'user_id' => $the_user_id,
+      'detail_type' => $fieldname,
+      'detail' => $this->input->post($fieldname),
+    );
+    $insert = $this->db->insert('user_details', $data);
     return $insert;
   }
-  
-  
+
   function read() {
     $this->db->select('*');
     $this->db->from('users');
@@ -49,47 +48,49 @@ class User_model extends CI_Model {
     }
     return $return;
   }
-    //UPDATE USER. ALL ROWS EXCEPT EMAIL.
-  function update(){
+
+  //UPDATE USER. ALL ROWS EXCEPT EMAIL.
+  function update() {
     $id = $this->input->post('id');
     $data = arraY(
-      'first_name'=>$this->input->post('first_name'),
-      'last_name'=>$this->input->post('last_name'),
-      );
-    
-    $this->db->where('id',$id);
-    $update = $this->db->update('users',$data);
+      'first_name' => $this->input->post('first_name'),
+      'last_name' => $this->input->post('last_name'),
+    );
+
+    $this->db->where('id', $id);
+    $update = $this->db->update('users', $data);
     return $update;
   }
-  
-  function update_user_dynamic_field($fieldname){
+
+  function update_user_dynamic_field($fieldname) {
     $user_id = $this->input->post('id');
     // Check if the user_details table already has an input for this user-id;detail_type pair
     //If already exists , run this :
-     $exists = $this->user_model->check_detail_pair_exists($user_id,$fieldname);
-     if ($exists){
-            $data = array(
-              'detail'=>$this->input->post($fieldname),
-              );
+    $exists = $this->user_model->check_detail_pair_exists($user_id, $fieldname);
+    if ($exists) {
+      $data = array(
+        'detail' => $this->input->post($fieldname),
+      );
 
-            $this->db->where('detail_type',$fieldname);
-            $this->db->where('user_id',$user_id);
-            $update = $this->db->update('user_details',$data);
-            return $update;
-     }else{     
-     /// If it doesnt exist , run CREATE SCRIPT
-       if (!empty($this->input->post($fieldname))){
-            $data = array(
-              'user_id'=> $user_id,
-              'detail_type' => $fieldname,
-              'detail' => $this->input->post($fieldname),
-            );
-            $insert = $this->db->insert('user_details',$data);
-            return $insert;
-       }
-     } 
+      $this->db->where('detail_type', $fieldname);
+      $this->db->where('user_id', $user_id);
+      $update = $this->db->update('user_details', $data);
+      return $update;
+    }
+    else {
+      /// If it doesnt exist , run CREATE SCRIPT
+      if (!empty($this->input->post($fieldname))) {
+        $data = array(
+          'user_id' => $user_id,
+          'detail_type' => $fieldname,
+          'detail' => $this->input->post($fieldname),
+        );
+        $insert = $this->db->insert('user_details', $data);
+        return $insert;
+      }
+    }
   }
-  
+
   function update_user_details_for_user($user_id, $detail_type, $new_detail) {
     $data = array(
       'detail' => $new_detail,
@@ -110,16 +111,16 @@ class User_model extends CI_Model {
     $this->db->delete('user_details');
   }
 
-  function validate_login(){
-    $this->db->where('username',$this->input->post('username'));
-    $this->db->where('password',md5($this->input->post('password')));
+  function validate_login() {
+    $this->db->where('username', $this->input->post('username'));
+    $this->db->where('password', md5($this->input->post('password')));
     $query = $this->db->get('users');
-    
-    if($query->num_rows == 1){
+
+    if ($query->num_rows == 1) {
       return true;
     }
   }
- 
+
   function add_user_detail_with_type($user_id, $detail_type, $detail) {
     $detail_exists = Self::check_detail_exists_of_type($user_id, $detail_type, $detail);
     $detail_type_exists = Self::check_detail_type_exists($detail_type);
@@ -150,20 +151,19 @@ class User_model extends CI_Model {
     }
   }
 
-  function check_user_is_administrator($user){
+  function check_user_is_administrator($user) {
     $this->db->select('*');
     $this->db->from('usergroups');
-    $this->db->where('group_id','1');
+    $this->db->where('group_id', '1');
     $result = $this->db->get();
-    foreach ($result->result_array() as $row){
-      if(Self::grab_userid_by_username($user) == $row['user_id']){
+    foreach ($result->result_array() as $row) {
+      if (Self::grab_userid_by_username($user) == $row['user_id']) {
         return true;
       }
-     }
-     return false;
+    }
+    return false;
   }
-  
-  
+
   function get_detail_types_set_for_user($user_id) {
     $this->db->select('detail_type');
     $this->db->from('user_details');
@@ -206,7 +206,7 @@ class User_model extends CI_Model {
     }
   }
 
-  function email_already_exists($email){
+  function email_already_exists($email) {
     $this->db->select('*');
     $this->db->from('users');
     $this->db->where('email', $email);
@@ -218,8 +218,7 @@ class User_model extends CI_Model {
       return true;
     }
   }
-  
-  
+
   function user_already_exists($name) {
     $this->db->select('*');
     $this->db->from('users');
@@ -385,19 +384,18 @@ class User_model extends CI_Model {
     return $array_of_group_ids_checked;
   }
 
-  function get_detail_by_usr_and_type($user_id,$detail_type){
+  function get_detail_by_usr_and_type($user_id, $detail_type) {
     $this->db->select('detail');
     $this->db->from('user_details');
-    $this->db->where('user_id',$user_id);
-    $this->db->where('detail_type',$detail_type);
+    $this->db->where('user_id', $user_id);
+    $this->db->where('detail_type', $detail_type);
     $result = $this->db->get();
-    foreach ($result->result_array() as $row){
+    foreach ($result->result_array() as $row) {
       return $row['detail'];
     }
-    
   }
-  
-  function get_all_groupnames_from_db(){
+
+  function get_all_groupnames_from_db() {
     $this->db->select('*');
     $this->db->from('groups');
     $result = $this->db->get();
@@ -407,10 +405,7 @@ class User_model extends CI_Model {
     }
     return $group_names;
   }
-  
-  
-  
-  
+
   function get_all_groups_in_db() {
     $this->db->select('*');
     $this->db->from('groups');
@@ -530,19 +525,19 @@ class User_model extends CI_Model {
     $this->db->delete('usergroups');
   }
 
-  function assign_user_to_group_by_name(){
+  function assign_user_to_group_by_name() {
     
   }
-  
-  function map_user_at_creation($user_name){
+
+  function map_user_at_creation($user_name) {
     $this->load->model('group_model');
     $data = array(
       'user_id' => Self::grab_userid_by_username($user_name),
       'group_id' => $this->group_model->get_group_id_of_group_user(),
     );
-   $this->db->insert('usergroups', $data);
+    $this->db->insert('usergroups', $data);
   }
-  
+
   function assign_user_to_group($user_id, $group_id) {
     $mapping_exists = Self::verify_existing_mapping($user_id, $group_id);
     if (!$mapping_exists) {

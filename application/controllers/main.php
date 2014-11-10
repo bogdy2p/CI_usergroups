@@ -27,7 +27,7 @@ class Main extends CI_Controller {
     $this->load->view('main/index');
     $this->load->view('templates/sitewide_footer');
   }
-      else {
+  else {
       $this->load->view('templates/unauthorized');
     }
   }

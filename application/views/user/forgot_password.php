@@ -10,5 +10,4 @@ YOU MUST ANSWER A SECRET QUESTION / ENTER SOMETHING like birthdate and a CAPTCHA
 <br /><br />
 
 <?php
-
 ?>

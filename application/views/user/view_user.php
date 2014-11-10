@@ -70,7 +70,7 @@
       $userdata->first_name,
       $userdata->last_name,
       implode("  & ", $groups),
-      ),
+    ),
   );
   ?>
   <div class="col-xs-12 col-md-4">

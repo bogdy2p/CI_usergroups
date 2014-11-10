@@ -18,13 +18,13 @@ $main = new Main_model();
     <div class="col-xs-12 col-md-3"><h2>Todo Tasks :</h2></div>
     <div class="col-xs-12 col-md-6">
 
-<?php $task->generate_todo_list_for_main(); ?>
+      <?php $task->generate_todo_list_for_main(); ?>
     </div>
     <div class="col-xs-12 col-md-3">
-<?php $main->print_database_statistics(); ?>
+      <?php $main->print_database_statistics(); ?>
     </div>
   </div>
   <div class="row">
-<?php $main->print_colour_meanings(); ?>
+    <?php $main->print_colour_meanings(); ?>
   </div>  
 </div> <!-- End of container-->

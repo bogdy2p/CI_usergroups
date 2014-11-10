@@ -69,7 +69,6 @@ class Main_model extends CI_Model {
     return $result;
   }
 
-
   function generate_groups_users_table_html() {
     Self::generate_groups_users_table_header();
     Self::generate_groups_users_table_content();

@@ -31,19 +31,19 @@ class Detail_type_model extends CI_Model {
     return $return;
   }
 
-  function update(){
+  function update() {
     $old_value = $this->input->post('old_detail_name');
     $data = array(
       'name' => $this->input->post('detail_name'),
     );
     $this->db->where('name', $old_value);
-    $this->db->update('user_detail_types',$data);
+    $this->db->update('user_detail_types', $data);
   }
-  
+
   function update_detail_types_names_in_user_groups() {
     $old_name = $this->input->post('old_detail_name');
     $new_name = $this->input->post('detail_name');
-    
+
     $data = array(
       'detail_type' => $new_name,
     );
@@ -116,4 +116,5 @@ class Detail_type_model extends CI_Model {
     $result = $this->db->count_all_results();
     return $result;
   }
+
 }

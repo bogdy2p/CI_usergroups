@@ -6,7 +6,7 @@
     echo form_open('user/validate_form_create_user');
     echo form_label('Email:');
     echo '<br />';
-    echo '<p id="email_field_error"></p>'; 
+    echo '<p id="email_field_error"></p>';
     echo form_input('email', set_value('email'), 'id="email_field" placeholder = "example@provider.com"');
     echo '<br />';
     echo form_label('First Name:');
@@ -32,7 +32,7 @@
     echo '<br />';
 
     $detail_types = $this->user_model->get_all_user_detail_types();
-    
+
     foreach ($detail_types as $detail_type) {
       echo form_label(ucfirst($detail_type));
       echo '<br />';

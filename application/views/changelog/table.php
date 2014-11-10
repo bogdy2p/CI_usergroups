@@ -1,5 +1,6 @@
 <?php if (!isset($_POST['day']))
-    $_POST['day'] = '100';?>
+  $_POST['day'] = '100';
+?>
 <h4>Changes for last <?php echo $_POST['day'] - 1; ?> days</h4>
 <div class="row"> 
   <?php
@@ -24,7 +25,7 @@
       'Created',
     ),
   );
-  
+
   $changelogs = $this->changelog_model->read_for_last_x_days($_POST['day']);
   foreach ($changelogs as $changelog) {
     $table_data[] = array(

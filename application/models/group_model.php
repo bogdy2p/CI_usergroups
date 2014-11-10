@@ -76,8 +76,8 @@ class Group_model extends CI_Model {
     }
     return $return;
   }
-  
-  function get_group_id_of_group_user(){
+
+  function get_group_id_of_group_user() {
     $this->db->select('*');
     $this->db->from('groups');
     $this->db->where('name', 'user');
@@ -86,7 +86,7 @@ class Group_model extends CI_Model {
       return $row['id'];
     }
   }
-  
+
   function get_group_name_by_group_id($id) {
     $this->db->select('name');
     $this->db->from('groups');
@@ -117,7 +117,6 @@ class Group_model extends CI_Model {
     return $result;
   }
 
-
   function generate_groups_list_html() {
     echo "<h4>Already Existent Groups :</h4>";
     $groups = Self::read();
@@ -132,4 +131,5 @@ class Group_model extends CI_Model {
     }
     echo '</ul>';
   }
+
 }
