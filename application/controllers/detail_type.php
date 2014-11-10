@@ -22,7 +22,7 @@ class Detail_type extends CI_Controller {
     $this->load->view('detailtype/index');
     $this->load->view('templates/sitewide_footer');
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
     }
 }
 
@@ -34,7 +34,7 @@ class Detail_type extends CI_Controller {
     $this->load->view('templates/sitewide_footer');
   }
   else {
-      $this->load->view('templates/unauthorized');
+      show_404();
     }
   }
 
@@ -45,7 +45,7 @@ class Detail_type extends CI_Controller {
     $this->load->view('detailtype/edit');
     $this->load->view('templates/sitewide_footer');
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
     }
 }
 
@@ -53,7 +53,7 @@ class Detail_type extends CI_Controller {
     if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
     $this->load->view('detailtype/delete');
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
     }
 }
 
@@ -61,7 +61,7 @@ class Detail_type extends CI_Controller {
     if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
     $this->load->view('detailtype/ajax');
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
     }
 }
 
@@ -79,7 +79,7 @@ class Detail_type extends CI_Controller {
       redirect('detail_type');
     }
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
     }
 }
 
@@ -99,7 +99,7 @@ class Detail_type extends CI_Controller {
       redirect('detail_type');
     }
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
     }
 }
   

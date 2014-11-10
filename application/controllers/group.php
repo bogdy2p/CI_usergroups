@@ -23,7 +23,7 @@ class Group extends CI_Controller {
     $this->load->view('group/table');
     $this->load->view('templates/sitewide_footer');
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
   }
 }
   public function add() {
@@ -33,7 +33,7 @@ class Group extends CI_Controller {
     $this->load->view('group/create');
     $this->load->view('templates/sitewide_footer');
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
   }
 }
 
@@ -52,7 +52,7 @@ class Group extends CI_Controller {
       redirect('group');
     }
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
   }
 }
   
@@ -71,7 +71,7 @@ class Group extends CI_Controller {
       redirect('group');
     }
   }else{
-  $this->load->view('templates/unauthorized');
+  show_404();
   }
 }
 
@@ -82,7 +82,7 @@ class Group extends CI_Controller {
     $this->load->view('group/edit');
     $this->load->view('templates/sitewide_footer');
   }else{
- $this->load->view('templates/unauthorized');
+ show_404();
     }
 }
 
@@ -90,7 +90,7 @@ class Group extends CI_Controller {
     if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
     $this->load->view('group/delete');
   }else{
-$this->load->view('templates/unauthorized');
+show_404();
     }
 }
 
@@ -98,7 +98,7 @@ $this->load->view('templates/unauthorized');
     if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
     $this->load->view('group/ajax');
   }else{
-  $this->load->view('templates/unauthorized');
+  show_404();
   }
 }
   

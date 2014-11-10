@@ -163,6 +163,8 @@ class User extends CI_Controller {
   }
 
   public function edit() {
+    // HERE WE SHOULD CHECK IF POST OR GET ['ID'] IS SET , OR ELSE , DIE TO 404.
+    
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('user/edit');
@@ -170,7 +172,11 @@ class User extends CI_Controller {
   }
 
   public function delete() {
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
     $this->load->view('user/delete');
+  } else {
+      show_404();
+    }
   }
 
   public function view_user() {
@@ -195,7 +201,12 @@ class User extends CI_Controller {
   }
 
   public function delete_detail_type() {
+  if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
     $this->load->view('user/delete_detail_type');
+  }
+   else {
+      show_404();
+    }
   }
 
   public function ajax() {

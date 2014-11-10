@@ -25,7 +25,7 @@ class Changelog extends CI_Controller {
       $this->load->view('templates/sitewide_footer');
     }
     else {
-      $this->load->view('templates/unauthorized');
+      show_404();
     }
   }
 
@@ -37,7 +37,7 @@ class Changelog extends CI_Controller {
       $this->load->view('templates/sitewide_footer');
     }
     else {
-      $this->load->view('templates/unauthorized');
+      show_404();
     }
   }
 
@@ -48,7 +48,7 @@ class Changelog extends CI_Controller {
       $this->load->view('changelog/download');
     }
     else {
-      $this->load->view('templates/unauthorized');
+      show_404();
     }
   }
 
@@ -67,7 +67,7 @@ class Changelog extends CI_Controller {
       }
     }
     else {
-      $this->load->view('templates/unauthorized');
+      show_404();
     }
   }
 

@@ -28,7 +28,7 @@ class Main extends CI_Controller {
     $this->load->view('templates/sitewide_footer');
   }
   else {
-      $this->load->view('templates/unauthorized');
+      show_404();
     }
   }
 
@@ -46,7 +46,7 @@ class Main extends CI_Controller {
     $this->load->view('main/usersbygroups');
     $this->load->view('templates/sitewide_footer');
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
     }
 }
 
@@ -57,7 +57,7 @@ class Main extends CI_Controller {
     $this->load->view('main/list');
     $this->load->view('templates/sitewide_footer');
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
     }
 }
 
@@ -65,7 +65,7 @@ class Main extends CI_Controller {
     if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
     $this->load->view('main/delete');
   }else{
-    $this->load->view('templates/unauthorized');
+    show_404();
     }
 }
 
