@@ -25,7 +25,7 @@
     echo '<br />';
     echo form_input('password_confirm', '', 'placeholder="Confirm Password" class="Password"');
     echo '<br /><br />';
-    echo form_submit('submit','Change My Password','id="submit" class="btn btn-success"');
+    echo form_submit('submit', 'Change My Password', 'id="submit" class="btn btn-success"');
     echo form_close();
     ?>
 

@@ -49,7 +49,7 @@ class User_model extends CI_Model {
     return $return;
   }
 
-  function check_old_password_is_correct($username,$password){
+  function check_old_password_is_correct($username, $password) {
     $this->db->where('username', $username);
     $this->db->where('password', md5($this->input->post('old_password')));
     $query = $this->db->get('users');
@@ -57,18 +57,15 @@ class User_model extends CI_Model {
       return true;
     }
   }
-  
-  
-  function update_password_for_username($username){
+
+  function update_password_for_username($username) {
     $data = array(
       'password' => md5($this->input->post('password')),
-    );    
-    $this->db->where('username',$username);
-    $this->db->update('users',$data);
+    );
+    $this->db->where('username', $username);
+    $this->db->update('users', $data);
   }
-  
-  
-  
+
   //UPDATE USER. ALL ROWS EXCEPT EMAIL.
   function update() {
     $id = $this->input->post('id');
@@ -81,7 +78,8 @@ class User_model extends CI_Model {
     $update = $this->db->update('users', $data);
     return $update;
   }
-  function update_user_by_session(){
+
+  function update_user_by_session() {
     $username = $this->session->userdata['username'];
     $data = arraY(
       'first_name' => $this->input->post('first_name'),
@@ -92,15 +90,24 @@ class User_model extends CI_Model {
     return $update;
   }
 
-  function update_user_fields_by_session($fieldname){
+  function update_user_fields_by_session($fieldname) {
     $user_id = $this->session->userdata['user_id'];
     $exists = $this->user_model->check_detail_pair_exists($user_id, $fieldname);
-    
-    if ($exists) { $data = array('detail' => $this->input->post($fieldname),);
-      $this->db->where('detail_type', $fieldname);
-      $this->db->where('user_id', $user_id);
-      $update = $this->db->update('user_details', $data);
-      return $update;
+
+    if ($exists) {
+       if(!empty($this->input->post($fieldname))){
+         $data = array('detail' => $this->input->post($fieldname),);
+         $this->db->where('detail_type', $fieldname);
+         $this->db->where('user_id', $user_id);
+         $update = $this->db->update('user_details', $data);
+         return $update;
+       } else {
+         //IF THE VALUE FROM THE FORM IS EMPTY (nothing entered , delete from database);
+         $this->db->where('detail_type', $fieldname);
+         $this->db->where('user_id', $user_id);
+         $delete = $this->db->delete('user_details');
+         return $delete;
+       } 
     }
     else {
       /// If it doesnt exist , run CREATE SCRIPT
@@ -115,24 +122,20 @@ class User_model extends CI_Model {
       }
     }
   }
-  
+
   function update_user_dynamic_field($fieldname) {
     $user_id = $this->input->post('id');
-    // Check if the user_details table already has an input for this user-id;detail_type pair
-    //If already exists , run this :
     $exists = $this->user_model->check_detail_pair_exists($user_id, $fieldname);
     if ($exists) {
       $data = array(
         'detail' => $this->input->post($fieldname),
       );
-
       $this->db->where('detail_type', $fieldname);
       $this->db->where('user_id', $user_id);
       $update = $this->db->update('user_details', $data);
       return $update;
     }
     else {
-      /// If it doesnt exist , run CREATE SCRIPT
       if (!empty($this->input->post($fieldname))) {
         $data = array(
           'user_id' => $user_id,
@@ -391,7 +394,7 @@ class User_model extends CI_Model {
       return $user_object;
     }
   }
-  
+
   function get_user_object_by_username($username) {
     $this->db->select('*');
     $this->db->from('users');
