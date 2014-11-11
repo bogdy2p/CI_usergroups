@@ -42,8 +42,13 @@ class User extends CI_Controller {
   }
 
   public function logout() {
+    if ((isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in']))) {
     $this->session->sess_destroy();
     redirect('site', 'refresh');
+  }
+    else {
+      show_404();
+    }
   }
 
   public function validate_credentials_and_login() {
@@ -237,10 +242,14 @@ class User extends CI_Controller {
   }
 
   public function add() {
+   if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('user/create');
     $this->load->view('templates/sitewide_footer');
+  } else {
+      show_404();
+    }
   }
 
   public function edit() {

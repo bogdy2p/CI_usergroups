@@ -30,10 +30,7 @@ print_r(" .");
   <div class="col-xs-12 col-md-2"></div>
   <div class="col-xs-12 col-md-2"></div>
   <div class="col-xs-12 col-md-2"></div>  
-  <div class="col-xs-12 col-md-2">
-    <a href="my_account_password">CHANGE MY PASSWORD</a><br /><br />
-    <a href="my_account_update_details">CHANGE MY DETAILS</a><br /><br />
-  </div>  
+  <div class="col-xs-12 col-md-2"></div>  
   <div class="col-xs-12 col-md-2"></div>  
 </div>
 
@@ -48,9 +45,9 @@ print_r(" .");
 
 
 <?php
-//echo '<pre>';
-//print_r($current_user);
-//echo '</pre>';
+echo '<pre>';
+print_r($current_user);
+echo '</pre>';
 
 echo '<br />';
 echo '<br />';
