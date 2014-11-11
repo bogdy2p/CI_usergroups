@@ -21,9 +21,9 @@ print_r(" .");
   <div class="col-xs-12 col-md-2"></div>
   <div class="col-xs-12 col-md-2"></div>  
   <div class="col-xs-12 col-md-2">
-    <a href="change my password">CHANGE MY PASSWORD</a><br /><br />
-    <a href="LINK TO CHANGE MY NAME-DETAILS">CHANGE MY NAME-DETAILS</a><br /><br />
-    <a href="LINK TO CHANGE MY OTHER DETAILS ( THE DYNAMIC ONES )">CHANGE MY OTHER DETAILS ( THE DYNAMIC ONES )</a><br />
+    <a href="my_account_password">CHANGE MY PASSWORD</a><br /><br />
+    <a href="my_account_static_details">CHANGE MY NAME-DETAILS</a><br /><br />
+    <a href="my_account_dynamic_details">CHANGE MY OTHER DETAILS ( THE DYNAMIC ONES )</a><br />
   </div>  
   <div class="col-xs-12 col-md-2"></div>  
 </div>

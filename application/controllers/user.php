@@ -16,12 +16,17 @@ class User extends CI_Controller {
   }
 
   public function index() {
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
-    $this->load->view('user/index');
+    $this->load->view('my_account/my_account_view');
+    //$this->load->view('user/index');
     //$this->load->view('user/table');
     $this->load->view('templates/sitewide_footer');
-  }
+  }else{
+    show_404();
+    }
+}
 
   public function login() {
     if (!isset($this->session->userdata['is_logged_in'])) {
@@ -31,7 +36,8 @@ class User extends CI_Controller {
       $this->load->view('templates/sitewide_footer');
     }
     else {
-      redirect(index_page());
+      redirect('user','refresh');
+      
     }
   }
 
@@ -52,7 +58,7 @@ class User extends CI_Controller {
         'is_logged_in' => true,
       );
       $this->session->set_userdata($data);
-      redirect('user/index');
+      redirect('site/index');
     }
     else { // Credentials INCORRECT
       $this->login_failed();
@@ -196,24 +202,36 @@ class User extends CI_Controller {
   }
 
   public function view_user() {
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('user/view_user');
     $this->load->view('templates/sitewide_footer');
+  } else {
+      show_404();
+    }
   }
 
   public function detail_types() {
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('user/detail_types');
     $this->load->view('templates/sitewide_footer');
+  } else {
+      show_404();
+    }
   }
 
   public function edit_detail_type() {
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('user/edit_detail_type');
     $this->load->view('templates/sitewide_footer');
+  } else {
+      show_404();
+    }
   }
 
   public function delete_detail_type() {
@@ -241,7 +259,7 @@ class User extends CI_Controller {
     if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
-      $this->load->view('user/my_account_view');
+      $this->load->view('my_account/my_account_view');
       $this->load->view('templates/sitewide_footer');
     }
     else {
@@ -251,7 +269,10 @@ class User extends CI_Controller {
 
   public function my_account_password() {
     if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
-      //FUNCTIONALITY
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('my_account/change_password_view');
+      $this->load->view('templates/sitewide_footer');
     }
     else {
       show_404();
@@ -260,7 +281,10 @@ class User extends CI_Controller {
 
   public function my_account_static_details() {
     if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
-      //FUNCTIONALITY
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('my_account/update_static_account_details_view');
+      $this->load->view('templates/sitewide_footer');
     }
     else {
       show_404();
@@ -269,7 +293,10 @@ class User extends CI_Controller {
 
   public function my_account_dynamic_details() {
     if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
-      //FUNCTIONALITY
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('my_account/update_dynamic_account_details_view');
+      $this->load->view('templates/sitewide_footer');
     }
     else {
       show_404();
