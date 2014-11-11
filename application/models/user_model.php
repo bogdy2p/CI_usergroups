@@ -95,19 +95,20 @@ class User_model extends CI_Model {
     $exists = $this->user_model->check_detail_pair_exists($user_id, $fieldname);
 
     if ($exists) {
-       if(!empty($this->input->post($fieldname))){
-         $data = array('detail' => $this->input->post($fieldname),);
-         $this->db->where('detail_type', $fieldname);
-         $this->db->where('user_id', $user_id);
-         $update = $this->db->update('user_details', $data);
-         return $update;
-       } else {
-         //IF THE VALUE FROM THE FORM IS EMPTY (nothing entered , delete from database);
-         $this->db->where('detail_type', $fieldname);
-         $this->db->where('user_id', $user_id);
-         $delete = $this->db->delete('user_details');
-         return $delete;
-       } 
+      if (!empty($this->input->post($fieldname))) {
+        $data = array('detail' => $this->input->post($fieldname),);
+        $this->db->where('detail_type', $fieldname);
+        $this->db->where('user_id', $user_id);
+        $update = $this->db->update('user_details', $data);
+        return $update;
+      }
+      else {
+        //IF THE VALUE FROM THE FORM IS EMPTY (nothing entered , delete from database);
+        $this->db->where('detail_type', $fieldname);
+        $this->db->where('user_id', $user_id);
+        $delete = $this->db->delete('user_details');
+        return $delete;
+      }
     }
     else {
       /// If it doesnt exist , run CREATE SCRIPT
