@@ -81,7 +81,41 @@ class User_model extends CI_Model {
     $update = $this->db->update('users', $data);
     return $update;
   }
+  function update_user_by_session(){
+    $username = $this->session->userdata['username'];
+    $data = arraY(
+      'first_name' => $this->input->post('first_name'),
+      'last_name' => $this->input->post('last_name'),
+    );
+    $this->db->where('username', $username);
+    $update = $this->db->update('users', $data);
+    return $update;
+  }
 
+  function update_user_fields_by_session($fieldname){
+    $user_id = $this->session->userdata['user_id'];
+    $exists = $this->user_model->check_detail_pair_exists($user_id, $fieldname);
+    
+    if ($exists) { $data = array('detail' => $this->input->post($fieldname),);
+      $this->db->where('detail_type', $fieldname);
+      $this->db->where('user_id', $user_id);
+      $update = $this->db->update('user_details', $data);
+      return $update;
+    }
+    else {
+      /// If it doesnt exist , run CREATE SCRIPT
+      if (!empty($this->input->post($fieldname))) {
+        $data = array(
+          'user_id' => $user_id,
+          'detail_type' => $fieldname,
+          'detail' => $this->input->post($fieldname),
+        );
+        $insert = $this->db->insert('user_details', $data);
+        return $insert;
+      }
+    }
+  }
+  
   function update_user_dynamic_field($fieldname) {
     $user_id = $this->input->post('id');
     // Check if the user_details table already has an input for this user-id;detail_type pair

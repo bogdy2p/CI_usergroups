@@ -53,15 +53,15 @@ else {
   <div class="col-xs-12 col-md-3">
     <?php
     $user_id = $user->id;
-    $detail_types = $this->user_model->get_all_user_detail_types();
-    foreach ($detail_types as $detail_type) {
-      echo form_label(ucfirst($detail_type));
-      echo '<br />';
-      $old_detail_data = $this->user_model->get_detail_by_usr_and_type($user_id, $detail_type);
-      echo form_input($detail_type, set_value($detail_type, $old_detail_data), 'placeholder="' . ucfirst($detail_type) . '"');
-      echo '<br />';
-    }
-    ?>
+$detail_types = $this->user_model->get_all_user_detail_types();
+foreach ($detail_types as $detail_type) {
+  echo form_label(ucfirst($detail_type));
+  echo '<br />';
+  $old_detail_data = $this->user_model->get_detail_by_usr_and_type($user_id, $detail_type);
+  echo form_input($detail_type, set_value($detail_type, $old_detail_data), 'placeholder="' . ucfirst($detail_type) . '"');
+  echo '<br />';
+}
+?>
     <br />
   </div>
 

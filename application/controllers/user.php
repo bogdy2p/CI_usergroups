@@ -17,16 +17,17 @@ class User extends CI_Controller {
 
   public function index() {
     if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('my_account/my_account_view');
-    //$this->load->view('user/index');
-    //$this->load->view('user/table');
-    $this->load->view('templates/sitewide_footer');
-  }else{
-    show_404();
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      //$this->load->view('my_account/my_account_view');
+      //$this->load->view('user/index');
+      $this->load->view('user/table');
+      $this->load->view('templates/sitewide_footer');
     }
-}
+    else {
+      show_404();
+    }
+  }
 
   public function login() {
     if (!isset($this->session->userdata['is_logged_in'])) {
@@ -36,8 +37,7 @@ class User extends CI_Controller {
       $this->load->view('templates/sitewide_footer');
     }
     else {
-      redirect('user','refresh');
-      
+      redirect('user', 'refresh');
     }
   }
 
@@ -54,6 +54,7 @@ class User extends CI_Controller {
     if ($query) { // DACA S-A VALIDAT CU SUCCESS
       $data = array(
         'username' => $this->input->post('username'),
+        'user_id' => $this->user_model->grab_userid_by_username($this->input->post('username')),
         'admin_status' => $this->user_model->check_user_is_administrator($this->input->post('username')),
         'is_logged_in' => true,
       );
@@ -127,41 +128,71 @@ class User extends CI_Controller {
       }
     }
   }
-  
-  public function validate_form_change_password(){
-     $this->form_validation->set_rules('old_password','Old Password','trim|required');
-     $this->form_validation->set_rules('password', 'Password', 'trim|min_length[4]');
-     $this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|matches[password]');
-     
-  if ($this->form_validation->run() == FALSE) {
-     $this->load->view('templates/sitewide_header');
-     $this->load->view('templates/site_menu');
-     $this->load->view('my_account/change_password_form');
-     $this->load->view('templates/sitewide_footer');
-  }else{
-     $username = $this->session->userdata['username'];
-     $old_pass = $this->input->post('password');
-     $validated = $this->user_model->check_old_password_is_correct($username,$old_pass);
-        if ($validated){
-          
+
+  public function validate_form_change_password() {
+    $this->form_validation->set_rules('old_password', 'Old Password', 'trim|required');
+    $this->form_validation->set_rules('password', 'Password', 'trim|min_length[4]');
+    $this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|matches[password]');
+
+    if ($this->form_validation->run() == FALSE) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('my_account/change_password_form');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      $username = $this->session->userdata['username'];
+      $old_pass = $this->input->post('password');
+      $validated = $this->user_model->check_old_password_is_correct($username, $old_pass);
+      if ($validated) {
+
         $this->user_model->update_password_for_username($username);
         $data['success_message'] = 'You have successfully updated your password.';
         $this->load->view('templates/sitewide_header');
         $this->load->view('templates/site_menu');
-        $this->load->view('my_account/my_account_view',$data);
+        $this->load->view('my_account/my_account_view', $data);
         $this->load->view('templates/sitewide_footer');
-        }else{
-         $data['custom_error'] = 'You entered the WRONG old password.';
-         $this->load->view('templates/sitewide_header');
-         $this->load->view('templates/site_menu');
-         $this->load->view('my_account/change_password_form',$data);
-         $this->load->view('templates/sitewide_footer');
-        }
+      }
+      else {
+        $data['custom_error'] = 'You entered the WRONG old password.';
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
+        $this->load->view('my_account/change_password_form', $data);
+        $this->load->view('templates/sitewide_footer');
+      }
+    }
   }
-}
-  
-  
-  
+
+  function validate_form_update_details() {
+    $this->form_validation->set_rules('first_name', 'First Name', 'trim|min_length[3]|max_length[18]');
+    $this->form_validation->set_rules('last_name', 'Last Name', 'trim|min_length[3]|max_length[30]');
+    $detail_types = $this->user_model->get_all_user_detail_types();
+    foreach ($detail_types as $detail_type) {
+      $this->form_validation->set_rules($detail_type, ucfirst($detail_type), 'trim|min_length[2]');
+    }
+    if ($this->form_validation->run() == FALSE) { // validation failed
+    }
+    else {
+      if ($query = $this->user_model->update_user_by_session()) {
+        $data['success_message'] = 'You have successfully updated user data.';
+        foreach ($detail_types as $fieldname) {
+          $this->user_model->update_user_fields_by_session($fieldname);
+        }
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
+        $this->load->view('my_account/my_account_view', $data);
+        $this->load->view('templates/sitewide_footer');
+      }
+      else {
+        $data['custom_error'] = 'Something went wrong.Contact Site Admin for this matter.';
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
+        $this->load->view('my_account/update_account_details', $data);
+        $this->load->view('templates/sitewide_footer');
+      }
+    }
+  }
+
   function validate_form_update_user() {
     //FORM VALIDATION
     $this->form_validation->set_rules('first_name', 'First Name', 'trim|min_length[3]|max_length[18]');
@@ -234,40 +265,39 @@ class User extends CI_Controller {
       show_404();
     }
   }
-  
-  
-  
-  
-  
+
   public function view_user() {
     if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('user/view_user');
-    $this->load->view('templates/sitewide_footer');
-  } else {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('user/view_user');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
       show_404();
     }
   }
 
   public function detail_types() {
     if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('user/detail_types');
-    $this->load->view('templates/sitewide_footer');
-  } else {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('user/detail_types');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
       show_404();
     }
   }
 
   public function edit_detail_type() {
     if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('user/edit_detail_type');
-    $this->load->view('templates/sitewide_footer');
-  } else {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('user/edit_detail_type');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
       show_404();
     }
   }
@@ -317,23 +347,11 @@ class User extends CI_Controller {
     }
   }
 
-  public function my_account_static_details() {
+  public function my_account_update_details() {
     if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
-      $this->load->view('my_account/update_static_account_details_view');
-      $this->load->view('templates/sitewide_footer');
-    }
-    else {
-      show_404();
-    }
-  }
-
-  public function my_account_dynamic_details() {
-    if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
-      $this->load->view('templates/sitewide_header');
-      $this->load->view('templates/site_menu');
-      $this->load->view('my_account/update_dynamic_account_details_view');
+      $this->load->view('my_account/update_account_details');
       $this->load->view('templates/sitewide_footer');
     }
     else {

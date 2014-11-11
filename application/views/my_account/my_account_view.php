@@ -21,8 +21,6 @@ foreach ($groups_is_member as $group) {
   $contor++;
 }
 print_r(" .");
-
-//
 ?>
 <br /><br />
 <div class ="row">
@@ -32,8 +30,7 @@ print_r(" .");
   <div class="col-xs-12 col-md-2"></div>  
   <div class="col-xs-12 col-md-2">
     <a href="my_account_password">CHANGE MY PASSWORD</a><br /><br />
-    <a href="my_account_static_details">CHANGE MY NAME-DETAILS</a><br /><br />
-    <a href="my_account_dynamic_details">CHANGE MY OTHER DETAILS ( THE DYNAMIC ONES )</a><br />
+    <a href="my_account_update_details">CHANGE MY DETAILS</a><br /><br />
   </div>  
   <div class="col-xs-12 col-md-2"></div>  
 </div>
@@ -41,7 +38,6 @@ print_r(" .");
 
 
 <br /><br />
-
 <br /><br />
 
 
@@ -50,9 +46,9 @@ print_r(" .");
 
 
 <?php
-echo '<pre>';
+//echo '<pre>';
 //print_r($current_user);
-echo '</pre>';
+//echo '</pre>';
 
 echo '<br />';
 echo '<br />';

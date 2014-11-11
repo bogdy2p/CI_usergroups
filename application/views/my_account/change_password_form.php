@@ -5,11 +5,11 @@
 <div class="row">
   <div class="col-xs-12 col-md-4"></div>
   <div class="col-xs-12 col-md-4">
-    <?php 
-if (isset($custom_error)){
-  print_r($custom_error);
-}
-?>
+    <?php
+    if (isset($custom_error)) {
+      print_r($custom_error);
+    }
+    ?>
     <?php echo validation_errors('<p class="error">'); ?>
     <?php
     echo form_open('user/validate_form_change_password');
