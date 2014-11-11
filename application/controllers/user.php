@@ -57,14 +57,17 @@ class User extends CI_Controller {
     $query = $this->user_model->validate_login();
 
     if ($query) { // DACA S-A VALIDAT CU SUCCESS
+      $username = $this->input->post('username');
       $data = array(
-        'username' => $this->input->post('username'),
-        'user_id' => $this->user_model->grab_userid_by_username($this->input->post('username')),
-        'admin_status' => $this->user_model->check_user_is_administrator($this->input->post('username')),
+        'username' => $username,
+        'user_id' => $this->user_model->grab_userid_by_username($username),
+        'admin_status' => $this->user_model->check_user_is_administrator($username),
         'is_logged_in' => true,
       );
       $this->session->set_userdata($data);
       $this->user_model->update_access_at_login();
+      $old_logins_number = $this->user_model->get_total_logins($username);
+      $this->user_model->update_total_logins($username,$old_logins_number);
       redirect('site/index');
     }
     else { // Credentials INCORRECT

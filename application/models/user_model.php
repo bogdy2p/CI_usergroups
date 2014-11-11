@@ -397,6 +397,26 @@ class User_model extends CI_Model {
     return $return;
   }
 
+  function get_total_logins($username){
+    $this->db->select('total_logins');
+    $this->db->from('users');
+    $this->db->where('username',$username);
+    $result = $this->db->get();
+    foreach ($result->result_array() as $row){
+      return $row['total_logins'];
+    }
+  }
+  
+  function update_total_logins($username,$old_logins_number){
+    $data = array(
+      'total_logins' => ($old_logins_number + 1),
+    );
+    $this->db->where('username',$username);
+    $update = $this->db->update('users',$data);
+    return $update;
+  }
+  
+  
   function get_user_object($id) {
     $this->db->select('*');
     $this->db->from('users');
