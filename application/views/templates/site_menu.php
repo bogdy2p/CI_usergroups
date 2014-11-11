@@ -108,7 +108,7 @@ function display_no_session_menu() {
                     </div>                            
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav navbar-right">
                              <li><a href="' . base_url() . 'user/register"><span class="spanred">Register</span></a></li>
                              <li><a href="' . base_url() . 'user/login"><span class="spangre">Login</span></a></li>
                         </ul>

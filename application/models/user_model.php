@@ -19,6 +19,7 @@ class User_model extends CI_Model {
       'last_name' => $this->input->post('last_name'),
       'email' => $this->input->post('email'),
       'password' => md5($this->input->post('password')),
+      'creation_ip' => $this->session->userdata['ip_address'],
     );
 
     $this->db->set('creation_date', 'NOW()', FALSE);

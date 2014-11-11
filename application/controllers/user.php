@@ -111,7 +111,7 @@ class User extends CI_Controller {
     }
     else {
       $this->load->model('user_model');
-
+        
       if ($query = $this->user_model->create()) {
 
         $username = $_POST['username'];
