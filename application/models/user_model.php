@@ -67,7 +67,17 @@ class User_model extends CI_Model {
     $this->db->update('users', $data);
   }
 
-  //UPDATE USER. ALL ROWS EXCEPT EMAIL.
+  function update_access_at_login(){
+      $data = array(
+        'last_ip_accessed' => $this->session->userdata['ip_address'],
+      );
+      $this->db->set('last_access_date', 'NOW()', FALSE);
+      $this->db->where('username',$this->input->post('username'));
+      $update = $this->db->update('users',$data);
+      return $update;
+  }
+  
+  
   function update() {
     $id = $this->input->post('id');
     $data = arraY(

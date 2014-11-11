@@ -64,6 +64,7 @@ class User extends CI_Controller {
         'is_logged_in' => true,
       );
       $this->session->set_userdata($data);
+      $this->user_model->update_access_at_login();
       redirect('site/index');
     }
     else { // Credentials INCORRECT
