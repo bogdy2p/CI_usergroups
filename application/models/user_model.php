@@ -337,6 +337,16 @@ class User_model extends CI_Model {
       return $user_object;
     }
   }
+  
+  function get_user_object_by_username($username) {
+    $this->db->select('*');
+    $this->db->from('users');
+    $this->db->where('username', $username);
+    $result = $this->db->get();
+    foreach ($result->result() as $user_object) {
+      return $user_object;
+    }
+  }
 
   function get_groups_checked_in_form() {
     //Grab an the array of all groups ind the db.

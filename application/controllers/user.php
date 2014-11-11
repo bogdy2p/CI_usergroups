@@ -71,18 +71,6 @@ class User extends CI_Controller {
     }
   }
 
-  public function my_account() {
-    if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
-      $this->load->view('templates/sitewide_header');
-      $this->load->view('templates/site_menu');
-      $this->load->view('user/my_account_view');
-      $this->load->view('templates/sitewide_footer');
-    }
-    else {
-      show_404();
-    }
-  }
-
   public function forgot_password() {
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
@@ -247,6 +235,45 @@ class User extends CI_Controller {
     $this->load->view('templates/site_menu');
     $this->load->view('login/login_form', $data);
     $this->load->view('templates/sitewide_footer');
+  }
+
+  public function my_account() {
+    if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('user/my_account_view');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      show_404();
+    }
+  }
+
+  public function my_account_password() {
+    if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
+      //FUNCTIONALITY
+    }
+    else {
+      show_404();
+    }
+  }
+
+  public function my_account_static_details() {
+    if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
+      //FUNCTIONALITY
+    }
+    else {
+      show_404();
+    }
+  }
+
+  public function my_account_dynamic_details() {
+    if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
+      //FUNCTIONALITY
+    }
+    else {
+      show_404();
+    }
   }
 
 }
