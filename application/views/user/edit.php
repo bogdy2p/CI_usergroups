@@ -1,5 +1,12 @@
 <!--// SHOULD GRAB USER OBJECT BEFORE PRINTING ALL?...-->
-<?php $user = $this->user_model->get_user_object($_GET['id']); ?>
+<?php
+if (isset($_GET['id'])) {
+  $user = $this->user_model->get_user_object($_GET['id']);
+}
+else {
+  show_404();
+}
+?> 
 <div class ="row">
 
   <?php echo ('<h4 class="middle_it">You are now editing user : ' . $user->username . ' ( Email : ' . $user->email . ' )</h4>'); ?>

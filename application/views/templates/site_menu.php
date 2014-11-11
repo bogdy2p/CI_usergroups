@@ -29,6 +29,7 @@ function display_normal_menu() {
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                              <li><a href="' . base_url() . 'site">   View SITE         </a></li>
+                             <li><a href="' . base_url() . 'user/my_account">   My Account       </a></li>
                      <!--    <li><a href="' . base_url() . 'user/login"><span class="spangre">Login</span></a></li>
                              <li><a href="' . base_url() . 'user/register"><span class="spanred">Register</span></a></li> -->
                              <li><a href="' . base_url() . 'user/logout"><span class="spanred">Log Out !</span></a></li>
@@ -55,10 +56,11 @@ function display_administrator_menu() {
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                              <li><a href="' . base_url() . 'site">   View SITE         </a></li>
+                             <li><a href="' . base_url() . 'user/my_account">   My Account       </a></li>
                              <li><a href="' . base_url() . 'main/tables">   View Tables         </a></li>
                              <li><a href="' . base_url() . 'detail_type">   Details Types  </a></li>
-                             <li><a href="' . base_url() . 'user">   USER            </a></li>
-                             <li><a href="' . base_url() . 'group">   GROUP           </a></li>
+                             <li><a href="' . base_url() . 'user">   Admin Users            </a></li>
+                             <li><a href="' . base_url() . 'group">   Admin Groups           </a></li>
                              <li><a href="' . base_url() . 'changelog">   View Changelogs     </a></li>
                              <li><a href="' . base_url() . 'task">   Manage Todo\'s (tasks)    </a></li>
                          <!--<li><a href="' . base_url() . 'user/register"><span class="spanred">Register</span></a></li>

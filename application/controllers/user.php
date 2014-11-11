@@ -25,14 +25,15 @@ class User extends CI_Controller {
 
   public function login() {
     if (!isset($this->session->userdata['is_logged_in'])) {
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('user/login_form');
-    $this->load->view('templates/sitewide_footer');
-  }else{
-    redirect(index_page());
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('user/login_form');
+      $this->load->view('templates/sitewide_footer');
     }
-}
+    else {
+      redirect(index_page());
+    }
+  }
 
   public function logout() {
     $this->session->sess_destroy();
@@ -60,14 +61,27 @@ class User extends CI_Controller {
 
   public function register() {
     if (!isset($this->session->userdata['is_logged_in'])) {
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('user/register_form');
-    $this->load->view('templates/sitewide_footer');
-  }else{
-     redirect(index_page());
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('user/register_form');
+      $this->load->view('templates/sitewide_footer');
     }
-}
+    else {
+      redirect(index_page());
+    }
+  }
+
+  public function my_account() {
+    if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('user/my_account_view');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      show_404();
+    }
+  }
 
   public function forgot_password() {
     $this->load->view('templates/sitewide_header');
@@ -172,21 +186,23 @@ class User extends CI_Controller {
 
   public function edit() {
     if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
-    // HERE WE SHOULD CHECK IF POST OR GET ['ID'] IS SET , OR ELSE , DIE TO 404.
-    
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('user/edit');
-    $this->load->view('templates/sitewide_footer');
-  }else{
-    show_404();
+      // HERE WE SHOULD CHECK IF POST OR GET ['ID'] IS SET , OR ELSE , DIE TO 404.
+
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('user/edit');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      show_404();
+    }
   }
-}
 
   public function delete() {
     if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
-    $this->load->view('user/delete');
-  } else {
+      $this->load->view('user/delete');
+    }
+    else {
       show_404();
     }
   }
@@ -213,10 +229,10 @@ class User extends CI_Controller {
   }
 
   public function delete_detail_type() {
-  if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
-    $this->load->view('user/delete_detail_type');
-  }
-   else {
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
+      $this->load->view('user/delete_detail_type');
+    }
+    else {
       show_404();
     }
   }
