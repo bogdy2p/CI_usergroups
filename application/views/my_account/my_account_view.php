@@ -1,13 +1,23 @@
-<?php 
+<div class="row">
+  <div class="col-xs-12 col-md-4"></div>
+  <div class="col-xs-12 col-md-4">
+    <?php
+    if (isset($success_message)) {
+      print_r($success_message);
+    }
+    ?></div>
+  <div class="col-xs-12 col-md-4"></div>
+</div> 
 
-$username = $this->session->userdata['username']; 
+<?php
+$username = $this->session->userdata['username'];
 $current_user = $this->user_model->get_user_object_by_username($username);
 
 $groups_is_member = $this->user_model->get_number_of_groups_for_a_user($current_user->id);
 print_r("You currently belong to this groups :");
 $contor = 1;
-foreach ($groups_is_member as $group){
-  echo ' '.$contor.' - <spanred>'.$group.'</spanred>';
+foreach ($groups_is_member as $group) {
+  echo ' ' . $contor . ' - <spanred>' . $group . '</spanred>';
   $contor++;
 }
 print_r(" .");
@@ -39,7 +49,7 @@ print_r(" .");
 
 
 
-<?php 
+<?php
 echo '<pre>';
 //print_r($current_user);
 echo '</pre>';
@@ -47,7 +57,8 @@ echo '</pre>';
 echo '<br />';
 echo '<br />';
 echo '<br />';
-echo '<br />';echo '<br />';
+echo '<br />';
+echo '<br />';
 echo '<br />';
 
 echo '<h1>' . $username . '</h1>';
@@ -55,7 +66,5 @@ echo '<h1>' . $username . '</h1>';
 
 Welcome to My Account View
 <?php
-
 //print_r($this->session->userdata);
-
 ?>

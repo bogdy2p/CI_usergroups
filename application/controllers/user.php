@@ -127,7 +127,41 @@ class User extends CI_Controller {
       }
     }
   }
-
+  
+  public function validate_form_change_password(){
+     $this->form_validation->set_rules('old_password','Old Password','trim|required');
+     $this->form_validation->set_rules('password', 'Password', 'trim|min_length[4]');
+     $this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|matches[password]');
+     
+  if ($this->form_validation->run() == FALSE) {
+     $this->load->view('templates/sitewide_header');
+     $this->load->view('templates/site_menu');
+     $this->load->view('my_account/change_password_form');
+     $this->load->view('templates/sitewide_footer');
+  }else{
+     $username = $this->session->userdata['username'];
+     $old_pass = $this->input->post('password');
+     $validated = $this->user_model->check_old_password_is_correct($username,$old_pass);
+        if ($validated){
+          
+        $this->user_model->update_password_for_username($username);
+        $data['success_message'] = 'You have successfully updated your password.';
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
+        $this->load->view('my_account/my_account_view',$data);
+        $this->load->view('templates/sitewide_footer');
+        }else{
+         $data['custom_error'] = 'You entered the WRONG old password.';
+         $this->load->view('templates/sitewide_header');
+         $this->load->view('templates/site_menu');
+         $this->load->view('my_account/change_password_form',$data);
+         $this->load->view('templates/sitewide_footer');
+        }
+  }
+}
+  
+  
+  
   function validate_form_update_user() {
     //FORM VALIDATION
     $this->form_validation->set_rules('first_name', 'First Name', 'trim|min_length[3]|max_length[18]');
@@ -200,7 +234,11 @@ class User extends CI_Controller {
       show_404();
     }
   }
-
+  
+  
+  
+  
+  
   public function view_user() {
     if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
     $this->load->view('templates/sitewide_header');
@@ -271,7 +309,7 @@ class User extends CI_Controller {
     if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
-      $this->load->view('my_account/change_password_view');
+      $this->load->view('my_account/change_password_form');
       $this->load->view('templates/sitewide_footer');
     }
     else {

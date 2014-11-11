@@ -49,6 +49,26 @@ class User_model extends CI_Model {
     return $return;
   }
 
+  function check_old_password_is_correct($username,$password){
+    $this->db->where('username', $username);
+    $this->db->where('password', md5($this->input->post('old_password')));
+    $query = $this->db->get('users');
+    if ($query->num_rows == 1) {
+      return true;
+    }
+  }
+  
+  
+  function update_password_for_username($username){
+    $data = array(
+      'password' => md5($this->input->post('password')),
+    );    
+    $this->db->where('username',$username);
+    $this->db->update('users',$data);
+  }
+  
+  
+  
   //UPDATE USER. ALL ROWS EXCEPT EMAIL.
   function update() {
     $id = $this->input->post('id');
