@@ -15,7 +15,6 @@ $groups_is_member = $this->user_model->get_number_of_groups_for_a_user($current_
 ?>
 
 <div class ="row">
-  <?php // echo '<h1>' . $username . '</h1>'; ?>
   <div class="col-xs-12 col-md-4">
     <div class="account_info">
       <h4>Account Information:</h4>  
@@ -31,9 +30,6 @@ $groups_is_member = $this->user_model->get_number_of_groups_for_a_user($current_
   </div>
   <div class="col-xs-12 col-md-4">
     <?php
-    //print_r($current_user->last_access_date);
-    //print_r($current_user->last_ip_accessed);
-
     print_r("<h4>Account Level :");
     foreach ($groups_is_member as $group) {
       echo '<spanred> ' . $group . '</spanred>';
