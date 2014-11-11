@@ -24,11 +24,15 @@ class User extends CI_Controller {
   }
 
   public function login() {
+    if (!isset($this->session->userdata['is_logged_in'])) {
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('user/login_form');
     $this->load->view('templates/sitewide_footer');
-  }
+  }else{
+    redirect(index_page());
+    }
+}
 
   public function logout() {
     $this->session->sess_destroy();
@@ -55,11 +59,15 @@ class User extends CI_Controller {
   }
 
   public function register() {
+    if (!isset($this->session->userdata['is_logged_in'])) {
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('user/register_form');
     $this->load->view('templates/sitewide_footer');
-  }
+  }else{
+     redirect(index_page());
+    }
+}
 
   public function forgot_password() {
     $this->load->view('templates/sitewide_header');
