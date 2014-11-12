@@ -2,7 +2,7 @@
 <div class="col-xs-12 col-md-12">
   <?php
   $table_template = array(
-    'table_open' => '<table class="tablesorter" id="usersTable">',
+    'table_open' => '<table class="table table-bordered tablesorter" id="usersTable">',
     'heading_row_start' => '<tr class="wordwrap1">',
     'heading_row_end' => '</tr>',
     'heading_cell_start' => '<th class="success wordwrap1">',
