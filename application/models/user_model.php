@@ -373,6 +373,18 @@ class User_model extends CI_Model {
     }
     return $return;
   }
+  
+  function get_all_user_ids_sorted_by_id($sort){
+    $this->db->select('id');
+    $this->db->from('users');
+    $this->db->order_by('id',$sort);
+    $result = $this->db->get();
+    $return = array();
+    foreach ($result->result_array() as $row){
+      $return[] = $row['id'];
+    }return $return;
+  }
+  
 
   function get_userids_for_a_group($id) {
     $this->db->select('user_id');

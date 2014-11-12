@@ -1,3 +1,15 @@
+<?php 
+if ((isset($_GET['table'])) && (isset($_GET['sortby'])) && isset($_GET['mode'])){
+  $table_name = $_GET['table'];
+  $sort_column = $_GET['sortby'];
+  $sort_order = $_GET['mode'];
+}else{
+  $table_name = 'users';
+  $sort_column = 'id';
+  $sort_order = 'asc';
+}
+?>
+
 <h4>Users Table</h4>
 <div class="row">
   <?php
@@ -17,15 +29,14 @@
     'cell_alt_end' => '</td>',
     'table_close' => '</table>',
   );
-  $fa = 'VASILEEE';
-  $id_ascending = '<a href="tables?sortby=id&mode=normal"><span class="glyphicon glyphicon-sort-by-alphabet spanred"></span></a>';
-  $id_descending = '<a href="tables?sortby=id&mode=reversed"><span class="glyphicon glyphicon-sort-by-alphabet-alt spanred"></span></a>';
-  $user_alfabetical = '<a href="tables?sortby=username&mode=normal"><span class="glyphicon glyphicon-sort-by-alphabet spanred"></span></a>';
-  $user_reversealfabetic = '<a href="tables?sortby=username&mode=reversed"><span class="glyphicon glyphicon-sort-by-alphabet-alt spanred"></span></a>';
+  $id_ascending = '<a href="tables?sortby=id&mode=asc"><span class="glyphicon glyphicon-sort-by-alphabet spanred"></span></a>';
+  $id_descending = '<a href="tables?sortby=id&mode=desc"><span class="glyphicon glyphicon-sort-by-alphabet-alt spanred"></span></a>';
+  $user_alfabetical = '<a href="tables?sortby=username&mode=asc"><span class="glyphicon glyphicon-sort-by-alphabet spanred"></span></a>';
+  $user_reversealfabetic = '<a href="tables?sortby=username&mode=desc"><span class="glyphicon glyphicon-sort-by-alphabet-alt spanred"></span></a>';
   $this->table->set_heading($id_ascending.' User Id '.$id_descending, $user_alfabetical.' Username '.$user_reversealfabetic, 'Full Name', 'View', 'Edit', 'Delete');
 
 
-  $user_id_array = $this->user_model->grab_all_user_ids();
+  $user_id_array = $this->user_model->get_all_user_ids_sorted_by_id($sort_order);
   foreach ($user_id_array as $user_id) {
     $temp = $this->user_model->get_user_object($user_id);
     $this->table->add_row(
@@ -36,3 +47,16 @@
   echo $this->table->generate();
   ?>
 </div>
+
+ <?php 
+//  echo '<pre>';
+//  $desc = $this->user_model->get_user_table_sorted_by_id('DESC');
+//  var_dump($desc);
+//  print_r($desc);
+//  echo '</pre>';
+//  echo '<pre>';
+//  $asc = $this->user_model->get_user_table_sorted_by_id('ASC');
+//  var_dump($asc);
+//  print_r($asc);
+//  echo '</pre>';
+  ?>
