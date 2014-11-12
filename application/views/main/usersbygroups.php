@@ -20,12 +20,7 @@
   );
   $groups = $this->group_model->grab_all_group_ids();
   foreach ($groups as $group_id) {
-    $table_data = array(
-      array(
-        $this->group_model->get_group_name_by_group_id($group_id) . '\'s',
-        'User ID',
-      ),
-    );
+    $table_data = array(array($this->group_model->get_group_name_by_group_id($group_id) . '\'s', 'User ID',),);
     $userids_array = $this->user_model->get_userids_for_a_group($group_id);
     foreach ($userids_array as $key => $value) {
       $table_data[] = array(

@@ -13,6 +13,7 @@ if ((isset($_GET['table'])) && ($_GET['table'] == 'groups')) {
 }
 else {
   $sort_order = 'asc';
+  $sort_column = 'id';
 }
 ?>
 
@@ -42,11 +43,14 @@ else {
 
   $group_id_ascending = '<a href="?table=groups&sortby=id&mode=asc">' . $model1 . '</a>';
   $group_id_descending = '<a href="?table=groups&sortby=id&mode=desc">' . $model2 . '</a>';
-  $group_alphabetical = '';
-  $group_rev_alphabetical = '';
-  $this->table->set_heading($group_id_ascending . ' Group ID ' . $group_id_descending, $group_alphabetical . ' Group Name ' . $group_rev_alphabetical, 'Special Key', 'Edit', 'Delete');
+  $group_name_asc = '<a href="?table=groups&sortby=name&mode=asc">' . $model1 . '</a>';
+  $group_name_desc = '<a href="?table=groups&sortby=name&mode=desc">' . $model2 . '</a>';
+  $special_key_asc = '<a href="?table=groups&sortby=special_key&mode=asc">' . $model1 . '</a>';
+  $special_key_desc = '<a href="?table=groups&sortby=special_key&mode=desc">' . $model2 . '</a>';
+ 
+  $this->table->set_heading($group_id_ascending . ' Group ID ' . $group_id_descending, $group_name_asc . ' Group Name ' . $group_name_desc, $special_key_asc.' Special Key '.$special_key_desc, 'Edit', 'Delete');
 
-  $group_id_array = $this->group_model->grab_all_group_ids_sorted('id', $sort_order);
+  $group_id_array = $this->group_model->grab_all_group_ids_sorted($sort_column, $sort_order);
   foreach ($group_id_array as $group_id) {
     $temp = $this->group_model->get_group_object_by_id($group_id);
     $table_data[] = array(
