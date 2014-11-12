@@ -1,8 +1,9 @@
-<h4>Mapping Table</h4>
-<div class="row">
+
+<div class="col-xs-12 col-md-6">
+  <h4>Mapping Table</h4>
   <?php
   $table_template = array(
-    'table_open' => '<table class="table table-bordered col-xs-12 col-md-3" id="mappingTable">',
+    'table_open' => '<table class="table table-bordered col-xs-12 col-md-3 tablesorter" id="mappingTable">',
     'heading_row_start' => '<tr>',
     'heading_row_end' => '</tr>',
     'heading_cell_start' => '<th class="success">',
