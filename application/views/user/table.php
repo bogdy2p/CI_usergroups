@@ -31,11 +31,11 @@
   ?>
     <div id="pager" class="pager">
   <form>
-    <img src="<?php echo base_url().'assets/css/tablesorter/' ?>first.png" class="first"/>
-    <img src="<?php echo base_url().'assets/css/tablesorter/' ?>prev.png" class="prev"/>
+    <img src="#" class="first"/>
+    <img src="#" class="prev"/>
     <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
-    <img src="<?php echo base_url().'assets/css/tablesorter/' ?>next.png" class="next"/>
-    <img src="<?php echo base_url().'assets/css/tablesorter/' ?>last.png" class="last"/>
+    <img src="#" class="next"/>
+    <img src="#" class="last"/>
     <select class="pagesize">
       <option value="2">2</option>
       <option value="4">4</option>

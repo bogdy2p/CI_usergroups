@@ -1,13 +1,13 @@
 //$(document).ready(function() {
-//  $("#usersTable")
-//    .tablesorter({widthFixed: true, widgets: ['zebra']})
+// $("#usersTable")
+//   .tablesorter({widthFixed: true, widgets: ['zebra']})
 //});
 
-$(document).ready(function() { 
-    $("table") 
-    .tablesorter({widthFixed: true, widgets: ['zebra']}) 
-    .tablesorterPager({container: $("#pager")}); 
-}); 
+// $(document).ready(function() { 
+//     $("table") 
+//     .tablesorter({widthFixed: true, widgets: ['zebra']}) 
+//     .tablesorterPager({container: $("#pager")}); 
+// }); 
 //
 //$(document).ready(function()
 //{
