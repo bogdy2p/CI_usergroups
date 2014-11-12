@@ -17,10 +17,8 @@
     'cell_alt_end' => '</td>',
     'table_close' => '</table>',
   );
-
-
+  
   $this->table->set_heading(' Map ID ', ' User ID ', ' Group ID ', 'Delete');
-
   $maps_id_array = $this->main_model->read();
   foreach ($maps_id_array as $map) {
     $table_data[] = array(
