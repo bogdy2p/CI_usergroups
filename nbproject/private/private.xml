@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Hyphen Lab">
-            <file>file:/var/www/html/user_ci/application/controllers/task.php</file>
-            <file>file:/var/www/html/user_ci/application/controllers/changelog.php</file>
-            <file>file:/var/www/html/user_ci/application/controllers/detail_type.php</file>
-            <file>file:/var/www/html/user_ci/application/controllers/user.php</file>
-            <file>file:/var/www/html/user_ci/application/controllers/main.php</file>
-            <file>file:/var/www/html/user_ci/application/controllers/group.php</file>
-            <file>file:/var/www/html/user_ci/application/controllers/site.php</file>
+            <file>file:/var/www/html/user_ci/application/views/main/mappingtable.php</file>
+            <file>file:/var/www/html/user_ci/application/views/main/usersbygroups.php</file>
+            <file>file:/var/www/html/user_ci/application/views/user/table.php</file>
+            <file>file:/var/www/html/user_ci/application/views/my_account/my_account_view.php</file>
+            <file>file:/var/www/html/user_ci/application/views/group/table.php</file>
         </group>
     </open-files>
 </project-private>
