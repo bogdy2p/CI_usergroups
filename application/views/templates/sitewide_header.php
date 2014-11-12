@@ -21,6 +21,7 @@ echo '<script src="' . base_url() . 'assets/less/less.min.js"></script>';
 ?>
 <?php
 echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>';
+echo '<script src="' . base_url() . 'assets/js/jquery.tablesorter.js"></script>';
 echo '</head>';
 echo '<body>';
 echo '<script src="' . base_url() . 'assets/js/ajaxusername.js"></script>';

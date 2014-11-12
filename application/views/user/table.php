@@ -48,10 +48,10 @@ else {
 
 
   $this->table->set_heading(
-      array('data' => $id_asc . ' User Id ' . $id_desc ,'id'=>'user_id'),
-      array('data' => $name_asc . ' Username ' . $name_desc,'id' => 'username'),
-      array('data' => $creation_date_asc . ' Created ' . $creation_date_desc, 'id' => 'created'),
-      array('data'=> $number_of_logins_asc . ' Logins ' . $number_of_logins_desc,'id'=>'logins'),
+      array('data' => $id_asc . ' User Id ' . $id_desc ,'id'=>'id.ASC' ,'onclick'=>'sortBy(this.id)'),
+      array('data' => $name_asc . ' Username ' . $name_desc,'id' => 'username.ASC' ,'onclick'=>'sortBy(this.id)'),
+      array('data' => $creation_date_asc . ' Created ' . $creation_date_desc, 'id' => 'creation_date.ASC' ,'onclick'=>'sortBy(this.id)'),
+      array('data' => $number_of_logins_asc . ' Logins ' . $number_of_logins_desc,'id'=>'total_logins.ASC' ,'onclick'=>'sortBy(this.id)'),
       'View',
       'Edit',
       'Delete');
