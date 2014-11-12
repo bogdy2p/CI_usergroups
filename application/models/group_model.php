@@ -76,6 +76,18 @@ class Group_model extends CI_Model {
     }
     return $return;
   }
+  
+  function grab_all_group_ids_sorted($column='id',$sort) {
+    $this->db->select('id');
+    $this->db->from('groups');
+    $this->db->order_by($column,$sort);
+    $result = $this->db->get();
+    $return = array();
+    foreach ($result->result_array() as $row) {
+      $return[] = $row['id'];
+    }
+    return $return;
+  }
 
   function get_group_id_of_group_user() {
     $this->db->select('*');

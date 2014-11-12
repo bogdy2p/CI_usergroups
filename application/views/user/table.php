@@ -1,15 +1,20 @@
-<?php 
-if ((isset($_GET['table'])) && (isset($_GET['sortby'])) && isset($_GET['mode'])){
-  $table_name = $_GET['table'];
-  $sort_column = $_GET['sortby'];
-  $sort_order = $_GET['mode'];
-}else{
-  $table_name = 'users';
-  $sort_column = 'id';
+<?php
+if ((isset($_GET['table'])) && ($_GET['table'] == 'users')) {
+  if ((isset($_GET['sortby'])) && isset($_GET['mode'])) {
+    $sort_column = $_GET['sortby'];
+    $sort_order = $_GET['mode'];
+    $table_name = $_GET['table'];
+  }
+  else {
+    $table_name = 'users';
+    $sort_column = 'id';
+    $sort_order = 'asc';
+  }
+}
+else {
   $sort_order = 'asc';
 }
 ?>
-
 <h4>Users Table</h4>
 <div class="row">
   <?php
@@ -29,12 +34,16 @@ if ((isset($_GET['table'])) && (isset($_GET['sortby'])) && isset($_GET['mode']))
     'cell_alt_end' => '</td>',
     'table_close' => '</table>',
   );
-  $id_ascending = '<a href="tables?sortby=id&mode=asc"><span class="glyphicon glyphicon-sort-by-alphabet spanred"></span></a>';
-  $id_descending = '<a href="tables?sortby=id&mode=desc"><span class="glyphicon glyphicon-sort-by-alphabet-alt spanred"></span></a>';
-  $user_alfabetical = '<a href="tables?sortby=username&mode=asc"><span class="glyphicon glyphicon-sort-by-alphabet spanred"></span></a>';
-  $user_reversealfabetic = '<a href="tables?sortby=username&mode=desc"><span class="glyphicon glyphicon-sort-by-alphabet-alt spanred"></span></a>';
-  $this->table->set_heading($id_ascending.' User Id '.$id_descending, $user_alfabetical.' Username '.$user_reversealfabetic, 'Full Name', 'View', 'Edit', 'Delete');
 
+  $model1 = '<span class="glyphicon glyphicon-sort-by-alphabet spanred"></span>';
+  $model2 = '<span class="glyphicon glyphicon-sort-by-alphabet-alt spanred"></span>';
+  $id_ascending = '<a href="?table=users&sortby=id&mode=asc">' . $model1 . '</a>';
+  $id_descending = '<a href="?table=users&sortby=id&mode=desc">' . $model2 . '</a>';
+  //$user_alfabetical = '<a href="?table=users&sortby=username&mode=asc">'.$model1.'</a>';
+  $user_alfabetical = '';
+  //$user_reversealfabetic = '<a href="?table=users&sortby=username&mode=desc">'.$model2.'</a>';
+  $user_reversealfabetic = '';
+  $this->table->set_heading($id_ascending . ' User Id ' . $id_descending, $user_alfabetical . ' Username ' . $user_reversealfabetic, 'Full Name', 'View', 'Edit', 'Delete');
 
   $user_id_array = $this->user_model->get_all_user_ids_sorted_by_id($sort_order);
   foreach ($user_id_array as $user_id) {
@@ -48,15 +57,3 @@ if ((isset($_GET['table'])) && (isset($_GET['sortby'])) && isset($_GET['mode']))
   ?>
 </div>
 
- <?php 
-//  echo '<pre>';
-//  $desc = $this->user_model->get_user_table_sorted_by_id('DESC');
-//  var_dump($desc);
-//  print_r($desc);
-//  echo '</pre>';
-//  echo '<pre>';
-//  $asc = $this->user_model->get_user_table_sorted_by_id('ASC');
-//  var_dump($asc);
-//  print_r($asc);
-//  echo '</pre>';
-  ?>

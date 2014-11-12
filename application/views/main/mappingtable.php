@@ -1,3 +1,22 @@
+<?php
+if ((isset($_GET['table'])) && ($_GET['table'] == 'mapping')) {
+  if ((isset($_GET['sortby'])) && isset($_GET['mode'])) {
+    $sort_column = $_GET['sortby'];
+    $sort_order = $_GET['mode'];
+    $table_name = $_GET['table'];
+  }
+  else {
+    $table_name = 'mapping';
+    $sort_column = 'id';
+    $sort_order = 'asc';
+  }
+}
+else {
+  $sort_order = 'asc';
+}
+?>
+
+
 <h4>Mapping Table</h4>
 <div class="row">
   <?php
@@ -17,13 +36,7 @@
     'cell_alt_end' => '</td>',
     'table_close' => '</table>',
   );
-  $table_data = array(
-    array('Map ID',
-      'User ID',
-      'Group ID',
-      'Delete',
-    ),
-  );
+  $table_data = array(array('Map ID','User ID',     'Group ID',      'Delete',    ),  );
 
   $maps_id_array = $this->main_model->read();
   foreach ($maps_id_array as $map) {
