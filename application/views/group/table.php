@@ -1,27 +1,8 @@
-<?php
-if ((isset($_GET['table'])) && ($_GET['table'] == 'groups')) {
-  if ((isset($_GET['sortby'])) && isset($_GET['mode'])) {
-    $sort_column = $_GET['sortby'];
-    $sort_order = $_GET['mode'];
-    $table_name = $_GET['table'];
-  }
-  else {
-    $table_name = 'groups';
-    $sort_column = 'id';
-    $sort_order = 'asc';
-  }
-}
-else {
-  $sort_order = 'asc';
-  $sort_column = 'id';
-}
-?>
-
 <h4>Groups Table</h4>
 <div class="row">
   <?php
   $table_template = array(
-    'table_open' => '<table class="table table-bordered col-xs-12 col-md-3">',
+    'table_open' => '<table class="table table-bordered col-xs-12 col-md-3" id="groupsTable">',
     'heading_row_start' => '<tr>',
     'heading_row_end' => '</tr>',
     'heading_cell_start' => '<th class="success">',
@@ -37,18 +18,9 @@ else {
     'table_close' => '</table>',
   );
 
-  $model1 = '<span class="glyphicon glyphicon-sort-by-alphabet spanred"></span>';
-  $model2 = '<span class="glyphicon glyphicon-sort-by-alphabet-alt spanred"></span>';
-  $group_id_ascending = '<a href="?table=groups&sortby=id&mode=asc">' . $model1 . '</a>';
-  $group_id_descending = '<a href="?table=groups&sortby=id&mode=desc">' . $model2 . '</a>';
-  $group_name_asc = '<a href="?table=groups&sortby=name&mode=asc">' . $model1 . '</a>';
-  $group_name_desc = '<a href="?table=groups&sortby=name&mode=desc">' . $model2 . '</a>';
-  $special_key_asc = '<a href="?table=groups&sortby=special_key&mode=asc">' . $model1 . '</a>';
-  $special_key_desc = '<a href="?table=groups&sortby=special_key&mode=desc">' . $model2 . '</a>';
+  $this->table->set_heading(' Group ID ', ' Group Name ', ' Special Key ', 'Edit', 'Delete');
 
-  $this->table->set_heading($group_id_ascending . ' Group ID ' . $group_id_descending, $group_name_asc . ' Group Name ' . $group_name_desc, $special_key_asc . ' Special Key ' . $special_key_desc, 'Edit', 'Delete');
-
-  $group_id_array = $this->group_model->grab_all_group_ids_sorted($sort_column, $sort_order);
+  $group_id_array = $this->group_model->grab_all_group_ids();
   foreach ($group_id_array as $group_id) {
     $temp = $this->group_model->get_group_object_by_id($group_id);
     $table_data[] = array(

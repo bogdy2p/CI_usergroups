@@ -14,16 +14,20 @@ echo '<link href="' . base_url() . 'assets/css/bootstrap-theme.css" rel="stylesh
 echo '<link href="' . base_url() . 'assets/css/style.css"           rel="stylesheet"  type="text/css">';
 echo '<link href="' . base_url() . 'assets/css/loginsystem.css"           rel="stylesheet"  type="text/css">';
 echo '<script src="' . base_url() . 'assets/js/testuser.js"></script>';
-?>
-<?php 
 echo '<link rel="stylesheet/less" type="text/css" href="' . base_url() . 'assets/customless/style.less"/>';
 echo '<script src="' . base_url() . 'assets/less/less.min.js"></script>';
-?>
-<?php
 echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>';
-echo '<script src="' . base_url() . 'assets/js/jquery.tablesorter.js"></script>';
+echo '<script src="' . base_url() . 'assets/js/sorting.js"></script>';
+
+
+//HEAD ENDS HERE
 echo '</head>';
+
+//BODY STARTS HERE
 echo '<body>';
+
+
+
 echo '<script src="' . base_url() . 'assets/js/ajaxusername.js"></script>';
 echo '<div class ="container">';
 ?>

@@ -50,18 +50,6 @@ class User_model extends CI_Model {
     return $return;
   }
 
-  function read_sorted($column, $mode) {
-    $this->db->select('*');
-    $this->db->from('users');
-    $this->db->order_by($column, $mode);
-    $result = $this->db->get();
-    $return = array();
-    foreach ($result->result_array() as $row) {
-      $return[] = $row;
-    }
-    return $return;
-  }
-
   function check_old_password_is_correct($username, $password) {
     $this->db->where('username', $username);
     $this->db->where('password', md5($this->input->post('old_password')));
