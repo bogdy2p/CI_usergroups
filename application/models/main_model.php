@@ -17,10 +17,10 @@ class Main_model extends CI_Model {
     return $return;
   }
 
-  function read_sorted($column,$mode){
+  function read_sorted($column, $mode) {
     $this->db->select('*');
     $this->db->from('usergroups');
-    $this->db->order_by($column,$mode);
+    $this->db->order_by($column, $mode);
     $result = $this->db->get();
     $return = array();
     foreach ($result->result_array() as $row) {
@@ -28,10 +28,7 @@ class Main_model extends CI_Model {
     }
     return $return;
   }
-  
-  
-  
-  
+
   function delete_mapping($id) {
     $this->db->where('id', $id);
     $this->db->delete('usergroups');

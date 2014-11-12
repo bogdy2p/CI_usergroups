@@ -50,6 +50,18 @@ class User_model extends CI_Model {
     return $return;
   }
 
+  function read_sorted($column, $mode) {
+    $this->db->select('*');
+    $this->db->from('users');
+    $this->db->order_by($column, $mode);
+    $result = $this->db->get();
+    $return = array();
+    foreach ($result->result_array() as $row) {
+      $return[] = $row;
+    }
+    return $return;
+  }
+
   function check_old_password_is_correct($username, $password) {
     $this->db->where('username', $username);
     $this->db->where('password', md5($this->input->post('old_password')));
@@ -67,17 +79,16 @@ class User_model extends CI_Model {
     $this->db->update('users', $data);
   }
 
-  function update_access_at_login(){
-      $data = array(
-        'last_ip_accessed' => $this->session->userdata['ip_address'],
-      );
-      $this->db->set('last_access_date', 'NOW()', FALSE);
-      $this->db->where('username',$this->input->post('username'));
-      $update = $this->db->update('users',$data);
-      return $update;
+  function update_access_at_login() {
+    $data = array(
+      'last_ip_accessed' => $this->session->userdata['ip_address'],
+    );
+    $this->db->set('last_access_date', 'NOW()', FALSE);
+    $this->db->where('username', $this->input->post('username'));
+    $update = $this->db->update('users', $data);
+    return $update;
   }
-  
-  
+
   function update() {
     $id = $this->input->post('id');
     $data = arraY(
@@ -373,18 +384,17 @@ class User_model extends CI_Model {
     }
     return $return;
   }
-  
-  function get_all_user_ids_sorted_by_id($sort){
+
+  function get_all_user_ids_sorted_by_id($sort) {
     $this->db->select('id');
     $this->db->from('users');
-    $this->db->order_by('id',$sort);
+    $this->db->order_by('id', $sort);
     $result = $this->db->get();
     $return = array();
-    foreach ($result->result_array() as $row){
+    foreach ($result->result_array() as $row) {
       $return[] = $row['id'];
     }return $return;
   }
-  
 
   function get_userids_for_a_group($id) {
     $this->db->select('user_id');
@@ -409,26 +419,25 @@ class User_model extends CI_Model {
     return $return;
   }
 
-  function get_total_logins($username){
+  function get_total_logins($username) {
     $this->db->select('total_logins');
     $this->db->from('users');
-    $this->db->where('username',$username);
+    $this->db->where('username', $username);
     $result = $this->db->get();
-    foreach ($result->result_array() as $row){
+    foreach ($result->result_array() as $row) {
       return $row['total_logins'];
     }
   }
-  
-  function update_total_logins($username,$old_logins_number){
+
+  function update_total_logins($username, $old_logins_number) {
     $data = array(
       'total_logins' => ($old_logins_number + 1),
     );
-    $this->db->where('username',$username);
-    $update = $this->db->update('users',$data);
+    $this->db->where('username', $username);
+    $update = $this->db->update('users', $data);
     return $update;
   }
-  
-  
+
   function get_user_object($id) {
     $this->db->select('*');
     $this->db->from('users');
