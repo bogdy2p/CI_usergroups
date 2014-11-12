@@ -2,7 +2,7 @@
 <div class="col-xs-12 col-md-12">
   <?php
   $table_template = array(
-    'table_open' => '<table class="table table-bordered col-xs-12 col-md-3 tablesorter" id="usersTable">',
+    'table_open' => '<table class="tablesorter" id="usersTable">',
     'heading_row_start' => '<tr class="wordwrap1">',
     'heading_row_end' => '</tr>',
     'heading_cell_start' => '<th class="success wordwrap1">',
@@ -29,5 +29,22 @@
   $this->table->set_template($table_template);
   echo $this->table->generate();
   ?>
+    <div id="pager" class="pager">
+  <form>
+    <img src="<?php echo base_url().'assets/css/tablesorter/' ?>first.png" class="first"/>
+    <img src="<?php echo base_url().'assets/css/tablesorter/' ?>prev.png" class="prev"/>
+    <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+    <img src="<?php echo base_url().'assets/css/tablesorter/' ?>next.png" class="next"/>
+    <img src="<?php echo base_url().'assets/css/tablesorter/' ?>last.png" class="last"/>
+    <select class="pagesize">
+      <option value="2">2</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+  </form>
 </div>
+
+</div>
+
+
 
