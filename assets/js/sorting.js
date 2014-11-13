@@ -4,8 +4,6 @@
 //});
 //
 
-
-
 $(document).ready(function() {
   $("#usersTable")
     .tablesorter({widthFixed: true, widgets: ['zebra']})
@@ -19,11 +17,15 @@ $(document).ready(function() {
     .tablesorterPager({container: $("#pagerGroup")});
 });
 
-
-
-
 $(document).ready(function() {
   $("#mappingTable")
     .tablesorter({widthFixed: true, widgets: ['zebra']})
     .tablesorterPager({container: $("#pagerMapping")});
+});
+
+$(document).ready(function() {
+  $("#changelogTable")
+    .tablesorter({widthFixed: true, widgets: ['zebra']})
+    .tablesorterPager({container: $("#pagerChangelog")})
+  ;
 });

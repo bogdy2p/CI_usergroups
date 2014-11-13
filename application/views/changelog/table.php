@@ -5,7 +5,7 @@
 <div class="row"> 
   <?php
   $table_template = array(
-    'table_open' => '<table class="table table-bordered">',
+    'table_open' => '<table class="table table-bordered col-xs-12 col-md-12 tablesorter" id="changelogTable">',
     'heading_row_start' => '<tr class="wordwrap1">',
     'heading_row_end' => '</tr>',
     'heading_cell_start' => '<th class="success col-xs-11 col-md-11">',
@@ -25,15 +25,33 @@
       'Created',
     ),
   );
-
+  
+  $this->table->set_heading(' Name ', ' Created ');
   $changelogs = $this->changelog_model->read_for_last_x_days($_POST['day']);
   foreach ($changelogs as $changelog) {
-    $table_data[] = array(
-      '<' . $changelog['colour'] . '>' . $changelog['name'] . '</' . $changelog['colour'] . '>',
-      $changelog['date'],
-    );
+    $this->table->add_row(
+          array('data' => '<' . $changelog['colour'] . '>' . $changelog['name'] . '</' . $changelog['colour'] . '>', 'class' => 'highlight col-xs-10 col-md-10 wordwrap1'),
+          array('data' => $changelog['date'], 'class' => 'highlight col-xs-2 col-md-2 wordwrap1')
+      );
   }
   $this->table->set_template($table_template);
-  echo $this->table->generate($table_data);
+  echo $this->table->generate();
   ?>
+  <div id="pagerChangelog" class="tablesorterPager">
+      <form>
+        <select class="form-control-static pagesize">
+          <option selected="selected" value="5">5 / Page</option>
+          <option value="10">10 / Page</option>
+          <option value="20">20 / Page</option>
+          <option value="50">50 / Page</option>
+          <option value="500">500 / Page</option>
+        </select>
+        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>first.png" class="first"/>
+        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>prev.png" class="prev"/>
+        <input type="text" class="pagedisplay"> <!-- this can be any element, including an input -->
+        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>next.png" class="next"/>
+        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>last.png" class="last"/>
+      </form>
+    </div>  
+  
 </div>
