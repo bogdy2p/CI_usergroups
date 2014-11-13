@@ -15,8 +15,8 @@ div.tablesorterPager input.next {
 	margin-left: 10px;
 }
 div.tablesorterPager input {
-	font-size: 8px;
-	width: 50px;
+	font-size: 10px;
+	width: 160px;
 	border: 1px solid #330000;
 	text-align: center;
 }

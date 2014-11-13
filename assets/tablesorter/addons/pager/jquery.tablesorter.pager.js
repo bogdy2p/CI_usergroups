@@ -3,7 +3,8 @@
 		tablesorterPager: new function() {
 			
 			function updatePageDisplay(c) {
-				var s = $(c.cssPageDisplay,c.container).val((c.page+1) + c.seperator + c.totalPages);	
+				var s = $(c.cssPageDisplay,c.container).val((c.page+1) + c.seperator + c.totalPages + "aav");
+                                var s = $(c.cssPageDisplay,c.container).val('Viewing page '+(c.page+1) + ' of total ' + c.totalPages + " Pages");
 			}
 			
 			function setPageSize(table,size) {

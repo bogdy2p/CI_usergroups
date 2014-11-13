@@ -1,3 +1,14 @@
+.pagerendered{
+  font-size: 10px;
+  width: 100%;
+  position:absolute;
+  bottom: 0px;  
+  text-align: center;
+  //background-color: salmon;
+  position: fixed;
+}
+
+
 .default_css_table{
   margin: 0px auto;
   background: black;

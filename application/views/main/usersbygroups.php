@@ -1,8 +1,8 @@
-&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>
+<!--&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>-->
 <!--<div class="row">-->
  
   <!--<h4>Users by group</h4> <hr />-->
-  <p>User By Groups Table removed due to inefficiency<p>
+  <!--<p>User By Groups Table removed due to inefficiency<p>-->
   <?php
 //  $table_template = array(
 //    'table_open' => '<table class="table table-bordered col-xs-12 col-md-3" id="u_by_gTable">',
