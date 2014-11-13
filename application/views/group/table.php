@@ -37,12 +37,11 @@
 
   <div id="pagerGroup" class="tablesorterPager">
     <form>
-      <label>GroupTablePager</label>
-      <select class="pagesize">
-        <option selected="selected" value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="100">100</option>
+      <select class="form-control-static pagesize">
+        <option selected="selected" value="2">2 / Page</option>
+        <option value="3">3 / Page</option>
+        <option value="4">4 / Page</option>
+        <option value="100">100 / Page</option>
       </select>
       <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>first.png" class="first"/>
       <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>prev.png" class="prev"/>

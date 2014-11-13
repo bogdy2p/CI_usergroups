@@ -21,5 +21,17 @@ div.tablesorterPager input {
 	text-align: center;
 }
 
+.pagesize{
+  margin-left: 5px;
+  margin-right: 5px;
+  font-weight: bold;
+  color: red;
+  //border-radius: 5px;
+}
+
+.pagesize option{
+  color:blue;
+  font-weight: bold;
+}
 
   
