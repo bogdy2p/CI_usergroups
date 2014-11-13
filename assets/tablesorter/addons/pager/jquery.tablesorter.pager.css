@@ -1,9 +1,6 @@
 div.tablesorterPager {
-        width: 300px;
-        margin: 0px auto;
-        z-index: 100;
 	padding: 10px 0 10px 0;
-	background-color: #D6D2C2;
+	//background-color: #D6D2C2;
 	text-align: center;
 }
 div.tablesorterPager span {
