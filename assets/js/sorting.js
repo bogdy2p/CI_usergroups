@@ -2,17 +2,22 @@
 //("table").tablesorter();
 //});
 
- $(document).ready(function() { 
-     $("table") 
-     .tablesorter({widthFixed: true, widgets: ['zebra']}) 
-     .tablesorterPager({container: $("#pager")}); 
- }); 
+$(document).ready(function() {
+  $("#usersTable")
+    .tablesorter({widthFixed: true, widgets: ['zebra']})
+    .tablesorterPager({container: $("#pagerUser")});
+});
 //
+$(document).ready(function() {
+  $("#groupsTable")
+    .tablesorter({widthFixed: true, widgets: ['zebra']})
+    .tablesorterPager({container: $("#pagerGroup")});
+});
 
-//$(document).ready(function()
-//{
-//  $("#mappingTable")
-//    .tablesorter({widthFixed: true, widgets: ['zebra']})
-////  $("#mappingTable").tablesorterPager();
-//}
-//);
+$(document).ready(function()
+{
+  $("#mappingTable")
+    .tablesorter({widthFixed: true, widgets: ['zebra']})
+    .tablesorterPager({container: $("#pagerMapping")});
+}
+);
