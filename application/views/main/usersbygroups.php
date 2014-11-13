@@ -1,7 +1,7 @@
-
-<div class="row">
+&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>
+<!--<div class="row">-->
  
-  <h4>Users by group</h4> <hr />
+  <!--<h4>Users by group</h4> <hr />-->
   <p>User By Groups Table removed due to inefficiency<p>
   <?php
 //  $table_template = array(
@@ -34,4 +34,4 @@
 //    echo $this->table->generate($table_data);
 //  }
 //  ?>
-</div>
+<!--</div>-->

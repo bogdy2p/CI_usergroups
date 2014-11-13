@@ -1,5 +1,4 @@
-
-<div class="col-xs-12 col-md-6">
+<div class="col-xs-12 col-md-12">
   <h4>Groups Table</h4>
   <?php
   $table_template = array(
@@ -35,20 +34,22 @@
   $this->table->set_template($table_template);
   echo $this->table->generate($table_data);
   ?>
-</div>
-<div id="pagerGroup" class="pager">
+
+  <div id="pagerGroup" class="tablesorterPager">
     <form>
       <label>GroupTablePager</label>
-      <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>first.png" class="first"/>
-      <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>prev.png" class="prev"/>
-      <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
-      <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>next.png" class="next"/>
-      <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>last.png" class="last"/>
       <select class="pagesize">
         <option value="2" selected>2</option>
         <option value="3">3</option>
         <option value="4">4</option>
         <option value="100">ALL</option>
       </select>
+      <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>first.png" class="first"/>
+      <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>prev.png" class="prev"/>
+      <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+      <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>next.png" class="next"/>
+      <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>last.png" class="last"/>
     </form>
-  </div>
+  </div>  
+</div>
+
