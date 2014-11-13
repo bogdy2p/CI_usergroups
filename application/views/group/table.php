@@ -39,10 +39,10 @@
     <form>
       <label>GroupTablePager</label>
       <select class="pagesize">
-        <option value="2" selected>2</option>
+        <option selected="selected" value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
-        <option value="100">ALL</option>
+        <option value="100">100</option>
       </select>
       <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>first.png" class="first"/>
       <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>prev.png" class="prev"/>
