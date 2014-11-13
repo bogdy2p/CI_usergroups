@@ -503,6 +503,22 @@ class User_model extends CI_Model {
     }
   }
 
+  function get_account_picture_link($username){
+    $this->db->select('account_picture');
+    $this->db->from('users');
+    $this->db->where('username',$username);
+    $result = $this->db->get();
+    foreach ($result->result_array() as $row) {
+      if (!empty($row['account_picture'])){
+      return $row['account_picture'];
+      }else{
+      return 'http://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
+      }
+    }
+  }
+  
+  
+  
   function get_all_groupnames_from_db() {
     $this->db->select('*');
     $this->db->from('groups');

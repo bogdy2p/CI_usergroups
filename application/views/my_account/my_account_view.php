@@ -38,10 +38,9 @@ $groups_is_member = $this->user_model->get_number_of_groups_for_a_user($current_
     ?>
   </div>
   <div class="col-xs-12 col-md-3">
-    USER IMAGE ?!?! (should implement) ?
-    USER IMAGE ?!?! (should implement) ?
-    USER IMAGE ?!?! (should implement) ?
-    USER IMAGE ?!?! (should implement) ?
+
+    <img class="account_picture" src="<?php echo $this->user_model->get_account_picture_link($current_user->username);?>">
+    Change My Account Picture Link Here
 
   </div>
   <div class="col-xs-12 col-md-1"></div>

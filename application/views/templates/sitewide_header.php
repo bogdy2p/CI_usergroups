@@ -9,7 +9,9 @@ echo '<meta charset="utf-8">';
 echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
 echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 
-echo '<script src="' . base_url() . 'assets/js/jquery-2.1.1.js"                             type="text/javascript"></script>';
+echo '
+<script src="' . base_url() . 'assets/js/jquery-2.1.1.js"     type="text/javascript"></script> 
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"  type="text/javascript"></script>';
 echo '                           
 <link href="' . base_url() . 'assets/css/bootstrap.css"                  rel="stylesheet"       type="text/css">
 <link href="' . base_url() . 'assets/css/bootstrap-theme.css"            rel="stylesheet"       type="text/css">

@@ -25,7 +25,7 @@
   // GENERATE TABLES USING CODEIGNITER TABLE HELPER 
 
   $tmpl1 = array(
-    'table_open' => '<table class="table table-bordered ">',
+    'table_open' => '<table class="table table-bordered">',
     'heading_row_start' => '<tr class="">',
     'heading_row_end' => '</tr>',
     'heading_cell_start' => '<th class="danger ">',
