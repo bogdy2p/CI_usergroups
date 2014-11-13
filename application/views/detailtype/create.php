@@ -2,6 +2,7 @@
   <div class="col-xs-3 col-md-4"></div>
   <div class="col-xs-6 col-md-4">
     <div id="detail_type_error"></div>
+    <?php echo validation_errors('<p class="error">'); ?>
     <?php
     echo form_open('detail_type/validate_form_create_detail', 'id="add_new_detail_form"');
     echo form_label('Add New DetailType');

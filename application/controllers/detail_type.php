@@ -16,92 +16,96 @@ class Detail_type extends CI_Controller {
   }
 
   public function index() {
-    if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('detailtype/index');
-    $this->load->view('templates/sitewide_footer');
-  }else{
-    show_404();
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('detailtype/index');
+      $this->load->view('templates/sitewide_footer');
     }
-}
+    else {
+      show_404();
+    }
+  }
 
   public function add() {
-    if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('detailtype/create');
-    $this->load->view('templates/sitewide_footer');
-  }
-  else {
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('detailtype/create');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
       show_404();
     }
   }
 
   public function edit() {
-    if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('detailtype/edit');
-    $this->load->view('templates/sitewide_footer');
-  }else{
-    show_404();
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('detailtype/edit');
+      $this->load->view('templates/sitewide_footer');
     }
-}
+    else {
+      show_404();
+    }
+  }
 
   public function delete() {
-    if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
-    $this->load->view('detailtype/delete');
-  }else{
-    show_404();
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
+      $this->load->view('detailtype/delete');
     }
-}
+    else {
+      show_404();
+    }
+  }
 
   public function ajax() {
-    if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
-    $this->load->view('detailtype/ajax');
-  }else{
-    show_404();
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
+      $this->load->view('detailtype/ajax');
     }
-}
+    else {
+      show_404();
+    }
+  }
 
   public function validate_form_create_detail() {
-    if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
-    $this->form_validation->set_rules('detail_name', 'Detail Name', 'required|min_length[2]|is_unique[user_detail_types.name]');
-    if ($this->form_validation->run() == FALSE) {
-      $this->load->view('templates/sitewide_header');
-      $this->load->view('templates/site_menu');
-      $this->load->view('detail_type/create');
-      $this->load->view('templates/sitewide_footer');
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
+      $this->form_validation->set_rules('detail_name', 'Detail Name', 'trim|required|min_length[2]|is_unique[user_detail_types.name]');
+      if ($this->form_validation->run() == FALSE) {
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
+        $this->load->view('detailtype/create');
+        $this->load->view('templates/sitewide_footer');
+      }
+      else {
+        $this->detail_type_model->create();
+        redirect('detail_type');
+      }
     }
     else {
-      $this->detail_type_model->create();
-      redirect('detail_type');
+      show_404();
     }
-  }else{
-    show_404();
-    }
-}
+  }
 
-  
-  public function validate_form_update_detail(){
-   if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
-   $this->form_validation->set_rules('detail_name', 'Detail Name', 'required|min_length[2]|is_unique[user_detail_types.name]');
-    if ($this->form_validation->run() == FALSE) {
-      $this->load->view('templates/sitewide_header');
-      $this->load->view('templates/site_menu');
-      $this->load->view('detail_type/edit');
-      $this->load->view('templates/sitewide_footer');
+  public function validate_form_update_detail() {
+    if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
+      $this->form_validation->set_rules('detail_name', 'Detail Name', 'required|min_length[2]|is_unique[user_detail_types.name]');
+      if ($this->form_validation->run() == FALSE) {
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
+        $this->load->view('detail_type/edit');
+        $this->load->view('templates/sitewide_footer');
+      }
+      else {
+        $this->detail_type_model->update();
+        $this->detail_type_model->update_detail_types_names_in_user_groups();
+        redirect('detail_type');
+      }
     }
     else {
-      $this->detail_type_model->update();
-      $this->detail_type_model->update_detail_types_names_in_user_groups();
-      redirect('detail_type');
+      show_404();
     }
-  }else{
-    show_404();
-    }
-}
-  
-  
+  }
+
 }
