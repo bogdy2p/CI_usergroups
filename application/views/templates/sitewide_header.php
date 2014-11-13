@@ -26,17 +26,7 @@ echo '
 <script src="' . base_url() . 'assets/tablesorter/jquery.tablesorter.js"                    type="text/javascript"></script>
 <script src="' . base_url() . 'assets/tablesorter/addons/pager/jquery.tablesorter.pager.js" type="text/javascript"></script>
 <script src="' . base_url() . 'assets/js/sorting.js"                                        type="text/javascript"></script>';
-?>
 
-
-<!--<script type="text/javascript">
-	$(function() {
-		$("table")
-			.tablesorter({widthFixed: true , widgets: ['zebra']} )
-	});
-</script>-->
-
-<?php
 
 echo ' </head> 
 

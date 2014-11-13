@@ -43,7 +43,7 @@
       </select>
       <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>first.png" class="first"/>
       <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>prev.png" class="prev"/>
-      <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+      <input type="text" class="pagedisplay"> <!-- this can be any element, including an input -->
       <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>next.png" class="next"/>
       <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>last.png" class="last"/>
     </form>
