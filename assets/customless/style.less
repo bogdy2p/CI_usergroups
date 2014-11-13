@@ -7,3 +7,36 @@
   height: @height;
   width: @width;
 }
+
+#changelogTable {
+  thead {
+    color:black;
+    font-size:14px;
+    tr{
+      th{
+        text-align: left;
+        border: 1px solid gold;
+        background-color: #44444a;
+        color: white;
+      }
+    }
+  }  
+  tbody{
+    tr.odd{
+      background-color:#e7ec9a;
+      td{
+        border: 1px solid gold;
+        color:red;
+        font-size: 12px;
+      }
+    }
+    tr.even{
+      background-color: #c9dcde;
+      td{
+        border: 1px solid gold;
+        color:red;
+      }
+    }
+  }
+}
+

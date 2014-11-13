@@ -5,8 +5,8 @@
 <div class="row"> 
   <?php
   $table_template = array(
-    'table_open' => '<table class="table table-bordered col-xs-12 col-md-12 tablesorter" id="changelogTable">',
-    'heading_row_start' => '<tr class="wordwrap1">',
+    'table_open' => '<table class="changelogtable table tablesorter" id="changelogTable">',
+    'heading_row_start' => '<tr>',
     'heading_row_end' => '</tr>',
     'heading_cell_start' => '<th class="success col-xs-11 col-md-11">',
     'heading_cell_end' => '</th>',
@@ -40,7 +40,8 @@
   <div id="pagerChangelog" class="tablesorterPager">
       <form>
         <select class="form-control-static pagesize">
-          <option selected="selected" value="5">5 / Page</option>
+          <option selected="selected" value="2">2 / Page</option>
+          <option value="5">5 / Page</option>
           <option value="10">10 / Page</option>
           <option value="20">20 / Page</option>
           <option value="50">50 / Page</option>
