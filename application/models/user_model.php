@@ -517,7 +517,21 @@ class User_model extends CI_Model {
     }
   }
   
+  function set_account_picture_link($username,$link){
+    $data = array(
+      'account_picture' => $link,
+    );
+    $this->db->where('username',$username);
+    $update = $this->db->update('users', $data);
+    return $update;
+  }
   
+  function remove_account_picture($username){
+    $data = array('account_picture' => '',);
+    $this->db->where('username',$username);
+    $update = $this->db->update('users',$data);
+    return $update;
+  }
   
   function get_all_groupnames_from_db() {
     $this->db->select('*');

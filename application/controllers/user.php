@@ -373,4 +373,16 @@ class User extends CI_Controller {
     }
   }
 
+  public function my_account_change_picture(){
+    if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('my_account/change_my_picture');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      show_404();
+    }
+  }
+  
 }
