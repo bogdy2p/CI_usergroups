@@ -115,6 +115,14 @@ spangre{
   word-wrap: break-word;
   max-width: 70px;
 }
+@media screen and (max-width: 600px) {
+  .wordwrap1 {
+    word-wrap: break-word;
+    max-width: 50px;
+  }
+
+}
+
 
 .pointer {
   cursor: pointer;
