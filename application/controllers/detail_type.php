@@ -90,11 +90,11 @@ class Detail_type extends CI_Controller {
 
   public function validate_form_update_detail() {
     if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
-      $this->form_validation->set_rules('detail_name', 'Detail Name', 'required|min_length[2]|is_unique[user_detail_types.name]');
+      $this->form_validation->set_rules('detail_name', 'Detail Name', 'trim|required|min_length[2]|is_unique[user_detail_types.name]');
       if ($this->form_validation->run() == FALSE) {
         $this->load->view('templates/sitewide_header');
         $this->load->view('templates/site_menu');
-        $this->load->view('detail_type/edit');
+        $this->load->view('detailtype/edit');
         $this->load->view('templates/sitewide_footer');
       }
       else {

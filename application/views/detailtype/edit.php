@@ -13,7 +13,7 @@
     <div class="row">
       <?php echo validation_errors('<p class="error">'); ?>
       <?php
-      echo form_open('detail_type/validate_form_update_detail', 'id="add_new_detail_form"');
+      echo form_open('detail_type/validate_form_update_detail?name='.$this->input->get('name'), 'id="add_new_detail_form"');
       echo form_label('Update Detail : ' . $this->input->get('name'));
       echo '<br />';
       echo form_hidden('old_detail_name', $this->input->get('name'));
