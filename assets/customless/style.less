@@ -2,21 +2,29 @@
 @width: @height;
 @black: #000000;
 @red: #f00;
-
+//$lamaie: yellowgreeen;
 .square {
   height: @height;
   width: @width;
 }
 
+.changelogtablecontainer{
+  padding : 10px;
+  border-radius: 15px;
+  background-color: yellowgreen;
+}
+
 #changelogTable {
+
   thead {
+    
     color:black;
     font-size:14px;
-    tr{
+    tr{border-radius: 10px;
       th{
         text-align: left;
-        border: 1px solid gold;
         background-color: #44444a;
+        background-color: #8FAB56;
         color: white;
       }
     }
@@ -40,3 +48,7 @@
   }
 }
 
+#pagerChangelog{
+  top:0 !important;
+  padding: 0px;
+}

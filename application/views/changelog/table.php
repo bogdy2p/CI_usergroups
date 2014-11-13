@@ -3,6 +3,26 @@
 ?>
 <h4>Changes for last <?php echo $_POST['day'] - 1; ?> days</h4>
 <div class="row"> 
+  <div class="changelogtablecontainer">
+    <div id="pagerChangelog" class="tablesorterPager">
+      <form>
+        <select class="form-control-static pagesize">
+          <option selected="selected" value="2">2 / Page</option>
+          <option value="5">5 / Page</option>
+          <option value="10">10 / Page</option>
+          <option value="20">20 / Page</option>
+          <option value="50">50 / Page</option>
+          <option value="500">500 / Page</option>
+        </select>
+        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>first.png" class="first"/>
+        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>prev.png" class="prev"/>
+        <input type="text" class="pagedisplay"> <!-- this can be any element, including an input -->
+        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>next.png" class="next"/>
+        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>last.png" class="last"/>
+      </form>
+    </div>  
+    
+    <br />
   <?php
   $table_template = array(
     'table_open' => '<table class="changelogtable table tablesorter" id="changelogTable">',
@@ -37,22 +57,7 @@
   $this->table->set_template($table_template);
   echo $this->table->generate();
   ?>
-  <div id="pagerChangelog" class="tablesorterPager">
-      <form>
-        <select class="form-control-static pagesize">
-          <option selected="selected" value="2">2 / Page</option>
-          <option value="5">5 / Page</option>
-          <option value="10">10 / Page</option>
-          <option value="20">20 / Page</option>
-          <option value="50">50 / Page</option>
-          <option value="500">500 / Page</option>
-        </select>
-        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>first.png" class="first"/>
-        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>prev.png" class="prev"/>
-        <input type="text" class="pagedisplay"> <!-- this can be any element, including an input -->
-        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>next.png" class="next"/>
-        <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>last.png" class="last"/>
-      </form>
-    </div>  
+  </div>
+  
   
 </div>

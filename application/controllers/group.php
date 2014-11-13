@@ -39,9 +39,8 @@ class Group extends CI_Controller {
 
   public function validate_form_create_group() {
     if(isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])){
-    $this->form_validation->set_rules('name', 'Group Name', 'required|min_length[2]|is_unique[groups.name]');
+    $this->form_validation->set_rules('name', 'Group Name', 'trim|required|min_length[2]|is_unique[groups.name]');
     if ($this->form_validation->run() == FALSE) {
-      
         $this->load->view('templates/sitewide_header');
         $this->load->view('templates/site_menu');
         $this->load->view('group/create');

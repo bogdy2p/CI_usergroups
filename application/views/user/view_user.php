@@ -104,10 +104,3 @@
   ?>
 </div>  <!-- END OF ROW 2-->
 <div class="clearer"></div>
-
-
-<div class="row">
-  <div class="col-xs-12 col-md-4"> dsadas</div> 
-  <div class="col-xs-12 col-md-4">2</div>
-  <div class="col-xs-12 col-md-4">3</div>
-</div> <!--END OF ROW 3 -->
