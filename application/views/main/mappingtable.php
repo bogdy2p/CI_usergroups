@@ -22,15 +22,15 @@
     $this->table->set_heading(' Map ID ', ' User ID ', ' Group ID ', 'Delete');
     $maps_id_array = $this->main_model->read();
     foreach ($maps_id_array as $map) {
-      $table_data[] = array(
-        $map['id'],
-        $this->user_model->get_user_name_by_user_id($map['user_id']),
-        $map['group_id'] . ' - ' . $this->group_model->get_group_name_by_group_id($map['group_id']),
-        '<a><span onclick="confirm_delete_mapping(' . $map['id'] . ')" class="glyphicon glyphicon-remove spanred pointer"></span></a>',
+      $this->table->add_row(
+          array('data' =>  $map['id'], 'class' => 'highlight col-xs-1 col-md-1'),
+          array('data' => $this->user_model->get_user_name_by_user_id($map['user_id']), 'class' => 'highlight col-xs-5 col-md-5 wordwrap1'),
+          array('data' => $map['group_id'] . ' - ' . $this->group_model->get_group_name_by_group_id($map['group_id']), 'class' => 'highlight col-xs-5 col-md-5'),
+          array('data' => '<a><span onclick="confirm_delete_mapping(' . $map['id'] . ')" class="glyphicon glyphicon-remove spanred pointer"></span></a>', 'class' => 'highlight col-xs-1 col-md-1',)   
       );
     }
     $this->table->set_template($table_template);
-    echo $this->table->generate($table_data);
+    echo $this->table->generate();
     ?>
 
     <div id="pagerMapping" class="tablesorterPager">

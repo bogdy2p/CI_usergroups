@@ -15,9 +15,10 @@ echo '
 <link href="' . base_url() . 'assets/css/bootstrap-theme.css"            rel="stylesheet"       type="text/css">
 <link href="' . base_url() . 'assets/css/style.css"                      rel="stylesheet"       type="text/css">
 <link href="' . base_url() . 'assets/css/loginsystem.css"                rel="stylesheet"       type="text/css">
+<link href="' . base_url() . 'assets/customless/style.less"              rel="stylesheet/less"  type="text/css"/>
 <link href="' . base_url() . 'assets/tablesorter/themes/blue/style.css"       rel="stylesheet"       type="text/css">
 <link href="' . base_url() . 'assets/tablesorter/addons/pager/jquery.tablesorter.pager.css"   rel="stylesheet"       type="text/css">
-<link href="' . base_url() . 'assets/customless/style.less"              rel="stylesheet/less"  type="text/css"/>';
+';
 
 echo '
 <script src="' . base_url() . 'assets/less/less.min.js"                                     type="text/javascript"></script>

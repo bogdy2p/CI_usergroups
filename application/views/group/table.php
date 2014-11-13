@@ -3,7 +3,7 @@
     <h4>Groups Table</h4>
     <?php
     $table_template = array(
-      'table_open' => '<table class="table table-bordered col-xs-12 col-md-3 tablesorter" id="groupsTable">',
+      'table_open' => '<table class="table table-bordered col-xs-12 col-md-12 tablesorter" id="groupsTable">',
       'heading_row_start' => '<tr>',
       'heading_row_end' => '</tr>',
       'heading_cell_start' => '<th class="success">',
@@ -24,16 +24,17 @@
     $group_id_array = $this->group_model->grab_all_group_ids();
     foreach ($group_id_array as $group_id) {
       $temp = $this->group_model->get_group_object_by_id($group_id);
-      $table_data[] = array(
-        $temp->id,
-        $temp->name,
-        $temp->special_key,
-        '<a href="' . base_url() . 'group/edit?id=' . $group_id . '"><span class="glyphicon glyphicon-edit spangre">',
-        '<a><span onclick="confirm_delete_group(' . $group_id . ')" class="glyphicon glyphicon-remove spanred pointer"></span></a>',
+
+      $this->table->add_row(
+          array('data' => $temp->id, 'class' => 'highlight col-xs-1 col-md-1'),
+          array('data' => $temp->name, 'class' => 'highlight col-xs-4 col-md-4 wordwrap1'),
+          array('data' => $temp->special_key, 'class' => 'highlight col-xs-4 col-md-4 wordwrap1'),
+          array('data' => '<a href="' . base_url() . 'group/edit?id=' . $group_id . '"><span class="glyphicon glyphicon-edit spangre">', 'class' => 'highlight col-xs-1 col-md-1'),
+          array('data' => '<a><span onclick="confirm_delete_group(' . $group_id . ')" class="glyphicon glyphicon-remove spanred pointer"></span></a>', 'class' => 'highlight col-xs-1 col-md-1',)   
       );
     }
     $this->table->set_template($table_template);
-    echo $this->table->generate($table_data);
+    echo $this->table->generate();
     ?>
 
     <div id="pagerGroup" class="tablesorterPager">
