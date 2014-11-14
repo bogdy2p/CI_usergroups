@@ -503,36 +503,41 @@ class User_model extends CI_Model {
     }
   }
 
-  function get_account_picture_link($username){
+  function has_image_file_on_server($username){
+    return true;
+  }  
+  
+  function get_account_picture_link($username) {
     $this->db->select('account_picture');
     $this->db->from('users');
-    $this->db->where('username',$username);
+    $this->db->where('username', $username);
     $result = $this->db->get();
     foreach ($result->result_array() as $row) {
-      if (!empty($row['account_picture'])){
-      return $row['account_picture'];
-      }else{
-      return 'http://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
+      if (!empty($row['account_picture'])) {
+        return base_url().'uploads/account_pictures/'.$row['account_picture'];
+      }
+      else {
+        return 'http://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
       }
     }
   }
-  
-  function set_account_picture_link($username,$link){
+
+  function set_account_picture_link($username, $link) {
     $data = array(
       'account_picture' => $link,
     );
-    $this->db->where('username',$username);
+    $this->db->where('username', $username);
     $update = $this->db->update('users', $data);
     return $update;
   }
-  
-  function remove_account_picture($username){
+
+  function remove_account_picture($username) {
     $data = array('account_picture' => '',);
-    $this->db->where('username',$username);
-    $update = $this->db->update('users',$data);
+    $this->db->where('username', $username);
+    $update = $this->db->update('users', $data);
     return $update;
   }
-  
+
   function get_all_groupnames_from_db() {
     $this->db->select('*');
     $this->db->from('groups');

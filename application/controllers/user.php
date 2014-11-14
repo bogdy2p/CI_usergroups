@@ -171,40 +171,49 @@ class User extends CI_Controller {
     }
   }
 
-  public function validate_form_change_picture_by_link() {
-    $this->form_validation->set_rules('image_link', 'Image Link', 'trim|min_length[4]');
+//  public function validate_form_change_picture_by_link() {
+//    $this->form_validation->set_rules('image_link', 'Image Link', 'trim|min_length[4]');
+//
+//    if ($this->form_validation->run() == FALSE) {
+//      $this->load->view('templates/sitewide_header');
+//      $this->load->view('templates/site_menu');
+//      $this->load->view('my_account/change_my_picture');
+//      $this->load->view('templates/sitewide_footer');
+//    }
+//    else {
+//      $username = $this->session->userdata['username'];
+//      $image_link = $this->input->post('image_link');
+//      $validated = $this->user_model->set_account_picture_link($username, $image_link);
+//      if ($validated) {
+//        $data['success_message'] = 'You have successfully updated BY LINK INPUT your Account Picture.';
+//        $this->load->view('templates/sitewide_header');
+//        $this->load->view('templates/site_menu');
+//        $this->load->view('my_account/my_account_view', $data);
+//        $this->load->view('templates/sitewide_footer');
+//      }
+//      else {
+//        $data['custom_error'] = 'You entered the WRONG old password.';
+//        $this->load->view('templates/sitewide_header');
+//        $this->load->view('templates/site_menu');
+//        $this->load->view('my_account/my_account_view', $data);
+//        $this->load->view('templates/sitewide_footer');
+//      }
+//    }
+//  }
 
-    if ($this->form_validation->run() == FALSE) {
-      $this->load->view('templates/sitewide_header');
-      $this->load->view('templates/site_menu');
-      $this->load->view('my_account/change_my_picture');
-      $this->load->view('templates/sitewide_footer');
-    }
-    else {
-      $username = $this->session->userdata['username'];
-      $image_link = $this->input->post('image_link');
-      $validated = $this->user_model->set_account_picture_link($username, $image_link);
-      if ($validated) {
-        $data['success_message'] = 'You have successfully updated BY LINK INPUT your Account Picture.';
-        $this->load->view('templates/sitewide_header');
-        $this->load->view('templates/site_menu');
-        $this->load->view('my_account/my_account_view', $data);
-        $this->load->view('templates/sitewide_footer');
-      }
-      else {
-        $data['custom_error'] = 'You entered the WRONG old password.';
-        $this->load->view('templates/sitewide_header');
-        $this->load->view('templates/site_menu');
-        $this->load->view('my_account/change_password_form', $data);
-        $this->load->view('templates/sitewide_footer');
-      }
-    }
+  public function validate_form_remove_account_picture() {
+    $username = $this->session->userdata['username'];
+    $link = '';
+    $this->user_model->set_account_picture_link($username, $link);
+    die('HAS BEEN DONE');
   }
-
+  
+  
+  
   public function validate_form_change_picture_by_file() {
     $custom_filename = $this->session->userdata['username'];
     $config['upload_path'] = 'uploads/account_pictures';
-    $config['file_name'] = $custom_filename.'_account_picture';
+    $config['file_name'] = $custom_filename . '_account_picture';
     $config['overwrite'] = TRUE;
     $config['allowed_types'] = 'gif|jpg|png';
     $config['max_size'] = '2048000';
@@ -213,7 +222,7 @@ class User extends CI_Controller {
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
 
-    if (! $asd = $this->upload->do_upload()) {
+    if (!$asd = $this->upload->do_upload()) {
       $error = array('error' => $this->upload->display_errors());
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
@@ -223,10 +232,10 @@ class User extends CI_Controller {
     else {
       $data = array('upload_data' => $this->upload->data());
       $username = $this->session->userdata['username'];
-      $uploads_folder = base_url().'uploads/account_pictures/';
+      $uploads_folder = base_url() . 'uploads/account_pictures/';
       $filename = $data['upload_data']['file_name'];
       $link = $filename;
-      $this->user_model->set_account_picture_link($username,$link);
+      $this->user_model->set_account_picture_link($username, $link);
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
       $this->load->view('my_account/my_account_view');
