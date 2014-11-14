@@ -10,13 +10,13 @@
   <div class="col-xs-12 col-md-4">
     <div class="upload_account_image">
       <?php
-      echo form_open('user/blablabla');
+      echo form_open_multipart('user/change_picture_validation');
       echo'<br/>';
       echo form_label('Choose an option below:');
       echo'<br/><br/><br/>';
       echo form_label('Enter direct image link');
       echo'<br/>';
-      echo form_input('fds');
+      echo form_input('image_link');
       echo'<br/><br/><br/>';
       echo form_label('Upload a local image file');
       echo'<br/>';
