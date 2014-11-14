@@ -203,35 +203,29 @@ class User extends CI_Controller {
     }
   }
 
-  public function validate_form_change_picture_by_file() {
-    $this->form_validation->set_rules('file', 'File', 'file_type[image/jpeg|image/gif|image/png]|file_max_size[500]');
-    if ($this->form_validation->run() == FALSE) {
-      $this->load->view('templates/sitewide_header');
-      $this->load->view('templates/site_menu');
-      $this->load->view('my_account/change_my_picture');
-      $this->load->view('templates/sitewide_footer');
+  public function validate_form_change_picture_by_file() { 
+    $config['upload_path'] = 'uploads/account_pictures';
+    $config['allowed_types'] = 'gif|jpg|png';
+    $config['max_size'] = '1000001';
+    $config['max_width'] = '1024';
+    $config['max_height'] = '768';
+
+    $this->load->library('upload', $config);
+    $this->upload->initialize($config);
+
+    if (!$this->upload->do_upload()) {
+      $error = array('error' => $this->upload->display_errors());
+
+      $this->load->view('upload/upload_form', $error);
     }
     else {
-      $username = $this->session->userdata['username'];
-      $image_link = $this->input->post('file');
-      $validated = $this->user_model->set_account_picture_link($username, $image_link);
-      if ($validated) {
+      $data = array('upload_data' => $this->upload->data());
 
-        $this->user_model->update_password_for_username($username);
-        $data['success_message'] = 'You have successfully updated BY FILE UPLOAD your Account Picture.';
-        $this->load->view('templates/sitewide_header');
-        $this->load->view('templates/site_menu');
-        $this->load->view('my_account/my_account_view', $data);
-        $this->load->view('templates/sitewide_footer');
-      }
-      else {
-        $data['custom_error'] = 'You entered the WRONG old password.';
-        $this->load->view('templates/sitewide_header');
-        $this->load->view('templates/site_menu');
-        $this->load->view('my_account/error', $data);
-        $this->load->view('templates/sitewide_footer');
-      }
+      $this->load->view('upload/upload_success', $data);
     }
+    
+    
+    
   }
 
   function validate_form_update_details() {

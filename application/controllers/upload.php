@@ -2,44 +2,37 @@
 
 class Upload extends CI_Controller {
 
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->helper(array('form', 'url'));
-	}
+  function __construct() {
+    parent::__construct();
+    $this->load->helper(array('form', 'url'));
+  }
 
-	function index()
-	{
-		$this->load->view('upload/upload_form', array('error' => ' ' ));
-	}
+  function index() {
+    $this->load->view('upload/upload_form', array('error' => ' '));
+  }
 
-	function do_upload()
-	{
-		$config['upload_path'] = 'uploads/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '1000001';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+  function do_upload() {
+    $config['upload_path'] = 'uploads/account_pictures';
+    $config['allowed_types'] = 'gif|jpg|png';
+    $config['max_size'] = '1000001';
+    $config['max_width'] = '1024';
+    $config['max_height'] = '768';
 
-
-    //var_dump(is_dir($asd)); 
-    
-   
-		$this->load->library('upload', $config);
+    $this->load->library('upload', $config);
     $this->upload->initialize($config);
 
-		if ( ! $this->upload->do_upload())
-		{
-			$error = array('error' => $this->upload->display_errors());
+    if (!$this->upload->do_upload()) {
+      $error = array('error' => $this->upload->display_errors());
 
-			$this->load->view('upload/upload_form', $error);
-		}
-		else
-		{
-			$data = array('upload_data' => $this->upload->data());
+      $this->load->view('upload/upload_form', $error);
+    }
+    else {
+      $data = array('upload_data' => $this->upload->data());
 
-			$this->load->view('upload/upload_success', $data);
-		}
-	}
+      $this->load->view('upload/upload_success', $data);
+    }
+  }
+
 }
+
 ?>

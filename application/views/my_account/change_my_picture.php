@@ -24,7 +24,6 @@
       echo form_close();
       echo'<br/>';
       ?>
-
       <?php
 //      echo form_open_multipart('user/validate_form_change_picture_by_file');
 //      echo form_label('Upload a local image file');
@@ -36,10 +35,10 @@
       ?>
 
       <?php //echo $error; ?>
-      <?php echo form_open_multipart('upload/do_upload'); ?>
+      <?php echo form_open_multipart('user/validate_form_change_picture_by_file'); ?>
       <input type="file" name="userfile" size="20" />
       <br /><br />
-      <input type="submit" value="upload" />
+      <input type="submit" value="Update by File " class="btn btn-success" />
       </form>
 
 
