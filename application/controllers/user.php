@@ -187,7 +187,7 @@ class User extends CI_Controller {
       if ($validated) {
 
         $this->user_model->update_password_for_username($username);
-        $data['success_message'] = 'You have successfully updated your Account Picture.';
+        $data['success_message'] = 'You have successfully updated BY LINK INPUT your Account Picture.';
         $this->load->view('templates/sitewide_header');
         $this->load->view('templates/site_menu');
         $this->load->view('my_account/my_account_view', $data);
@@ -204,7 +204,7 @@ class User extends CI_Controller {
   }
 
   public function validate_form_change_picture_by_file() {
-    $this->form_validation->set_rules('image_link', 'Old Password', 'trim|min_length[4]');
+    $this->form_validation->set_rules('file', 'File', 'file_type[image/jpeg|image/gif|image/png]|file_max_size[500]');
     if ($this->form_validation->run() == FALSE) {
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
@@ -213,12 +213,12 @@ class User extends CI_Controller {
     }
     else {
       $username = $this->session->userdata['username'];
-      $image_link = $this->input->post('image_link');
+      $image_link = $this->input->post('file');
       $validated = $this->user_model->set_account_picture_link($username, $image_link);
       if ($validated) {
 
         $this->user_model->update_password_for_username($username);
-        $data['success_message'] = 'You have successfully updated your Account Picture.';
+        $data['success_message'] = 'You have successfully updated BY FILE UPLOAD your Account Picture.';
         $this->load->view('templates/sitewide_header');
         $this->load->view('templates/site_menu');
         $this->load->view('my_account/my_account_view', $data);
@@ -228,7 +228,7 @@ class User extends CI_Controller {
         $data['custom_error'] = 'You entered the WRONG old password.';
         $this->load->view('templates/sitewide_header');
         $this->load->view('templates/site_menu');
-        $this->load->view('my_account/change_password_form', $data);
+        $this->load->view('my_account/error', $data);
         $this->load->view('templates/sitewide_footer');
       }
     }

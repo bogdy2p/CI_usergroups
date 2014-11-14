@@ -8,7 +8,7 @@
 
 <div class="row">
   <div class="col-xs-12 col-md-4">
-    <img class="account_picture" src="<?php echo $this->user_model->get_account_picture_link($this->session->userdata['username']);?>">
+    <img class="account_picture" src="<?php echo $this->user_model->get_account_picture_link($this->session->userdata['username']); ?>">
     <br />ACTUAL IMAGE PREVIEW HERE
   </div>
   <div class="col-xs-12 col-md-4">
@@ -20,21 +20,29 @@
       echo'<br/>';
       echo form_input('image_link');
       echo'<br/><br/>';
-      echo form_submit('submit', 'Update By Link' ,'class="btn btn-success"');
+      echo form_submit('submit', 'Update By Link', 'class="btn btn-success"');
       echo form_close();
       echo'<br/>';
       ?>
-      
-      <?php 
-      echo form_open_multipart('user/validate_form_change_picture_by_file');
-      echo form_label('Upload a local image file');
-      echo'<br/>';
-      echo form_upload('file');
-      echo'<br/>';
-      echo form_submit('submit', 'Update By File' ,'class="btn btn-success"');
-      echo form_close();
-      
+
+      <?php
+//      echo form_open_multipart('user/validate_form_change_picture_by_file');
+//      echo form_label('Upload a local image file');
+//      echo'<br/>';
+//      echo form_upload('file');
+//      echo'<br/>';
+//      echo form_submit('upload', 'Update By File', 'class="btn btn-success"');
+//      echo form_close();
       ?>
+
+      <?php //echo $error; ?>
+      <?php echo form_open_multipart('upload/do_upload'); ?>
+      <input type="file" name="userfile" size="20" />
+      <br /><br />
+      <input type="submit" value="upload" />
+      </form>
+
+
     </div>
   </div>
   <div class="col-xs-12 col-md-4">
