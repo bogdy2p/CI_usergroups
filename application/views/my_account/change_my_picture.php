@@ -9,7 +9,9 @@
 <div class="row">
  
   <div class="col-xs-12 col-md-3">
-    <img class="account_picture" src="<?php echo $this->user_model->get_account_picture_link($this->session->userdata['username']); ?>">
+    <img class="account_picture" src="
+      <?php 
+        echo base_url().'uploads/account_pictures/'.$this->user_model->get_account_picture_link($this->session->userdata['username']); ?>">
     <br />ACTUAL IMAGE PREVIEW HERE
   </div>
   <div class="col-xs-12 col-md-3">
@@ -24,8 +26,6 @@
       echo form_close();
       echo'<br/>';
       ?>
-     
-     
 
     </div>
   </div>

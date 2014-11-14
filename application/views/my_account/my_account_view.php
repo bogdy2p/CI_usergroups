@@ -39,7 +39,8 @@ $groups_is_member = $this->user_model->get_number_of_groups_for_a_user($current_
   </div>
   <div class="col-xs-12 col-md-3">
 
-    <img class="account_picture" src="<?php echo $this->user_model->get_account_picture_link($current_user->username);?>">
+    <img class="account_picture" src="<?php 
+        echo base_url().'uploads/account_pictures/'.$this->user_model->get_account_picture_link($this->session->userdata['username']); ?>">
     <a href="my_account_change_picture">Change My Account Picture Link Here</a>
 
   </div>

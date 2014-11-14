@@ -172,7 +172,7 @@ class User extends CI_Controller {
   }
 
   public function validate_form_change_picture_by_link() {
-    $this->form_validation->set_rules('image_link', 'Old Password', 'trim|min_length[4]');
+    $this->form_validation->set_rules('image_link', 'Image Link', 'trim|min_length[4]');
 
     if ($this->form_validation->run() == FALSE) {
       $this->load->view('templates/sitewide_header');
@@ -185,8 +185,6 @@ class User extends CI_Controller {
       $image_link = $this->input->post('image_link');
       $validated = $this->user_model->set_account_picture_link($username, $image_link);
       if ($validated) {
-
-        $this->user_model->update_password_for_username($username);
         $data['success_message'] = 'You have successfully updated BY LINK INPUT your Account Picture.';
         $this->load->view('templates/sitewide_header');
         $this->load->view('templates/site_menu');
@@ -227,7 +225,7 @@ class User extends CI_Controller {
       $username = $this->session->userdata['username'];
       $uploads_folder = base_url().'uploads/account_pictures/';
       $filename = $data['upload_data']['file_name'];
-      $link = $uploads_folder.$filename;
+      $link = $filename;
       $this->user_model->set_account_picture_link($username,$link);
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
