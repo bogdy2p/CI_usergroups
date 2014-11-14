@@ -4,18 +4,18 @@
 //$this->user_model->remove_account_picture('admin');
 /////////////////////////////TESTINGS//////////////////////////////////////
 ?>
-
+  <?php if (isset($error)) {echo $error;} ?>
 
 <div class="row">
-  <div class="col-xs-12 col-md-4">
+ 
+  <div class="col-xs-12 col-md-3">
     <img class="account_picture" src="<?php echo $this->user_model->get_account_picture_link($this->session->userdata['username']); ?>">
     <br />ACTUAL IMAGE PREVIEW HERE
   </div>
-  <div class="col-xs-12 col-md-4">
+  <div class="col-xs-12 col-md-3">
     <div class="upload_account_image">
       <?php
       echo form_open('user/validate_form_change_picture_by_link');
-      echo'<br/><br/>';
       echo form_label('Enter direct image link');
       echo'<br/>';
       echo form_input('image_link');
@@ -24,27 +24,23 @@
       echo form_close();
       echo'<br/>';
       ?>
-      <?php if (isset($error)) {echo $error;} ?>
-      <?php
-//      echo form_open_multipart('user/validate_form_change_picture_by_file');
-//      echo form_label('Upload a local image file');
-//      echo'<br/>';
-//      echo form_upload('file', set_value('file'), 'size="20"');
-//      echo'<br/>';
-//      echo form_submit('submit', 'Update By File', 'class="btn btn-success"');
-//      echo form_close();
-      ?>
-
      
-      <?php echo form_open_multipart('user/validate_form_change_picture_by_file');?>
-      <input type="file" name="userfile" size="20" />
-      <input type="submit" name="submit" value="Update by File" class="btn btn-success" />
-      </form>
-
+     
 
     </div>
   </div>
-  <div class="col-xs-12 col-md-4">
+  <div class="col-xs-12 col-md-3">
+     <?php echo form_open_multipart('user/validate_form_change_picture_by_file');
+           echo form_label('Choose an image');
+     ?>
+      <input type="file" name="userfile" size="20" />
+      <br />
+      <input type="submit" name="submit" value="Update by File" class="btn btn-success" />
+      </form>
+
+    
+  </div>
+  <div class="col-xs-12 col-md-3">
     <div class="remove_account_image">
 
       Remove account image button

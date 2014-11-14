@@ -204,25 +204,18 @@ class User extends CI_Controller {
   }
 
   public function validate_form_change_picture_by_file() {
-
     $custom_filename = $this->session->userdata['username'];
     $config['upload_path'] = 'uploads/account_pictures';
-    $config['file_name'] = $custom_filename;
-    $config['overwrite'] = FALSE;
+    $config['file_name'] = $custom_filename.'_account_picture';
+    $config['overwrite'] = TRUE;
     $config['allowed_types'] = 'gif|jpg|png';
     $config['max_size'] = '2048000';
     $config['max_width'] = '1024';
     $config['max_height'] = '768';
-
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
-    //echo '<pre>';
-    //print_r($this->upload);
-    //die();
-    
 
     if (! $asd = $this->upload->do_upload()) {
-      
       $error = array('error' => $this->upload->display_errors());
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
@@ -230,11 +223,16 @@ class User extends CI_Controller {
       $this->load->view('templates/sitewide_footer');
     }
     else {
-      //echo '<pre>';
-      //print_r($this->upload);
-      //die();
       $data = array('upload_data' => $this->upload->data());
-      $this->load->view('upload/upload_success', $data);
+      $username = $this->session->userdata['username'];
+      $uploads_folder = base_url().'uploads/account_pictures/';
+      $filename = $data['upload_data']['file_name'];
+      $link = $uploads_folder.$filename;
+      $this->user_model->set_account_picture_link($username,$link);
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('my_account/my_account_view');
+      $this->load->view('templates/sitewide_footer');
     }
   }
 
