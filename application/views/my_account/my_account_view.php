@@ -29,21 +29,22 @@ $groups_is_member = $this->user_model->get_number_of_groups_for_a_user($current_
     </div>
   </div>
   <div class="col-xs-12 col-md-4">
-    <?php
-    print_r("<h4>Account Level :");
-    foreach ($groups_is_member as $group) {
-      echo '<spanred> ' . $group . '</spanred>';
-    }
-    print_r(" .</h4>");
-    ?>
-  </div>
-  <div class="col-xs-12 col-md-3 unpadded">
-    <div class="account_picture">
-      <img src="<?php echo $this->user_model->get_account_picture_link($this->session->userdata['username']); ?>">
-      <a href="my_account_change_picture">Change</a>
+    <div class="account_level_information">
+      <?php
+      print_r("<h4>Account Level :");
+      foreach ($groups_is_member as $group) {
+        echo '<spanred> ' . $group . '</spanred>';
+      }
+      print_r(" .</h4>");
+      ?>
     </div>
   </div>
-  <div class="col-xs-12 col-md-1"></div>
+  <div class="col-xs-12 col-md-4 unpadded overflowhidden">
+    <div class="account_picture">
+      <img class="image" src="<?php echo $this->user_model->get_account_picture_link($this->session->userdata['username']); ?>">
+      <a class="button" href="my_account_change_picture">Change</a>
+    </div>
+  </div>
 </div>
 
 

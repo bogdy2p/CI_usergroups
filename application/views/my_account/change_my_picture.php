@@ -23,7 +23,7 @@ if (isset($error)) {
       ?>
       <input type="file" name="userfile" size="20" />
       <br />
-      <input type="submit" name="submit" value="Update by File" class="btn btn-success" />
+      <input type="submit" name="submit" value="Upload Another" class="btn btn-success" />
       </form>
       <br />
     </div>

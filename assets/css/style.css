@@ -4,10 +4,8 @@
   position:absolute;
   bottom: 0px;  
   text-align: center;
-  //background-color: salmon;
   position: fixed;
 }
-
 
 .default_css_table{
   margin: 0px auto;
@@ -123,23 +121,10 @@ spangre{
 
 }
 
-
 .pointer {
   cursor: pointer;
 }
 
 .clearer {
   clear: both;
-}
-
-.account_info{
-  background-color: #CCF3DC;
-  border-radius: 10px;
-  padding: 10px;
-  border: 1px solid activecaption;
-}
-
-
-#changelogTable{
- 
 }
