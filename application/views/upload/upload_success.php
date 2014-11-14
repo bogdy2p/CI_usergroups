@@ -6,4 +6,17 @@
   <?php endforeach; ?>
 </ul>
 
-<p><?php echo anchor('upload', 'Upload Another File!'); ?></p>
+<!--// 
+// FUNCTIONALITATE SA VERIFICI DACA NU EXISTA DEJA FISIERUL IN MOMENTUL UPLOAD-ULUI (REDENUMIRE IN CAZ DE EXISTENTA)//
+FUNCTIONALITATE SA SETAM NOUL LINK AL IMAGINII CA SI LINK DE PROFILE PICTURE IN DATABASE AICI-->
+
+<?php 
+
+  $username = $this->session->userdata['username'];
+  echo $username;
+  
+
+
+
+
+?>

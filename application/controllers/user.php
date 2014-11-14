@@ -203,29 +203,39 @@ class User extends CI_Controller {
     }
   }
 
-  public function validate_form_change_picture_by_file() { 
+  public function validate_form_change_picture_by_file() {
+
+    $custom_filename = $this->session->userdata['username'];
     $config['upload_path'] = 'uploads/account_pictures';
+    $config['file_name'] = $custom_filename;
+    $config['overwrite'] = FALSE;
     $config['allowed_types'] = 'gif|jpg|png';
-    $config['max_size'] = '1000001';
+    $config['max_size'] = '2048000';
     $config['max_width'] = '1024';
     $config['max_height'] = '768';
 
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
+    //echo '<pre>';
+    //print_r($this->upload);
+    //die();
+    
 
-    if (!$this->upload->do_upload()) {
+    if (! $asd = $this->upload->do_upload()) {
+      
       $error = array('error' => $this->upload->display_errors());
-
-      $this->load->view('upload/upload_form', $error);
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('my_account/change_my_picture', $error);
+      $this->load->view('templates/sitewide_footer');
     }
     else {
+      //echo '<pre>';
+      //print_r($this->upload);
+      //die();
       $data = array('upload_data' => $this->upload->data());
-
       $this->load->view('upload/upload_success', $data);
     }
-    
-    
-    
   }
 
   function validate_form_update_details() {

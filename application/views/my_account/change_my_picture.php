@@ -24,21 +24,21 @@
       echo form_close();
       echo'<br/>';
       ?>
+      <?php if (isset($error)) {echo $error;} ?>
       <?php
 //      echo form_open_multipart('user/validate_form_change_picture_by_file');
 //      echo form_label('Upload a local image file');
 //      echo'<br/>';
-//      echo form_upload('file');
+//      echo form_upload('file', set_value('file'), 'size="20"');
 //      echo'<br/>';
-//      echo form_submit('upload', 'Update By File', 'class="btn btn-success"');
+//      echo form_submit('submit', 'Update By File', 'class="btn btn-success"');
 //      echo form_close();
       ?>
 
-      <?php //echo $error; ?>
-      <?php echo form_open_multipart('user/validate_form_change_picture_by_file'); ?>
+     
+      <?php echo form_open_multipart('user/validate_form_change_picture_by_file');?>
       <input type="file" name="userfile" size="20" />
-      <br /><br />
-      <input type="submit" value="Update by File " class="btn btn-success" />
+      <input type="submit" name="submit" value="Update by File" class="btn btn-success" />
       </form>
 
 
