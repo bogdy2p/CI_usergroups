@@ -67,7 +67,7 @@ class User extends CI_Controller {
       $this->session->set_userdata($data);
       $this->user_model->update_access_at_login();
       $old_logins_number = $this->user_model->get_total_logins($username);
-      $this->user_model->update_total_logins($username,$old_logins_number);
+      $this->user_model->update_total_logins($username, $old_logins_number);
       redirect('site/index');
     }
     else { // Credentials INCORRECT
@@ -115,7 +115,7 @@ class User extends CI_Controller {
     }
     else {
       $this->load->model('user_model');
-        
+
       if ($query = $this->user_model->create()) {
 
         $username = $_POST['username'];
@@ -154,9 +154,71 @@ class User extends CI_Controller {
       $old_pass = $this->input->post('password');
       $validated = $this->user_model->check_old_password_is_correct($username, $old_pass);
       if ($validated) {
-
         $this->user_model->update_password_for_username($username);
         $data['success_message'] = 'You have successfully updated your password.';
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
+        $this->load->view('my_account/my_account_view', $data);
+        $this->load->view('templates/sitewide_footer');
+      }
+      else {
+        $data['custom_error'] = 'You entered the WRONG old password.';
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
+        $this->load->view('my_account/change_password_form', $data);
+        $this->load->view('templates/sitewide_footer');
+      }
+    }
+  }
+
+  public function validate_form_change_picture_by_link() {
+    $this->form_validation->set_rules('image_link', 'Old Password', 'trim|min_length[4]');
+
+    if ($this->form_validation->run() == FALSE) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('my_account/change_my_picture');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      $username = $this->session->userdata['username'];
+      $image_link = $this->input->post('image_link');
+      $validated = $this->user_model->set_account_picture_link($username, $image_link);
+      if ($validated) {
+
+        $this->user_model->update_password_for_username($username);
+        $data['success_message'] = 'You have successfully updated your Account Picture.';
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
+        $this->load->view('my_account/my_account_view', $data);
+        $this->load->view('templates/sitewide_footer');
+      }
+      else {
+        $data['custom_error'] = 'You entered the WRONG old password.';
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
+        $this->load->view('my_account/change_password_form', $data);
+        $this->load->view('templates/sitewide_footer');
+      }
+    }
+  }
+
+  public function validate_form_change_picture_by_file() {
+    $this->form_validation->set_rules('image_link', 'Old Password', 'trim|min_length[4]');
+    if ($this->form_validation->run() == FALSE) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('my_account/change_my_picture');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      $username = $this->session->userdata['username'];
+      $image_link = $this->input->post('image_link');
+      $validated = $this->user_model->set_account_picture_link($username, $image_link);
+      if ($validated) {
+
+        $this->user_model->update_password_for_username($username);
+        $data['success_message'] = 'You have successfully updated your Account Picture.';
         $this->load->view('templates/sitewide_header');
         $this->load->view('templates/site_menu');
         $this->load->view('my_account/my_account_view', $data);
@@ -373,7 +435,7 @@ class User extends CI_Controller {
     }
   }
 
-  public function my_account_change_picture(){
+  public function my_account_change_picture() {
     if (isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in'])) {
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
@@ -384,5 +446,5 @@ class User extends CI_Controller {
       show_404();
     }
   }
-  
+
 }
