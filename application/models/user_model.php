@@ -503,10 +503,6 @@ class User_model extends CI_Model {
     }
   }
 
-  function has_image_file_on_server($username){
-    return true;
-  }  
-  
   function get_account_picture_link($username) {
     $this->db->select('account_picture');
     $this->db->from('users');
@@ -514,7 +510,7 @@ class User_model extends CI_Model {
     $result = $this->db->get();
     foreach ($result->result_array() as $row) {
       if (!empty($row['account_picture'])) {
-        return base_url().'uploads/account_pictures/'.$row['account_picture'];
+        return base_url() . 'uploads/account_pictures/' . $row['account_picture'];
       }
       else {
         return 'http://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';

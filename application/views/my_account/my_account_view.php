@@ -37,11 +37,11 @@ $groups_is_member = $this->user_model->get_number_of_groups_for_a_user($current_
     print_r(" .</h4>");
     ?>
   </div>
-  <div class="col-xs-12 col-md-3">
-
-    <img class="account_picture" src="<?php echo $this->user_model->get_account_picture_link($this->session->userdata['username']);?>">
-    <a href="my_account_change_picture">Change My Account Picture Link Here</a>
-
+  <div class="col-xs-12 col-md-3 unpadded">
+    <div class="account_picture">
+      <img src="<?php echo $this->user_model->get_account_picture_link($this->session->userdata['username']); ?>">
+      <a href="my_account_change_picture">Change</a>
+    </div>
   </div>
   <div class="col-xs-12 col-md-1"></div>
 </div>
