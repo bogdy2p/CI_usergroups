@@ -18,24 +18,39 @@ class Post extends CI_Controller {
   }
 
   public function add() {
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('post/create');
-    $this->load->view('templates/sitewide_footer');
+    if ((isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in']))) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('post/create');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      show_404();
+    }
   }
 
   public function delete() {
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('post/delete');
-    $this->load->view('templates/sitewide_footer');
+    if ((isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in']))) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('post/delete');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      show_404();
+    }
   }
 
   public function my_posts() {
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('post/my_posts');
-    $this->load->view('templates/sitewide_footer');
+    if ((isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in']))) {
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('post/my_posts');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      show_404();
+    }
   }
 
 }

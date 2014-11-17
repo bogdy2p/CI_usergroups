@@ -212,18 +212,26 @@ class User extends CI_Controller {
     }
     else {
       // After upload succeded , resize the image to 300x300 (create thumbnail)
-      $config_resize['source_image'] = $this->upload->data()['full_path'];
-      $config_resize['image_library'] = 'gd2';
-      $config_resize['create_thumb'] = TRUE;
-      $config_resize['maintain_ratio'] = FALSE;
-      $config_resize['width'] = 300;
-      $config_resize['height'] = 300;
-      $this->load->library('image_lib', $config_resize);
-      $this->image_lib->dest_folder = $this->upload->data()['file_path'] . 'thumbnails';
-      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails/' . $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
-      $this->image_lib->resize();
+      $thumbnail['source_image'] = $this->upload->data()['full_path'];
+      $thumbnail['image_library'] = 'gd2';
+      $thumbnail['create_thumb'] = TRUE;
+      $thumbnail['maintain_ratio'] = FALSE;
+      $this->load->library('image_lib', $thumbnail);
+      //300 THUMBNAIL
+      
+      $this->image_lib->width = 300;
+      $this->image_lib->height = 300;
+      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails300/' . $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker .'_300'. $this->upload->data()['file_ext'];
+      $test = $this->image_lib->resize();
+    
+      //75 THUMBNAIL
+      $this->image_lib->width = 75;
+      $this->image_lib->height = 75;
+      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails75/' . $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker .'_75'.$this->upload->data()['file_ext'];
+      $test2 = $this->image_lib->resize();
+
       $username = $this->session->userdata['username'];
-      $file = $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
+      $file = $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker .'_300'. $this->upload->data()['file_ext'];
       $this->user_model->set_account_picture_link($username, $file);
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');

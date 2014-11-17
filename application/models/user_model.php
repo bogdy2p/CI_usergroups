@@ -510,7 +510,7 @@ class User_model extends CI_Model {
     $result = $this->db->get();
     foreach ($result->result_array() as $row) {
       if (!empty($row['account_picture'])) {
-        return base_url() . 'uploads/account_pictures/thumbnails/' . $row['account_picture'];
+        return base_url() . 'uploads/account_pictures/thumbnails300/' . $row['account_picture'];
       }
       else {
         return 'http://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';

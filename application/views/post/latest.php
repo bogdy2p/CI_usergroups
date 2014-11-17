@@ -39,8 +39,6 @@
   ?>
 
 
-
-
   Latest posts will be displayed here.  
 </div>
 
