@@ -55,11 +55,26 @@ class Post extends CI_Controller {
 
   public function validate_add_new_post() {
     if ((isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in']))) {
-      echo ' VASILEE WORKED';
-    }
-    else {
-      echo 'VASILE DIDNT WORK';
+      $this->form_validation->set_rules('post_title', 'Post Title', 'required|min_length[3]|max_length[200]');
+      $this->form_validation->set_rules('post_content', 'Post Content', 'required|min_length[2]');
+
+      if ($this->form_validation->run() == FALSE) { // validation failed
+        $this->load->view('templates/sitewide_header');
+        $this->load->view('templates/site_menu');
+        $this->load->view('post/create');
+        $this->load->view('templates/sitewide_footer');
+      }
+      else {
+        echo 'Form Validated.';
+        $this->load->model('post_model');
+        // CALL THE FUNCTION TO ADD A POST HERE.
+        
+        
+        
+      }
+    }else {
+        echo 'VASILE DIDNT WORK';
+      }
     }
   }
-
-}
+  

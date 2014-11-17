@@ -1,5 +1,7 @@
 Create Post Form (view)
 
+  
+<?php echo validation_errors('<p class="error">'); ?>
 <?php
 
 echo form_open('post/validate_add_new_post');
