@@ -212,7 +212,6 @@ class User extends CI_Controller {
     }
     else {
       // After upload succeded , resize the image to 300x300 (create thumbnail)
-      //TEST GITIGNORE
       $config_resize['source_image'] = $this->upload->data()['full_path'];
       $config_resize['image_library'] = 'gd2';
       $config_resize['create_thumb'] = TRUE;
