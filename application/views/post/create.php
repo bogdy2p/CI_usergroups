@@ -2,9 +2,18 @@ Create Post Form (view)
 
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+echo form_open('post/validate_add_new_post');
+echo form_label('Post title');
+echo'<br />';
+echo form_input('post_title');
+echo'<br />';
+echo form_label('Post Content');
+echo'<br />';
+echo form_textarea('post_content');
+echo'<br />';
+echo form_submit('submit', 'Post new content' ,'class="btn btn-success"');
+echo form_close();
 
+
+
+?>

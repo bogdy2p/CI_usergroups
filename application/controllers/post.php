@@ -53,4 +53,13 @@ class Post extends CI_Controller {
     }
   }
 
+  public function validate_add_new_post() {
+    if ((isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in']))) {
+      echo ' VASILEE WORKED';
+    }
+    else {
+      echo 'VASILE DIDNT WORK';
+    }
+  }
+
 }
