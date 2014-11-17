@@ -46,6 +46,21 @@ class Post_model extends CI_Model {
     return $return;
   }
   
+  function read_last($number){
+    $this->db->select('*');
+    $this->db->from('posts');
+    $this->db->order_by('date_posted','DESC');
+    $this->db->limit($number);
+    $result = $this->db->get();
+    $return = array();
+    foreach ($result->result_array() as $row) {
+      $return[] = $row;
+    }
+    return $return;
+  }
+  
+  
+  
   function print_poster_thumbnail($user_id) {
     $this->db->select('account_picture');
     $this->db->from('users');

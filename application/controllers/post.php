@@ -11,11 +11,20 @@ class Post extends CI_Controller {
   }
 
   public function index() {
-    $this->load->model('user_model');
-    $this->load->view('templates/sitewide_header');
-    $this->load->view('templates/site_menu');
-    $this->load->view('post/latest');
-    $this->load->view('templates/sitewide_footer');
+    if ((isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in']))) {
+      $this->load->model('user_model');
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('post/latest');
+      $this->load->view('templates/sitewide_footer');
+    }
+    else {
+      $this->load->model('user_model');
+      $this->load->view('templates/sitewide_header');
+      $this->load->view('templates/site_menu');
+      $this->load->view('post/sessionless_latest');
+      $this->load->view('templates/sitewide_footer');
+    }
   }
 
   public function add() {
@@ -72,22 +81,23 @@ class Post extends CI_Controller {
         $user_id = $this->session->userdata['user_id'];
         $title = $this->input->post('post_title');
         $content = $this->input->post('post_content');
-        if($this->post_model->create()){
-            $this->load->view('templates/sitewide_header');
-            $this->load->view('templates/site_menu');
-            $this->load->view('post/latest');
-            $this->load->view('templates/sitewide_footer');
-        }else{
-            $data['error'] = 'Unable to post !';
-            $this->load->view('templates/sitewide_header');
-            $this->load->view('templates/site_menu');
-            $this->load->view('post/create',$data);
-            $this->load->view('templates/sitewide_footer');
+        if ($this->post_model->create()) {
+          $this->load->view('templates/sitewide_header');
+          $this->load->view('templates/site_menu');
+          $this->load->view('post/latest');
+          $this->load->view('templates/sitewide_footer');
+        }
+        else {
+          $data['error'] = 'Unable to post !';
+          $this->load->view('templates/sitewide_header');
+          $this->load->view('templates/site_menu');
+          $this->load->view('post/create', $data);
+          $this->load->view('templates/sitewide_footer');
         }
       }
     }
     else {
-      echo 'VASILE DIDNT WORK';
+      show_404();
     }
   }
 

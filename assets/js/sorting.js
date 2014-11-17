@@ -29,3 +29,9 @@ $(document).ready(function() {
     .tablesorterPager({container: $("#pagerChangelog")})
   ;
 });
+
+$(document).ready(function() {
+  $("#latestPostTable")
+    .tablesorter({widthFixed: true, widgets: ['zebra']})
+    .tablesorterPager({container: $("#pagerLatest")})
+});
