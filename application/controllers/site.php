@@ -40,7 +40,9 @@ class Site extends CI_Controller {
   }
 
   public function view_user() {
+
     if ((isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in']))) {
+      $this->load->model('user_model');
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
       $this->load->view('site/view_another_user');

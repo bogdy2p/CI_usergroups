@@ -26,12 +26,12 @@ $(document).ready(function() {
 $(document).ready(function() {
   $("#changelogTable")
     .tablesorter({widthFixed: true, widgets: ['zebra']})
-    .tablesorterPager({container: $("#pagerChangelog")})
-  ;
+    .tablesorterPager({container: $("#pagerChangelog"), size: 10})
+    ;
 });
 
 $(document).ready(function() {
   $("#latestPostTable")
     .tablesorter({widthFixed: true, widgets: ['zebra']})
-    .tablesorterPager({container: $("#pagerLatest")})
+    .tablesorterPager({container: $("#pagerLatest"), size: 5})
 });

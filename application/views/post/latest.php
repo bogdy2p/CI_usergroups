@@ -31,10 +31,10 @@
       // THE POST (USER ID SHOULD BE CONVERTED TO GRAB THE USERNAME);
       $post_image = $this->post_model->print_poster_thumbnail($post['user_id']);
       $username = $this->user_model->get_user_name_by_user_id($post['user_id']);
-      $div_data = '<div class="user">
+      $div_data = '<div class="user"><a href="site/view_user?username=' . $username . '">
         <img class="logo" src="' . $post_image . '"></img>
         <p class="name">' . $username . '</p>
-        </div>    ';
+        </a></div>    ';
       $this->table->add_row(
           array('data' => $post['content'], 'class' => 'col-xs-9 col-md-9 align_left'), array('data' => $div_data, 'class' => 'highlight col-xs-1 col-md-1'), array('data' => $post['date_posted'], 'class' => 'highlight col-xs-2 col-md-2 wordwrap1')
       );
@@ -46,10 +46,10 @@
     <div id="pagerLatest" class="tablesorterPager">
       <form>
         <select class="form-control-static pagesize">
-          <option selected="selected" value="2">2 / Page</option>
-          <option value="3">3 / Page</option>
-          <option value="4">4 / Page</option>
-          <option value="100">100 / Page</option>
+          <option selected="selected" value="5">5 / Page</option>
+          <option value="10">10 / Page</option>
+          <option value="20">20 / Page</option>
+          <option value="200">200 / Page</option>
         </select>
         <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>first.png" class="first"/>
         <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>prev.png" class="prev"/>

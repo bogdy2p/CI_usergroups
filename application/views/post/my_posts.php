@@ -5,7 +5,7 @@
     ?>
     <?php
     $post_table_template = array(
-      'table_open' => '<table class="table table-bordered tablesorter" id="latestPostTable">',
+      'table_open' => '<table class="table table-bordered tablesorter" id="myPostTable">',
       'heading_row_start' => '<tr class="wordwrap1">',
       'heading_row_end' => '</tr>',
       'heading_cell_start' => '<th class="success wordwrap1">',

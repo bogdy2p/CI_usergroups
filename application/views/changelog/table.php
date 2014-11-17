@@ -8,11 +8,11 @@ if (!isset($_POST['day']))
     <div id="pagerChangelog" class="tablesorterPager">
       <form>
         <select class="form-control-static pagesize">
-          <option selected="selected" value="2">2 / Page</option>
+          <option selected="selected" value="10">10 / Page</option>
           <option value="5">5 / Page</option>
-          <option value="10">10 / Page</option>
           <option value="20">20 / Page</option>
           <option value="50">50 / Page</option>
+          <option value="100">100 / Page</option>
           <option value="500">500 / Page</option>
         </select>
         <img src="<?php echo base_url() . 'assets/tablesorter/themes/blue/' ?>first.png" class="first"/>

@@ -33,11 +33,10 @@ class Post_model extends CI_Model {
     $this->db->delete('posts');
   }
 
-  
-  function read_for_user($user_id){
+  function read_for_user($user_id) {
     $this->db->select('*');
     $this->db->from('posts');
-    $this->db->where('user_id',$user_id);
+    $this->db->where('user_id', $user_id);
     $result = $this->db->get();
     $return = array();
     foreach ($result->result_array() as $row) {
@@ -45,11 +44,11 @@ class Post_model extends CI_Model {
     }
     return $return;
   }
-  
-  function read_last($number){
+
+  function read_last($number) {
     $this->db->select('*');
     $this->db->from('posts');
-    $this->db->order_by('date_posted','DESC');
+    $this->db->order_by('date_posted', 'DESC');
     $this->db->limit($number);
     $result = $this->db->get();
     $return = array();
@@ -58,9 +57,7 @@ class Post_model extends CI_Model {
     }
     return $return;
   }
-  
-  
-  
+
   function print_poster_thumbnail($user_id) {
     $this->db->select('account_picture');
     $this->db->from('users');
@@ -75,6 +72,5 @@ class Post_model extends CI_Model {
       }
     }
   }
-  
 
 }
