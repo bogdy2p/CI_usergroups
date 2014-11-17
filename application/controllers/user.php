@@ -20,8 +20,6 @@ class User extends CI_Controller {
     if (isset($this->session->userdata['admin_status']) && ($this->session->userdata['admin_status'])) {
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
-      //$this->load->view('my_account/my_account_view');
-      //$this->load->view('user/index');
       $this->load->view('user/table');
       $this->load->view('templates/sitewide_footer');
     }
