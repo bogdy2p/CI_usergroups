@@ -196,9 +196,9 @@ class User extends CI_Controller {
     $config['file_name'] = $custom_filename . '_account_picture';
     $config['overwrite'] = TRUE;
     $config['allowed_types'] = 'gif|jpg|png';
-    $config['max_size'] = '2048000';
-    $config['max_width'] = '2048';
-    $config['max_height'] = '2048';
+    $config['max_size'] = '4048000';
+    $config['max_width'] = '3000';
+    $config['max_height'] = '3000';
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
 
@@ -211,8 +211,7 @@ class User extends CI_Controller {
       $this->load->view('templates/sitewide_footer');
     }
     else {
-      $data = array('upload_data' => $this->upload->data());
-      // DACA A REUSIT UPLOAD-UL , AICI FACEM RESIZE-ul
+      // After upload succeded , resize the image to 300x300 (create thumbnail)
       $config_resize['source_image'] = $this->upload->data()['full_path'];
       $config_resize['image_library'] = 'gd2';
       $config_resize['create_thumb'] = TRUE;
@@ -223,7 +222,6 @@ class User extends CI_Controller {
       $this->image_lib->dest_folder = $this->upload->data()['file_path'] . 'thumbnails';
       $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails/' . $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
       $this->image_lib->resize();
-
       $username = $this->session->userdata['username'];
       $file = $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
       $this->user_model->set_account_picture_link($username, $file);
