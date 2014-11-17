@@ -198,10 +198,34 @@ class User extends CI_Controller {
     $config['allowed_types'] = 'gif|jpg|png';
     $config['max_size'] = '2048000';
     $config['max_width'] = '2048';
-    $config['max_height'] = '1500';
+    $config['max_height'] = '2048';
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
-
+   
+   
+    echo '<pre>';
+    var_dump($this->upload);
+    die(); 
+    $config['source_image']	= 'uploads/account_pictures/asd2_account_picture.jpg';
+    $config['image_library'] = 'gd2';
+    $config['create_thumb'] = TRUE;
+    $config['maintain_ratio'] = TRUE;
+    $config['width']	= 300;
+    $config['height']	= 300;
+    
+    
+   
+    $this->load->library('image_lib', $config); 
+    $this->image_lib->resize();
+    var_dump($this->image_lib);
+    die();
+    
+    
+    //print_r($config);
+    
+    
+    
+    //die();
     if (!$asd = $this->upload->do_upload()) {
       $error = array('error' => $this->upload->display_errors());
       $this->load->view('templates/sitewide_header');
