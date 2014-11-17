@@ -201,31 +201,8 @@ class User extends CI_Controller {
     $config['max_height'] = '2048';
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
-   
-   
-    echo '<pre>';
-    var_dump($this->upload);
-    die(); 
-    $config['source_image']	= 'uploads/account_pictures/asd2_account_picture.jpg';
-    $config['image_library'] = 'gd2';
-    $config['create_thumb'] = TRUE;
-    $config['maintain_ratio'] = TRUE;
-    $config['width']	= 300;
-    $config['height']	= 300;
-    
-    
-   
-    $this->load->library('image_lib', $config); 
-    $this->image_lib->resize();
-    var_dump($this->image_lib);
-    die();
-    
-    
-    //print_r($config);
-    
-    
-    
-    //die();
+
+
     if (!$asd = $this->upload->do_upload()) {
       $error = array('error' => $this->upload->display_errors());
       $this->load->view('templates/sitewide_header');
@@ -235,11 +212,21 @@ class User extends CI_Controller {
     }
     else {
       $data = array('upload_data' => $this->upload->data());
+      // DACA A REUSIT UPLOAD-UL , AICI FACEM RESIZE-ul
+      $config_resize['source_image'] = $this->upload->data()['full_path'];
+      $config_resize['image_library'] = 'gd2';
+      $config_resize['create_thumb'] = TRUE;
+      $config_resize['maintain_ratio'] = FALSE;
+      $config_resize['width'] = 300;
+      $config_resize['height'] = 300;
+      $this->load->library('image_lib', $config_resize);
+      $this->image_lib->dest_folder = $this->upload->data()['file_path'] . 'thumbnails';
+      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails/' . $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
+      $this->image_lib->resize();
+
       $username = $this->session->userdata['username'];
-      $uploads_folder = base_url() . 'uploads/account_pictures/';
-      $filename = $data['upload_data']['file_name'];
-      $link = $filename;
-      $this->user_model->set_account_picture_link($username, $link);
+      $file = $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
+      $this->user_model->set_account_picture_link($username, $file);
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
       $this->load->view('my_account/my_account_view');
