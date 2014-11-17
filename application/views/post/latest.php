@@ -1,13 +1,12 @@
 <div class="latest_posts_display">
-  <br />FLOW :
-  <br />Display a table of 5 posts ordered by DATE.
-  <br />Display : Post Content ,Post Author , and Posting Date.
-  <br />Table should not be bordered inside , only coloured rows.
-
-
+  <div class="col-xs-12 col-md-12"> 
+  <?php 
+  $this->load->model('user_model');
+  
+  ?>
   <?php
   $post_table_template = array(
-    'table_open' => '<table class="table table-bordered tablesorter" id="latestPostTable">',
+    'table_open' => '<table class="table tablesorter" id="latestPostTable">',
     'heading_row_start' => '<tr class="wordwrap1">',
     'heading_row_end' => '</tr>',
     'heading_cell_start' => '<th class="success wordwrap1">',
@@ -23,21 +22,36 @@
     'table_close' => '</table>',
   );
   $this->table->set_heading(
-      array('data' => ' Poster Image'), array('data' => ' Content '), array('data' => ' Posted By'), array('data' => ' Date Posted ')
+      
+      array('data' => ' Post Content '),array('data' => ' Who Posted'), array('data' => ' Date Posted ')
   );
-  
+ 
   $post_array = $this->post_model->read();
 
   foreach ($post_array as $post) {
     // THE POST (USER ID SHOULD BE CONVERTED TO GRAB THE USERNAME);
+    
+    
+    $post_image = $this->post_model->print_poster_thumbnail($post['user_id']);
+    $username = $this->user_model->get_user_name_by_user_id($post['user_id']);
+    
+    $div_data = '<div class="user">
+        <img class="logo" src="'.$post_image.'"></img>
+        <p class="name">'.$username.'</p>
+        </div>    ';
+    
+    
+    
     $this->table->add_row(
-        array('data' => 'GRAB THUMBNAIL OF THE USER HERE', 'class' => ''), array('data' => $post['content'], 'class' => 'highlight col-xs-1 col-md-1'), array('data' => $post['user_id'], 'class' => 'highlight col-xs-3 col-md-3 wordwrap1'), array('data' => $post['date_posted'], 'class' => 'highlight col-xs-3 col-md-3 wordwrap1')
+        array('data' => $post['content'], 'class' => 'col-xs-9 col-md-9 align_left'),
+        array('data' => $div_data, 'class' => 'highlight col-xs-1 col-md-1'),
+        array('data' => $post['date_posted'], 'class' => 'highlight col-xs-2 col-md-2 wordwrap1')
     );
   }
   $this->table->set_template($post_table_template);
   echo $this->table->generate();
   ?>
-
+</div>
 
   Latest posts will be displayed here.  
 </div>

@@ -11,6 +11,7 @@ class Post extends CI_Controller {
   }
 
   public function index() {
+    $this->load->model('user_model');
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
     $this->load->view('post/latest');
@@ -18,6 +19,7 @@ class Post extends CI_Controller {
   }
 
   public function add() {
+    $this->load->model('user_model');
     if ((isset($this->session->userdata['is_logged_in']) && ($this->session->userdata['is_logged_in']))) {
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
@@ -65,16 +67,28 @@ class Post extends CI_Controller {
         $this->load->view('templates/sitewide_footer');
       }
       else {
-        echo 'Form Validated.';
-        $this->load->model('post_model');
-        // CALL THE FUNCTION TO ADD A POST HERE.
-        
-        
-        
-      }
-    }else {
-        echo 'VASILE DIDNT WORK';
+        $this->load->model('user_model');
+        $username = $this->session->userdata['username'];
+        $user_id = $this->session->userdata['user_id'];
+        $title = $this->input->post('post_title');
+        $content = $this->input->post('post_content');
+        if($this->post_model->create()){
+            $this->load->view('templates/sitewide_header');
+            $this->load->view('templates/site_menu');
+            $this->load->view('post/latest');
+            $this->load->view('templates/sitewide_footer');
+        }else{
+            $data['error'] = 'Unable to post !';
+            $this->load->view('templates/sitewide_header');
+            $this->load->view('templates/site_menu');
+            $this->load->view('post/create',$data);
+            $this->load->view('templates/sitewide_footer');
+        }
       }
     }
+    else {
+      echo 'VASILE DIDNT WORK';
+    }
   }
-  
+
+}

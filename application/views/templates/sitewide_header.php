@@ -37,7 +37,4 @@ echo ' </head>
 <body>    
 <div class ="container">
 ';
-
-
-
 ?>

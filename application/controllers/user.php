@@ -13,6 +13,7 @@ class User extends CI_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->model('user_model');
+    
   }
 
   public function index() {
@@ -221,17 +222,17 @@ class User extends CI_Controller {
       
       $this->image_lib->width = 300;
       $this->image_lib->height = 300;
-      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails300/' . $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker .'_300'. $this->upload->data()['file_ext'];
+      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails300/' . $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
       $test = $this->image_lib->resize();
     
       //75 THUMBNAIL
       $this->image_lib->width = 75;
       $this->image_lib->height = 75;
-      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails75/' . $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker .'_75'.$this->upload->data()['file_ext'];
+      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails75/' . $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
       $test2 = $this->image_lib->resize();
 
       $username = $this->session->userdata['username'];
-      $file = $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker .'_300'. $this->upload->data()['file_ext'];
+      $file = $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
       $this->user_model->set_account_picture_link($username, $file);
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
