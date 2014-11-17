@@ -4,10 +4,10 @@ class Post_model extends CI_Model {
 
   function __construct() {
     parent::__construct();
+    
   }
 
-  
-   function create() {
+  function create() {
     $data = array(
       'title' => $this->input->post('title'),
       'content' => $this->input->post('content'),
@@ -28,11 +28,10 @@ class Post_model extends CI_Model {
     }
     return $return;
   }
-  
+
   function delete_post($id) {
     $this->db->where('id', $id);
     $this->db->delete('posts');
   }
-  
-  
+
 }

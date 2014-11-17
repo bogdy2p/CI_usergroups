@@ -19,24 +19,12 @@
       'table_close' => '</table>',
     );
     $this->table->set_heading(
-        array('data' => ' User Id '),
-        array('data' => ' Username'),
-        array('data' => ' Created '),
-        array('data' => ' Logins '),
-        'View',
-        'Edit',
-        'Delete');
+        array('data' => ' User Id '), array('data' => ' Username'), array('data' => ' Created '), array('data' => ' Logins '), 'View', 'Edit', 'Delete');
 
     $user_id_array = $this->user_model->read();
     foreach ($user_id_array as $user) {
       $this->table->add_row(
-          array('data' => $user['id'], 'class' => 'highlight col-xs-1 col-md-1'),
-          array('data' => $user['username'], 'class' => 'highlight col-xs-3 col-md-3 wordwrap1'),
-          array('data' => $user['creation_date'], 'class' => 'highlight col-xs-3 col-md-3 wordwrap1'),
-          array('data' => $user['total_logins'], 'class' => 'highlight col-xs-2 col-md-2 wordwrap1'),
-          array('data' => '<a href="' . base_url() . 'user/view_user?id=' . $user['id'] . '"><span class="glyphicon glyphicon-eye-open"></span>', 'class' => 'highlight col-xs-1 col-md-1'),
-          array('data' => '<a href="' . base_url() . 'user/edit?id=' . $user['id'] . '"><span class="glyphicon glyphicon-edit spangre"></span>', 'class' => 'highlight col-xs-1 col-md-1',),
-          array('data' => '<a><span class="glyphicon glyphicon-remove spanred pointer" onclick=confirm_delete_user(' . $user['id'] . ');></span>', 'class' => 'highlight col-xs-1 col-md-1')
+          array('data' => $user['id'], 'class' => 'highlight col-xs-1 col-md-1'), array('data' => $user['username'], 'class' => 'highlight col-xs-3 col-md-3 wordwrap1'), array('data' => $user['creation_date'], 'class' => 'highlight col-xs-3 col-md-3 wordwrap1'), array('data' => $user['total_logins'], 'class' => 'highlight col-xs-2 col-md-2 wordwrap1'), array('data' => '<a href="' . base_url() . 'user/view_user?id=' . $user['id'] . '"><span class="glyphicon glyphicon-eye-open"></span>', 'class' => 'highlight col-xs-1 col-md-1'), array('data' => '<a href="' . base_url() . 'user/edit?id=' . $user['id'] . '"><span class="glyphicon glyphicon-edit spangre"></span>', 'class' => 'highlight col-xs-1 col-md-1',), array('data' => '<a><span class="glyphicon glyphicon-remove spanred pointer" onclick=confirm_delete_user(' . $user['id'] . ');></span>', 'class' => 'highlight col-xs-1 col-md-1')
       );
     }
     $this->table->set_template($table_template);

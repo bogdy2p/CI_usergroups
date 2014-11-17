@@ -13,11 +13,13 @@ class Site extends CI_Controller {
   public function index() {
     $this->load->model('task_model');
     $this->load->model('user_model');
+    $this->load->model('post_model');
     $this->load->model('group_model');
     $this->load->model('detail_type_model');
     $this->load->model('changelog_model');
     $this->load->view('templates/sitewide_header');
     $this->load->view('templates/site_menu');
+    $this->load->view('post/latest');
     $this->load->view('site/index');
     $this->load->view('templates/sitewide_footer');
   }
