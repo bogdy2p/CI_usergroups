@@ -182,6 +182,8 @@ class User extends CI_Controller {
         $file_with_path_and_extension = $image_dir.$username.'_account_picture.'.$extension;
         if(file_exists($file_with_path_and_extension)){
           unlink($image_dir.$username.'_account_picture.'.$extension);  
+          unlink($thumb300_dir.$username.'_account_picture.'.$extension);
+          unlink($thumb75_dir.$username.'_account_picture.'.$extension);
         }else{
           //echo 'This file wasnt set.';
         }
@@ -236,17 +238,17 @@ class User extends CI_Controller {
       
       $this->image_lib->width = 300;
       $this->image_lib->height = 300;
-      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails300/' . $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
+      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails300/' . $this->upload->data()['raw_name'] . $this->upload->data()['file_ext'];
       $test = $this->image_lib->resize();
     
       //75 THUMBNAIL
       $this->image_lib->width = 75;
       $this->image_lib->height = 75;
-      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails75/' . $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
+      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails75/' . $this->upload->data()['raw_name'] .  $this->upload->data()['file_ext'];
       $test2 = $this->image_lib->resize();
 
       $username = $this->session->userdata['username'];
-      $file = $this->upload->data()['raw_name'] . $this->image_lib->thumb_marker . $this->upload->data()['file_ext'];
+      $file = $this->upload->data()['raw_name'] .  $this->upload->data()['file_ext'];
       $this->user_model->set_account_picture_link($username, $file);
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');
