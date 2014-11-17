@@ -503,6 +503,21 @@ class User_model extends CI_Model {
     }
   }
 
+  function get_account_picture_name($username) {
+    $this->db->select('account_picture');
+    $this->db->from('users');
+    $this->db->where('username', $username);
+    $result = $this->db->get();
+    foreach ($result->result_array() as $row) {
+      if (!empty($row['account_picture'])) {
+        return $row['account_picture'];
+      }
+      else {
+        return false;
+      }
+    }
+  }
+
   function get_account_picture_link($username) {
     $this->db->select('account_picture');
     $this->db->from('users');

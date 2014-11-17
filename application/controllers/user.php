@@ -171,6 +171,22 @@ class User extends CI_Controller {
   }
 
   public function validate_form_remove_account_picture() {
+    // GRAB THE OLD PROFILE PICTURE LINK (OR AT LEAST THE NAME OF THE FILE)
+    // DELETE FROM THE SERVER THE FILES STARTING WITH THE USER'S NAME , and CONTINUED BY an UNDERSCORE.
+    $username = $this->session->userdata['username'];
+    $valid_extensions_array = array('jpg','png','gif');
+    $image_dir   = 'uploads/account_pictures/';
+    $thumb300_dir ='uploads/account_pictures/thumbnails300/';
+    $thumb75_dir = 'uploads/account_pictures/thumbnails75/';
+    foreach ($valid_extensions_array as $extension){
+        $file_with_path_and_extension = $image_dir.$username.'_account_picture.'.$extension;
+        if(file_exists($file_with_path_and_extension)){
+          unlink($image_dir.$username.'_account_picture.'.$extension);  
+        }else{
+          //echo 'This file wasnt set.';
+        }
+    }
+   
     $username = $this->session->userdata['username'];
     $link = '';
     if ($this->user_model->set_account_picture_link($username, $link)) {
