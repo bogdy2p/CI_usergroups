@@ -31,19 +31,27 @@ function display_normal_menu($username) {
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                        
                               <li class="dropdown">
-                                  <a class="dropdown-toggle" data-toggle="dropdown">My Account <span class="caret"></span></a>
-                                  <ul class="dropdown-menu" role="menu">
-                                    <li><a href="' . base_url() . 'post/create">New Post</a></li>
-                                    <li><a href="' . base_url() . 'post/my_posts">My Posts</a></li>
-                                    <li><a href="' . base_url() . 'user/my_account">View Account Data</a></li>
-                                    <li><a href="' . base_url() . 'user/my_account_password">Change Password</a></li>
-                                    <li><a href="' . base_url() . 'user/my_account_update_details">Change Details</a></li>
-                                  </ul>
+                                      <a class="dropdown-toggle" data-toggle="dropdown">Post<span class="caret"></span></a>
+                                      <ul class="dropdown-menu" role="menu">
+                                          <li><a href="' . base_url() . 'post/add">New Post</a></li>
+                                          <li><a href="' . base_url() . 'post/my_posts">My Posts</a></li> 
+                                      </ul>
+                               </li>
+                              <li class="dropdown">
+                                      <a class="dropdown-toggle" data-toggle="dropdown">My Account <span class="caret"></span></a>
+                                      <ul class="dropdown-menu" role="menu">
+                                          <li><a href="' . base_url() . 'user/my_account">View Account Data</a></li>
+                                          <li><a href="' . base_url() . 'user/my_account_password">Change Password</a></li>
+                                          <li><a href="' . base_url() . 'user/my_account_update_details">Change Details</a></li>
+                                      </ul>
                              </li>
-                             
+
                         </ul>
+                        
+                        
+                       
+
                         <ul class="nav navbar-nav navbar-right">
                        <li><a href="' . base_url() . 'user/logout"><span class="spanred">Log Out !</span></a></li>
                        </ul>
