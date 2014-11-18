@@ -2,18 +2,12 @@
 
 if (!defined('BASEPATH'))
   exit('No direct script access allowed');
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 class User extends CI_Controller {
 
   public function __construct() {
     parent::__construct();
     $this->load->model('user_model');
-    
   }
 
   public function index() {
@@ -174,21 +168,22 @@ class User extends CI_Controller {
     // GRAB THE OLD PROFILE PICTURE LINK (OR AT LEAST THE NAME OF THE FILE)
     // DELETE FROM THE SERVER THE FILES STARTING WITH THE USER'S NAME , and CONTINUED BY an UNDERSCORE.
     $username = $this->session->userdata['username'];
-    $valid_extensions_array = array('jpg','png','gif');
-    $image_dir   = 'uploads/account_pictures/';
-    $thumb300_dir ='uploads/account_pictures/thumbnails300/';
+    $valid_extensions_array = array('jpg', 'png', 'gif');
+    $image_dir = 'uploads/account_pictures/';
+    $thumb300_dir = 'uploads/account_pictures/thumbnails300/';
     $thumb75_dir = 'uploads/account_pictures/thumbnails75/';
-    foreach ($valid_extensions_array as $extension){
-        $file_with_path_and_extension = $image_dir.$username.'_account_picture.'.$extension;
-        if(file_exists($file_with_path_and_extension)){
-          unlink($image_dir.$username.'_account_picture.'.$extension);  
-          unlink($thumb300_dir.$username.'_account_picture.'.$extension);
-          unlink($thumb75_dir.$username.'_account_picture.'.$extension);
-        }else{
-          //echo 'This file wasnt set.';
-        }
+    foreach ($valid_extensions_array as $extension) {
+      $file_with_path_and_extension = $image_dir . $username . '_account_picture.' . $extension;
+      if (file_exists($file_with_path_and_extension)) {
+        unlink($image_dir . $username . '_account_picture.' . $extension);
+        unlink($thumb300_dir . $username . '_account_picture.' . $extension);
+        unlink($thumb75_dir . $username . '_account_picture.' . $extension);
+      }
+      else {
+        //echo 'This file wasnt set.';
+      }
     }
-   
+
     $username = $this->session->userdata['username'];
     $link = '';
     if ($this->user_model->set_account_picture_link($username, $link)) {
@@ -235,20 +230,20 @@ class User extends CI_Controller {
       $thumbnail['maintain_ratio'] = FALSE;
       $this->load->library('image_lib', $thumbnail);
       //300 THUMBNAIL
-      
+
       $this->image_lib->width = 300;
       $this->image_lib->height = 300;
       $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails300/' . $this->upload->data()['raw_name'] . $this->upload->data()['file_ext'];
       $test = $this->image_lib->resize();
-    
+
       //75 THUMBNAIL
       $this->image_lib->width = 75;
       $this->image_lib->height = 75;
-      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails75/' . $this->upload->data()['raw_name'] .  $this->upload->data()['file_ext'];
+      $this->image_lib->full_dst_path = $this->upload->data()['file_path'] . 'thumbnails75/' . $this->upload->data()['raw_name'] . $this->upload->data()['file_ext'];
       $test2 = $this->image_lib->resize();
 
       $username = $this->session->userdata['username'];
-      $file = $this->upload->data()['raw_name'] .  $this->upload->data()['file_ext'];
+      $file = $this->upload->data()['raw_name'] . $this->upload->data()['file_ext'];
       $this->user_model->set_account_picture_link($username, $file);
       $this->load->view('templates/sitewide_header');
       $this->load->view('templates/site_menu');

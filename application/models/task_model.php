@@ -1,14 +1,8 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 class Task_model extends CI_Model {
 
-  //Constructor function for class Changelog.
+  //Constructor function for class Task_model.
   function __construct() {
     parent::__construct();
   }
