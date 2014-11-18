@@ -31,6 +31,15 @@ function display_normal_menu($username) {
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
+                        
+                              <li class="dropdown">
+                                      <a class="dropdown-toggle" data-toggle="dropdown">Message<span class="caret"></span></a>
+                                      <ul class="dropdown-menu" role="menu">
+                                          <li><a href="' . base_url() . 'message/create">Send</a></li>
+                                          <li><a href="' . base_url() . 'message/index">View</a></li>
+                                          <li><a href="' . base_url() . '#">#notimplemented</a></li> 
+                                      </ul>
+                               </li>
                               <li class="dropdown">
                                       <a class="dropdown-toggle" data-toggle="dropdown">Post<span class="caret"></span></a>
                                       <ul class="dropdown-menu" role="menu">
@@ -46,12 +55,7 @@ function display_normal_menu($username) {
                                           <li><a href="' . base_url() . 'user/my_account_update_details">Change Details</a></li>
                                       </ul>
                              </li>
-
                         </ul>
-                        
-                        
-                       
-
                         <ul class="nav navbar-nav navbar-right">
                        <li><a href="' . base_url() . 'user/logout"><span class="spanred">Log Out !</span></a></li>
                        </ul>
@@ -78,7 +82,16 @@ function display_administrator_menu($username) {
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     
                         <ul class="nav navbar-nav">
-                        
+                            
+                            <li class="dropdown">
+                                  <a class="dropdown-toggle" data-toggle="dropdown">Messages<span class="caret"></span></a>
+                                  <ul class="dropdown-menu" role="menu">
+                                          <li><a href="' . base_url() . 'message/create">Send</a></li>
+                                          <li><a href="' . base_url() . 'message/index">View</a></li>
+                                          <li><a href="' . base_url() . '#">#notimplemented</a></li>
+                                          <li><a href="' . base_url() . '#">#notimplemented</a></li>
+                                  </ul>
+                            </li>
                              <li class="dropdown">
                                   <a class="dropdown-toggle" data-toggle="dropdown">My Account <span class="caret"></span></a>
                                   <ul class="dropdown-menu" role="menu">
@@ -89,18 +102,18 @@ function display_administrator_menu($username) {
                                         <li><a href="' . base_url() . 'user/my_account_password">Change Password</a></li>
                                         <li><a href="' . base_url() . 'user/my_account_update_details">Change Details</a></li>
                                   </ul>
-                                  
-
                              </li>
-                             <li><a href="' . base_url() . 'main/tables">   View Tables         </a></li>
-                             <li><a href="' . base_url() . 'detail_type">   Details Types  </a></li>
-                             <li><a href="' . base_url() . 'user">   Admin Users            </a></li>
-                             <li><a href="' . base_url() . 'group">   Admin Groups           </a></li>
+                             <li class="dropdown">
+                                  <a class="dropdown-toggle" data-toggle="dropdown">Administrate <span class="caret"></span></a>
+                                  <ul class="dropdown-menu" role="menu">
+                                      <li><a href="' . base_url() . 'user">   Admin Users            </a></li>
+                                      <li><a href="' . base_url() . 'group">   Admin Groups           </a></li>
+                                      <li><a href="' . base_url() . 'main/tables">   View Tables         </a></li>
+                                      <li><a href="' . base_url() . 'detail_type">   Details Types  </a></li>
+                                  </ul>
+                             </li>
                              <li><a href="' . base_url() . 'changelog">   Changelogs     </a></li>
                              <li><a href="' . base_url() . 'task">   Manage Tasks    </a></li>
-                    
- 
-
                         </ul>
                        
                      
