@@ -73,4 +73,16 @@ class Post_model extends CI_Model {
     }
   }
 
+  function verify_message_ownership($user_id, $post_id) {
+    $this->db->select('*');
+    $this->db->from('posts');
+    $this->db->where('id', $post_id);
+    $this->db->where('user_id', $user_id);
+    $result = $this->db->get();
+    foreach ($result->result_array() as $row){
+      return true;
+    }
+    return false;
+  }
+
 }

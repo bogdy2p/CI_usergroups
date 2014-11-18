@@ -1,17 +1,23 @@
 <?php
 
-// IF IS LOGGED IN , GRAB SESSION [USER ID]
-
-// CHECK THAT THE USER IS THE SAME AS THE POSTER , THEN DO DELETE.
-
-if (isset($_GET['id'])) {
-  $post_id = $_GET['id'];
-  $post_model = new Post_model();
-  $post_model->delete_post($post_id);
+if (isset($this->session->userdata['user_id'])) {
+  if (isset($_GET['id'])) {
+    $user_id = $this->session->userdata['user_id'];
+    $post_id = $_GET['id'];
+    $is_ok = $this->post_model->verify_message_ownership($user_id, $post_id);
+    if ($is_ok) {
+      $this->post_model->delete_post($post_id);
+      header('Location: ' . base_url() . 'post/my_posts');
+    }
+    else {
+      die("You are not the creator of this message !");
+    }
+  }
+  else {
+    show_404();
+  }
 }
 else {
-  die('post->delete.php error');
+  show_404();
 }
-header('Location: ' . base_url() . 'post/my_posts');
-
 ?>
