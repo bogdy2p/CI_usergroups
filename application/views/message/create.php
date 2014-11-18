@@ -1,3 +1,15 @@
+Create Message View
+
+1. Message TO
+
+2. Message Content  
+
+3. Send Button
+
+4. Check to attach something.
+
+5. Attach something.
+
 <?php
 
 /* 

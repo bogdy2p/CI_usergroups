@@ -1,3 +1,8 @@
+Message Index (List all messages)
+
+(Eventually a table , sorted by DATE , and by the status (read/not read))
+
+
 <?php
 
 /* 

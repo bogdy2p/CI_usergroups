@@ -1,8 +1,30 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+class Message_model extends CI_Model {
 
+  //Constructor function for class Changelog.
+  function __construct() {
+    parent::__construct();
+  }
+
+  
+  function create(){
+    
+  }
+  
+  
+  function read(){
+    
+  }
+  
+  function update(){
+    
+  }
+  
+  function delete(){
+    
+  }
+  
+  
+  
+}

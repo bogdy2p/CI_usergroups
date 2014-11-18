@@ -1,3 +1,13 @@
+Individual Message View
+
+1. Table with : This message is from
+
+2. Message Content
+
+3. Reply Button
+
+4. Delete Button
+
 <?php
 
 /* 
