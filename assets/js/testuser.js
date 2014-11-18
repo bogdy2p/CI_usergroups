@@ -43,3 +43,13 @@ function confirm_delete_todo(id) {
     return false;
   }
 }
+
+function confirm_delete_post(id) {
+  if (confirm() == true) {
+    window.location.replace("/user_ci/post/delete?post_id=" + id);
+    return true;
+  } else {
+    window.location.replace("/user_ci/post");
+    return false
+  }
+}

@@ -27,7 +27,6 @@
 
     $post_array = $this->post_model->read();
     foreach ($post_array as $post) {
-      // THE POST (USER ID SHOULD BE CONVERTED TO GRAB THE USERNAME);
       $post_image = $this->post_model->print_poster_thumbnail($post['user_id']);
       $username = $this->user_model->get_user_name_by_user_id($post['user_id']);
       $div_data = '<div class="user"><a href="' . base_url() . 'site/view_user?username=' . $username . '">
