@@ -21,14 +21,20 @@
       'table_close' => '</table>',
     );
     $this->table->set_heading(
-        array('data' => ' Date Posted '), array('data' => ' Post Title '), array('data' => ' Content')
+        array('data' => ' Date Posted '),
+        array('data' => ' Post Title '),
+        array('data' => ' Content'),
+        array('data' => ' Remove')
     );
     $user_id = $this->session->userdata['user_id'];
     $my_posts = $this->post_model->read_for_user($user_id);
 
     foreach ($my_posts as $post) {
       $this->table->add_row(
-          array('data' => $post['date_posted'], 'class' => 'highlight col-xs-2 col-md-2 wordwrap1'), array('data' => $post['title'], 'class' => 'highlight col-xs-2 col-md-2'), array('data' => $post['content'], 'class' => 'col-xs-8 col-md-8 ')
+          array('data' => $post['date_posted'], 'class' => 'highlight col-xs-2 col-md-2 wordwrap1'),
+          array('data' => $post['title'], 'class' => 'highlight col-xs-2 col-md-2'),
+          array('data' => $post['content'], 'class' => 'col-xs-8 col-md-8 '),
+          array('data' => '<a><span onclick="confirm_delete_post(' . $post['id'] . ')" class="glyphicon glyphicon-remove spanred pointer"></span></a>', 'class' => 'highlight col-xs-1 col-md-1',)   
       );
     }
     $this->table->set_template($post_table_template);

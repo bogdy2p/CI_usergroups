@@ -45,11 +45,11 @@ function confirm_delete_todo(id) {
 }
 
 function confirm_delete_post(id) {
-  if (confirm() == true) {
-    window.location.replace("/user_ci/post/delete?post_id=" + id);
+  if (confirm("Remove post with id = " + id + " ? ") == true) {
+    window.location.replace("/user_ci/post/delete?id=" + id);
     return true;
   } else {
-    window.location.replace("/user_ci/post");
+    window.location.replace("/user_ci/post/my_posts");
     return false
   }
 }
