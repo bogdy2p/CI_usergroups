@@ -20,6 +20,7 @@ class Post_model extends CI_Model {
   function read() {
     $this->db->select('*');
     $this->db->from('posts');
+    $this->db->order_by('date_posted', 'DESC');
     $result = $this->db->get();
     $return = array();
     foreach ($result->result_array() as $row) {
@@ -79,7 +80,7 @@ class Post_model extends CI_Model {
     $this->db->where('id', $post_id);
     $this->db->where('user_id', $user_id);
     $result = $this->db->get();
-    foreach ($result->result_array() as $row){
+    foreach ($result->result_array() as $row) {
       return true;
     }
     return false;

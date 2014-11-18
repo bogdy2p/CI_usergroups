@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-md-2"></div>
-  <div class="col-xs-12 col-md-8"> 
+  <div class="col-xs-12 col-md-8">
     <?php
     $this->load->model('user_model');
     ?>
@@ -27,15 +27,32 @@
 
     $post_array = $this->post_model->read();
     foreach ($post_array as $post) {
+      //$check_poster_is_admin = $this->post_model->check_poster_is_admin($post['id']);
       $post_image = $this->post_model->print_poster_thumbnail($post['user_id']);
       $username = $this->user_model->get_user_name_by_user_id($post['user_id']);
+      $is_admin = $this->user_model->check_user_is_administrator($username);
+      $is_editor = $this->user_model->check_user_is_editor($username);
       $div_data = '<div class="user"><a href="' . base_url() . 'site/view_user?username=' . $username . '">
         <img class="logo" src="' . $post_image . '"></img>
         <p class="name">' . $username . '</p>
         </a></div>    ';
-      $this->table->add_row(
-          array('data' => $post['content'], 'class' => 'col-xs-9 col-md-9 align_left'), array('data' => $div_data, 'class' => 'highlight col-xs-1 col-md-1'), array('data' => $post['date_posted'], 'class' => 'highlight col-xs-2 col-md-2 wordwrap1')
-      );
+
+      if ($is_admin) {
+
+        $this->table->add_row(
+            array('data' => $post['content'], 'class' => 'col-xs-9 col-md-9 align_left adminstyle'), array('data' => $div_data, 'class' => 'highlight col-xs-1 col-md-1 adminstyle'), array('data' => $post['date_posted'], 'class' => 'highlight col-xs-2 col-md-2 wordwrap1 adminstyle')
+        );
+      }
+      elseif ($is_editor) {
+        $this->table->add_row(
+            array('data' => $post['content'], 'class' => 'col-xs-9 col-md-9 align_left editorstyle'), array('data' => $div_data, 'class' => 'highlight col-xs-1 col-md-1 editorstyle'), array('data' => $post['date_posted'], 'class' => 'highlight col-xs-2 col-md-2 wordwrap1 editorstyle')
+        );
+      }
+      else {
+        $this->table->add_row(
+            array('data' => $post['content'], 'class' => 'col-xs-9 col-md-9 align_left'), array('data' => $div_data, 'class' => 'highlight col-xs-1 col-md-1'), array('data' => $post['date_posted'], 'class' => 'highlight col-xs-2 col-md-2 wordwrap1')
+        );
+      }
     }
     $this->table->set_template($post_table_template);
     echo $this->table->generate();

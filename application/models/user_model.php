@@ -232,6 +232,19 @@ class User_model extends CI_Model {
     return false;
   }
 
+  function check_user_is_editor($user) {
+    $this->db->select('*');
+    $this->db->from('usergroups');
+    $this->db->where('group_id', '2');
+    $result = $this->db->get();
+    foreach ($result->result_array() as $row) {
+      if (Self::grab_userid_by_username($user) == $row['user_id']) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   function get_detail_types_set_for_user($user_id) {
     $this->db->select('detail_type');
     $this->db->from('user_details');
